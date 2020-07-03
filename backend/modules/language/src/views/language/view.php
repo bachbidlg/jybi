@@ -4,8 +4,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\widgets\ToastrWidget;
-use modava\language\widgets\NavbarWidgets;
-use modava\language\LanguageModule;
+use milkyway\language\widgets\NavbarWidgets;
+use milkyway\language\LanguageModule;
 
 /* @var $this yii\web\View */
 /* @var $model milkyway\language\models\Language */

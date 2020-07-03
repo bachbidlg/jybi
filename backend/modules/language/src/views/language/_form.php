@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use backend\widgets\ToastrWidget;
-use modava\language\LanguageModule;
+use milkyway\language\LanguageModule;
 
 /* @var $this yii\web\View */
 /* @var $model milkyway\language\models\Language */

@@ -1,5 +1,5 @@
 <?php
-namespace modava\language\widgets;
+namespace milkyway\language\widgets;
 
 class NavbarWidgets extends \yii\base\Widget
 {

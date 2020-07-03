@@ -1,7 +1,7 @@
 <?php
 
-use modava\language\LanguageModule;
-use modava\language\widgets\NavbarWidgets;
+use milkyway\language\LanguageModule;
+use milkyway\language\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;

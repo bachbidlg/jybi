@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-use modava\language\LanguageModule;
+use milkyway\language\LanguageModule;
 
 ?>
 <ul class="nav nav-tabs nav-sm nav-light mb-25">

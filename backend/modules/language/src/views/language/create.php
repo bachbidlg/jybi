@@ -1,8 +1,8 @@
 <?php
 
-use modava\language\widgets\NavbarWidgets;
+use milkyway\language\widgets\NavbarWidgets;
 use yii\helpers\Html;
-use modava\language\LanguageModule;
+use milkyway\language\LanguageModule;
 
 
 /* @var $this yii\web\View */
