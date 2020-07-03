@@ -33,6 +33,7 @@ use yii\helpers\Url;
                     </a>
                 </li>
             </ul>
+            <?php if(Yii::$app->user->can(\modava\auth\models\User::DEV)){ ?>
             <hr class="nav-separator">
             <div class="nav-header">
                 <span>User Interface</span>
@@ -268,6 +269,7 @@ use yii\helpers\Url;
                     </ul>
                 </li>
             </ul>
+            <?php } ?>
             <hr class="nav-separator">
             <div class="nav-header">
                 <span>Getting Started</span>

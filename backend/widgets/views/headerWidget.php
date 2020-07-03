@@ -10,18 +10,21 @@ use yii\helpers\Url;
        href="javascript:void(0);"><span class="feather-icon"><i data-feather="more-vertical"></i></span></a>
     <a id="navbar_toggle_btn" class="navbar-toggle-btn nav-link-hover" href="javascript:void(0);"><span
                 class="feather-icon"><i data-feather="menu"></i></span></a>
-    <a class="navbar-brand" href="<?=Url::home(); ?>">
-        <?= Yii::t('backend', 'Modava'); ?>
+    <a class="navbar-brand" href="<?= Url::home(); ?>">
+        <?= Yii::t('backend', 'ACI'); ?>
     </a>
     <ul class="navbar-nav hk-navbar-content order-xl-2">
+        <?php /*
         <li class="nav-item">
             <a id="navbar_search_btn" class="nav-link nav-link-hover" href="javascript:void(0);"><span
                         class="feather-icon"><i data-feather="search"></i></span></a>
         </li>
+ */ ?>
         <li class="nav-item">
             <a id="settings_toggle_btn" class="nav-link nav-link-hover" href="javascript:void(0);"><span
                         class="feather-icon"><i data-feather="settings"></i></span></a>
         </li>
+        <?php /*
         <li class="nav-item dropdown dropdown-notifications">
             <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false"><span class="feather-icon bell"><i
@@ -131,6 +134,7 @@ use yii\helpers\Url;
                 </div>
             </div>
         </li>
+ */ ?>
         <li class="nav-item dropdown dropdown-authentication">
             <a class="nav-link dropdown-toggle no-caret" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
@@ -143,11 +147,12 @@ use yii\helpers\Url;
                         <span class="badge badge-success badge-indicator"></span>
                     </div>
                     <div class="media-body">
-                        <span>Madelyn Shane<i class="zmdi zmdi-chevron-down"></i></span>
+                        <span><?= Yii::$app->user->identity->userProfile->fullname ?><i class="zmdi zmdi-chevron-down"></i></span>
                     </div>
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
+                <?php /*
                 <a class="dropdown-item" href="profile.html"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
                 <a class="dropdown-item" href="#"><i
                             class="dropdown-icon zmdi zmdi-card"></i><span>My balance</span></a>
@@ -167,8 +172,8 @@ use yii\helpers\Url;
                                     class="dropdown-icon zmdi zmdi-minus-circle-outline text-danger"></i><span>Offline</span></a>
                     </div>
                 </div>
-                <div class="dropdown-divider"></div>
-                <?= Html::a('<i class="dropdown-icon zmdi zmdi-power"></i> ' . Yii::t('backend', 'Logout'), Url::toRoute(['/auth/logout.html']), ['class' => 'dropdown-item', 'data-method ' => 'POST']); ?>
+                <div class="dropdown-divider"></div>*/ ?>
+                <?= Html::a('<i class="dropdown-icon zmdi zmdi-power"></i> ' . Yii::t('backend', 'Logout'), Url::toRoute(['/auth/logout.html']), ['class' => 'dropdown-item', 'data-method' => 'POST']); ?>
             </div>
         </li>
     </ul>
@@ -192,7 +197,7 @@ use yii\helpers\Url;
                 <a href="#" class="nav-link">Help Desk</a>
             </li>
             <li class="nav-item<?php if (Yii::$app->controller->module->id == 'calendar') echo ' active'; ?>">
-                <a href="<?=Url::toRoute(['/calendar']); ?>" class="nav-link"><?=Yii::t('backend', 'Calendar'); ?></a>
+                <a href="<?= Url::toRoute(['/calendar']); ?>" class="nav-link"><?= Yii::t('backend', 'Calendar'); ?></a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">Email</a>
