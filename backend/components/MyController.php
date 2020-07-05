@@ -9,6 +9,7 @@
 namespace backend\components;
 
 use backend\modules\user\models\User;
+use milkyway\language\models\table\LanguageTable;
 use yii\web\Controller;
 use Yii;
 
@@ -19,6 +20,8 @@ class MyController extends Controller
         parent::init();
         $user = new User();
         $userRoleName = $user->getRoleName(Yii::$app->user->id);
+        $defaultLanguage = LanguageTable::getDefaultLanguage();
+        if ($defaultLanguage !== null) Yii::$app->language = $defaultLanguage->code;
         $this->view->params['userRoleName'] = $userRoleName;
 //        if (Yii::$app->user->id != null) {
 //            $system_maintenance = Setting::getKey('system_maintenance');

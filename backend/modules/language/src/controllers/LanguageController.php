@@ -11,6 +11,7 @@ use milkyway\language\LanguageModule;
 use backend\components\MyController;
 use milkyway\language\models\Language;
 use milkyway\language\models\search\LanguageSearch;
+use yii\web\Response;
 
 /**
  * LanguageController implements the CRUD actions for Language model.
@@ -18,8 +19,8 @@ use milkyway\language\models\search\LanguageSearch;
 class LanguageController extends MyController
 {
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function behaviors()
     {
         return [
@@ -33,9 +34,9 @@ class LanguageController extends MyController
     }
 
     /**
-    * Lists all Language models.
-    * @return mixed
-    */
+     * Lists all Language models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new LanguageSearch();
@@ -45,16 +46,15 @@ class LanguageController extends MyController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-            }
-
+    }
 
 
     /**
-    * Displays a single Language model.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Displays a single Language model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -63,10 +63,10 @@ class LanguageController extends MyController
     }
 
     /**
-    * Creates a new Language model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    * @return mixed
-    */
+     * Creates a new Language model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new Language();
@@ -98,18 +98,18 @@ class LanguageController extends MyController
     }
 
     /**
-    * Updates an existing Language model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Updates an existing Language model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate()) {
+            if ($model->validate()) {
                 if ($model->save()) {
                     Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                         'title' => 'Thông báo',
@@ -137,12 +137,12 @@ class LanguageController extends MyController
     }
 
     /**
-    * Deletes an existing Language model.
-    * If deletion is successful, the browser will be redirected to the 'index' page.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Deletes an existing Language model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -174,13 +174,54 @@ class LanguageController extends MyController
         return $this->redirect(['index']);
     }
 
+    public function actionChangeValue()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->post('id');
+            $val = Yii::$app->request->post('val');
+            $field = Yii::$app->request->post('field');
+            $model = Language::getById($id);
+            if (!$model->hasAttribute($field)) return [
+                'code' => 404,
+                'msg' => LanguageModule::t('language', 'Không tìm thấy dữ liệu')
+            ];
+            try {
+                $model->setAttribute($field, $val);
+                if ($model->validate() && $model->save()) return [
+                    'code' => 200,
+                    'msg' => LanguageModule::t('language', 'Cập nhật thành công')
+                ];
+                else {
+                    $error = '';
+                    foreach ($model->getErrors() as $err) {
+                        $error .= $err[0] . '<br/>';
+                    }
+                    return [
+                        'code' => 400,
+                        'msg' => LanguageModule::t('language', 'Cập nhật thất bại') . ': <br/>' . $error
+                    ];
+                }
+            } catch (Exception $ex) {
+                return [
+                    'code' => 400,
+                    'msg' => LanguageModule::t('language', 'Có lỗi xảy ra')
+                ];
+            }
+        }
+        return [
+            'code' => 403,
+            'msg' => LanguageModule::t('language', 'Không có quyền truy cập')
+        ];
+    }
+
     /**
-    * Finds the Language model based on its primary key value.
-    * If the model is not found, a 404 HTTP exception will be thrown.
-    * @param integer $id
-    * @return Language the loaded model
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Finds the Language model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Language the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
 
 
     protected function findModel($id)

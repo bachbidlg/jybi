@@ -6,6 +6,7 @@ use common\helpers\MyHelper;
 use common\models\User;
 use milkyway\language\LanguageModule;
 use milkyway\language\models\table\LanguageTable;
+use yii\behaviors\AttributeBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
@@ -40,14 +41,6 @@ class Language extends LanguageTable
         return array_merge(
             parent::behaviors(),
             [
-                'slug' => [
-                    'class' => SluggableBehavior::class,
-                    'immutable' => false,
-                    'ensureUnique' => true,
-                    'value' => function () {
-                        return MyHelper::createAlias($this->name);
-                    }
-                ],
                 [
                     'class' => BlameableBehavior::class,
                     'createdByAttribute' => 'created_by',
@@ -61,6 +54,22 @@ class Language extends LanguageTable
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                     ],
                 ],
+                'is_default' => [
+                    'class' => AttributeBehavior::class,
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['is_default'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['is_default'],
+                    ],
+                    'value' => function () {
+                        if ($this->is_default === null) {
+                            $query = self::find()->where([self::tableName() . '.is_default' => self::STATUS_PUBLISHED])->published();
+                            if ($this->primaryKey === null) $query->andWhere(self::tableName() . '.id IS NOT null');
+                            else $query->andWhere(['<>', self::tableName() . '.id', $this->primaryKey]);
+                            return $query->count() > 0 ? 0 : 1;
+                        }
+                        return $this->is_default;
+                    }
+                ],
             ]
         );
     }
@@ -71,12 +80,24 @@ class Language extends LanguageTable
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['name', 'code'], 'required'],
+            [['code'], 'unique'],
+            [['status', 'is_default'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}']
+            [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}'],
+            [['is_default'], 'checkIsDefault']
         ];
+    }
+
+    public function checkIsDefault()
+    {
+        if (!$this->hasErrors() && $this->is_default === self::STATUS_PUBLISHED) {
+            $check_other_default = self::getDefaultLanguage();
+            if ($check_other_default != null && $check_other_default->id != $this->primaryKey) {
+                $this->addError('is_default', LanguageModule::t('language', 'Đã có ngôn ngữ mặc định'));
+            }
+        }
     }
 
     public function beforeSave($insert)
@@ -110,9 +131,10 @@ class Language extends LanguageTable
         return [
             'id' => LanguageModule::t('language', 'ID'),
             'name' => LanguageModule::t('language', 'Name'),
-            'slug' => LanguageModule::t('language', 'Slug'),
+            'code' => LanguageModule::t('language', 'Code'),
             'image' => LanguageModule::t('language', 'Image'),
             'status' => LanguageModule::t('language', 'Status'),
+            'is_default' => LanguageModule::t('language', 'Default'),
             'created_at' => LanguageModule::t('language', 'Created At'),
             'created_by' => LanguageModule::t('language', 'Created By'),
             'updated_at' => LanguageModule::t('language', 'Updated At'),
