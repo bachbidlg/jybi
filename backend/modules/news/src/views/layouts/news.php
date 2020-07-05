@@ -1,5 +1,5 @@
 <?php
-\modava\news\assets\NewsAsset::register($this);
+\milkyway\news\assets\NewsAsset::register($this);
 ?>
 <?php $this->beginContent('@backend/views/layouts/main.php'); ?>
 <?php echo $content ?>

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </h4>
         <p>
             <a class="btn btn-outline-light" href="<?= Url::to(['create']); ?>"
-                title="<?= LanguageModule::t('language', 'Create'); ?>">
+               title="<?= LanguageModule::t('language', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= LanguageModule::t('language', 'Create'); ?></a>
             <?= Html::a(LanguageModule::t('language', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(LanguageModule::t('language', 'Delete'), ['delete', 'id' => $model->id], [
@@ -47,17 +47,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
-						'id',
-						'name',
-						'image',
+                        'id',
+                        'name',
+                        [
+                            'attribute' => 'image',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                if ($model->image == null) return null;
+                                return Html::img(Yii::getAlias('@frontendUrl/uploads/language') . '/' . $model->image, [
+                                    'style' => 'max-width: 70px'
+                                ]);
+                            }
+                        ],
+                        'sort',
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {
                                 return Yii::$app->getModule('language')->params['status'][$model->status];
                             }
                         ],
-						'created_at',
-						'updated_at',
+                        'created_at:datetime',
+                        'updated_at:datetime',
                         [
                             'attribute' => 'userCreated.userProfile.fullname',
                             'label' => LanguageModule::t('language', 'Created By')

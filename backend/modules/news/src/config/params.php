@@ -1,5 +1,5 @@
 <?php
-use modava\news\NewsModule;
+use milkyway\news\NewsModule;
 
 return [
     'availableLocales' => [

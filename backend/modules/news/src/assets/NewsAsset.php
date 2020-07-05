@@ -1,6 +1,6 @@
 <?php
 
-namespace modava\news\assets;
+namespace milkyway\news\assets;
 
 use yii\web\AssetBundle;
 
@@ -11,7 +11,6 @@ class NewsAsset extends AssetBundle
 {
     public $sourcePath = '@newsweb';
     public $css = [
-        'vendors/datatables.net-dt/css/jquery.dataTables.min.css',
         'vendors/bootstrap/dist/css/bootstrap.min.css',
         'vendors/jquery-toggles/css/toggles.css',
         'vendors/jquery-toggles/css/themes/toggles-light.css',

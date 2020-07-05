@@ -1,5 +1,5 @@
 <?php
-namespace modava\news\components;
+namespace milkyway\news\components;
 
 use modava\imagick\Imagick;
 use yii\base\Component;

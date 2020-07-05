@@ -28,10 +28,18 @@ use modava\auth\models\User;
                 <span>UI</span>
             </div>
             <ul class="navbar-nav flex-column">
+                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('news')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/news-category']); ?>">
+                            <i class="ion ion-md-list"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'News'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('language')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'language') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/language']); ?>">
-                            <i class="ion ion-ios-cog"></i>
+                            <i class="ion ion-md-flag"></i>
                             <span class="nav-link-text"><?= Yii::t('backend', 'Language'); ?></span>
                         </a>
                     </li>

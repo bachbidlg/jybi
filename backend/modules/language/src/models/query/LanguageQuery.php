@@ -25,4 +25,9 @@ class LanguageQuery extends \yii\db\ActiveQuery
     {
         return $this->orderBy([Language::tableName() . '.id' => SORT_DESC]);
     }
+
+    public function sort($sort = SORT_ASC)
+    {
+        return $this->orderBy([Language::tableName() . '.sort' => $sort]);
+    }
 }

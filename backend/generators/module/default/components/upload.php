@@ -6,7 +6,7 @@ $ns = explode('\\', $generator->moduleClass)[0];
 
 namespace <?= $ns ?>\<?= $generator->moduleID ?>\components;
 
-use <?= $ns ?>\imagick\Imagick;
+use modava\imagick\Imagick;
 use yii\base\Component;
 
 class MyUpload extends Component

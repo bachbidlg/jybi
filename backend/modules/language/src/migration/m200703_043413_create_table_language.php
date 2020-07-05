@@ -23,8 +23,10 @@ class m200703_043413_create_table_language extends Migration
             $this->createTable('language', [
                 'id' => $this->primaryKey(),
                 'name' => $this->string(255)->notNull(),
+                'slug' => $this->string(255)->null(),
                 'image' => $this->string(255)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
+                'sort' => $this->integer(11)->null()->defaultValue(1)->comment('Thứ tự'),
                 'created_at' => $this->integer(11)->null(),
                 'created_by' => $this->integer(11)->null()->defaultValue(1),
                 'updated_at' => $this->integer(11)->null(),

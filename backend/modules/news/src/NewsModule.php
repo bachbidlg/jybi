@@ -12,7 +12,7 @@ use yii\web\Controller;
 /**
  * news module definition class
  */
-class newsModule extends Module implements BootstrapInterface
+class NewsModule extends Module implements BootstrapInterface
 {
     /**
      * @inheritdoc
@@ -51,7 +51,7 @@ class newsModule extends Module implements BootstrapInterface
         Yii::$app->i18n->translations['news/messages/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en',
-            'basePath' => '@modava/news/messages',
+            'basePath' => '@milkyway/news/messages',
             'fileMap' => [
                 'news/messages/news' => 'news.php',
             ],

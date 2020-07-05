@@ -28,7 +28,7 @@ return [
         'class' => 'milkyway\language\LanguageModule',
     ],
     'news' => [
-        'class' => 'milkyway\news\newsModule',
+        'class' => 'milkyway\news\NewsModule',
     ],
     'tags' => [
         'class' => 'milkyway\tags\TagsModule',

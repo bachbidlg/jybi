@@ -18,6 +18,7 @@ $modelFullClassName = $modelClassName;
 if ($generator->ns !== $generator->queryNs) {
     $modelFullClassName = '\\' . $generator->ns . '\\' . $modelFullClassName;
 }
+$columns = $tableSchema->columns;
 
 echo "<?php\n";
 ?>
@@ -44,9 +45,16 @@ class <?= $className ?>Query extends <?= '\\' . ltrim($generator->queryBaseClass
         return $this->andWhere([<?= $modelFullClassName ?>::tableName() . '.status' => <?= $modelFullClassName ?>::STATUS_DISABLED]);
     }
 <?php } ?>
-
+<?php if(in_array('id', $columns)){ ?>
     public function sortDescById()
     {
         return $this->orderBy([<?= $modelFullClassName ?>::tableName() . '.id' => SORT_DESC]);
     }
+<?php } ?>
+<?php if(in_array('sort', $columns)){ ?>
+    public function sort($sort = SORT_ASC)
+    {
+        return $this->orderBy([<?= $modelFullClassName ?>::tableName() . '.sort' => $sort]);
+    }
+<?php } ?>
 }

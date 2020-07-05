@@ -1,8 +1,8 @@
 <?php
-namespace modava\news\components;
+namespace milkyway\news\components;
 
 class MyErrorHandler extends \yii\web\ErrorHandler
 {
-    public $errorView = '@modava/news/views/error/error.php';
+    public $errorView = '@milkyway/news/views/error/error.php';
 
 }

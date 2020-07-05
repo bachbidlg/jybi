@@ -1,7 +1,7 @@
 <?php
 namespace milkyway\language\components;
 
-use milkyway\imagick\Imagick;
+use modava\imagick\Imagick;
 use yii\base\Component;
 
 class MyUpload extends Component

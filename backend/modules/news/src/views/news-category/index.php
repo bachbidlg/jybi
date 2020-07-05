@@ -1,16 +1,16 @@
 <?php
 
-use milkyway\language\LanguageModule;
-use milkyway\language\widgets\NavbarWidgets;
+use milkyway\news\NewsModule;
+use milkyway\news\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel milkyway\language\models\search\LanguageSearch */
+/* @var $searchModel milkyway\news\models\search\NewsCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = LanguageModule::t('language', 'Languages');
+$this->title = NewsModule::t('news', 'News Categories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= LanguageModule::t('language', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= LanguageModule::t('language', 'Create'); ?></a>
+           title="<?= NewsModule::t('news', 'Create'); ?>">
+            <i class="fa fa-plus"></i> <?= NewsModule::t('news', 'Create'); ?></a>
     </div>
 
     <!-- Row -->
@@ -60,10 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>
                                     ',
                                     'pager' => [
-                                        'firstPageLabel' => LanguageModule::t('language', 'First'),
-                                        'lastPageLabel' => LanguageModule::t('language', 'Last'),
-                                        'prevPageLabel' => LanguageModule::t('language', 'Previous'),
-                                        'nextPageLabel' => LanguageModule::t('language', 'Next'),
+                                        'firstPageLabel' => NewsModule::t('news', 'First'),
+                                        'lastPageLabel' => NewsModule::t('news', 'Last'),
+                                        'prevPageLabel' => NewsModule::t('news', 'Previous'),
+                                        'nextPageLabel' => NewsModule::t('news', 'Next'),
                                         'maxButtonCount' => 5,
 
                                         'options' => [
@@ -95,18 +95,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'class' => 'd-none',
                                             ],
                                         ],
-										'name',
-                                        [
-                                            'attribute' => 'image',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                if ($model->image == null) return null;
-                                                return Html::img(Yii::getAlias('@frontendUrl/uploads/language') . '/' . $model->image, [
-                                                    'style' => 'max-width: 70px'
-                                                ]);
-                                            }
-                                        ],
-                                        'sort',
+                                    
+										'category',
+										'image',
+										'sort',
+										'alias',
                                         [
                                             'attribute' => 'created_by',
                                             'value' => 'userCreated.userProfile.fullname',
@@ -123,22 +116,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         [
                                             'class' => 'yii\grid\ActionColumn',
-                                            'header' => LanguageModule::t('language', 'Actions'),
+                                            'header' => NewsModule::t('news', 'Actions'),
                                             'template' => '{update} {delete}',
                                             'buttons' => [
                                                 'update' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                                        'title' => LanguageModule::t('language', 'Update'),
-                                                        'alia-label' => LanguageModule::t('language', 'Update'),
+                                                        'title' => NewsModule::t('news', 'Update'),
+                                                        'alia-label' => NewsModule::t('news', 'Update'),
                                                         'data-pjax' => 0,
                                                         'class' => 'btn btn-info btn-xs'
                                                     ]);
                                                 },
                                                 'delete' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
-                                                        'title' => LanguageModule::t('language', 'Delete'),
+                                                        'title' => NewsModule::t('news', 'Delete'),
                                                         'class' => 'btn btn-danger btn-xs btn-del',
-                                                        'data-title' => LanguageModule::t('language', 'Delete?'),
+                                                        'data-title' => NewsModule::t('news', 'Delete?'),
                                                         'data-pjax' => 0,
                                                         'data-url' => $url,
                                                         'btn-success-class' => 'success-delete',

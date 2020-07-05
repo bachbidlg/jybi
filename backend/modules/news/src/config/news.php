@@ -1,11 +1,11 @@
 <?php
-use modava\news\components\MyErrorHandler;
+use milkyway\news\components\MyErrorHandler;
 
 $config = [
     'defaultRoute' => 'news/index',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'aliases' => [
-        '@newsweb' => '@modava/news/web',
+        '@newsweb' => '@milkyway/news/web',
     ],
     'components' => [
         'errorHandler' => [
