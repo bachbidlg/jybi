@@ -13,6 +13,7 @@ use milkyway\news\NewsModule;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'News Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$params = $this->params;
 \yii\web\YiiAsset::register($this);
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-view']) ?>
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </h4>
         <p>
             <a class="btn btn-outline-light" href="<?= Url::to(['create']); ?>"
-                title="<?= NewsModule::t('news', 'Create'); ?>">
+               title="<?= NewsModule::t('news', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= NewsModule::t('news', 'Create'); ?></a>
             <?= Html::a(NewsModule::t('news', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(NewsModule::t('news', 'Delete'), ['delete', 'id' => $model->id], [
@@ -47,20 +48,40 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
-						'id',
-						'slug',
-						'category',
-						'image',
+                        'id',
+                        'slug',
+                        [
+                            'attribute' => 'category',
+                            'format' => 'raw',
+                            'value' => function ($model) use ($params) {
+                                if ($model->categoryHasOne == null) return null;
+                                $language = $params['defaultLanguage'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
+                                return Html::a($model->categoryHasOne->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->category], [
+                                    'target' => '_blank',
+                                    'data-pjax' => 0
+                                ]);
+                            }
+                        ],
+                        [
+                            'attribute' => 'image',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                if ($model->image == null || !file_exists($model->pathImage . '/' . $model->image)) return null;
+                                return Html::img($model->urlImage . '/' . $model->image, [
+                                    'style' => 'max-width: 70px'
+                                ]);
+                            }
+                        ],
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {
                                 return Yii::$app->getModule('news')->params['status'][$model->status];
                             }
                         ],
-						'sort',
-						'created_at',
-						'updated_at',
-						'alias',
+                        'sort',
+                        'created_at:datetime',
+                        'updated_at:datetime',
+                        'alias',
                         [
                             'attribute' => 'userCreated.userProfile.fullname',
                             'label' => NewsModule::t('news', 'Created By')

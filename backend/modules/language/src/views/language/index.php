@@ -111,10 +111,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ],
                                             'sort',
                                             [
+                                                'attribute' => 'status',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . LanguageTable::STATUS_PUBLISHED . '" data-unchecked="' . LanguageTable::STATUS_DISABLED . '">';
+                                                }
+                                            ],
+                                            [
                                                 'attribute' => 'is_default',
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
-                                                    return '<input type="checkbox" class="ipt-default" ' . ($model->is_default ? 'checked' : '') . ' data-field="is_default" data-id="' . $model->id . '">';
+                                                    return '<input type="checkbox" class="ipt-checkbox" ' . ($model->is_default ? 'checked' : '') . ' data-field="is_default" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . LanguageTable::STATUS_PUBLISHED . '" data-unchecked="' . LanguageTable::STATUS_DISABLED . '">';
                                                 }
                                             ],
                                             [
@@ -173,59 +180,12 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 <?php
-$url_check_default = Url::toRoute(['change-value']);
-$published = LanguageTable::STATUS_PUBLISHED;
-$disabled = LanguageTable::STATUS_DISABLED;
 $script = <<< JS
 $('body').on('click', '.success-delete', function(e){
     e.preventDefault();
     var url = $(this).attr('href') || null;
     if(url !== null){
         $.post(url);
-    }
-    return false;
-}).on('change', '.ipt-default', function(e){
-    e.preventDefault();
-    var el = $(this),
-        val = el.is(':checked'),
-        id = el.attr('data-id') || null,
-        field = el.attr('data-field') || null;
-    if(id !== null){
-        $.post('$url_check_default', {
-            id: id,
-            val: val ? $published : $disabled,
-            field: field
-        }, res => {
-            var msg = res.msg,
-                cls = res.code === 200 ? 'success' : 'warning';
-            if(res.code !== 200){
-                el.prop('checked', !val);
-            }
-            if (typeof $.toast === "function") {
-                $.toast({
-                    heading: 'Thông báo',
-                    text: msg,
-                    position: 'top-right',
-                    class: 'jq-toast-' + cls,
-                    hideAfter: 3500,
-                    stack: 6,
-                    showHideTransition: 'fade'
-                });
-            } else alert(msg);
-        }, 'json').fail(f => {
-            if (typeof $.toast === "function") {
-                $.toast({
-                    heading: 'Thông báo',
-                    text: 'Có lỗi xảy ra',
-                    position: 'top-right',
-                    class: 'jq-toast-danger',
-                    hideAfter: 3500,
-                    stack: 6,
-                    showHideTransition: 'fade'
-                });
-            } else alert('Có lỗi xảy ra');
-            el.prop('checked', !val);
-        });
     }
     return false;
 });

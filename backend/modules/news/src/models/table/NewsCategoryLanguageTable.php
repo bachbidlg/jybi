@@ -13,7 +13,6 @@ class NewsCategoryLanguageTable extends \yii\db\ActiveRecord
         return 'news_category_language';
     }
 
-
     public function afterDelete()
     {
         $cache = Yii::$app->cache;

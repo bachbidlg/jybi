@@ -82,7 +82,7 @@ class Language extends LanguageTable
         return [
             [['name', 'code'], 'required'],
             [['code'], 'unique'],
-            [['status', 'is_default'], 'integer'],
+            [['status', 'is_default', 'sort'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}'],
@@ -92,7 +92,7 @@ class Language extends LanguageTable
 
     public function checkIsDefault()
     {
-        if (!$this->hasErrors() && $this->is_default === self::STATUS_PUBLISHED) {
+        if (!$this->hasErrors() && $this->is_default == self::STATUS_PUBLISHED) {
             $check_other_default = self::getDefaultLanguage();
             if ($check_other_default != null && $check_other_default->id != $this->primaryKey) {
                 $this->addError('is_default', LanguageModule::t('language', 'Đã có ngôn ngữ mặc định'));

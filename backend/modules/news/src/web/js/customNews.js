@@ -1,15 +1,16 @@
 function readImage(input, preview, maxWidth = 50) {
-    var img_preview;
-    preview.hide();
-    if(preview.is('img')){
+    var img_preview,
+        image_default = $(input).attr('data-default') || null;
+    if(image_default === null) preview.hide();
+    if (preview.is('img')) {
         img_preview = preview;
     } else {
         if (preview.children('img').length <= 0) preview.append('<img/>');
         img_preview = preview.children('img');
     }
     img_preview.attr({
-        'src': '',
-        'style': 'max-width: '+ maxWidth +'px'
+        'src': image_default,
+        'style': 'max-width: ' + maxWidth + 'px'
     });
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -20,6 +21,7 @@ function readImage(input, preview, maxWidth = 50) {
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
 }
+
 $(function () {
     "use strict";
 
@@ -68,7 +70,69 @@ $(function () {
         }).attr('title', title);
     }
 
+    function changeCheckBox(el) {
+        var url = el.attr('data-url') || null,
+            is_checked = el.is(':checked'),
+            checked = el.attr('data-checked') || null,
+            unchecked = el.attr('data-unchecked') || null,
+            val = is_checked ? checked : unchecked,
+            id = el.attr('data-id') || null,
+            field = el.attr('data-field') || null;
+        if (url !== null && id !== null) {
+            $.post(url, {
+                id: id,
+                val: val,
+                field: field
+            }, res => {
+                var msg = res.msg,
+                    cls = res.code === 200 ? 'success' : 'warning';
+                if (res.code !== 200) {
+                    el.prop('checked', !is_checked);
+                }
+                if (typeof $.toast === "function") {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: msg,
+                        position: 'top-right',
+                        class: 'jq-toast-' + cls,
+                        hideAfter: 3500,
+                        stack: 6,
+                        showHideTransition: 'fade'
+                    });
+                } else alert(msg);
+            }, 'json').fail(f => {
+                if (typeof $.toast === "function") {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: 'Có lỗi xảy ra',
+                        position: 'top-right',
+                        class: 'jq-toast-danger',
+                        hideAfter: 3500,
+                        stack: 6,
+                        showHideTransition: 'fade'
+                    });
+                } else alert('Có lỗi xảy ra');
+                el.prop('checked', !is_checked);
+            });
+        }
+    }
+
     $('body').on('load-body', function () {
         setPopovers();
     }).trigger('load-body');
+    $('body').on('afterValidate', '.form-language', function (event, messages, errorAttributes) {
+        if ([undefined, false].includes(window['submit_form'])) return false;
+        window['submit_form'] = false;
+        var check_tab_active_error = $('#tab-language-content .tab-content .tab-pane.active .form-group.has-error').length > 0;
+        if (!check_tab_active_error && Object.keys(errorAttributes).length > 0) {
+            var tab_title = $('#' + errorAttributes[0].id).closest('.tab-pane').attr('aria-labelledby');
+            $('#tab-language .nav-item .nav-link#' + tab_title).trigger('click');
+        }
+    });
+    $('body').on('change', '.ipt-checkbox', function (e) {
+        e.preventDefault();
+        var el = $(this);
+        if (el.is(':checkbox')) changeCheckBox(el);
+        return false;
+    })
 });

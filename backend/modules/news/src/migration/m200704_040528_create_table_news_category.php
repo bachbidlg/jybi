@@ -22,8 +22,8 @@ class m200704_040528_create_table_news_category extends Migration
         if ($check_table === null) {
             $this->createTable('news_category', [
                 'id' => $this->primaryKey(),
-                'slug' => $this->string(255)->null(),
                 'category' => $this->integer(11)->null()->defaultValue(0),
+                'slug' => $this->string(255)->notNull(),
                 'image' => $this->string(255)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
                 'sort' => $this->integer(11)->null()->defaultValue(1)->comment('Thứ tự'),
@@ -37,12 +37,16 @@ class m200704_040528_create_table_news_category extends Migration
             $this->addForeignKey('news_category-created_by-user-id', 'news_category', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
             $this->addForeignKey('news_category-updated_by-user-id', 'news_category', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
         }
+        if (!is_dir(Yii::getAlias('@frontend/web/uploads/news-category'))) {
+            @mkdir(Yii::getAlias('@frontend/web/uploads/news-category'), 0775, true);
+        }
         $check_table_language = Yii::$app->db->getTableSchema('news_category_language');
         if ($check_table_language === null) {
             $this->createTable('news_category_language', [
                 'news_category_id' => $this->integer(11)->notNull(),
                 'language_id' => $this->integer(11)->notNull(),
                 'name' => $this->string(255)->notNull(),
+                'slug' => $this->string(255)->notNull(),
                 'description' => $this->text()->null(),
                 'metadata' => $this->json()->null()
             ], $tableOptions);

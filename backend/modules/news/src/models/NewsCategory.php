@@ -4,49 +4,64 @@ namespace milkyway\news\models;
 
 use common\helpers\MyHelper;
 use common\models\User;
+use milkyway\language\models\Language;
+use milkyway\language\models\table\LanguageTable;
 use milkyway\news\NewsModule;
 use milkyway\news\models\table\NewsCategoryTable;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
 use Yii;
+use yii\db\Transaction;
+use yii\web\UploadedFile;
 
 /**
-* This is the model class for table "news_category".
-*
-    * @property int $id
-    * @property string $slug
-    * @property int $category
-    * @property string $image
-    * @property int $status
-    * @property int $sort Thứ tự
-    * @property int $created_at
-    * @property int $created_by
-    * @property int $updated_at
-    * @property int $updated_by
-    * @property string $alias
-    *
-            * @property NewsCategory $category0
-            * @property NewsCategory[] $newsCategories
-            * @property User $createdBy
-            * @property User $updatedBy
-            * @property NewsCategoryLanguage[] $newsCategoryLanguages
-            * @property Language[] $languages
-    */
+ * This is the model class for table "news_category".
+ *
+ * @property int $id
+ * @property string $slug
+ * @property int $category
+ * @property string $image
+ * @property int $status
+ * @property int $sort Thứ tự
+ * @property int $created_at
+ * @property int $created_by
+ * @property int $updated_at
+ * @property int $updated_by
+ * @property string $alias
+ *
+ * @property NewsCategory $category0
+ * @property NewsCategory[] $newsCategories
+ * @property User $createdBy
+ * @property User $updatedBy
+ * @property NewsCategoryLanguage[] $newsCategoryLanguages
+ * @property Language[] $languages
+ */
 class NewsCategory extends NewsCategoryTable
 {
+    const SCENARIO_UPDATE = 'update';
     public $toastr_key = 'news-category';
+    public $news_category_language;
+    public $iptImage;
+    private $oldImage;
+
     public function behaviors()
     {
+        $default_language = LanguageTable::getDefaultLanguage();
+        $list_language = LanguageTable::getAll();
         return array_merge(
             parent::behaviors(),
             [
                 'slug' => [
                     'class' => SluggableBehavior::class,
-                    'immutable' => false,
-                    'ensureUnique' => true,
-                    'value' => function () {
-                        return MyHelper::createAlias($this->id);
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['slug'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['slug'],
+                    ],
+                    'value' => function () use ($default_language, $list_language) {
+                        if ($this->slug != null) return $this->slug;
+                        $language = $default_language !== null ? $default_language->primaryKey : $list_language[0]->primaryKey;
+                        return MyHelper::createAlias($this->news_category_language[$language]['name']);
                     }
                 ],
                 [
@@ -67,23 +82,112 @@ class NewsCategory extends NewsCategoryTable
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-			[['category', 'status', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-			[['slug', 'image'], 'string', 'max' => 255],
-			[['alias'], 'string', 'max' => 500],
-			[['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
-			[['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
-			[['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
-		];
+            [['category', 'status', 'sort'], 'integer'],
+            [['sort'], 'default', 'value' => 1],
+            [['slug', 'image'], 'string', 'max' => 255],
+            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
+            [['news_category_language'], 'validateNewsCategoryLanguage'],
+            [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}'],
+        ];
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->oldImage = $this->getOldAttribute('image');
+        return parent::beforeSave($insert); // TODO: Change the autogenerated stub
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $iptImage = UploadedFile::getInstance($this, 'iptImage');
+        if ($iptImage != null) {
+            $imageName = $iptImage->baseName . '-' . time() . '.' . $iptImage->extension;
+            if ($iptImage->saveAs($this->pathImage . '/' . $imageName)) {
+                $this->updateAttributes([
+                    'image' => $imageName
+                ]);
+                if (file_exists($this->pathImage . '/' . $this->oldImage)) {
+                    @unlink($this->pathImage . '/' . $this->oldImage);
+                }
+            }
+        }
+        $old_alias = $this->alias;
+        $alias = '';
+        if ($this->categoryHasOne != null) $alias = $this->categoryHasOne->alias;
+        $alias .= '/' . $this->primaryKey;
+        $change_alias = $old_alias != $alias;
+        if ($change_alias) {
+            $this->updateAttributes([
+                'alias' => $alias
+            ]);
+        }
+        if ($change_alias && $old_alias != null) {
+            Yii::$app->db->createCommand("UPDATE " . self::tableName() . " SET alias=REPLACE(alias, '{$old_alias}/', '{$alias}/') WHERE alias LIKE '{$old_alias}/%'")->execute();
+        }
+        parent::afterSave($insert, $changedAttributes); // TODO: Change the autogenerated stub
+    }
+
+    public function setNewsCategoryLanguage()
+    {
+        foreach ($this->newsCategoryLanguage as $language_id => $news_category_language) {
+            $this->news_category_language[$language_id] = $news_category_language->getAttributes();
+        }
+    }
+
+    public function saveNewsCategoryLanguage()
+    {
+        if (!$this->hasErrors()) {
+            $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
+            foreach ($this->news_category_language as $news_category_language) {
+                $news_category_language_model = null;
+                if (isset($news_category_language['news_category_id']) && isset($news_category_language['language_id'])) {
+                    $news_category_language_model = NewsCategoryLanguage::find()->where(['news_category_id' => $news_category_language['news_category_id'], 'language_id' => $news_category_language['language_id']])->one();
+                }
+                if ($news_category_language_model == null) $news_category_language_model = new NewsCategoryLanguage();
+                $news_category_language_model->scenario = NewsCategoryLanguage::SCENARIO_UPDATE;
+                $news_category_language_model->setAttributes(array_merge($news_category_language, [
+                    'news_category_id' => $this->primaryKey
+                ]));
+                if (!$news_category_language_model->save()) {
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
+            $transaction->commit();
+            return true;
+        }
+    }
+
+    public function validateNewsCategoryLanguage()
+    {
+        if (!$this->hasErrors()) {
+            foreach ($this->news_category_language as $i => $news_category_language) {
+                $news_category_language_model = null;
+                if (isset($news_category_language['news_category_id']) && isset($news_category_language['language_id'])) {
+                    $news_category_language_model = NewsCategoryLanguage::find()->where(['news_category_id' => $news_category_language['news_category_id'], 'language_id' => $news_category_language['language_id']])->one();
+                }
+                if ($news_category_language_model == null) $news_category_language_model = new NewsCategoryLanguage();
+                if ($this->scenario === self::SCENARIO_UPDATE) $news_category_language_model->scenario = NewsCategoryLanguage::SCENARIO_UPDATE;
+                $news_category_language_model->setAttributes($news_category_language);
+                if (!$news_category_language_model->validate()) {
+                    foreach ($news_category_language_model->getErrors() as $k => $error) {
+                        $this->addError("news_category_language[$i][$k]", $error);
+                    }
+                }
+            }
+        }
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
@@ -99,25 +203,5 @@ class NewsCategory extends NewsCategoryTable
             'updated_by' => NewsModule::t('news', 'Updated By'),
             'alias' => NewsModule::t('news', 'Alias'),
         ];
-    }
-
-    /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUserCreated()
-    {
-        return $this->hasOne(User::class, ['id' => 'created_by']);
-    }
-
-    /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUserUpdated()
-    {
-        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }

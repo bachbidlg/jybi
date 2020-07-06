@@ -4,7 +4,6 @@ use milkyway\news\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use milkyway\news\NewsModule;
 
-
 /* @var $this yii\web\View */
 /* @var $model milkyway\news\models\NewsCategory */
 

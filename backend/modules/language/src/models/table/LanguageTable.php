@@ -91,7 +91,7 @@ class LanguageTable extends \yii\db\ActiveRecord
         $key = 'redis-language-get-by-id-' . $id;
         $data = $cache->get($key);
         if ($data == false || !defined('YII2_CACHE') || YII2_CACHE === false) {
-            $query = self::find()->where([self::tableName() . '.id' => $id])->published();
+            $query = self::find()->where([self::tableName() . '.id' => $id]);
             $data = $query->one();
             if (defined('YII2_CACHE') && YII2_CACHE === true) $cache->set($key, $data);
         }
@@ -104,7 +104,7 @@ class LanguageTable extends \yii\db\ActiveRecord
         $key = 'redis-language-get-by-code-' . $code;
         $data = $cache->get($key);
         if ($data == false || !defined('YII2_CACHE') || YII2_CACHE === false) {
-            $query = self::find()->where([self::tableName() . '.code' => $code])->published();
+            $query = self::find()->where([self::tableName() . '.code' => $code]);
             $data = $query->one();
             if (defined('YII2_CACHE') && YII2_CACHE === true) $cache->set($key, $data);
         }

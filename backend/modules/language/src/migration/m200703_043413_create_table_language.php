@@ -37,7 +37,7 @@ class m200703_043413_create_table_language extends Migration
             $this->addForeignKey('language-created_by-user-id', 'language', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
             $this->addForeignKey('language-updated_by-user-id', 'language', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
         }
-        if(!is_dir(Yii::getAlias('@frontend/web/uploads/language'))){
+        if (!is_dir(Yii::getAlias('@frontend/web/uploads/language'))) {
             @mkdir(Yii::getAlias('@frontend/web/uploads/language'), 0775, true);
         }
     }

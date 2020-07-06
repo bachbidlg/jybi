@@ -182,7 +182,7 @@ class LanguageController extends MyController
             $val = Yii::$app->request->post('val');
             $field = Yii::$app->request->post('field');
             $model = Language::getById($id);
-            if (!$model->hasAttribute($field)) return [
+            if ($model === null || !$model->canGetProperty($field)) return [
                 'code' => 404,
                 'msg' => LanguageModule::t('language', 'Không tìm thấy dữ liệu')
             ];

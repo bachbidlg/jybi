@@ -110,28 +110,4 @@ class <?= $className ?> extends <?= $className ?>Table
 <?php endforeach; ?>
         ];
     }
-
-<?php if(isset($tableSchema->columns['created_by'])){ ?>
-    /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUserCreated()
-    {
-        return $this->hasOne(User::class, ['id' => 'created_by']);
-    }
-<?php } ?>
-
-<?php if(isset($tableSchema->columns['updated_by'])){ ?>
-    /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUserUpdated()
-    {
-        return $this->hasOne(User::class, ['id' => 'updated_by']);
-    }
-<?php } ?>
 }

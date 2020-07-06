@@ -21,8 +21,8 @@ class MyController extends Controller
         $user = new User();
         $userRoleName = $user->getRoleName(Yii::$app->user->id);
         $defaultLanguage = LanguageTable::getDefaultLanguage();
-        if ($defaultLanguage !== null) Yii::$app->language = $defaultLanguage->code;
         $this->view->params['userRoleName'] = $userRoleName;
+        $this->view->params['defaultLanguage'] = $defaultLanguage == null ? null : $defaultLanguage->id;
 //        if (Yii::$app->user->id != null) {
 //            $system_maintenance = Setting::getKey('system_maintenance');
 //            if ($system_maintenance != null && $system_maintenance->value == '1') {
