@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'id',
                         'name',
+                        'code',
                         [
                             'attribute' => 'image',
                             'format' => 'raw',
@@ -60,6 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                         ],
                         'sort',
+                        [
+                            'attribute' => 'is_default',
+                            'value' => function ($model) {
+                                return Yii::$app->getModule('language')->params['default'][$model->is_default];
+                            }
+                        ],
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {

@@ -23,9 +23,10 @@ class m200703_043413_create_table_language extends Migration
             $this->createTable('language', [
                 'id' => $this->primaryKey(),
                 'name' => $this->string(255)->notNull(),
-                'slug' => $this->string(255)->null(),
+                'code' => $this->string(255)->null(),
                 'image' => $this->string(255)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
+                'is_default' => $this->tinyInteger(1)->null()->defaultValue(0)->comment('1: Mặc định, 0: No'),
                 'sort' => $this->integer(11)->null()->defaultValue(1)->comment('Thứ tự'),
                 'created_at' => $this->integer(11)->null(),
                 'created_by' => $this->integer(11)->null()->defaultValue(1),
@@ -35,6 +36,9 @@ class m200703_043413_create_table_language extends Migration
             $this->createIndex('language-name', 'language', 'name', true);
             $this->addForeignKey('language-created_by-user-id', 'language', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
             $this->addForeignKey('language-updated_by-user-id', 'language', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
+        }
+        if(!is_dir(Yii::getAlias('@frontend/web/uploads/language'))){
+            @mkdir(Yii::getAlias('@frontend/web/uploads/language'), 0775, true);
         }
     }
 
