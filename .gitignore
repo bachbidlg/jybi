@@ -36,6 +36,10 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
+# html
+index.html
+404.html
+
 # vagrant runtime
 /.vagrant
 
