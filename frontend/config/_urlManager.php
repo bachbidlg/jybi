@@ -20,6 +20,11 @@ return [
         ['pattern' => 'gioi-thieu', 'route' => 'intro/index', 'suffix' => '.html'],
         ['pattern' => 'lien-he', 'route' => 'contact/index', 'suffix' => '.html'],
 
+        /* demo */
+        ['pattern' => 'du-an/<slug>', 'route' => 'news/view', 'suffix' => '.html'],
+        ['pattern' => 'du-an', 'route' => 'news/index', 'suffix' => '.html'],
+        /* demo */
+
         ['pattern' => 'bat-dong-san-ky-gui/trang-<page:\d+>', 'route' => 'ky-gui/index', 'suffix' => '.html'],
         ['pattern' => 'bat-dong-san-ky-gui/<slug>', 'route' => 'ky-gui/view', 'suffix' => '.html'],
         ['pattern' => 'bat-dong-san-ky-gui', 'route' => 'ky-gui', 'suffix' => '.html'],

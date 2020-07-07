@@ -16,7 +16,7 @@ $(function () {
     $('.testimonial-area').owlCarousel({
         items: 1,
         loop: true,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 3000,
         nav: false,
         dots: true,

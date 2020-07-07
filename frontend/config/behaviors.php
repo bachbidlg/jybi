@@ -4,7 +4,7 @@ return [
     'class' => 'frontend\filters\MyAccessControl',
     'rules' => [
         [
-            'controllers' => ['site', 'intro', 'contact'],
+            'controllers' => ['site', 'intro', 'news', 'contact'],
             'allow' => true,
         ],
     ]

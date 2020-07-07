@@ -31,7 +31,7 @@ use yii\helpers\Url;
                         <a href="#" title="">Dự án <i class="fas fa-caret-down"></i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="#" title="">Biệt thự</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Biệt thự</a>
                             </li>
                             <li>
                                 <a href="#" title="">Nhà phố</a>
