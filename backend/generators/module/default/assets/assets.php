@@ -1,9 +1,10 @@
 <?php
 /* @var $generator yii\gii\generators\model\Generator */
+$ns = explode('\\', $generator->moduleClass)[0];
 ?>
 <?= "<?php\n" ?>
 
-namespace modava\<?= $generator->moduleID ?>\assets;
+namespace <?= $ns ?>\<?= $generator->moduleID ?>\assets;
 
 use yii\web\AssetBundle;
 
@@ -14,7 +15,6 @@ class <?= ucfirst($generator->moduleID) ?>Asset extends AssetBundle
 {
     public $sourcePath = '@<?= $generator->moduleID ?>web';
     public $css = [
-        'vendors/datatables.net-dt/css/jquery.dataTables.min.css',
         'vendors/bootstrap/dist/css/bootstrap.min.css',
         'vendors/jquery-toggles/css/toggles.css',
         'vendors/jquery-toggles/css/themes/toggles-light.css',

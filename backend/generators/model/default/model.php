@@ -25,8 +25,8 @@ namespace <?= $generator->ns ?>;
 
 use common\helpers\MyHelper;
 use common\models\User;
-use modava\<?= $generator->messageCategory ?>\<?= ucfirst($generator->messageCategory) ?>Module;
-use modava\<?= $generator->messageCategory ?>\models\table\<?= $modelClass ?>Table;
+use <?= str_replace('\models', '', $generator->ns) ?>\<?= ucfirst($generator->messageCategory) ?>Module;
+use <?= $generator->ns ?>\table\<?= $modelClass ?>Table;
 <?php if (isset($tableSchema->columns['created_by']) && isset($tableSchema->columns['updated_by'])) { ?>
 use yii\behaviors\BlameableBehavior;
 <?php } ?>
@@ -110,28 +110,4 @@ class <?= $className ?> extends <?= $className ?>Table
 <?php endforeach; ?>
         ];
     }
-
-<?php if(isset($tableSchema->columns['created_by'])){ ?>
-    /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUserCreated()
-    {
-        return $this->hasOne(User::class, ['id' => 'created_by']);
-    }
-<?php } ?>
-
-<?php if(isset($tableSchema->columns['updated_by'])){ ?>
-    /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
-    public function getUserUpdated()
-    {
-        return $this->hasOne(User::class, ['id' => 'updated_by']);
-    }
-<?php } ?>
 }

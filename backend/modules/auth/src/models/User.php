@@ -30,6 +30,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
     const USERS = 'users'; //user frontend
+    const DEV = 'develop';
 
 
     /**

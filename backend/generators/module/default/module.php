@@ -26,7 +26,7 @@ use yii\web\Controller;
 /**
  * <?= $generator->moduleID ?> module definition class
  */
-class <?= $className ?> extends Module implements BootstrapInterface
+class <?= ucfirst($className) ?> extends Module implements BootstrapInterface
 {
     /**
      * @inheritdoc
@@ -65,7 +65,7 @@ class <?= $className ?> extends Module implements BootstrapInterface
         Yii::$app->i18n->translations['<?= $generator->moduleID ?>/messages/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en',
-            'basePath' => '@modava/<?= $generator->moduleID ?>/messages',
+            'basePath' => '@<?= explode('\\', $generator->moduleClass)[0] ?>/<?= $generator->moduleID ?>/messages',
             'fileMap' => [
                 '<?= $generator->moduleID ?>/messages/<?= $generator->moduleID ?>' => '<?= $generator->moduleID ?>.php',
             ],
