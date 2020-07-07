@@ -1,6 +1,7 @@
 <?php
 $config = [
     'id' => 'frontend',
+    'aliases' => ['@frontendWeb' => '@frontend/web'],
     'basePath' => dirname(__DIR__),
     'homeUrl' => Yii::getAlias('@frontendUrl'),
     'controllerNamespace' => 'frontend\controllers',

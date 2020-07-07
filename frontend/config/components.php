@@ -20,13 +20,15 @@ return [
         'appendTimestamp' => true,
         'bundles' => [
             'yii\web\JqueryAsset' => [
-                'js' => [],
+                'js' => ['/third_party/jquery/jquery.min.js'],
                 'jsOptions' => ['position' => \yii\web\View::POS_END],
             ],
             'yii\bootstrap\BootstrapPluginAsset' => [
                 'js' => []
             ],
-            'yii\bootstrap\BootstrapAsset' => ['css' => ['/css/bootstrap.min.css']],
+            'yii\bootstrap\BootstrapAsset' => [
+                'css' => ['/third_party/bootstrap/css/bootstrap.min.css']
+            ],
         ],
     ],
 

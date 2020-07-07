@@ -1,3 +1,3 @@
 <?php
 
-define('WEB_NAME', 'Frontend');
+define('WEB_NAME', 'ACI Design');

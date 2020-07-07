@@ -27,7 +27,7 @@ return [
     ],
 
     'db' => require __DIR__ . '/_db.php',
-    'db2' => require __DIR__ . '/_db2.php',
+//    'db2' => require __DIR__ . '/_db2.php',
     'queue' => [
         'class' => \yii\queue\db\Queue::class,
         'db' => 'db', // DB connection component or its config
