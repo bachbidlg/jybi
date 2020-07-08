@@ -18,7 +18,7 @@ $this->title = WEB_NAME;
                 Nam.</p>
         </div>
         <div class="section-content">
-            <div class="row row-cols-1 row-cols-lg-3">
+            <div class="row row-cols-1 row-cols-md-3">
                 <div class="col">
                     <div class="box-about">
                         <div class="box-icon">
@@ -83,7 +83,7 @@ $this->title = WEB_NAME;
             <div class="h3">Dự án của chúng tôi</div>
         </div>
         <div class="section-content">
-            <div class="row row-cols-1 row-cols-lg-2">
+            <div class="row row-cols-1 row-cols-md-2">
                 <div class="col">
                     <div class="box-project">
                         <a class="d-block" href="#" title="">

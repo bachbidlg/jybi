@@ -30,8 +30,12 @@
 			line-height: 1.2em;
 			text-transform: uppercase;
 
-			@media #{$small-mobile} {
-				font-size: 26px;
+			@media #{$desktop-device} {
+				font-size: 32px;
+			}
+			
+			@media #{$tablet-device}, #{$large-mobile} {
+				font-size: 24px;
 			}
 		}
 
@@ -122,7 +126,7 @@
 			@include prefix((transition: all .2s), webkit moz o);
 			cursor: pointer;
 
-			@media #{$large-laptop-device}, #{$laptop-device}, #{$desktop-device} {
+			@media #{$large-laptop-device}, #{$laptop-device}, #{$desktop-device}, #{$tablet-device} {
 				max-width: calc(100% / 3 - 2px);
 			}
 
@@ -151,6 +155,10 @@
 				font-size: 24px;
 				margin-bottom: .5rem;
 				text-transform: capitalize;
+
+				@media #{$tablet-device} {
+					font-size: 20px;
+				}
 
 				@media #{$small-mobile} {
 					font-size: 18px;
@@ -716,6 +724,10 @@
 			font-size: 24px;
 			font-weight: 400;
 
+			@media #{$small-mobile} {
+				font-size: 18px;
+			}
+
 			 a {
 				 color: #3a464e;
 
@@ -737,6 +749,10 @@
 				font-size: 13px;
 				color: #9eaab2;
 				display: inline;
+
+				@media #{$small-mobile} {
+					margin-left: 0;
+				}
 
 				i {
 					margin-right: 4px;

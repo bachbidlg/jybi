@@ -104,14 +104,14 @@ use yii\helpers\Url;
             <a href="#" title="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="clearfix"></div>
-        <a href="/" class="sidebar-logo"></a>
+        <a href="<?= Url::home() ?>" class="sidebar-logo"></a>
         <em class="sidebar-logo-text"></em>
-        <a class="menu-item" href="/">
+        <a class="menu-item" href="<?= Url::home() ?>">
             <i class="fas fa-home"></i>
             <span>Trang chủ</span>
             <i class="fa fa-circle"></i>
         </a>
-        <a class="menu-item" href="#">
+        <a class="menu-item" href="<?= Url::toRoute(['/gioi-thieu']); ?>">
             <i class="fas fa-info-circle"></i>
             <span>Giới thiệu</span>
             <i class="fa fa-circle"></i>
@@ -194,7 +194,7 @@ use yii\helpers\Url;
                 </a>
             </div>
         </div>
-        <a class="menu-item" href="#">
+        <a class="menu-item" href="<?= Url::toRoute(['/lien-he']); ?>">
             <i class="fas fa-envelope"></i>
             <span>Liên hệ</span>
             <i class="fa fa-circle"></i>
