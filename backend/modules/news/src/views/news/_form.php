@@ -1,25 +1,26 @@
 <?php
 
 use common\widgets\Select2;
+use yii\helpers\ArrayHelper;
+use modava\tiny\TinyMce;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use backend\widgets\ToastrWidget;
 use milkyway\news\NewsModule;
-use yii\helpers\ArrayHelper;
-use milkyway\language\models\table\LanguageTable;
-use milkyway\news\models\NewsCategoryLanguage;
+use milkyway\news\models\table\NewsTable;
 use milkyway\news\models\table\NewsCategoryTable;
+use milkyway\language\models\table\LanguageTable;
 
 /* @var $this yii\web\View */
-/* @var $model milkyway\news\models\NewsCategory */
+/* @var $model milkyway\news\models\News */
 /* @var $form yii\widgets\ActiveForm */
 
 $list_language = LanguageTable::getAll();
 $default_language = LanguageTable::getDefaultLanguage();
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
-    <div class="news-category-form">
+    <div class="news-form">
         <?php $form = ActiveForm::begin([
             'enableAjaxValidation' => true,
             'enableClientValidation' => true,
@@ -30,10 +31,14 @@ $default_language = LanguageTable::getDefaultLanguage();
         ]); ?>
         <div class="row">
             <div class="col-md-6 col-12">
+                <?= $form->field($model, 'type')->dropDownList(NewsTable::TYPE, []) ?>
+            </div>
+            <div class="col-md-6 col-12"></div>
+            <div class="col-md-6 col-12">
                 <?= Select2::widget([
                     'model' => $model,
                     'attribute' => 'category',
-                    'data' => ArrayHelper::map(NewsCategoryTable::getMenu($model->primaryKey, null), 'id', 'name'),
+                    'data' => ArrayHelper::map(NewsCategoryTable::getMenu(null, null), 'id', 'name'),
                     'options' => [
                         'prompt' => $model->getAttributeLabel('category')
                     ]
@@ -65,21 +70,26 @@ $default_language = LanguageTable::getDefaultLanguage();
             <?php } ?>
             <?php
             foreach ($list_language as $i => $language) {
-                if ($model->primaryKey === null) $model->news_category_language[$language->primaryKey]['language_id'] = $language->primaryKey;
+                if ($model->primaryKey === null) $model->news_language[$language->primaryKey]['language_id'] = $language->primaryKey;
                 ?>
                 <div class="tab-pane fade<?= ($default_language !== null && $language->primaryKey === $default_language->primaryKey) || ($default_language === null && $i == 0) ? ' default show active' : '' ?>"
                      id="language-<?= $language->primaryKey ?>" role="tabpanel"
                      aria-labelledby="language-<?= $language->primaryKey ?>-tab">
-                    <?= $form->field($model, 'news_category_language[' . $language->primaryKey . '][news_category_id]')->hiddenInput()->label(false) ?>
-                    <?= $form->field($model, 'news_category_language[' . $language->primaryKey . '][language_id]')->hiddenInput()->label(false) ?>
-                    <?= $form->field($model, 'news_category_language[' . $language->primaryKey . '][slug]')->hiddenInput([
+                    <?= $form->field($model, 'news_language[' . $language->primaryKey . '][news_id]')->hiddenInput()->label(false) ?>
+                    <?= $form->field($model, 'news_language[' . $language->primaryKey . '][language_id]')->hiddenInput()->label(false) ?>
+                    <?= $form->field($model, 'news_language[' . $language->primaryKey . '][slug]')->hiddenInput([
                         'class' => 'ipt-slug'
                     ])->label(false) ?>
-                    <?= $form->field($model, 'news_category_language[' . $language->primaryKey . '][name]')->textInput([
+                    <?= $form->field($model, 'news_language[' . $language->primaryKey . '][name]')->textInput([
                         'maxlength' => true,
                         'class' => 'form-control ipt-name'
                     ])->label(NewsModule::t('news', 'Name')) ?>
-                    <?= $form->field($model, 'news_category_language[' . $language->primaryKey . '][description]')->textarea(['maxlength' => true])->label(NewsModule::t('news', 'Description')) ?>
+                    <?= $form->field($model, 'news_language[' . $language->primaryKey . '][description]')->textarea(['maxlength' => true])->label(NewsModule::t('news', 'Description')) ?>
+                    <?= TinyMce::widget([
+                        'model' => $model,
+                        'attribute' => 'news_language[' . $language->primaryKey . '][content]',
+                        'options' => []
+                    ]) ?>
                 </div>
             <?php } ?>
             <?php if (count($list_language) > 1){ ?>
