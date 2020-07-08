@@ -1,7 +1,7 @@
 function readImage(input, preview, maxWidth = 50) {
     var img_preview,
         image_default = $(input).attr('data-default') || null;
-    if(image_default === null) preview.hide();
+    if (image_default === null) preview.hide();
     if (preview.is('img')) {
         img_preview = preview;
     } else {
