@@ -357,6 +357,73 @@ input::placeholder, textarea::placeholder {
 }
 
 /*--
+    - Button
+------------------------------------------*/
+
+.button {
+	font-size: 15px;
+	font-weight: 600;
+	padding: 10px 35px 10px 35px;
+	color: white;
+	border-radius: 3px;
+	border: none;
+	background-color: $theme-color;
+	display: inline-block;
+	width: auto;
+	cursor: pointer;
+	transition: all 0.2s linear;
+
+	&.button-icon {
+		position: relative;
+		padding-left: 56px;
+		padding-right: 25px;
+
+		&.small {
+			padding-left: 38px;
+			padding-right: 15px;
+
+			i {
+				padding-top: 12px;
+				width: 27px;
+			}
+		}
+
+		i {
+			background: rgba(0, 0, 0, 0.1);
+			position: absolute;
+			left: 0;
+			top: 0;
+			border-radius: 2px;
+			height: 100%;
+			width: 38px;
+			text-align: center;
+			padding-top: 13px;
+			font-size: 13px;
+		}
+	}
+
+	&.alt {
+		background-color: $theme-color;
+
+		&:hover {
+			background-color: #fecc55;
+			color: $white;
+		}
+	}
+
+	&.grey {
+		color: #e4ac26;
+		cursor: auto;
+		background-color: rgba(254, 192, 43, .4);
+	}
+
+	&.small {
+		padding: 6px 23px 6px 23px;
+		font-size: 12px;
+	}
+}
+
+/*--
     - Page Banner Section
 ------------------------------------------*/
 .page-banner-section {
@@ -501,5 +568,35 @@ input::placeholder, textarea::placeholder {
 				}
 			}
 		}
+	}
+}
+
+.pagination {
+	//display: inline-block;
+	padding-left: 0;
+	margin: 20px 0;
+	border-radius: 4px;
+
+	>div {
+		width: 100%;
+	}
+
+	ul li {
+		padding-left: 4px;
+		padding-right: 4px;
+		display: inline-block;
+		cursor: pointer;
+
+		&.current, &:hover {
+			.button.grey {
+				background-color: $theme-color;
+				color: $white;
+			}
+		}
+	}
+
+	.button {
+		padding: 5px 14px;
+		cursor: pointer;
 	}
 }

@@ -131,6 +131,8 @@
 			}
 
 			&:hover {
+				position: relative;
+				z-index: 1;
 				@include prefix((box-shadow: 0 70px 70px rgba(0, 0, 0, .2)), webkit);
 				@include prefix((transform: translate(0, -10px)), webkit ms);
 			}
@@ -529,6 +531,103 @@
 
 	#partners {
 		background-color: $white;
+	}
+}
+
+.page-news {
+	.blog-post {
+		background-color: $white;
+		margin-bottom: 40px;
+		@include prefix((transition: all .4s linear), webkit moz o);
+
+		&:hover {
+			box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	.blog-post-slide {
+		.owl-dots {
+			margin-top: 0;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+
+			.owl-dot {
+				span {
+					background-color: $white;
+					margin: 5px;
+					@include prefix((transition: all .4s ease), webkit moz o);
+				}
+
+				&.active span, &:hover span {
+					background-color: $theme-color;
+				}
+			}
+		}
+	}
+
+	.blog-post-img {
+		position: relative;
+		display: block;
+
+		.img-fade {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 80px;
+			background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+			background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+			opacity: 0.7;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	.blog-post-content {
+		padding: 4%;
+
+		h3 {
+			font-size: 24px;
+			font-weight: 400;
+
+			 a {
+				 color: #3a464e;
+
+				 &:hover {
+					 color: $theme-color;
+				 }
+			 }
+		}
+
+		.blog-post-meta {
+			margin-bottom: 20px;
+			padding: 10px 0px 15px 0px;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+			li {
+				margin-right: 13px;
+				margin-left: 20px;
+				font-weight: 600;
+				font-size: 13px;
+				color: #9eaab2;
+				display: inline;
+
+				i {
+					margin-right: 4px;
+				}
+			}
+		}
+
+		.blog-post-desc {
+			line-height: 1.8;
+			margin-bottom: 27px
+		}
 	}
 }
 
