@@ -15,7 +15,9 @@ class NewsController extends MyController
 {
     public function actionIndex()
     {
-        return $this->render('index', []);
+        return $this->render('index', [
+
+        ]);
     }
 
     public function actionView()

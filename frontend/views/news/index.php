@@ -6,7 +6,6 @@
  * Time: 10:56
  */
 
-use frontend\widgets\SidebarWidget;
 use yii\helpers\Url;
 
 $this->title = Yii::t('frontend', 'Dự án');
@@ -138,7 +137,13 @@ $this->title = Yii::t('frontend', 'Dự án');
                 </div>
             </div>
             <div class="col-lg-4">
-                <?php echo SidebarWidget::widget() ?>
+                <div class="sidebar sidebar-right">
+                    <?php
+                    echo \frontend\widgets\ContactWidget::widget();
+                    echo \frontend\widgets\NewsFeatured::widget();
+                    echo \frontend\widgets\NewsRecommendWidget::widget();
+                    ?>
+                </div>
             </div>
         </div>
     </div>
