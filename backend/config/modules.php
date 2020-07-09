@@ -33,4 +33,7 @@ return [
     'tags' => [
         'class' => 'milkyway\tags\TagsModule',
     ],
+    'contact' => [
+        'class' => 'milkyway\contact\ContactModule',
+    ],
 ];
