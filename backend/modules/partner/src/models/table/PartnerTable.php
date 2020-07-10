@@ -2,6 +2,7 @@
 
 namespace milkyway\partner\models\table;
 
+use backend\modules\user\models\User;
 use cheatsheet\Time;
 use milkyway\partner\models\query\PartnerQuery;
 use Yii;
@@ -11,6 +12,16 @@ class PartnerTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
     const STATUS_PUBLISHED = 1;
+
+    public $pathImage;
+    public $urlImage;
+
+    public function __construct($config = [])
+    {
+        $this->pathImage = Yii::getAlias('@frontend/web/uploads/partners');
+        $this->urlImage = Yii::getAlias('@frontendUrl/uploads/partners');
+        parent::__construct($config);
+    }
 
     public static function tableName()
     {
@@ -43,22 +54,22 @@ class PartnerTable extends \yii\db\ActiveRecord
     }
 
     /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getUserCreated()
     {
-    return $this->hasOne(User::class, ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getUserUpdated()
     {
-    return $this->hasOne(User::class, ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }

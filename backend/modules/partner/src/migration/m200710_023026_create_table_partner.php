@@ -14,7 +14,7 @@ class m200710_023026_create_table_partner extends Migration
     {
         /* check table exists */
         $check_table = Yii::$app->db->getTableSchema('partner');
-        if($check_table === null){
+        if ($check_table === null) {
             $tableOptions = null;
             if ($this->db->driverName === 'mysql') {
                 // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
@@ -26,6 +26,7 @@ class m200710_023026_create_table_partner extends Migration
                 'image' => $this->string(255)->null(),
                 'url' => $this->string(255)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
+                'sort' => $this->integer(11)->null()->defaultValue(0),
                 'created_at' => $this->integer(11)->null(),
                 'created_by' => $this->integer(11)->null()->defaultValue(1),
                 'updated_at' => $this->integer(11)->null(),
@@ -33,6 +34,9 @@ class m200710_023026_create_table_partner extends Migration
             ], $tableOptions);
             $this->addForeignKey('partner-created_by-user-id', 'partner', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
             $this->addForeignKey('partner-updated_by-user-id', 'partner', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
+        }
+        if (!is_dir(Yii::getAlias('@frontend/web/uploads/partners/170x100'))) {
+            @mkdir(Yii::getAlias('@frontend/web/uploads/partners/170x100'), 775, true);
         }
     }
 
