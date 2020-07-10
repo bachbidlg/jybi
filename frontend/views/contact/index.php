@@ -7,6 +7,11 @@
  */
 
 $this->title = Yii::t('frontend', 'Liên hệ');
+
+if (Yii::$app->session->hasFlash('alert')) {
+    $alert = Yii::$app->session->getFlash('alert');
+    echo '<script>alert("' . $alert['msg'] . '");</script>';
+}
 ?>
 
 <section class="page-contact">
@@ -17,58 +22,80 @@ $this->title = Yii::t('frontend', 'Liên hệ');
                     <div class="h4 info-title">Thông tin công ty</div>
                     <ul>
                         <li><i class="fas fa-map-signs"></i> 123/456 Abc, Xyz</li>
-                        <li><i class="fas fa-map-signs"></i> 123/456 Abc, Xyz</li>
                         <li><i class="fas fa-phone-volume"></i> 0123456789 (Mrs. X)</li>
-                        <li><i class="fas fa-phone-square"></i> 0123456789 (Ms. Y) </li>
+                        <li><i class="fas fa-phone-square"></i> 0123456789 (Ms. Y)</li>
                         <li><i class="fas fa-envelope-open"></i> khiem.huynhtrong@gmail.com</li>
                         <li><i class="fas fa-globe"></i> www.acidesign.vn</li>
                     </ul>
                 </div>
             </div>
             <div class="col">
-                <form class="contact-form" action="">
-                    <div class="form-group">
+                <?php
+                $form = \yii\bootstrap\ActiveForm::begin([
+                    'id' => 'form-contact',
+                    'enableAjaxValidation' => true,
+                    'validationUrl' => \yii\helpers\Url::toRoute(['validation-form']),
+                    'action' => \yii\helpers\Url::toRoute(['/lien-he']),
+                    'options' => [
+                        'class' => 'contact-form',
+                    ],
+                ])
+                ?>
+                <?= $form->field($model, 'full_name', [
+                    'template' => '
                         <div class="row">
-                            <div class="col-lg-3"><label>Họ và tên <span>(*)</span>:</label></div>
-                            <div class="col-lg-9"><input type="text" class="form-control" name="full-name"
-                                                         value="" required></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-3"><label>Email <span>(*)</span>:</label></div>
-                            <div class="col-lg-9"><input type="text" class="form-control" name="email"
-                                                         value="" required></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-3"><label>Điện thoại <span>(*)</span>:</label></div>
-                            <div class="col-lg-9"><input type="text" class="form-control" name="phone"
-                                                         value=""></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-3"><label>Tiêu đề:</label></div>
-                            <div class="col-lg-9"><input type="text" class="form-control" name="subject"
-                                                         value=""></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-3"><label>Nội dung <span>(*)</span>:</label></div>
+                            <div class="col-lg-3">{label}</div>
                             <div class="col-lg-9">
-                                <textarea name="content" class="form-control" rows="5"></textarea>
+                                {input}{error}
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group text-right">
-                        <button type="submit" class="btn btn-secondary"><i class="fas fa-paper-plane"></i>
-                            Gửi
-                        </button>
-                    </div>
-                </form>
+                        </div>'
+                ])->textInput([])->label($model->getAttributeLabel('full_name') . '<span> (*): </span>') ?>
+
+                <?= $form->field($model, 'email', [
+                    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+                ])->textInput([])->label($model->getAttributeLabel('email') . '<span> : </span>') ?>
+
+                <?= $form->field($model, 'phone', [
+                    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+                ])->textInput([])->label($model->getAttributeLabel('phone') . '<span> (*): </span>') ?>
+
+                <?= $form->field($model, 'subject', [
+                    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+                ])->textInput([])->label($model->getAttributeLabel('subject') . '<span> : </span>') ?>
+
+                <?= $form->field($model, 'message', [
+                    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+                ])->textarea(['rows'=>5])->label($model->getAttributeLabel('message') . '<span> : </span>') ?>
+
+                <?= \yii\helpers\Html::submitButton(
+                    '<i class="fas fa-paper-plane"></i> Gửi',
+                    ['class' => 'btn btn-secondary float-right']
+                ) ?>
+                <?php \yii\bootstrap\ActiveForm::end() ?>
             </div>
         </div>
     </div>

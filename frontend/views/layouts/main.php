@@ -55,6 +55,11 @@ $this->beginContent('@frontend/views/layouts/common.php');
                                         <?= Yii::t('frontend', 'Giới thiệu'); ?>
                                     </li>
                                 <?php } ?>
+                                <?php if (Yii::$app->controller->id == 'news') { ?>
+                                    <li class="current">
+                                        <?= Yii::t('frontend', 'Dự án'); ?>
+                                    </li>
+                                <?php } ?>
                                 <?php if (Yii::$app->controller->id == 'contact') { ?>
                                     <li class="current">
                                         <?= Yii::t('frontend', 'Liên hệ'); ?>

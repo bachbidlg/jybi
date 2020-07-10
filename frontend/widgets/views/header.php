@@ -34,13 +34,13 @@ use yii\helpers\Url;
                                 <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Biệt thự</a>
                             </li>
                             <li>
-                                <a href="#" title="">Nhà phố</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Nhà phố</a>
                             </li>
                             <li>
-                                <a href="#" title="">Căn hộ</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Căn hộ</a>
                             </li>
                             <li>
-                                <a href="#" title="">Văn phòng và công trình khác</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Văn phòng và công trình khác</a>
                             </li>
                         </ul>
                     </li>
@@ -49,16 +49,16 @@ use yii\helpers\Url;
 
                         <ul class="sub-menu">
                             <li>
-                                <a href="#" title="">Quy trình làm việc</a>
+                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Quy trình làm việc</a>
                             </li>
                             <li>
-                                <a href="#" title="">Phương pháp tính diện tích</a>
+                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Phương pháp tính diện tích</a>
                             </li>
                             <li>
-                                <a href="#" title="">Mô tả phàn thô - hoàn thiện</a>
+                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Mô tả phàn thô - hoàn thiện</a>
                             </li>
                             <li>
-                                <a href="#" title="">Giá thiết kế kiến trúc</a>
+                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Giá thiết kế kiến trúc</a>
                             </li>
                         </ul>
                     </li>
@@ -66,16 +66,16 @@ use yii\helpers\Url;
                         <a href="#">Tư vấn <i class="fas fa-caret-down"></i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="#" title="">Mẫu nhà phố đẹp</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Mẫu nhà phố đẹp</a>
                             </li>
                             <li>
-                                <a href="#" title="">Mẫu biệt thự đẹp</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Mẫu biệt thự đẹp</a>
                             </li>
                             <li>
-                                <a href="#" title="">Cẩm nang xây nhà</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Cẩm nang xây nhà</a>
                             </li>
                             <li>
-                                <a href="#" title="">Phong thủy</a>
+                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Phong thủy</a>
                             </li>
                         </ul>
                     </li>
@@ -104,14 +104,14 @@ use yii\helpers\Url;
             <a href="#" title="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="clearfix"></div>
-        <a href="/" class="sidebar-logo"></a>
+        <a href="<?= Url::home() ?>" class="sidebar-logo"></a>
         <em class="sidebar-logo-text"></em>
-        <a class="menu-item" href="/">
+        <a class="menu-item" href="<?= Url::home() ?>">
             <i class="fas fa-home"></i>
             <span>Trang chủ</span>
             <i class="fa fa-circle"></i>
         </a>
-        <a class="menu-item" href="#">
+        <a class="menu-item" href="<?= Url::toRoute(['/gioi-thieu']); ?>">
             <i class="fas fa-info-circle"></i>
             <span>Giới thiệu</span>
             <i class="fa fa-circle"></i>
@@ -120,22 +120,22 @@ use yii\helpers\Url;
             <input type="checkbox" data-submenu-items="4" class="toggle-submenu" id="toggle-1">
             <label class="menu-item" for="toggle-1"><i class="fas fa-archive"></i><span>Dự án</span></label>
             <div class="submenu-wrapper">
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Biệt thự
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Nhà phố
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Căn hộ
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Văn phòng và công trình khác
                     <i class="fa fa-circle"></i>
@@ -146,22 +146,22 @@ use yii\helpers\Url;
             <input type="checkbox" data-submenu-items="4" class="toggle-submenu" id="toggle-2">
             <label class="menu-item" for="toggle-2"><i class="fas fa-layer-group"></i><span>Báo giá</span></label>
             <div class="submenu-wrapper">
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Quy trình làm việc
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Phương pháp tính diện tích
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Mô tả phần thô - hoàn thiện
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Giá thiết kế kiến trúc
                     <i class="fa fa-circle"></i>
@@ -172,29 +172,29 @@ use yii\helpers\Url;
             <input type="checkbox" data-submenu-items="4" class="toggle-submenu" id="toggle-3">
             <label class="menu-item" for="toggle-3"><i class="fas fa-glasses"></i><span>Tư vấn</span></label>
             <div class="submenu-wrapper">
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Mẫu nhà phố đẹp
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Mẫu biệt thự đẹp
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Cẩm nang xây nhà
                     <i class="fa fa-circle"></i>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
                     <i class="fa fa-angle-right"></i>
                     Phong thủy
                     <i class="fa fa-circle"></i>
                 </a>
             </div>
         </div>
-        <a class="menu-item" href="#">
+        <a class="menu-item" href="<?= Url::toRoute(['/lien-he']); ?>">
             <i class="fas fa-envelope"></i>
             <span>Liên hệ</span>
             <i class="fa fa-circle"></i>

@@ -10,5 +10,8 @@ return [
     'Next' => 'Tiếp',
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
-    'Actions' => 'Hành động'
+    'Actions' => 'Hành động',
+    'News' => 'Bài viết',
+    'News Category' => 'Danh mục bài viết',
+    'News Categories' => 'Danh mục bài viết',
 ];
