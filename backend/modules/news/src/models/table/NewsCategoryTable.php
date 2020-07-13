@@ -108,7 +108,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         $data = $cache->get($key);
         if ($data == false) {
             $query = self::find()->sort();
-            $data = $query->one();
+            $data = $query->all();
             $cache->set($key, $data);
         }
         return $data;

@@ -9,7 +9,8 @@ Yii::setAlias('milkyway/language', dirname(dirname(__DIR__)) . '/backend/modules
 Yii::setAlias('milkyway/news', dirname(dirname(__DIR__)) . '/backend/modules/news/src');
 Yii::setAlias('milkyway/tags', dirname(dirname(__DIR__)) . '/backend/modules/tags/src');
 Yii::setAlias('milkyway/contact', dirname(dirname(__DIR__)) . '/backend/modules/contact/src');
-Yii::setAlias('milkyway/partner', dirname(dirname(__DIR__)) . '/backend/modules/partner/src');
+Yii::setAlias('milkyway/slider', dirname(dirname(__DIR__)) . '/backend/modules/slider/src');
+Yii::setAlias('milkyway/label', dirname(dirname(__DIR__)) . '/backend/modules/label/src');
 
 //Widget
 Yii::setAlias('modava/tiny', dirname(dirname(__DIR__)) . '/backend/widgets/tiny/src');
