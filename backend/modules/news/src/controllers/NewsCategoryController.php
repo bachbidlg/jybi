@@ -218,9 +218,9 @@ class NewsCategoryController extends MyController
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         if (Yii::$app->request->isAjax) {
-            $id = Yii::$app->request->post('id');
-            $val = Yii::$app->request->post('val');
-            $field = Yii::$app->request->post('field');
+            $id = Yii::$app->request->get('id');
+            $val = Yii::$app->request->get('val');
+            $field = Yii::$app->request->get('field');
             $model = NewsCategoryTable::getById($id);
             if ($model === null || !$model->canGetProperty($field)) return [
                 'code' => 404,

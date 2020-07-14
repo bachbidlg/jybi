@@ -79,7 +79,7 @@ $(function () {
             id = el.attr('data-id') || null,
             field = el.attr('data-field') || null;
         if (url !== null && id !== null) {
-            $.post(url, {
+            $.get(url, {
                 id: id,
                 val: val,
                 field: field
