@@ -69,7 +69,6 @@ $(function () {
         }).attr('title', title);
     }
 
-
     function changeCheckBox(el) {
         var url = el.attr('data-url') || null,
             is_checked = el.is(':checked'),
@@ -79,7 +78,7 @@ $(function () {
             id = el.attr('data-id') || null,
             field = el.attr('data-field') || null;
         if (url !== null && id !== null) {
-            $.post(url, {
+            $.get(url, {
                 id: id,
                 val: val,
                 field: field

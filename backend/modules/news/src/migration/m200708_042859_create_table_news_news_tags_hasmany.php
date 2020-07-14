@@ -13,14 +13,14 @@ class m200708_042859_create_table_news_news_tags_hasmany extends Migration
     public function safeUp()
     {
         /* check table exists */
-        $check_table = Yii::$app->db->getTableSchema('news_news_tags');
+        $check_table = Yii::$app->db->getTableSchema('news_news_tags_hasmany');
         if ($check_table === null) {
             $tableOptions = null;
             if ($this->db->driverName === 'mysql') {
                 // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
                 $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
             }
-            $this->createTable('news_news_tags', [
+            $this->createTable('news_news_tags_hasmany', [
                 'news_id' => $this->integer(11)->notNull(),
                 'tags_id' => $this->string(255)->notNull()->unique(),
             ], $tableOptions);
