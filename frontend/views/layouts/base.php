@@ -56,7 +56,35 @@ $bundle = AppAsset::register($this);
     <body>
     <?php $this->beginBody() ?>
     <?= $content ?>
+    <div class="quick-contact">
+        <a href="tel:" class="btn-call">
+            <span class="animated infinite zoomIn kenit-alo-circle"></span>
+            <span class="animated infinite pulse kenit-alo-circle-fill"></span>
+            <i class="fas fa-phone-alt"></i>
+        </a>
+        <a href="mailto:" class="btn-email">
+            <span class="animated infinite zoomIn kenit-alo-circle"></span>
+            <span class="animated infinite pulse kenit-alo-circle-fill"></span>
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
     <div id="gotop"><i class="fas fa fa-angle-double-up"></i></div>
+    <div class="quick-contact-mb d-block d-md-none">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="tel:" class="mb-phone">
+                <i class="fas fa-phone-alt"></i>
+                Gọi điện
+            </a>
+            <a href="sms:" class="mb-sms">
+                <i class="fas fa-sms"></i>
+                SMS
+            </a>
+            <a href="<?php echo \yii\helpers\Url::toRoute(['/contact/index']) ?>" class="mb-contact">
+                <i class="fas fa-map-marker-alt"></i>
+                Liên hệ
+            </a>
+        </div>
+    </div>
     <?php $this->endBody() ?>
     </body>
     </html>

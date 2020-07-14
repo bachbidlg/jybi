@@ -57,6 +57,10 @@ $(function () {
             1199: {items: 6}
         }
     });
+
+    $('#gotop').click(function() {
+        $('html, body').animate({scrollTop:0},500);
+    });
 });
 
 function m() {
