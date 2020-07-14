@@ -56,6 +56,7 @@ $bundle = AppAsset::register($this);
     <body>
     <?php $this->beginBody() ?>
     <?= $content ?>
+    <div id="gotop"><i class="fas fa fa-angle-double-up"></i></div>
     <?php $this->endBody() ?>
     </body>
     </html>

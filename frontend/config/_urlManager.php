@@ -21,11 +21,11 @@ return [
         ['pattern' => 'lien-he', 'route' => 'contact/index', 'suffix' => '.html'],
 
         /* demo */
-        ['pattern' => 'du-an/<slug>', 'route' => 'news/view', 'suffix' => '.html'],
-        ['pattern' => 'du-an', 'route' => 'news/index', 'suffix' => '.html'],
+        ['pattern' => '<slug>', 'route' => 'news/view', 'suffix' => '.html'],
+        ['pattern' => '<slug>', 'route' => 'news/index', 'suffix' => ''],
         /* demo */
 
-        ['pattern' => 'bat-dong-san-ky-gui/trang-<page:\d+>', 'route' => 'ky-gui/index', 'suffix' => '.html'],
+        /*['pattern' => 'bat-dong-san-ky-gui/trang-<page:\d+>', 'route' => 'ky-gui/index', 'suffix' => '.html'],
         ['pattern' => 'bat-dong-san-ky-gui/<slug>', 'route' => 'ky-gui/view', 'suffix' => '.html'],
         ['pattern' => 'bat-dong-san-ky-gui', 'route' => 'ky-gui', 'suffix' => '.html'],
         ['pattern' => 'bat-dong-san-ky-gui', 'route' => 'ky-gui/index', 'suffix' => '.html'],
@@ -33,7 +33,7 @@ return [
         ['pattern' => 'tin-bat-dong-san/trang-<page:\d+>', 'route' => 'news/index', 'suffix' => '.html'],
         ['pattern' => 'tin-bat-dong-san/<slug>', 'route' => 'news/view', 'suffix' => '.html'],
         ['pattern' => 'tin-bat-dong-san', 'route' => 'news', 'suffix' => '.html'],
-        ['pattern' => 'tin-bat-dong-san', 'route' => 'news/index', 'suffix' => '.html'],
+        ['pattern' => 'tin-bat-dong-san', 'route' => 'news/index', 'suffix' => '.html'],*/
 
 
         ['pattern' => 'robots', 'route' => 'robotsTxt/web/index', 'suffix' => '.txt'],

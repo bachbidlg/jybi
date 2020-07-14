@@ -18,7 +18,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * NewsCategoryController implements the CRUD actions for NewsCategory model.
+ * NewsCategoryController implements the CRUD actions for NewsCategoryQuery model.
  */
 class NewsCategoryController extends MyController
 {
@@ -38,7 +38,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Lists all NewsCategory models.
+     * Lists all NewsCategoryQuery models.
      * @return mixed
      */
     public function actionIndex()
@@ -54,7 +54,7 @@ class NewsCategoryController extends MyController
 
 
     /**
-     * Displays a single NewsCategory model.
+     * Displays a single NewsCategoryQuery model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -67,7 +67,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Creates a new NewsCategory model.
+     * Creates a new NewsCategoryQuery model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -105,7 +105,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Updates an existing NewsCategory model.
+     * Updates an existing NewsCategoryQuery model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -177,7 +177,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Deletes an existing NewsCategory model.
+     * Deletes an existing NewsCategoryQuery model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -256,7 +256,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Finds the NewsCategory model based on its primary key value.
+     * Finds the NewsCategoryQuery model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return NewsCategory the loaded model

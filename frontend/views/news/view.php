@@ -76,7 +76,7 @@ $this->title = Yii::t('frontend', 'Chi tiết');
             <div class="col-lg-4">
                 <div class="sidebar-right">
                     <?php
-                    echo \frontend\widgets\ContactWidget::widget();
+                    echo \frontend\widgets\ContactWidget::widget(['type' => 'contact_wg']);
                     echo \frontend\widgets\NewsFeatured::widget();
                     echo \frontend\widgets\NewsRecommendWidget::widget();
                     ?>
