@@ -31,10 +31,6 @@ $default_language = LanguageTable::getDefaultLanguage();
         ]); ?>
         <div class="row">
             <div class="col-md-6 col-12">
-                <?= $form->field($model, 'type')->dropDownList(NewsTable::TYPE, []) ?>
-            </div>
-            <div class="col-md-6 col-12"></div>
-            <div class="col-md-6 col-12">
                 <?= Select2::widget([
                     'model' => $model,
                     'attribute' => 'category',
@@ -101,11 +97,11 @@ $default_language = LanguageTable::getDefaultLanguage();
             $image = null;
             if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->urlImage . '/' . $model->image;
             if ($image != null) echo Html::img($image, [
-                'style' => 'max-width: 50px'
+                'style' => 'max-width: 120px'
             ]) ?>
         </div>
         <?= $form->field($model, 'iptImage')->fileInput([
-            'onchange' => 'readImage(this, $(".preview"))',
+            'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $image
         ]) ?>
 

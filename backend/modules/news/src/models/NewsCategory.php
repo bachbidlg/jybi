@@ -8,6 +8,7 @@ use milkyway\language\models\Language;
 use milkyway\language\models\table\LanguageTable;
 use milkyway\news\NewsModule;
 use milkyway\news\models\table\NewsCategoryTable;
+use yii\behaviors\AttributeBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
@@ -44,6 +45,7 @@ class NewsCategory extends NewsCategoryTable
     public $news_category_language;
     public $iptImage;
     private $oldImage;
+    public $name;
 
     public function behaviors()
     {
@@ -77,6 +79,17 @@ class NewsCategory extends NewsCategoryTable
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                     ],
                 ],
+                'type' => [
+                    'class' => AttributeBehavior::class,
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['type'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['type'],
+                    ],
+                    'value' => function () {
+                        if ($this->category != null) return null;
+                        return $this->type;
+                    }
+                ],
             ]
         );
     }
@@ -87,9 +100,9 @@ class NewsCategory extends NewsCategoryTable
     public function rules()
     {
         return [
-            [['category', 'status', 'sort'], 'integer'],
+            [['category', 'status', 'sort', 'type'], 'integer'],
             [['sort'], 'default', 'value' => 1],
-            [['slug', 'image'], 'string', 'max' => 255],
+            [['name', 'slug', 'image'], 'string', 'max' => 255],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],

@@ -221,7 +221,7 @@ class NewsCategoryController extends MyController
             $id = Yii::$app->request->post('id');
             $val = Yii::$app->request->post('val');
             $field = Yii::$app->request->post('field');
-            $model = NewsCategory::getById($id);
+            $model = NewsCategoryTable::getById($id);
             if ($model === null || !$model->canGetProperty($field)) return [
                 'code' => 404,
                 'msg' => NewsModule::t('news', 'Không tìm thấy dữ liệu')

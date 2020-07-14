@@ -24,7 +24,6 @@ class m200708_020618_create_table_news extends Migration
                 'id' => $this->primaryKey(),
                 'slug' => $this->string(255)->notNull(),
                 'category' => $this->integer(11)->null()->defaultValue(0),
-                'type' => $this->integer(11)->null()->defaultValue(0)->comment('0: Tin tức, 1: Dự án,...'),
                 'image' => $this->string(255)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
                 'sort' => $this->integer(11)->null()->defaultValue(1)->comment('Thứ tự'),

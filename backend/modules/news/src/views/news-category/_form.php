@@ -35,9 +35,14 @@ $default_language = LanguageTable::getDefaultLanguage();
                     'attribute' => 'category',
                     'data' => ArrayHelper::map(NewsCategoryTable::getMenu($model->primaryKey, null), 'id', 'name'),
                     'options' => [
-                        'prompt' => $model->getAttributeLabel('category')
+                        'prompt' => $model->getAttributeLabel('category'),
+                        'id' => 'category'
                     ]
                 ]) ?>
+            </div>
+            <div class="col-md-6 col-12 category-type"
+                 style="display: <?= $model->category == null ? 'block' : 'none' ?>">
+                <?= $form->field($model, 'type')->dropDownList(NewsCategoryTable::TYPE, []) ?>
             </div>
             <div class="col-md-6 col-12">
                 <?= $form->field($model, 'sort')->textInput() ?>
@@ -91,11 +96,11 @@ $default_language = LanguageTable::getDefaultLanguage();
             $image = null;
             if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->urlImage . '/' . $model->image;
             if ($image != null) echo Html::img($image, [
-                'style' => 'max-width: 50px'
+                'style' => 'max-width: 120px'
             ]) ?>
         </div>
         <?= $form->field($model, 'iptImage')->fileInput([
-            'onchange' => 'readImage(this, $(".preview"))',
+            'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $image
         ]) ?>
 
@@ -145,6 +150,13 @@ $('body').on('change', '#tab-language-content .tab-pane .ipt-name', function(){
     getNewSlug(name, false).then(slug => {
         ipt_slug.val(slug);
     });
+}).on('change', '#category', function(){
+    var v = $(this).val() || null;
+    if(v === null){
+        $('.category-type').slideDown();
+    } else {
+        $('.category-type').hide().find('option').prop('selected', false).removeAttr('selected');
+    }
 }).on('click', '#btn-submit-form', function(){
     submit_form = true;
 });

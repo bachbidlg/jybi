@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 use backend\widgets\ToastrWidget;
 use milkyway\news\widgets\NavbarWidgets;
 use milkyway\news\NewsModule;
+use milkyway\language\models\table\LanguageTable;
 
 /* @var $this yii\web\View */
 /* @var $model milkyway\news\models\NewsCategory */
@@ -14,6 +15,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'News Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $params = $this->params;
+$default_language = LanguageTable::getDefaultLanguage();
 \yii\web\YiiAsset::register($this);
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-view']) ?>
@@ -49,6 +51,16 @@ $params = $this->params;
                     'model' => $model,
                     'attributes' => [
                         'id',
+                        [
+                            'attribute' => 'id',
+                            'label' => NewsModule::t('news', 'Name'),
+                            'value' => function ($model) use ($default_language) {
+                                $language = $default_language->id;
+                                if (count($model->newsCategoryLanguage) <= 0) return null;
+                                if (!array_key_exists($language, $model->newsCategoryLanguage)) $language = array_keys($model->newsCategoryLanguage)[0];
+                                return $model->newsCategoryLanguage[$language]->name;
+                            }
+                        ],
                         'slug',
                         [
                             'attribute' => 'category',

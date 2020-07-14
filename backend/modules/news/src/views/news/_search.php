@@ -24,8 +24,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category') ?>
 
-    <?= $form->field($model, 'type') ?>
-
     <?= $form->field($model, 'image') ?>
 
     <?php // echo $form->field($model, 'status') ?>

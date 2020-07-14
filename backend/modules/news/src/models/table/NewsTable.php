@@ -10,12 +10,6 @@ class NewsTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
     const STATUS_PUBLISHED = 1;
-    const TYPE_NEWS = 0;
-    const TYPE_SERVICE = 1;
-    const TYPE = [
-        self::TYPE_NEWS => 'Tin tức',
-        self::TYPE_SERVICE => 'Dịch vụ'
-    ];
     public $pathImage;
     public $urlImage;
 

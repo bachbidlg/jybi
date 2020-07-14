@@ -124,13 +124,6 @@ $list_language = LanguageTable::getAll();
                                             }
                                         ],
                                         [
-                                            'attribute' => 'type',
-                                            'value' => function ($model) {
-                                                if (!array_key_exists($model->type, NewsTable::TYPE)) return null;
-                                                return NewsTable::TYPE[$model->type];
-                                            }
-                                        ],
-                                        [
                                             'attribute' => 'image',
                                             'format' => 'raw',
                                             'value' => function ($model) {

@@ -124,13 +124,14 @@ class LanguageTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getDefaultLanguage()
+    public static function getDefaultLanguage($data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-language-get-default-language';
         $data = $cache->get($key);
-        if ($data == false || !defined('YII2_CACHE') || YII2_CACHE === false) {
+        if ($data == false || !defined('YII2_CACHE') || YII2_CACHE === false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.is_default' => self::STATUS_PUBLISHED])->published()->sort();
+            if ($query->count() <= 0) $query = self::find()->published()->sort();
             $data = $query->one();
             if (defined('YII2_CACHE') && YII2_CACHE === true) $cache->set($key, $data);
         }

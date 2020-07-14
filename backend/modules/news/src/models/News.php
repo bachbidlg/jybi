@@ -21,7 +21,6 @@ use yii\web\UploadedFile;
  * @property int $id
  * @property string $slug
  * @property int $category
- * @property int $type 0: Tin tức, 1: Dự án,...
  * @property string $image
  * @property int $status
  * @property int $sort Thứ tự
@@ -88,7 +87,7 @@ class News extends NewsTable
     {
         return [
             [['category'], 'required'],
-            [['category', 'type'], 'integer'],
+            [['category'], 'integer'],
             [['slug', 'image'], 'string', 'max' => 255],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
@@ -195,7 +194,6 @@ class News extends NewsTable
             'id' => NewsModule::t('news', 'ID'),
             'slug' => NewsModule::t('news', 'Slug'),
             'category' => NewsModule::t('news', 'Category'),
-            'type' => NewsModule::t('news', 'Type'),
             'image' => NewsModule::t('news', 'Image'),
             'status' => NewsModule::t('news', 'Status'),
             'sort' => NewsModule::t('news', 'Sort'),

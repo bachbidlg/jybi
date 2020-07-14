@@ -25,6 +25,7 @@ class m200704_040528_create_table_news_category extends Migration
                 'category' => $this->integer(11)->null()->defaultValue(0),
                 'slug' => $this->string(255)->notNull(),
                 'image' => $this->string(255)->null(),
+                'type' => $this->integer(11)->null()->defaultValue(0)->comment('0: Tin tức, 1: Dự án,...'),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
                 'sort' => $this->integer(11)->null()->defaultValue(1)->comment('Thứ tự'),
                 'created_at' => $this->integer(11)->null(),
