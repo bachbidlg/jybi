@@ -1,6 +1,7 @@
 <?php
 
 $this->title = WEB_NAME;
+$default_language = $this->params['default_language'];
 ?>
 
 <!--Start #about-us-->
@@ -84,96 +85,34 @@ $this->title = WEB_NAME;
         </div>
         <div class="section-content">
             <div class="row row-cols-1 row-cols-md-2">
-                <div class="col">
-                    <div class="box-project">
-                        <a class="d-block" href="#" title="">
-                            <div class="box-image">
-                                <div class="overlay"></div>
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/img-pj-1.jpg')[1] ?>"
-                                     alt="img">
-                            </div>
-                        </a>
-                        <div class="box-content">
-                            <div class="title"><a href="#" title="">Biệt thự</a></div>
-                            <div class="desc">
-                                Báo giá xây dựng phần thô biệt thự, xây dựng hoàn thiện biệt thự tại TPHCM, Bình
-                                Dương, Đồng
-                                Nai,.... Tư vấn xây dựng biệt thự theo phong thủy giúp gia chủ làm ăn phát đạt.
-                                Thiết kế
-                                những mẫu biệt thự cao cấp hiện đại nhất hiện nay.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="box-project">
-                        <a class="d-block" href="#" title="">
-                            <div class="box-image">
-                                <div class="overlay"></div>
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/img-pj-2.jpg')[1] ?>"
-                                     alt="img">
-                            </div>
-                        </a>
-                        <div class="box-content">
-                            <div class="title">
-                                <a href="#" title="">Căn hộ</a>
-                            </div>
-                            <div class="desc">
-                                Thiết kế và thi công nội thất căn hộ chỉ với 1,5 triệu/m2. Tư vấn những mẫu nội thất
-                                căn hộ
-                                hiện đại, cổ điển đẹp mắt nhất hiện nay. Nội thất căn hộ được sản xuất và gia công
-                                tại xưởng
-                                của công ty nên chi phí hoàn thiện nội thất căn hộ rất cạnh tranh.
+                <?php
+                foreach($projectCat as $project){
+                    foreach($project->categoryHasMany as $category_has_many){
+                        ?>
+                        <div class="col">
+                            <div class="box-project">
+                                <a class="d-block" href="#" title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name?>">
+                                    <div class="box-image">
+                                        <div class="overlay"></div>
+                                        <img class="img-fluid"
+                                             src="<?= $category_has_many->getImage() ?>"
+                                             alt="img">
+                                    </div>
+                                </a>
+                                <div class="box-content">
+                                    <div class="title"><a href="#" title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name?>">
+                                            <?= $category_has_many->newsCategoryLanguage[$default_language]->name?>
+                                        </a></div>
+                                    <div class="desc">
+                                        <?= $category_has_many->newsCategoryLanguage[$default_language]->description?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="box-project">
-                        <a class="d-block" href="#" title="">
-                            <div class="box-image">
-                                <div class="overlay"></div>
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/img-pj-3.jpg')[1] ?>"
-                                     alt="img">
-                            </div>
-                        </a>
-                        <div class="box-content">
-                            <div class="title">
-                                <a href="#" title="">Nhà phố</a>
-                            </div>
-                            <div class="desc">
-                                Chuyên xây dựng nhà 3 tầng đẹp mắt, báo giá xây dựng nhà chìa khóa trao tay chỉ với
-                                5.2
-                                triệu/m2. Cung cấp và tư vấn những mẫu nhà phố hiện đại đẹp mắt nhất hiện nay.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="box-project">
-                        <a class="d-block" href="#" title="">
-                            <div class="box-image">
-                                <div class="overlay"></div>
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/img-pj-4.jpg')[1] ?>"
-                                     alt="img">
-                            </div>
-                        </a>
-                        <div class="box-content">
-                            <div class="title">
-                                <a href="#" title="">Văn phòng và công trình khác</a>
-                            </div>
-                            <div class="desc">
-                                Tư vấn và báo giá thiết kế, thi công nội thất trọn gói cho các shop, quán coffee,
-                                decor nội
-                                thất văn phòng công ty, showroom,... giá vô cùng cạnh tranh.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -340,11 +279,7 @@ $this->title = WEB_NAME;
         </div>
         <div class="section-content">
             <div class="partner-slider owl-carousel owl-theme">
-                <?php for ($i = 1; $i <= 8; $i++) { ?>
-                    <div class="partner-item">
-                        <img class="img-fluid" src="https://via.placeholder.com/170x100.png" alt="img">
-                    </div>
-                <?php } ?>
+                <?php echo \frontend\widgets\SliderWidget::widget(['type' => \frontend\models\Slider::TYPE_PARTNER])?>
             </div>
         </div>
     </div>

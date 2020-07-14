@@ -3,10 +3,8 @@
 namespace milkyway\slider\models\table;
 
 use backend\modules\user\models\User;
-use cheatsheet\Time;
 use milkyway\slider\models\query\SliderQuery;
 use Yii;
-use yii\db\ActiveRecord;
 
 class SliderTable extends \yii\db\ActiveRecord
 {
@@ -73,6 +71,16 @@ class SliderTable extends \yii\db\ActiveRecord
     public function getUserCreated()
     {
         return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    /**
+     * @return mixed
+     *
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getImage()
+    {
+        return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
     }
 
     /**

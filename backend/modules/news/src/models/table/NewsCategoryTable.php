@@ -44,7 +44,9 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         $keys = [
             'redis-news-category-get-by-id-' . $this->id,
             'redis-news-category-get-all',
-            'redis-news-category-get-by-slug-' . $this->slug
+            'redis-news-category-get-by-slug-' . $this->slug,
+            'redis-news-category-get-by-type-' . $this->type,
+            'redis-news-category-get-by-category-' . $this->category,
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -58,7 +60,9 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         $keys = [
             'redis-news-category-get-by-id-' . $this->id,
             'redis-news-category-get-all',
-            'redis-news-category-get-by-slug-' . $this->slug
+            'redis-news-category-get-by-slug-' . $this->slug,
+            'redis-news-category-get-by-type-' . $this->type,
+            'redis-news-category-get-by-category-' . $this->category,
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -91,9 +95,19 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return $this->hasOne(self::class, ['id' => 'category']);
     }
 
+    public function getCategoryHasMany()
+    {
+        return $this->hasMany(self::class, ['category' => 'id']);
+    }
+
     public function getNewsCategoryLanguage()
     {
         return $this->hasMany(NewsCategoryLanguageTable::class, ['news_category_id' => 'id'])->indexBy('language_id');
+    }
+
+    public function getImage()
+    {
+        return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
     }
 
     public static function getById($id)
@@ -117,6 +131,32 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         if ($data == false) {
             $query = self::find()->where([self::tableName() . '.slug' => $slug]);
             $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getByType($type)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-category-get-by-type-' . $type;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.type' => $type]);
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getByCategory($category)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-category-get-by-category-' . $category;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.category' => $category]);
+            $data = $query->all();
             $cache->set($key, $data);
         }
         return $data;

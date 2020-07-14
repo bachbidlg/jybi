@@ -11,25 +11,7 @@ $this->beginContent('@frontend/views/layouts/common.php');
         <main id="main">
             <?php if (Yii::$app->controller->id == 'site') { ?>
                 <!--Start #banner-->
-                <section id="banner-full">
-                    <div class="banner-slider owl-carousel owl-theme">
-                        <div class="item">
-                            <img class="img-fluid"
-                                 src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/slider-2.jpg')[1] ?>"
-                                 alt="img">
-                        </div>
-                        <div class="item">
-                            <img class="img-fluid"
-                                 src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/slider-3.jpg')[1] ?>"
-                                 alt="img">
-                        </div>
-                        <div class="item">
-                            <img class="img-fluid"
-                                 src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/slider-4.jpg')[1] ?>"
-                                 alt="img">
-                        </div>
-                    </div>
-                </section>
+                <?php echo \frontend\widgets\SliderWidget::widget(['type' => \frontend\models\Slider::TYPE_SLIDER])?>
                 <!--End #banner-->
             <?php } else { ?>
                 <section class="site-heading">

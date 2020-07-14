@@ -20,4 +20,8 @@ class SliderQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere([Slider::tableName() . '.status' => Slider::STATUS_DISABLED]);
     }
+
+    public function sort($sort = SORT_ASC) {
+        return $this->orderBy([Slider::tableName() . '.sort' => $sort]);
+    }
 }

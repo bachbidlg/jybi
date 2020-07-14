@@ -551,6 +551,17 @@
 
 	#partners {
 		background-color: #474747;
+
+		.partner-item {
+			background-color: $white;
+			text-align: center;
+
+			img {
+				width: auto;
+				max-height: 80px;
+				margin: 0 auto;
+			}
+		}
 	}
 }
 

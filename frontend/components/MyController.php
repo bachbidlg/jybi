@@ -8,12 +8,22 @@
 
 namespace frontend\components;
 
+use milkyway\language\models\table\LanguageTable;
+use yii\base\Module;
 use yii\web\Controller;
 use Yii;
 
 
 class MyController extends Controller
 {
+    public $default_language;
+    public function __construct(string $id, Module $module, array $config = [])
+    {
+        $this->default_language = LanguageTable::getDefaultLanguage(false);
+        Yii::$app->view->params['default_language'] = $this->default_language->id;
+        parent::__construct($id, $module, $config);
+    }
+
     public function actions()
     {
         return [
