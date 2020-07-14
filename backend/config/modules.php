@@ -36,4 +36,13 @@ return [
     'contact' => [
         'class' => 'milkyway\contact\ContactModule',
     ],
+    'partner' => [
+        'class' => 'milkyway\partner\PartnerModule',
+    ],
+    'slider' => [
+        'class' => 'milkyway\slider\SliderModule',
+    ],
+    'label' => [
+        'class' => 'milkyway\label\LabelModule',
+    ],
 ];

@@ -44,12 +44,22 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('contact')) { ?>
                 <li class="nav-item<?php if (Yii::$app->controller->module->id == 'contact') echo ' active'; ?>">
                     <a class="nav-link" href="<?= Url::toRoute(['/contact']); ?>">
-                        <i class="ion ion-md-flag"></i>
+                        <i class="ion ion-ios-chatbubbles"></i>
                         <span class="nav-link-text"><?= Yii::t('backend', 'Contacts'); ?></span>
                     </a>
                 </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('slider')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'slider') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/slider']); ?>">
+                            <i class="ion ion-ios-hand"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Slider'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
                 <li class="nav-item<?php if (Yii::$app->controller->module->id == 'settings') echo ' active'; ?>">
                     <a class="nav-link" href="<?= Url::toRoute(['/settings']); ?>">
                         <i class="ion ion-ios-cog"></i>
