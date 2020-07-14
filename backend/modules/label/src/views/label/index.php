@@ -22,9 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <h4 class="hk-pg-title"><span class="pg-title-icon"><span
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
-        <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= LabelModule::t('label', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= LabelModule::t('label', 'Create'); ?></a>
     </div>
 
     <!-- Row -->

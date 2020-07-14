@@ -22,11 +22,11 @@ class m200713_125635_create_table_label extends Migration
             }
             $this->createTable('label', [
                 'label' => $this->string(255)->notNull(),
-                'language_id' => $this->integer(11)->notNull(),
+                'language' => $this->integer(11)->notNull(),
                 'text' => $this->string(500)->null()
             ], $tableOptions);
-            $this->addPrimaryKey('label-label-language_id', 'label', ['label', 'language_id']);
-            $this->addForeignKey('label-language_id-language-id', 'label', 'language_id', 'language', 'id', 'RESTRICT', 'CASCADE');
+            $this->addPrimaryKey('label-label-language', 'label', ['label', 'language']);
+            $this->addForeignKey('label-language-language-id', 'label', 'language', 'language', 'id', 'RESTRICT', 'CASCADE');
         }
     }
 
