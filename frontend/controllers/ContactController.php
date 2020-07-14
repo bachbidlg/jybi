@@ -20,18 +20,21 @@ class ContactController extends MyController
     {
         $model = new ContactForm();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate() && $model->save()) {
-                Yii::$app->session->setFlash('alert', [
-                    'class' => 'success',
-                    'msg' => 'Gửi thành công!'
-                ]);
-                return $this->refresh();
-            } else {
-                Yii::$app->session->setFlash('alert', [
-                    'class' => 'danger',
-                    'msg' => 'Gửi thất bại! Vui lòng thử lại! save'
-                ]);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate() && $model->save()) {
+                    return [
+                        'code' => 200,
+                        'msg' => 'Gửi thành công',
+                    ];
+                } else {
+                    return [
+                        'code' => 400,
+                        'msg' => 'Gửi thất bại',
+                    ];
+                }
             }
         }
 

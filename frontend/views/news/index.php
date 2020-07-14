@@ -139,7 +139,7 @@ $this->title = Yii::t('frontend', 'Dự án');
             <div class="col-lg-4">
                 <div class="sidebar sidebar-right">
                     <?php
-                    echo \frontend\widgets\ContactWidget::widget();
+                    echo \frontend\widgets\ContactWidget::widget(['type' => 'contact_wg']);
                     echo \frontend\widgets\NewsFeatured::widget();
                     echo \frontend\widgets\NewsRecommendWidget::widget();
                     ?>

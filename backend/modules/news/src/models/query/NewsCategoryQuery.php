@@ -5,7 +5,7 @@ namespace milkyway\news\models\query;
 use milkyway\news\models\NewsCategory;
 
 /**
- * This is the ActiveQuery class for [[NewsCategory]].
+ * This is the ActiveQuery class for [[NewsCategoryQuery]].
  *
  * @see NewsCategory
  */

@@ -8,20 +8,35 @@
 
 namespace frontend\controllers;
 
-
 use frontend\components\MyController;
+use frontend\models\News;
+use frontend\models\NewsCategory;
 
 class NewsController extends MyController
 {
-    public function actionIndex()
+    public function actionIndex($slug = null)
     {
-        return $this->render('index', [
+        $category = NewsCategory::getBySlug($slug);
+        if($category == null) return $this->redirect(['/site/index']);
 
+        $news = News::getByAlias($category->alias);
+
+        return $this->render('index', [
+            'news' => $news
         ]);
     }
 
-    public function actionView()
+    public function actionView($slug)
     {
-        return $this->render('view', []);
+        $news = News::getBySlug($slug);
+        if($news == null) return $this->redirect(['/site/index']);
+
+        $category = NewsCategory::getById($news->category);
+        $newsRelate = News::getByAlias($category->alias, 5);
+
+        return $this->render('view', [
+            'news' => $news,
+            'newsRelate' => $newsRelate
+        ]);
     }
 }

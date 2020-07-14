@@ -41,7 +41,10 @@ class NewsTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $keys = [
             'redis-news-get-by-id-' . $this->id,
-            'redis-news-get-all'
+            'redis-news-get-by-slug-' . $this->slug,
+            'redis-news-get-by-category-' . $this->category,
+            'redis-news-get-by-alias-' . $this->alias,
+            'redis-news-get-all',
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -54,7 +57,10 @@ class NewsTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $keys = [
             'redis-news-get-by-id-' . $this->id,
-            'redis-news-get-all'
+            'redis-news-get-by-slug-' . $this->slug,
+            'redis-news-get-by-category-' . $this->category,
+            'redis-news-get-by-alias-' . $this->alias,
+            'redis-news-get-all',
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -105,6 +111,19 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
+    public static function getBySlug($slug)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-by-slug-' . $slug;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.slug' => $slug]);
+            $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
     public static function getAll()
     {
         $cache = Yii::$app->cache;
@@ -112,6 +131,36 @@ class NewsTable extends \yii\db\ActiveRecord
         $data = $cache->get($key);
         if ($data == false) {
             $query = self::find()->sort();
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getByCategory($category = null, $limit = null)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-by-category-' . $category;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.category' => $category]);
+            if ($limit != null) $query->limit($limit)->offset(0);
+            $query->sort();
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getByAlias($alias = null, $limit = null)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-by-alias-' . $alias;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}/%'");
+            if ($limit != null) $query->limit($limit)->offset(0);
+            $query->sort();
             $data = $query->all();
             $cache->set($key, $data);
         }

@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use milkyway\news\models\NewsCategory;
 
 /**
- * NewsCategorySearch represents the model behind the search form of `milkyway\news\models\NewsCategory`.
+ * NewsCategorySearch represents the model behind the search form of `milkyway\news\models\NewsCategoryQuery`.
  */
 class NewsCategorySearch extends NewsCategory
 {

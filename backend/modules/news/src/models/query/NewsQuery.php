@@ -20,4 +20,9 @@ class NewsQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere([News::tableName() . '.status' => News::STATUS_DISABLED]);
     }
+
+    public function sort($sort = SORT_ASC)
+    {
+        return $this->orderBy([News::tableName() . '.sort' => $sort]);
+    }
 }

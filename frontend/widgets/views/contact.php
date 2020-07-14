@@ -2,30 +2,77 @@
 /**
  * Created by PhpStorm.
  * User: luken
- * Date: 7/8/2020
- * Time: 13:58
+ * Date: 7/10/2020
+ * Time: 14:28
  */
 ?>
-<div class="widget form-contact">
-    <div class="sidebar-title">
-        <h4><?= Yii::t('frontend', 'Yêu cầu gọi lại') ?></h4>
-        <div class="separator"></div>
-    </div>
-    <div class="sidebar-content">
-        <form action="#">
-            <div class="form-title">Báo giá sau 10 phút</div>
-            <div class="form-group">
-                <input type="text" name="full_name" class="form-control" placeholder="Họ và tên">
-            </div>
-            <div class="form-group">
-                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại">
-            </div>
-            <div class="form-group">
-                <textarea name="message" class="form-control" rows="5" placeholder="Yêu cầu nhận tư vấn"></textarea>
-            </div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-contact-wg">Gửi yêu cầu</button>
-            </div>
-        </form>
-    </div>
-</div>
+<?php
+$form = \yii\bootstrap\ActiveForm::begin([
+    'id' => 'form-contact',
+    'enableAjaxValidation' => true,
+    'validationUrl' => \yii\helpers\Url::toRoute(['validation-form']),
+    'action' => \yii\helpers\Url::toRoute(['/contact/index']),
+    'options' => [
+        'class' => 'contact-form',
+    ],
+])
+?>
+<?= $form->field($model, 'full_name', [
+    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+])->textInput([])->label($model->getAttributeLabel('full_name') . '<span> (*): </span>') ?>
+
+<?= $form->field($model, 'email', [
+    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+])->textInput([])->label($model->getAttributeLabel('email') . '<span> : </span>') ?>
+
+<?= $form->field($model, 'phone', [
+    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+])->textInput([])->label($model->getAttributeLabel('phone') . '<span> (*): </span>') ?>
+
+<?= $form->field($model, 'subject', [
+    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+])->textInput([])->label($model->getAttributeLabel('subject') . '<span> : </span>') ?>
+
+<?= $form->field($model, 'message', [
+    'template' => '
+                        <div class="row">
+                            <div class="col-lg-3">{label}</div>
+                            <div class="col-lg-9">
+                                {input}{error}
+                            </div>
+                        </div>'
+])->textarea(['rows' => 5])->label($model->getAttributeLabel('message') . '<span> : </span>') ?>
+
+<?= \yii\helpers\Html::submitButton(
+    '<i class="fas fa-paper-plane"></i> Gửi',
+    ['class' => 'btn btn-secondary float-right']
+) ?>
+<?php \yii\bootstrap\ActiveForm::end() ?>
+
+<?php
+\frontend\assets\ContactAssets::register($this);
+?>

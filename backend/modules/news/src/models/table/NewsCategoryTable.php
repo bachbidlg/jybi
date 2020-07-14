@@ -37,7 +37,8 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $keys = [
             'redis-news-category-get-by-id-' . $this->id,
-            'redis-news-category-get-all'
+            'redis-news-category-get-all',
+            'redis-news-category-get-by-slug-' . $this->slug
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -50,7 +51,8 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $keys = [
             'redis-news-category-get-by-id-' . $this->id,
-            'redis-news-category-get-all'
+            'redis-news-category-get-all',
+            'redis-news-category-get-by-slug-' . $this->slug
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -95,6 +97,19 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         $data = $cache->get($key);
         if ($data == false) {
             $query = self::find()->where([self::tableName() . '.id' => $id]);
+            $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getBySlug($slug)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-category-get-by-slug-' . $slug;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.slug' => $slug]);
             $data = $query->one();
             $cache->set($key, $data);
         }
