@@ -10,6 +10,7 @@ class NewsTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
     const STATUS_PUBLISHED = 1;
+    const CHECK_HOT = 1;
     public $pathImage;
     public $urlImage;
 
@@ -38,6 +39,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-slug-' . $this->slug,
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
+            'redis-news-get-by-hot-' . $this->hot,
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -54,6 +56,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-slug-' . $this->slug,
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
+            'redis-news-get-by-hot-' . $this->hot,
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -92,6 +95,11 @@ class NewsTable extends \yii\db\ActiveRecord
         return $this->hasMany(NewsLanguageTable::class, ['news_id' => 'id'])->indexBy('language_id');
     }
 
+    public function getImage()
+    {
+        return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
+    }
+
     public static function getById($id)
     {
         $cache = Yii::$app->cache;
@@ -112,6 +120,19 @@ class NewsTable extends \yii\db\ActiveRecord
         $data = $cache->get($key);
         if ($data == false) {
             $query = self::find()->where([self::tableName() . '.slug' => $slug]);
+            $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getCheckHot($hot)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-by-hot-' . $hot;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.hot' => $hot]);
             $data = $query->one();
             $cache->set($key, $data);
         }

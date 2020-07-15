@@ -141,6 +141,13 @@ $list_language = LanguageTable::getAll();
                                             }
                                         ],
                                         [
+                                            'attribute' => 'hot',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->hot ? 'checked' : '') . ' data-field="hot" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
+                                            }
+                                        ],
+                                        [
                                             'attribute' => 'created_by',
                                             'value' => 'userCreated.userProfile.fullname',
                                             'headerOptions' => [

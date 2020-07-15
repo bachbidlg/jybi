@@ -22,14 +22,12 @@ class SiteController extends MyController
     public function actionIndex()
     {
         $projectCat = NewsCategory::getByType(NewsCategory::TYPE_PROJECT);
-        /*foreach($projectCat as $project){
-            foreach($project->categoryHasMany as $category_has_many){
-                echo $category_has_many->newsCategoryLanguage[$this->default_language->id]->name;
-            }
-        }*/
+
+        $projectHot = News::getCheckHot(News::CHECK_HOT);
 
         return $this->render('index', [
-            'projectCat' => $projectCat
+            'projectCat' => $projectCat,
+            'projectHot' => $projectHot
         ]);
     }
 
