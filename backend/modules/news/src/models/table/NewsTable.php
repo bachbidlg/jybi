@@ -10,7 +10,6 @@ class NewsTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
     const STATUS_PUBLISHED = 1;
-    const CHECK_HOT = 1;
     public $pathImage;
     public $urlImage;
 
@@ -39,7 +38,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-slug-' . $this->slug,
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
-            'redis-news-get-by-hot-' . $this->hot,
+            'redis-news-get-news-check-hot',
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -56,7 +55,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-slug-' . $this->slug,
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
-            'redis-news-get-by-hot-' . $this->hot,
+            'redis-news-get-news-check-hot',
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -126,14 +125,15 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getCheckHot($hot)
+    public static function getNewsCheckHot($data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
-        $key = 'redis-news-get-by-hot-' . $hot;
+        $key = 'redis-news-get-news-check-hot';
         $data = $cache->get($key);
-        if ($data == false) {
-            $query = self::find()->where([self::tableName() . '.hot' => $hot]);
-            $data = $query->one();
+        if ($data == false || $data_cache === false) {
+            $query = self::find()->where([self::tableName() . '.hot' => self::STATUS_PUBLISHED]);
+            $query->sort(SORT_DESC)->published();
+            $data = $query->all();
             $cache->set($key, $data);
         }
         return $data;

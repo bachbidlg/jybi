@@ -1,5 +1,8 @@
 <?php
 
+use yii\helpers\Url;
+
+
 $this->title = WEB_NAME;
 $default_language = $this->params['default_language'];
 ?>
@@ -86,12 +89,13 @@ $default_language = $this->params['default_language'];
         <div class="section-content">
             <div class="row row-cols-1 row-cols-md-2">
                 <?php
-                foreach($projectCat as $project){
-                    foreach($project->categoryHasMany as $category_has_many){
+                foreach ($projectCat as $project) {
+                    foreach ($project->categoryHasMany as $category_has_many) {
                         ?>
                         <div class="col">
                             <div class="box-project">
-                                <a class="d-block" href="#" title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name?>">
+                                <a class="d-block" href="<?= Url::toRoute(['/' . $category_has_many->slug]) ?>"
+                                   title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
                                     <div class="box-image">
                                         <div class="overlay"></div>
                                         <img class="img-fluid"
@@ -100,16 +104,19 @@ $default_language = $this->params['default_language'];
                                     </div>
                                 </a>
                                 <div class="box-content">
-                                    <div class="title"><a href="#" title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name?>">
-                                            <?= $category_has_many->newsCategoryLanguage[$default_language]->name?>
-                                        </a></div>
+                                    <div class="title">
+                                        <a href="<?= Url::toRoute(['/' . $category_has_many->slug]) ?>"
+                                           title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
+                                            <?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>
+                                        </a>
+                                    </div>
                                     <div class="desc">
-                                        <?= $category_has_many->newsCategoryLanguage[$default_language]->description?>
+                                        <?= $category_has_many->newsCategoryLanguage[$default_language]->description ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                <?php
+                        <?php
                     }
                 }
                 ?>
@@ -128,24 +135,29 @@ $default_language = $this->params['default_language'];
         </div>
         <div class="section-content">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
-                <?php for ($i = 1; $i <= 8; $i++) { ?>
+                <?php
+                foreach ($projectHot as $project) {
+                    ?>
                     <div class="col">
-                        <a class="d-block" href="#" title="">
+                        <a class="d-block" href="<?= Url::toRoute(['/' . $project->slug]) ?>"
+                           title="<?= $project->newsLanguage[$default_language]->name ?>">
                             <div class="project-item">
                                 <div class="project-image">
                                     <img class="img-fluid"
-                                         src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/img-pj-done-' . $i . '.jpg')[1] ?>"
+                                         src="<?= $project->getImage() ?>"
                                          alt="img">
                                 </div>
                                 <div class="overlay">
                                     <div class="desc">
-                                        <div class="h4">Tiêu đề <?= $i ?></div>
+                                        <div class="h4"><?= $project->newsLanguage[$default_language]->name ?></div>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                <?php } ?>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -279,7 +291,7 @@ $default_language = $this->params['default_language'];
         </div>
         <div class="section-content">
             <div class="partner-slider owl-carousel owl-theme">
-                <?php echo \frontend\widgets\SliderWidget::widget(['type' => \frontend\models\Slider::TYPE_PARTNER])?>
+                <?php echo \frontend\widgets\SliderWidget::widget(['type' => \frontend\models\Slider::TYPE_PARTNER]) ?>
             </div>
         </div>
     </div>

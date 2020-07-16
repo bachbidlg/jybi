@@ -53,6 +53,8 @@ class News extends NewsTable
             [
                 'slug' => [
                     'class' => SluggableBehavior::class,
+//                    'immutable' => false,
+                    'ensureUnique' => true,
                     'attributes' => [
                         ActiveRecord::EVENT_BEFORE_INSERT => ['slug'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['slug'],
@@ -87,7 +89,7 @@ class News extends NewsTable
     {
         return [
             [['category'], 'required'],
-            [['category'], 'integer'],
+            [['category', 'sort'], 'integer'],
             [['slug', 'image'], 'string', 'max' => 255],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],

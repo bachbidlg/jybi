@@ -23,7 +23,9 @@ class SiteController extends MyController
     {
         $projectCat = NewsCategory::getByType(NewsCategory::TYPE_PROJECT);
 
-        $projectHot = News::getCheckHot(News::CHECK_HOT);
+        $projectHot = News::getNewsCheckHot();
+
+
 
         return $this->render('index', [
             'projectCat' => $projectCat,
