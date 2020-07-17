@@ -43,9 +43,7 @@ class NewsCategoryController extends MyController
      */
     public function actionIndex()
     {
-        $searchModel = new NewsCategorySearch([
-            'type' => NewsCategoryTable::TYPE_NEWS
-        ]);
+        $searchModel = new NewsCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -75,9 +73,7 @@ class NewsCategoryController extends MyController
      */
     public function actionCreate()
     {
-        $model = new NewsCategory([
-            'type' => NewsCategoryTable::TYPE_NEWS
-        ]);
+        $model = new NewsCategory();
 
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
@@ -150,9 +146,7 @@ class NewsCategoryController extends MyController
     {
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
-            $model = new NewsCategory([
-                'type' => NewsCategoryTable::TYPE_NEWS
-            ]);
+            $model = new NewsCategory();
             if ($id !== null) $model = $this->findModel($id);
             $model->setNewsCategoryLanguage();
             if ($model->load(Yii::$app->request->post())) {
@@ -274,7 +268,6 @@ class NewsCategoryController extends MyController
     {
         $model = NewsCategory::find()->where([
             NewsCategory::tableName() . '.id' => $id,
-            NewsCategory::tableName() . '.type' => NewsCategory::TYPE_NEWS
         ])->one();
         if ($model !== null) {
             return $model;
