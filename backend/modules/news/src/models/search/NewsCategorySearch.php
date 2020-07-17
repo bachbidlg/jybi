@@ -18,7 +18,7 @@ class NewsCategorySearch extends NewsCategory
     public function rules()
     {
         return [
-            [['id', 'category', 'type', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
+            [['id', 'category', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
             [['slug', 'image', 'status', 'alias'], 'safe'],
         ];
     }
