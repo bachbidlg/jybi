@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use milkyway\slider\SliderModule;
 use milkyway\slider\widgets\NavbarWidgets;
 use yii\helpers\Html;
@@ -123,6 +124,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'headerOptions' => [
                                                 'width' => 150,
                                             ],
+                                        ],
+                                        [
+                                            'attribute' => 'status',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . SliderTable::STATUS_PUBLISHED . '" data-unchecked="' . SliderTable::STATUS_DISABLED . '">';
+                                            }
                                         ],
                                         [
                                             'attribute' => 'created_at',

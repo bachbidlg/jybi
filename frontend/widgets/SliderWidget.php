@@ -25,6 +25,7 @@ class SliderWidget extends Widget
     public function run()
     {
         $slider = Slider::getByType($this->type);
+        if (count($slider) <= 0) return null;
 
         $view = $this->type == Slider::TYPE_SLIDER ? 'slider' : 'partner';
 

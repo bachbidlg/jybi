@@ -42,7 +42,8 @@ class SliderTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $keys = [
             'redis-slider-get-all',
-            'redis-slider-get-by-type-' . $this->type
+            'redis-slider-get-by-type-' . $this->type,
+            'redis-slider-get-by-id-' . $this->id
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -55,7 +56,8 @@ class SliderTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $keys = [
             'redis-slider-get-all',
-            'redis-slider-get-by-type-' . $this->type
+            'redis-slider-get-by-type-' . $this->type,
+            'redis-slider-get-by-id-' . $this->id
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -80,7 +82,10 @@ class SliderTable extends \yii\db\ActiveRecord
      */
     public function getImage()
     {
-        return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
+        if (file_exists($this->pathImage . '/' . $this->image)) {
+            return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
+        }
+        return null;
     }
 
     /**
@@ -93,9 +98,20 @@ class SliderTable extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
+    public static function getById($id){
+        $cache = Yii::$app->cache;
+        $key = 'redis-slider-get-by-id-' . $id;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $query = self::find()->where([self::tableName() . '.id' => $id])->sort();
+            $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
     public static function getByType($type = null)
     {
-        if ($type == null) return self::getAll();
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-by-type-' . $type;
         $data = $cache->get($key);

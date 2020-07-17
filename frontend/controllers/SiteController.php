@@ -11,6 +11,7 @@ use frontend\models\News;
 use frontend\models\NewsCategory;
 use frontend\models\search\SearchNews;
 use frontend\models\search\SearchVideo;
+use frontend\models\Slider;
 use frontend\models\TagSeo;
 use Yii;
 use frontend\components\MyController;
@@ -21,13 +22,15 @@ class SiteController extends MyController
 
     public function actionIndex()
     {
-        $projectCat = NewsCategory::getByType(NewsCategory::TYPE_PROJECT);
+        $sliders = Slider::getByType(Slider::TYPE_SLIDER);
+        $partners = Slider::getByType(Slider::TYPE_PARTNER);
 
+        $projectCat = NewsCategory::getByType(NewsCategory::TYPE_PROJECT);
         $projectHot = News::getNewsCheckHot();
 
-
-
         return $this->render('index', [
+            'sliders' => $sliders,
+            'partners' => $partners,
             'projectCat' => $projectCat,
             'projectHot' => $projectHot
         ]);

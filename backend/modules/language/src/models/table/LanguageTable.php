@@ -129,7 +129,7 @@ class LanguageTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $key = 'redis-language-get-default-language';
         $data = $cache->get($key);
-        if ($data == false || !defined('YII2_CACHE') || YII2_CACHE === false || $data_cache === false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.is_default' => self::STATUS_PUBLISHED])->published()->sort();
             if ($query->count() <= 0) $query = self::find()->published()->sort();
             $data = $query->one();

@@ -9,11 +9,7 @@ $this->beginContent('@frontend/views/layouts/common.php');
     <div id="page">
         <?= HeaderWidget::widget() ?>
         <main id="main">
-            <?php if (Yii::$app->controller->id == 'site') { ?>
-                <!--Start #banner-->
-                <?php echo \frontend\widgets\SliderWidget::widget(['type' => \frontend\models\Slider::TYPE_SLIDER])?>
-                <!--End #banner-->
-            <?php } else { ?>
+            <?php if (Yii::$app->controller->id != 'site') { ?>
                 <section class="site-heading">
                     <!--<img src="https://demo2wpopal.b-cdn.net/rehomes/wp-content/uploads/2019/11/background-about_awards.jpg"
                          alt="">-->

@@ -2,6 +2,7 @@
 
 namespace milkyway\slider\controllers;
 
+use milkyway\slider\models\table\SliderTable;
 use yii\db\Exception;
 use Yii;
 use yii\helpers\Html;
@@ -11,6 +12,7 @@ use milkyway\slider\SliderModule;
 use backend\components\MyController;
 use milkyway\slider\models\Slider;
 use milkyway\slider\models\search\SliderSearch;
+use yii\web\Response;
 
 /**
  * SliderController implements the CRUD actions for Slider model.
@@ -18,8 +20,8 @@ use milkyway\slider\models\search\SliderSearch;
 class SliderController extends MyController
 {
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function behaviors()
     {
         return [
@@ -33,9 +35,9 @@ class SliderController extends MyController
     }
 
     /**
-    * Lists all Slider models.
-    * @return mixed
-    */
+     * Lists all Slider models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new SliderSearch();
@@ -45,16 +47,15 @@ class SliderController extends MyController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-            }
-
+    }
 
 
     /**
-    * Displays a single Slider model.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Displays a single Slider model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -63,10 +64,10 @@ class SliderController extends MyController
     }
 
     /**
-    * Creates a new Slider model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    * @return mixed
-    */
+     * Creates a new Slider model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new Slider();
@@ -98,18 +99,18 @@ class SliderController extends MyController
     }
 
     /**
-    * Updates an existing Slider model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Updates an existing Slider model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate()) {
+            if ($model->validate()) {
                 if ($model->save()) {
                     Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                         'title' => 'Thông báo',
@@ -137,12 +138,12 @@ class SliderController extends MyController
     }
 
     /**
-    * Deletes an existing Slider model.
-    * If deletion is successful, the browser will be redirected to the 'index' page.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Deletes an existing Slider model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -174,14 +175,54 @@ class SliderController extends MyController
         return $this->redirect(['index']);
     }
 
-    /**
-    * Finds the Slider model based on its primary key value.
-    * If the model is not found, a 404 HTTP exception will be thrown.
-    * @param integer $id
-    * @return Slider the loaded model
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+    public function actionChangeValue()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $val = Yii::$app->request->get('val');
+            $field = Yii::$app->request->get('field');
+            $model = SliderTable::getById($id);
+            if ($model === null || !$model->canGetProperty($field)) return [
+                'code' => 404,
+                'msg' => SliderModule::t('news', 'Không tìm thấy dữ liệu')
+            ];
+            try {
+                $model->setAttribute($field, $val);
+                if ($model->validate() && $model->save()) return [
+                    'code' => 200,
+                    'msg' => SliderModule::t('news', 'Cập nhật thành công')
+                ];
+                else {
+                    $error = '';
+                    foreach ($model->getErrors() as $err) {
+                        $error .= $err[0] . '<br/>';
+                    }
+                    return [
+                        'code' => 400,
+                        'msg' => SliderModule::t('news', 'Cập nhật thất bại') . ': <br/>' . $error
+                    ];
+                }
+            } catch (Exception $ex) {
+                return [
+                    'code' => 400,
+                    'msg' => SliderModule::t('news', 'Có lỗi xảy ra')
+                ];
+            }
+        }
+        return [
+            'code' => 403,
+            'msg' => SliderModule::t('news', 'Không có quyền truy cập')
+        ];
+    }
 
+    /**
+     * Finds the Slider model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Slider the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
 
     protected function findModel($id)
     {

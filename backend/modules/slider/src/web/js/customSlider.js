@@ -70,7 +70,60 @@ $(function () {
         }).attr('title', title);
     }
 
+    function changeCheckBox(el) {
+        var url = el.attr('data-url') || null,
+            is_checked = el.is(':checked'),
+            checked = el.attr('data-checked') || null,
+            unchecked = el.attr('data-unchecked') || null,
+            val = is_checked ? checked : unchecked,
+            id = el.attr('data-id') || null,
+            field = el.attr('data-field') || null;
+        if (url !== null && id !== null) {
+            $.get(url, {
+                id: id,
+                val: val,
+                field: field
+            }, res => {
+                var msg = res.msg,
+                    cls = res.code === 200 ? 'success' : 'warning';
+                if (res.code !== 200) {
+                    el.prop('checked', !is_checked);
+                }
+                if (typeof $.toast === "function") {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: msg,
+                        position: 'top-right',
+                        class: 'jq-toast-' + cls,
+                        hideAfter: 3500,
+                        stack: 6,
+                        showHideTransition: 'fade'
+                    });
+                } else alert(msg);
+            }, 'json').fail(f => {
+                if (typeof $.toast === "function") {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: 'Có lỗi xảy ra',
+                        position: 'top-right',
+                        class: 'jq-toast-danger',
+                        hideAfter: 3500,
+                        stack: 6,
+                        showHideTransition: 'fade'
+                    });
+                } else alert('Có lỗi xảy ra');
+                el.prop('checked', !is_checked);
+            });
+        }
+    }
+
     $('body').on('load-body', function () {
         setPopovers();
     }).trigger('load-body');
+    $('body').on('change', '.ipt-checkbox', function (e) {
+        e.preventDefault();
+        var el = $(this);
+        if (el.is(':checkbox')) changeCheckBox(el);
+        return false;
+    });
 });

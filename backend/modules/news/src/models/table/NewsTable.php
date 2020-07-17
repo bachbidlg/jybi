@@ -96,7 +96,10 @@ class NewsTable extends \yii\db\ActiveRecord
 
     public function getImage()
     {
-        return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
+        if (file_exists($this->pathImage . '/' . $this->image)) {
+            return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
+        }
+        return null;
     }
 
     public static function getById($id)
