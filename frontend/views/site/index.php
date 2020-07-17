@@ -16,7 +16,7 @@ $default_language = $this->params['default_language'];
         <div class="banner-slider owl-carousel owl-theme">
             <?php foreach ($sliders as $item): ?>
                 <div class="item">
-                    <a href="<?= $item->url ?: 'javascript:;' ?>">
+                    <a href="<?= $item->url ?: 'javascript:;' ?>"<?= $item->url != null ? ' target="_blank"' : '' ?>>
                         <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
                     </a>
                 </div>
@@ -316,7 +316,7 @@ $default_language = $this->params['default_language'];
                         <div class="banner-slider owl-carousel owl-theme">
                             <?php foreach ($partners as $item) { ?>
                                 <div class="item">
-                                    <a href="<?= $item->url ?: 'javscript:;' ?>">
+                                    <a href="<?= $item->url ?: 'javscript:;' ?>"<?= $item->url != null ? ' target="_blank"' : '' ?>>
                                         <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
                                     </a>
                                 </div>
