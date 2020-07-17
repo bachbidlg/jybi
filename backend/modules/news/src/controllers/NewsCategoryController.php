@@ -272,7 +272,10 @@ class NewsCategoryController extends MyController
 
     protected function findModel($id)
     {
-        $model = NewsCategory::find()->where([NewsCategory::tableName() . '.id' => $id, NewsCategory::tableName() . '.type' => NewsCategory::TYPE_NEWS])->one()
+        $model = NewsCategory::find()->where([
+            NewsCategory::tableName() . '.id' => $id,
+            NewsCategory::tableName() . '.type' => NewsCategory::TYPE_NEWS
+        ])->one();
         if ($model !== null) {
             return $model;
         }
