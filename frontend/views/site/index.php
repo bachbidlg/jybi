@@ -325,3 +325,10 @@ $default_language = $this->params['default_language'];
     </section>
     <!--End #partners-->
 <?php } ?>
+<?php
+$css = <<< CSS
+.owl-item .item a {
+    display: block;
+}
+CSS;
+$this->registerCss($css);
