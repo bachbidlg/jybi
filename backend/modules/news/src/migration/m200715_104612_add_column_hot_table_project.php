@@ -13,6 +13,7 @@ class m200715_104612_add_column_hot_table_project extends Migration
     public function safeUp()
     {
         $this->addColumn('news', 'hot', $this->integer(11)->null()->after('status')->comment('hiển thị dự án trang chủ. 0: disabled, 1: activation'));
+
     }
 
     /**

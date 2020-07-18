@@ -16,7 +16,9 @@ $default_language = $this->params['default_language'];
         <div class="banner-slider owl-carousel owl-theme">
             <?php foreach ($sliders as $item): ?>
                 <div class="item">
-                    <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
+                    <a href="<?= $item->url ?: 'javascript:;' ?>"<?= $item->url != null ? ' target="_blank"' : '' ?>>
+                        <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
+                    </a>
                 </div>
             <?php endforeach ?>
         </div>
@@ -110,7 +112,8 @@ $default_language = $this->params['default_language'];
                             ?>
                             <div class="col">
                                 <div class="box-project">
-                                    <a class="d-block" href="<?= Url::toRoute(['/' . $category_has_many->slug]) ?>"
+                                    <a class="d-block"
+                                       href="<?= Url::toRoute(['/news/index', 'slug' => $category_has_many->slug]) ?>"
                                        title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
                                         <div class="box-image">
                                             <div class="overlay"></div>
@@ -121,7 +124,7 @@ $default_language = $this->params['default_language'];
                                     </a>
                                     <div class="box-content">
                                         <div class="title">
-                                            <a href="<?= Url::toRoute(['/' . $category_has_many->slug]) ?>"
+                                            <a href="<?= Url::toRoute(['/news/index', 'slug' => $category_has_many->slug]) ?>"
                                                title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
                                                 <?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>
                                             </a>
@@ -156,7 +159,7 @@ $default_language = $this->params['default_language'];
                     foreach ($projectHot as $project) {
                         ?>
                         <div class="col">
-                            <a class="d-block" href="<?= Url::toRoute(['/' . $project->slug]) ?>"
+                            <a class="d-block" href="<?= Url::toRoute(['/news/view', 'slug' => $project->slug]) ?>"
                                title="<?= $project->newsLanguage[$default_language]->name ?>">
                                 <div class="project-item">
                                     <div class="project-image">
@@ -313,7 +316,9 @@ $default_language = $this->params['default_language'];
                         <div class="banner-slider owl-carousel owl-theme">
                             <?php foreach ($partners as $item) { ?>
                                 <div class="item">
-                                    <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
+                                    <a href="<?= $item->url ?: 'javscript:;' ?>"<?= $item->url != null ? ' target="_blank"' : '' ?>>
+                                        <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
+                                    </a>
                                 </div>
                             <?php } ?>
                         </div>
