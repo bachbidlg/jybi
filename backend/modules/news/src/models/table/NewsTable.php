@@ -170,6 +170,13 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
+    public static function getQueryByAlias($alias = null)
+    {
+        $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}/%'");
+        $query->sort();
+        return $query;
+    }
+
     public static function getByAlias($alias = null, $limit = null)
     {
         $cache = Yii::$app->cache;

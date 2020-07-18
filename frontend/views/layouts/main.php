@@ -3,6 +3,7 @@
 use frontend\widgets\FooterWidget;
 use frontend\widgets\HeaderWidget;
 use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 $this->beginContent('@frontend/views/layouts/common.php');
 ?>
@@ -24,26 +25,14 @@ $this->beginContent('@frontend/views/layouts/common.php');
                                 endif;
                                 ?>
                             </h1>
-                            <ul class="breadcrumb">
-                                <li>
-                                    <a href="<?= Url::home(); ?>"><?= Yii::t('frontend', 'Trang chủ'); ?></a>
-                                </li>
-                                <?php if (Yii::$app->controller->id == 'intro') { ?>
-                                    <li class="current">
-                                        <?= Yii::t('frontend', 'Giới thiệu'); ?>
-                                    </li>
-                                <?php } ?>
-                                <?php if (Yii::$app->controller->id == 'news') { ?>
-                                    <li class="current">
-                                        <?= Yii::t('frontend', 'Dự án'); ?>
-                                    </li>
-                                <?php } ?>
-                                <?php if (Yii::$app->controller->id == 'contact') { ?>
-                                    <li class="current">
-                                        <?= Yii::t('frontend', 'Liên hệ'); ?>
-                                    </li>
-                                <?php } ?>
-                            </ul>
+                            <?= Breadcrumbs::widget([
+                                'homeLink' => [
+                                    'label' => Yii::t('frontend', 'Home'),
+                                    'url' => Url::home()
+                                ],
+                                'activeItemTemplate' => '<li class="current">{link}</li>',
+                                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
+                            ]) ?>
                         </div>
                     </div>
 

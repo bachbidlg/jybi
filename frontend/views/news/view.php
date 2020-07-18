@@ -66,7 +66,9 @@ $this->title = Yii::t('frontend', 'Chi tiết');
                 <div class="widget comments px-0">
                     <div class="sidebar-title">
                         <h4><?= Yii::t('frontend', 'Bình luận') ?></h4>
-                        <div class="separator"></div>
+                        <div class="separator">
+                            <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5" data-width=""></div>
+                        </div>
                     </div>
                     <div class="sidebar-content">
 

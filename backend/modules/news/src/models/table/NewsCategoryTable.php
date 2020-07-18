@@ -126,6 +126,14 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return $data;
     }
 
+    public static function getByIds(array $ids = [], $sort = false)
+    {
+        if (count($ids) <= 0) return [];
+        $query = self::find()->where(['IN', self::tableName() . '.id', $ids])->indexBy('id');
+        if ($sort === true) $query->orderBy([new \yii\db\Expression('FIELD (id, ' . implode($ids, '-') . ')')]);
+        return $query->all();
+    }
+
     public static function getBySlug($slug)
     {
         $cache = Yii::$app->cache;

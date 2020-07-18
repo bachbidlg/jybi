@@ -11,25 +11,47 @@ namespace frontend\controllers;
 use frontend\components\MyController;
 use frontend\models\News;
 use frontend\models\NewsCategory;
+use yii\data\ActiveDataProvider;
+use milkyway\language\models\table\LanguageTable;
 
 class NewsController extends MyController
 {
     public function actionIndex($slug = null)
     {
         $category = NewsCategory::getBySlug($slug);
-        if($category == null) return $this->redirect(['/site/index']);
+        if ($category == null) return $this->redirect(['/site/index']);
+        $default_language = LanguageTable::getDefaultLanguage()->id;
 
-        $news = News::getByAlias($category->alias);
+        /* Breadcrumbs */
+        $alias = explode('/', $category->alias);
+        unset($alias[0]);
+        $list_breadcrumbs = NewsCategory::getByIds($alias, true);
+        unset($list_breadcrumbs[$category->id]);
+        foreach ($list_breadcrumbs as $breadcrumb) {
+            \Yii::$app->view->params['breadcrumbs'][] = [
+                'label' => $breadcrumb->newsCategoryLanguage[$default_language]->name,
+                'url' => ['/news/index', 'slug' => $breadcrumb->slug]
+            ];
+        }
+
+        $news = new ActiveDataProvider([
+            'query' => News::getQueryByAlias($category->alias),
+            'pagination' => [
+                'defaultPageSize' => 3
+            ]
+        ]);
 
         return $this->render('index', [
-            'news' => $news
+            'category' => $category,
+            'news' => $news,
+            'default_language' => $default_language
         ]);
     }
 
     public function actionView($slug)
     {
         $news = News::getBySlug($slug);
-        if($news == null) return $this->redirect(['/site/index']);
+        if ($news == null) return $this->redirect(['/site/index']);
 
         $category = NewsCategory::getById($news->category);
         $newsRelate = News::getByAlias($category->alias, 5);
