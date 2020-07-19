@@ -41,7 +41,7 @@ class NewsCategorySearch extends NewsCategory
      */
     public function search($params)
     {
-        $query = NewsCategory::find();
+        $query = NewsCategory::find()->where([self::tableName().'.type' => $this->type]);
 
         // add conditions that should always apply here
 

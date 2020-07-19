@@ -2,6 +2,7 @@
 
 namespace milkyway\news\models\search;
 
+use milkyway\news\models\table\NewsCategoryTable;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -15,11 +16,13 @@ class NewsSearch extends News
     /**
      * @inheritdoc
      */
+    public $type;
+
     public function rules()
     {
         return [
             [['id', 'category', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['slug', 'image', 'status', 'alias'], 'safe'],
+            [['type', 'slug', 'image', 'status', 'alias'], 'safe'],
         ];
     }
 
@@ -41,7 +44,7 @@ class NewsSearch extends News
      */
     public function search($params)
     {
-        $query = News::find();
+        $query = News::find()->joinWith(['categoryHasOne'])->where([NewsCategoryTable::tableName() . '.type' => $this->type]);
 
         // add conditions that should always apply here
 

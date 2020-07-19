@@ -6,6 +6,7 @@ use yii\helpers\Url;
 /* @var $partners array */
 /* @var $projectCat array */
 /* @var $projectHot array */
+/* @var $newsHot array */
 
 $this->title = WEB_NAME;
 $default_language = $this->params['default_language'];
@@ -270,6 +271,7 @@ $default_language = $this->params['default_language'];
     </section>
     <!--Start #testimonial-->
 
+<?php if (count($newsHot) > 0) { ?>
     <!--Start #news-->
     <section id="news">
         <div class="container">
@@ -279,22 +281,17 @@ $default_language = $this->params['default_language'];
             </div>
             <div class="section-content">
                 <div class="news-slider owl-carousel owl-theme">
-                    <?php for ($i = 1; $i <= 6; $i++) { ?>
+                    <?php foreach ($newsHot as $news_hot) { ?>
                         <div class="news-item">
                             <div class="image">
-                                <a href="#" title="">
-                                    <img class="img-fluid"
-                                         src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/img-news-' . $i . '.jpg')[1] ?>"
-                                         alt="img">
+                                <a href="<?= Url::toRoute(['/news/view', 'slug' => $news_hot->slug]) ?>"
+                                   title="<?= $news_hot->newsLanguage[$default_language]->name ?>">
+                                    <img class="img-fluid" src="<?= $news_hot->getImage() ?>"
+                                         alt="<?= $news_hot->newsLanguage[$default_language]->name ?>">
                                 </a>
                             </div>
-                            <div class="title">Tin tức <?= $i ?></div>
-                            <div class="desc">Sự phát triển của đô thị khiến cho quỹ đất tại thành phố Hồ Chí Minh ngày
-                                càng
-                                bị thu hẹp. Chính vì vậy mẫu thiết kế nhà ống 4x15m trở nên phổ biến. Làm sao để thiết
-                                kế
-                                nhà ống 3 tầng 4×15 cho hiện đại, trẻ trung, đảm bảo phong thủy là yêu...
-                            </div>
+                            <div class="title"><?= $news_hot->newsLanguage[$default_language]->name ?></div>
+                            <div class="desc"><?= $news_hot->newsLanguage[$default_language]->description ?></div>
                         </div>
                     <?php } ?>
                 </div>
@@ -302,7 +299,7 @@ $default_language = $this->params['default_language'];
         </div>
     </section>
     <!--End #news-->
-
+<?php } ?>
 <?php if (count($partners) > 0) { ?>
     <!--Start #partners-->
     <section id="partners">

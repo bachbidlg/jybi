@@ -33,16 +33,12 @@ $default_language = LanguageTable::getDefaultLanguage();
                 <?= Select2::widget([
                     'model' => $model,
                     'attribute' => 'category',
-                    'data' => ArrayHelper::map(NewsCategoryTable::getMenu($model->primaryKey, null), 'id', 'name'),
+                    'data' => ArrayHelper::map(NewsCategoryTable::getMenu(NewsCategoryTable::TYPE_NEWS, $model->primaryKey, null), 'id', 'name'),
                     'options' => [
                         'prompt' => $model->getAttributeLabel('category'),
                         'id' => 'category'
                     ]
                 ]) ?>
-            </div>
-            <div class="col-md-6 col-12 category-type"
-                 style="display: <?= $model->category == null ? 'block' : 'none' ?>">
-                <?= $form->field($model, 'type')->dropDownList(NewsCategoryTable::TYPE, []) ?>
             </div>
             <div class="col-md-6 col-12">
                 <?= $form->field($model, 'sort')->textInput() ?>

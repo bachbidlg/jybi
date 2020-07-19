@@ -86,7 +86,7 @@ class NewsCategory extends NewsCategoryTable
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['type'],
                     ],
                     'value' => function () {
-                        if ($this->category != null) return null;
+                        if ($this->category != null) return $this->categoryHasOne->type;
                         return $this->type;
                     }
                 ],

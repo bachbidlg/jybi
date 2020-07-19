@@ -3,6 +3,7 @@
 namespace milkyway\news\controllers;
 
 use milkyway\news\models\NewsLanguage;
+use milkyway\news\models\table\NewsCategoryTable;
 use milkyway\news\models\table\NewsTable;
 use yii\db\Exception;
 use Yii;
@@ -43,7 +44,9 @@ class NewsController extends MyController
      */
     public function actionIndex()
     {
-        $searchModel = new NewsSearch();
+        $searchModel = new NewsSearch([
+            'type' => NewsCategoryTable::TYPE_NEWS
+        ]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

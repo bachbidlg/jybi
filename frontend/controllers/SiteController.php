@@ -26,13 +26,15 @@ class SiteController extends MyController
         $partners = Slider::getByType(Slider::TYPE_PARTNER);
 
         $projectCat = NewsCategory::getByType(NewsCategory::TYPE_PROJECT);
-        $projectHot = News::getNewsCheckHot();
+        $projectHot = News::getNewsCheckHot(NewsCategory::TYPE_PROJECT, false);
+        $newsHot = News::getNewsCheckHot(NewsCategory::TYPE_NEWS, false);
 
         return $this->render('index', [
             'sliders' => $sliders,
             'partners' => $partners,
             'projectCat' => $projectCat,
-            'projectHot' => $projectHot
+            'projectHot' => $projectHot,
+            'newsHot' => $newsHot,
         ]);
     }
 

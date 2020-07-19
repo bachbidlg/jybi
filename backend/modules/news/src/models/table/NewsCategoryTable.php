@@ -186,11 +186,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getMenu($current = null, $category = null, $get_published = true, $data = null, $prefix = '|--')
+    public static function getMenu($type = null, $current = null, $category = null, $get_published = true, $data = null, $prefix = '|--')
     {
         if ($data == null) $data = [];
         $default_language = LanguageTable::getDefaultLanguage();
         $query = self::find()->joinWith(['newsCategoryLanguage'])->where([self::tableName() . '.category' => $category])->sort()->groupBy([self::tableName() . '.id']);
+        if($type !== null) $query->andWhere([self::tableName().'.type' => $type]);
         if ($get_published === true) $query->published();
         $rows = $query->all();
         if (count($rows) > 0) {
@@ -201,7 +202,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
                     'id' => $row->primaryKey,
                     'name' => $prefix . $row->newsCategoryLanguage[$language]->name
                 ];
-                $data = self::getMenu($current, $row->primaryKey, $get_published, $data, $prefix . '|--');
+                $data = self::getMenu($type, $current, $row->primaryKey, $get_published, $data, $prefix . '|--');
             }
         }
         return $data;

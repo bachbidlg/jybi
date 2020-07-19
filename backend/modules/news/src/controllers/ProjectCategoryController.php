@@ -43,7 +43,9 @@ class ProjectCategoryController extends MyController
      */
     public function actionIndex()
     {
-        $searchModel = new NewsCategorySearch();
+        $searchModel = new NewsCategorySearch([
+            'type' => NewsCategoryTable::TYPE_PROJECT
+        ]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -73,7 +75,9 @@ class ProjectCategoryController extends MyController
      */
     public function actionCreate()
     {
-        $model = new NewsCategory();
+        $model = new NewsCategory([
+            'type' => NewsCategoryTable::TYPE_PROJECT
+        ]);
 
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
@@ -266,7 +270,11 @@ class ProjectCategoryController extends MyController
 
     protected function findModel($id)
     {
-        if (($model = NewsCategory::findOne($id)) !== null) {
+        $model = NewsCategory::find()->where([
+            NewsCategory::tableName() . '.id' => $id,
+            NewsCategory::tableName() . '.type' => NewsCategoryTable::TYPE_PROJECT
+        ])->one();
+        if ($model !== null) {
             return $model;
         }
 

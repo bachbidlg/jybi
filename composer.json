@@ -20,7 +20,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.0.0",
-    "yiisoft/yii2": "2.0.*",
+    "yiisoft/yii2": "2.0.35",
     "yiisoft/yii2-bootstrap": "@dev",
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "yiisoft/yii2-imagine": "~2.2.0",
@@ -44,6 +44,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "skeeks/yii2-assets-auto-compress": "*",
     "tinymce/tinymce": " 5.2.2",
+    "modava/auth": "@dev",
     "modava/tiny": "@dev",
     "modava/imagick": "@dev",
     "modava/location": "@dev",

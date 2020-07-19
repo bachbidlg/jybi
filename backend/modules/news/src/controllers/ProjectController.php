@@ -2,8 +2,9 @@
 
 namespace milkyway\news\controllers;
 
-use milkyway\news\models\NewsCategoryLanguage;
+use milkyway\news\models\NewsLanguage;
 use milkyway\news\models\table\NewsCategoryTable;
+use milkyway\news\models\table\NewsTable;
 use yii\db\Exception;
 use Yii;
 use yii\db\Transaction;
@@ -12,15 +13,15 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use milkyway\news\NewsModule;
 use backend\components\MyController;
-use milkyway\news\models\NewsCategory;
-use milkyway\news\models\search\NewsCategorySearch;
+use milkyway\news\models\News;
+use milkyway\news\models\search\NewsSearch;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * NewsCategoryController implements the CRUD actions for NewsCategoryQuery model.
+ * NewsController implements the CRUD actions for News model.
  */
-class NewsCategoryController extends MyController
+class ProjectController extends MyController
 {
     /**
      * {@inheritdoc}
@@ -38,13 +39,13 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Lists all NewsCategoryQuery models.
+     * Lists all News models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NewsCategorySearch([
-            'type' => NewsCategoryTable::TYPE_NEWS
+        $searchModel = new NewsSearch([
+            'type' => NewsCategoryTable::TYPE_PROJECT
         ]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -56,7 +57,7 @@ class NewsCategoryController extends MyController
 
 
     /**
-     * Displays a single NewsCategoryQuery model.
+     * Displays a single News model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -69,19 +70,17 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Creates a new NewsCategoryQuery model.
+     * Creates a new News model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new NewsCategory([
-            'type' => NewsCategoryTable::TYPE_NEWS
-        ]);
+        $model = new News();
 
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
-            if ($model->validate() && $model->save() && $model->saveNewsCategoryLanguage()) {
+            if ($model->validate() && $model->save() && $model->saveNewsLanguage()) {
                 $transaction->commit();
                 Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                     'title' => 'Thông báo',
@@ -93,7 +92,7 @@ class NewsCategoryController extends MyController
                 $transaction->rollBack();
                 $errors = Html::tag('p', 'Tạo mới thất bại');
                 foreach ($model->getErrors() as $error) {
-                    $errors .= Html::tag('p', $error[0]);
+                    $errors .= Html::tag('p', is_array($error[0]) ? $error[0][0] : $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-form', [
                     'title' => 'Thông báo',
@@ -109,7 +108,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Updates an existing NewsCategoryQuery model.
+     * Updates an existing News model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -118,10 +117,10 @@ class NewsCategoryController extends MyController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->setNewsCategoryLanguage();
+        $model->setNewsLanguage();
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate() && $model->save() && $model->saveNewsCategoryLanguage()) {
+            if ($model->validate() && $model->save() && $model->saveNewsLanguage()) {
                 Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                     'title' => 'Thông báo',
                     'text' => 'Cập nhật thành công',
@@ -131,7 +130,7 @@ class NewsCategoryController extends MyController
             } else {
                 $errors = Html::tag('p', 'Cập nhật thất bại');
                 foreach ($model->getErrors() as $error) {
-                    $errors .= Html::tag('p', $error[0]);
+                    $errors .= Html::tag('p', is_array($error[0]) ? $error[0][0] : $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-form', [
                     'title' => 'Thông báo',
@@ -150,9 +149,9 @@ class NewsCategoryController extends MyController
     {
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
-            $model = new NewsCategory();
+            $model = new News();
             if ($id !== null) $model = $this->findModel($id);
-            $model->setNewsCategoryLanguage();
+            $model->setNewsLanguage();
             if ($model->load(Yii::$app->request->post())) {
                 return ActiveForm::validate($model);
             }
@@ -164,10 +163,10 @@ class NewsCategoryController extends MyController
         if (Yii::$app->request->isAjax) {
             $name = Yii::$app->request->post('name');
             $language = Yii::$app->request->post('language', false);
-            if ($language === true) $model = new NewsCategoryLanguage();
-            else $model = new NewsCategory();
+            if ($language === true) $model = new NewsLanguage();
+            else $model = new News();
             if ($id !== null) {
-                if ($language === true) $model = NewsCategoryLanguage::find()->where(['news_category_id' => $id, 'language' => $language])->one();
+                if ($language === true) $model = NewsLanguage::find()->where(['news_category_id' => $id, 'language' => $language])->one();
                 else $model = $this->findModel($id);
             }
             $model->name = $name;
@@ -181,7 +180,7 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Deletes an existing NewsCategoryQuery model.
+     * Deletes an existing News model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -225,7 +224,7 @@ class NewsCategoryController extends MyController
             $id = Yii::$app->request->get('id');
             $val = Yii::$app->request->get('val');
             $field = Yii::$app->request->get('field');
-            $model = NewsCategoryTable::getById($id);
+            $model = NewsTable::getById($id);
             if ($model === null || !$model->canGetProperty($field)) return [
                 'code' => 404,
                 'msg' => NewsModule::t('news', 'Không tìm thấy dữ liệu')
@@ -260,21 +259,17 @@ class NewsCategoryController extends MyController
     }
 
     /**
-     * Finds the NewsCategoryQuery model based on its primary key value.
+     * Finds the News model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return NewsCategory the loaded model
+     * @return News the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
 
 
     protected function findModel($id)
     {
-        $model = NewsCategory::find()->where([
-            NewsCategory::tableName() . '.id' => $id,
-            NewsCategory::tableName() . '.type' => NewsCategoryTable::TYPE_NEWS
-        ])->one();
-        if ($model !== null) {
+        if (($model = News::findOne($id)) !== null) {
             return $model;
         }
 

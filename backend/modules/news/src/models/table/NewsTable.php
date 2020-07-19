@@ -3,6 +3,7 @@
 namespace milkyway\news\models\table;
 
 use common\models\User;
+use frontend\models\NewsCategory;
 use milkyway\news\models\query\NewsQuery;
 use Yii;
 
@@ -38,7 +39,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-slug-' . $this->slug,
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
-            'redis-news-get-news-check-hot',
+            'redis-news-get-news-check-hot-' . $this->categoryHasOne->type,
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -55,7 +56,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-slug-' . $this->slug,
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
-            'redis-news-get-news-check-hot',
+            'redis-news-get-news-check-hot-' . $this->categoryHasOne->type,
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -128,13 +129,18 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getNewsCheckHot($data_cache = YII2_CACHE)
+    public static function getNewsCheckHot($type = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
-        $key = 'redis-news-get-news-check-hot';
+        $key = 'redis-news-get-news-check-hot-' . $type;
         $data = $cache->get($key);
         if ($data == false || $data_cache === false) {
-            $query = self::find()->where([self::tableName() . '.hot' => self::STATUS_PUBLISHED]);
+            $query = self::find()->where([
+                self::tableName() . '.hot' => self::STATUS_PUBLISHED,
+            ]);
+            if ($type !== null) $query->joinWith(['categoryHasOne'])->andWhere([
+                NewsCategory::tableName() . '.type' => $type
+            ]);
             $query->sort(SORT_DESC)->published();
             $data = $query->all();
             $cache->set($key, $data);

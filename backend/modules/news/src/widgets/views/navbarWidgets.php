@@ -16,4 +16,16 @@ use milkyway\news\NewsModule;
             <i class="ion ion-ios-locate"></i><?= NewsModule::t('news', 'News'); ?>
         </a>
     </li>
+    <li class="nav-item mb-5">
+        <a class="nav-link link-icon-left<?php if (Yii::$app->controller->id == 'project-category') echo ' active' ?>"
+           href="<?= Url::toRoute(['/news/project-category']); ?>">
+            <i class="ion ion-ios-locate"></i><?= NewsModule::t('news', 'Projects Category'); ?>
+        </a>
+    </li>
+    <li class="nav-item mb-5">
+        <a class="nav-link link-icon-left<?php if (Yii::$app->controller->id == 'project') echo ' active' ?>"
+           href="<?= Url::toRoute(['/news/project']); ?>">
+            <i class="ion ion-ios-locate"></i><?= NewsModule::t('news', 'Projects'); ?>
+        </a>
+    </li>
 </ul>

@@ -261,5 +261,6 @@ return [
     'Location' => 'Địa danh',
     'Contact' => 'Liên hệ',
     'Calendar' => 'Lịch biểu',
+    'News' => 'Bài viết',
 
 ];

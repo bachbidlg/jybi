@@ -11,7 +11,10 @@ return [
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
     'Actions' => 'Hành động',
-    'News' => 'Bài viết',
-    'News Category' => 'Danh mục bài viết',
-    'News Categories' => 'Danh mục bài viết',
+    'News' => 'Tin tức',
+    'Projects' => 'Dự án',
+    'News Category' => 'Danh mục tin tức',
+    'News Categories' => 'Danh mục tin tức',
+    'Projects Category' => 'Danh mục dự án',
+    'Projects Categories' => 'Danh mục dự án',
 ];
