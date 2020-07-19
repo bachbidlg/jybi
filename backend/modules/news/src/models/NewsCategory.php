@@ -102,7 +102,7 @@ class NewsCategory extends NewsCategoryTable
         return [
             [['category', 'status', 'sort', 'type'], 'integer'],
             [['sort'], 'default', 'value' => 1],
-            [['name', 'slug', 'image'], 'string', 'max' => 255],
+            [['name', 'slug', 'image', 'icon'], 'string', 'max' => 255],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],

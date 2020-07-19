@@ -6,8 +6,12 @@
  * Time: 19:33
  */
 
-use yii\helpers\Url;
+/* @var $menu array */
 
+use yii\helpers\Url;
+use milkyway\language\models\table\LanguageTable;
+
+$default_language = LanguageTable::getDefaultLanguage()->id;
 ?>
 <header id="header">
     <div class="container">
@@ -27,58 +31,29 @@ use yii\helpers\Url;
                         <a href="<?= Url::toRoute(['/gioi-thieu']); ?>"
                            title="<?= Yii::t('frontend', 'Giới thiệu'); ?>"><?= Yii::t('frontend', 'Giới thiệu'); ?></a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="#" title="">Dự án <i class="fas fa-caret-down"></i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Biệt thự</a>
+                    <?php
+                    if (count($menu) > 0) {
+                        foreach ($menu as $data_menu) {
+                            $has_children = isset($data_menu['children']) && count($data_menu['children']) > 0;
+                            ?>
+                            <li<?= $has_children ? ' class="menu-item-has-children"' : '' ?>>
+                                <a href="<?= $data_menu['url'] ?>"
+                                   title="<?= $data_menu['name'] ?>"><?= $data_menu['name'] ?><?= $has_children ? ' <i class="fas fa-caret-down"></i>' : '' ?></a>
+                                <?php if ($has_children) { ?>
+                                    <ul class="sub-menu">
+                                        <?php foreach ($data_menu['children'] as $sub_menu) { ?>
+                                            <li>
+                                                <a href="<?= $sub_menu['url'] ?>"
+                                                   title="<?= $sub_menu['name'] ?>"><?= $sub_menu['name'] ?></a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                <?php } ?>
                             </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Nhà phố</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Căn hộ</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Văn phòng và công trình khác</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Báo giá <i class="fas fa-caret-down"></i></a>
-
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Quy trình làm việc</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Phương pháp tính diện tích</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Mô tả phàn thô - hoàn thiện</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" title="">Giá thiết kế kiến trúc</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Tư vấn <i class="fas fa-caret-down"></i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Mẫu nhà phố đẹp</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Mẫu biệt thự đẹp</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Cẩm nang xây nhà</a>
-                            </li>
-                            <li>
-                                <a href="<?= Url::toRoute(['/du-an']); ?>" title="">Phong thủy</a>
-                            </li>
-                        </ul>
-                    </li>
+                            <?php
+                        }
+                    }
+                    ?>
                     <li<?php if (Yii::$app->controller->id == 'contact') echo ' class="active"'; ?>>
                         <a href="<?= Url::toRoute(['/lien-he']); ?>"
                            title="<?= Yii::t('frontend', 'Liên hệ'); ?>"><?= Yii::t('frontend', 'Liên hệ'); ?></a>
@@ -87,7 +62,7 @@ use yii\helpers\Url;
             </nav>
         </div>
     </div>
-    <a class="mobile-logo" href="#"><img
+    <a class="mobile-logo" href="<?= Url::home() ?>"><img
                 src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/logo.png')[1]; ?>" alt="image"></a>
 </header>
 <input type="checkbox" id="toggle-menu">
@@ -116,84 +91,40 @@ use yii\helpers\Url;
             <span>Giới thiệu</span>
             <i class="fa fa-circle"></i>
         </a>
-        <div class="submenu-item">
-            <input type="checkbox" data-submenu-items="4" class="toggle-submenu" id="toggle-1">
-            <label class="menu-item" for="toggle-1"><i class="fas fa-archive"></i><span>Dự án</span></label>
-            <div class="submenu-wrapper">
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Biệt thự
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Nhà phố
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Căn hộ
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Văn phòng và công trình khác
-                    <i class="fa fa-circle"></i>
-                </a>
-            </div>
-        </div>
-        <div class="submenu-item">
-            <input type="checkbox" data-submenu-items="4" class="toggle-submenu" id="toggle-2">
-            <label class="menu-item" for="toggle-2"><i class="fas fa-layer-group"></i><span>Báo giá</span></label>
-            <div class="submenu-wrapper">
-                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Quy trình làm việc
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Phương pháp tính diện tích
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Mô tả phần thô - hoàn thiện
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an/chi-tiet']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Giá thiết kế kiến trúc
-                    <i class="fa fa-circle"></i>
-                </a>
-            </div>
-        </div>
-        <div class="submenu-item">
-            <input type="checkbox" data-submenu-items="4" class="toggle-submenu" id="toggle-3">
-            <label class="menu-item" for="toggle-3"><i class="fas fa-glasses"></i><span>Tư vấn</span></label>
-            <div class="submenu-wrapper">
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Mẫu nhà phố đẹp
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Mẫu biệt thự đẹp
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Cẩm nang xây nhà
-                    <i class="fa fa-circle"></i>
-                </a>
-                <a href="<?= Url::toRoute(['/du-an']); ?>" class="menu-item">
-                    <i class="fa fa-angle-right"></i>
-                    Phong thủy
-                    <i class="fa fa-circle"></i>
-                </a>
-            </div>
-        </div>
+        <?php
+        if (count($menu) > 0) {
+            foreach ($menu as $data_menu) {
+                $has_children = isset($data_menu['children']) && count($data_menu['children']) > 0;
+                if (!$has_children) {
+                    ?>
+                    <a class="menu-item" href="<?= $data_menu['url'] ?>">
+                        <i class="fas fa-info-circle"></i>
+                        <span><?= $data_menu['name'] ?>></span>
+                        <i class="fa fa-circle"></i>
+                    </a>
+                    <?php
+                } else {
+                    ?>
+                    <div class="submenu-item">
+                        <input type="checkbox" data-submenu-items="4" class="toggle-submenu"
+                               id="toggle-<?= $data_menu['id'] ?>">
+                        <label class="menu-item" for="toggle-<?= $data_menu['id'] ?>"><i
+                                    class="<?= $data_menu['icon'] ?: 'fas fa-archive' ?>"></i><span><?= $data_menu['name'] ?></span></label>
+                        <div class="submenu-wrapper">
+                            <?php foreach ($data_menu['children'] as $sub_menu) { ?>
+                                <a href="<?= $sub_menu['url'] ?>" class="menu-item">
+                                    <i class="fa fa-angle-right"></i>
+                                    <?= $sub_menu['name'] ?>
+                                    <i class="fa fa-circle"></i>
+                                </a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+        }
+        ?>
         <a class="menu-item" href="<?= Url::toRoute(['/lien-he']); ?>">
             <i class="fas fa-envelope"></i>
             <span>Liên hệ</span>

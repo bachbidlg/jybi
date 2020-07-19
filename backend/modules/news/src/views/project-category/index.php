@@ -142,6 +142,13 @@ $list_language = LanguageTable::getAll();
                                                 }
                                             ],
                                             [
+                                                'attribute' => 'menu_main',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return '<input type="checkbox" class="ipt-checkbox" ' . ($model->menu_main ? 'checked' : '') . ' data-field="menu_main" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsCategoryTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsCategoryTable::STATUS_DISABLED . '">';
+                                                }
+                                            ],
+                                            [
                                                 'attribute' => 'created_by',
                                                 'value' => 'userCreated.userProfile.fullname',
                                                 'headerOptions' => [

@@ -8,6 +8,7 @@
 
 namespace frontend\widgets;
 
+use frontend\models\NewsCategory;
 use yii\base\Widget;
 
 class HeaderWidget extends Widget
@@ -19,6 +20,9 @@ class HeaderWidget extends Widget
 
     public function run()
     {
-        return $this->render('header', []);
+        $menu = NewsCategory::getMenu(null, null, null, true, null, '', '');
+        return $this->render('header', [
+            'menu' => $menu,
+        ]);
     }
 }

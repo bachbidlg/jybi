@@ -12,8 +12,10 @@ class m200715_104612_add_column_hot_table_project extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('news', 'hot', $this->integer(11)->null()->after('status')->comment('hiển thị dự án trang chủ. 0: disabled, 1: activation'));
-
+        $columns = $check_table = Yii::$app->db->getTableSchema('news')->columns;
+        if (!array_key_exists('hot', $columns)) {
+            $this->addColumn('news', 'hot', $this->integer(11)->null()->after('status')->comment('hiển thị dự án trang chủ. 0: disabled, 1: activation'));
+        }
     }
 
     /**
