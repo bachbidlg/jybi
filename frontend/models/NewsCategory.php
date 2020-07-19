@@ -31,7 +31,7 @@ class NewsCategory extends NewsCategoryTable
                     'name' => $prefix . $row->newsCategoryLanguage[$language]->name,
                     'url' => Url::toRoute(['/news/index', 'slug' => $row->slug]),
                     'icon' => $row->icon,
-                    'children' => self::getMenu($type, $current, $row->primaryKey, $get_published, $data, $prefix)
+                    'children' => self::getMenu($type, $current, $row->primaryKey, $get_published, [], $prefix)
                 ];
             }
         }

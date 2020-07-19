@@ -20,7 +20,7 @@ class HeaderWidget extends Widget
 
     public function run()
     {
-        $menu = NewsCategory::getMenu(null, null, null, true, null, '', '');
+        $menu = NewsCategory::getMenu(null, null, null, true, [], '', '');
         return $this->render('header', [
             'menu' => $menu,
         ]);
