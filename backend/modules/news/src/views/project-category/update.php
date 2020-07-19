@@ -11,7 +11,7 @@ use milkyway\news\NewsModule;
 $this->title = NewsModule::t('news', 'Update : {name}', [
     'name' => $model->id,
 ]);
-$this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'News Categories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'Projects Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = NewsModule::t('news', 'Update');
 ?>

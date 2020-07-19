@@ -5,25 +5,27 @@
  * Date: 7/2/2020
  * Time: 19:33
  */
+
+/* @var $footerInfo frontend\models\Freetype */
+
+use frontend\models\Language;
+
+$default_language = Language::getDefaultLanguage()->id;
 ?>
 <footer id="footer">
     <div class="footer-top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="ft-column about">
-                        <div class="ft-col-title">Nền tảng</div>
-                        <div class="ft-col-content">
-                            <p>
-                                Chúng tôi hiểu rằng để tạo ra được một sản phẩm chuẩn mực từ thiết kế đến thi công thực
-                                tế là cả một quá trình làm việc trên nền tảng thấu hiểu, phối hợp ăn ý giữa ý tưởng sáng
-                                tạo – chuyên môn KTS với nhu cầu quý khách hàng. Do đó An Phú Design & Build luôn đặt
-                                khách hàng làm trung tâm, không ngừng phát triển ý tưởng, xây dựng đội ngũ thi công bài
-                                bản chuyên nghiệp nhằm kiến tạo những không gian sống hoàn hảo nhất.
-                            </p>
+                <?php if (!empty($footer_info)) { ?>
+                    <div class="col-lg-4">
+                        <div class="ft-column about">
+                            <div class="ft-col-title"><?= $footer_info->freetypeLanguage[$default_language]->name ?></div>
+                            <div class="ft-col-content">
+                                <?= $footer_info->freetypeLanguage[$default_language]->content ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
                 <div class="col-lg-5">
                     <div class="ft-column info">
                         <div class="ft-col-title">Thông tin</div>

@@ -8,7 +8,7 @@ use milkyway\news\NewsModule;
 /* @var $model milkyway\news\models\NewsCategory */
 
 $this->title = NewsModule::t('news', 'Create');
-$this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'News Categories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'Projects Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">

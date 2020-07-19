@@ -60,6 +60,14 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('freetype')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'freetype') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/freetype']); ?>">
+                            <i class="ion ion-ios-document"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Freetype'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('label')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'label') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/label']); ?>">

@@ -34,7 +34,7 @@ $default_language = LanguageTable::getDefaultLanguage();
                 <?= Select2::widget([
                     'model' => $model,
                     'attribute' => 'category',
-                    'data' => ArrayHelper::map(NewsCategoryTable::getMenu(NewsCategoryTable::TYPE_NEWS, null, null), 'id', 'name'),
+                    'data' => ArrayHelper::map(NewsCategoryTable::getMenu(NewsCategoryTable::TYPE_PROJECT, null, null), 'id', 'name'),
                     'options' => [
                         'prompt' => $model->getAttributeLabel('category')
                     ]

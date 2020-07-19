@@ -13,9 +13,11 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
     const STATUS_PUBLISHED = 1;
     const TYPE_NEWS = 0;
     const TYPE_PROJECT = 1;
+    const TYPE_SUPPORT = 2;
     const TYPE = [
         self::TYPE_NEWS => 'Tin tức',
-        self::TYPE_PROJECT => 'Dự án'
+        self::TYPE_PROJECT => 'Dự án',
+        self::TYPE_SUPPORT => 'Hỗ trợ khách hàng',
     ];
 
     public $pathImage;

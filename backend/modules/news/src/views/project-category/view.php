@@ -12,7 +12,7 @@ use milkyway\language\models\table\LanguageTable;
 /* @var $model milkyway\news\models\NewsCategory */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'News Categories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'Projects Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $params = $this->params;
 $default_language = LanguageTable::getDefaultLanguage();

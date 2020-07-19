@@ -262,5 +262,6 @@ return [
     'Contact' => 'Liên hệ',
     'Calendar' => 'Lịch biểu',
     'News' => 'Bài viết',
+    'Freetype' => 'Tự soạn thảo',
 
 ];

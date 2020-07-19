@@ -94,7 +94,7 @@ class News extends NewsTable
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
-            [['news_language'], 'validateNewsCategoryLanguage'],
+            [['news_language'], 'validateNewsLanguage'],
             [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}'],
         ];
     }
@@ -167,7 +167,7 @@ class News extends NewsTable
         }
     }
 
-    public function validateNewsCategoryLanguage()
+    public function validateNewsLanguage()
     {
         if (!$this->hasErrors()) {
             foreach ($this->news_language as $i => $news_language) {

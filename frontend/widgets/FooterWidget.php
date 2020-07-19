@@ -8,6 +8,7 @@
 
 namespace frontend\widgets;
 
+use frontend\models\Freetype;
 use yii\base\Widget;
 
 class FooterWidget extends Widget
@@ -19,6 +20,9 @@ class FooterWidget extends Widget
 
     public function run()
     {
-        return $this->render('footer', []);
+        $footer_info = Freetype::getOneByType(Freetype::TYPE_FOOTER_INFO, false);
+        return $this->render('footer', [
+            'footer_info' => $footer_info
+        ]);
     }
 }

@@ -12,9 +12,12 @@ return [
     'Created At' => 'Ngày tạo',
     'Actions' => 'Hành động',
     'News' => 'Tin tức',
-    'Projects' => 'Dự án',
     'News Category' => 'Danh mục tin tức',
     'News Categories' => 'Danh mục tin tức',
+    'Projects' => 'Dự án',
     'Projects Category' => 'Danh mục dự án',
     'Projects Categories' => 'Danh mục dự án',
+    'Supports' => 'Hỗ trợ khách hàng',
+    'Supports Category' => 'Danh mục hỗ trợ khách hàng',
+    'Supports Categories' => 'Danh mục hỗ trợ khách hàng',
 ];

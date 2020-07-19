@@ -45,4 +45,7 @@ return [
     'label' => [
         'class' => 'milkyway\label\LabelModule',
     ],
+    'freetype' => [
+        'class' => 'milkyway\freetype\FreetypeModule',
+    ],
 ];
