@@ -17,7 +17,7 @@ class m200428_071830_insert_account_login extends Migration
             'username' => 'admin',
             'auth_key' => 'A8DUoLxLHFdxvVzVOdS4OrvzY8xjk97s',
             'password_hash' => '$2y$13$86/bGSUBrrWjvLBQWMO62.aJT2TxRCVErW7mIbYFG5VQnQ4D2zskK',
-            'email' => 'mail.smtp.phpmailer@gmail.com',
+            'email' => 'mongdaovan86.wd@gmail.com',
             'status' => '10',
             'created_at' => time(),
             'updated_at' => time(),
@@ -25,10 +25,10 @@ class m200428_071830_insert_account_login extends Migration
         ]);
         $this->insert('user_profile', [
             'user_id' => '1',
-            'fullname' => 'Dev',
+            'fullname' => 'Đào Văn Mong',
             'bithday' => '12/08/1986',
             'address' => '466 Cao Thắng, P.12, Q.10, HCM',
-            'phone' => '0123456789',
+            'phone' => '0906904884',
             'gender' => '1',
         ]);
     }

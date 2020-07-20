@@ -4,8 +4,10 @@ namespace modava\auth\models;
 
 use Yii;
 use yii\base\NotSupportedException;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -25,13 +27,31 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    const EVENT_AFTER_SIGNUP = 'afterSignup';
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+    const STATUS = [
+        self::STATUS_ACTIVE => 'Active',
+        self::STATUS_DELETED => 'Deleted',
+        self::STATUS_INACTIVE => 'Inactive',
+    ];
 
-    const USERS = 'users'; //user frontend
     const DEV = 'develop';
+    const SALES_ONLINE = 'sales_online';
+    const CLINIC = 'clinic';
+    const USERS = 'users'; //user frontend
 
+    public $toastr_key = 'user';
+    public $manager;
+    public $role_name;
+    public $role;
+    public $fullname;
+
+    public function init()
+    {
+        $this->manager = Yii::$app->authManager;
+    }
 
     /**
      * {@inheritdoc}
@@ -213,5 +233,118 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /*
+     * Trả về tên Role của user.
+     */
+
+    public function getRoleName($id)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'rbac-' . $id;
+
+        $assignment = $cache->get($key);
+
+        if ($assignment == false) {
+            $assignment = array_keys($this->manager->getAssignments($id));
+            $assignment = $assignment != null ? $assignment[0] : null;
+
+            $cache->set($key, $assignment);
+        }
+
+
+        return $assignment;
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserProfile()
+    {
+        return $this->hasOne(UserProfile::class, ['user_id' => 'id']);
+    }
+
+    public function getUserToken()
+    {
+        return $this->hasMany(UserToken::class, ['user_id' => 'id']);
+    }
+
+    public function getUserCreated()
+    {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    public function getUserUpdated()
+    {
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
+
+    public function getAuthItem()
+    {
+        return $this->hasMany(RbacAuthItem::class, ['name' => 'item_name'])
+            ->viaTable('rbac_auth_assignment', ['user_id' => 'id']);
+    }
+
+    public function afterSignup(array $profileData = [])
+    {
+        $this->refresh();
+
+        $profile = new UserProfile();
+        $profile->locale = Yii::$app->language;
+        $profile->load($profileData, '');
+        $this->link('userProfile', $profile);
+        $this->trigger(self::EVENT_AFTER_SIGNUP);
+        // Default role
+        $auth = Yii::$app->authManager;
+        $auth->assign($auth->getRole($this->role_name), $this->getId());
+    }
+
+    /*
+     * Kiểm tra parent - child
+     * $role đưa vào cần kiểm tra
+     * $roleUser role của người đang kiểm tra
+     */
+    public function checkParent(string $role, string $roleUser): bool
+    {
+        if ($roleUser == 'user_develop') {
+            return true;
+        }
+        $result = $this->manager->getChildRoles($roleUser);
+        foreach ($result as $roleName) {
+            if ($role == $roleName->name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getUserMetadataHasOne()
+    {
+        return $this->hasOne(UserMetadata::class, ['user_id' => 'id']);
+    }
+
+    public function getUserMetadata($metadataName = null)
+    {
+        if ($this->primaryKey == null) return null;
+        $metadata = $this->userMetadataHasOne == null ? [] : $this->userMetadataHasOne->metadata;
+        if (!is_array($metadata)) $metadata = [];
+        if (is_string($metadataName)) return $metadata[$metadataName] ?: null;
+        if (is_array($metadataName)) {
+            return ArrayHelper::filter($metadata, $metadataName);
+        }
+        return null;
+    }
+
+    public static function getUserByRole($role, $select = null, $active = true)
+    {
+        if (!is_string($role) && !is_array($role)) return [];
+        $query = self::find()->joinWith(['authItem', 'userProfile'])
+            ->where([RbacAuthItem::tableName() . '.name' => $role]);
+        if ($select != null) $query->select($select);
+        if ($active === true) $query->andWhere([self::tableName() . '.status' => self::STATUS_ACTIVE]);
+        return $query->all();
     }
 }
