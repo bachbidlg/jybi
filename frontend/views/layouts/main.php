@@ -16,12 +16,14 @@ $this->beginContent('@frontend/views/layouts/common.php');
                          alt="">-->
                     <div class="heading-wrap">
                         <div class="container">
-                            <h1>
+                            <h1 class="page-title">
                                 <?php
                                 if (Yii::$app->controller->id == 'intro') :
                                     echo Yii::t('frontend', 'Giới thiệu');
                                 elseif (Yii::$app->controller->id == 'contact') :
                                     echo Yii::t('frontend', 'Liên hệ');
+                                elseif(isset($this->title)) :
+                                    echo $this->title;
                                 endif;
                                 ?>
                             </h1>

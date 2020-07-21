@@ -42,8 +42,16 @@ class NewsCategory extends NewsCategoryTable
     {
         $query = self::find()
             ->joinWith(['newsCategoryLanguage'])
-            ->where(self::tableName() . '.category IS NULL')
             ->andWhere([self::tableName() . '.menu_main' => self::STATUS_PUBLISHED])
+            ->published()
+            ->sort();
+        return $query->all();
+    }
+
+    public static function getMenuFooter(){
+        $query = self::find()
+            ->joinWith(['newsCategoryLanguage'])
+            ->andWhere([self::tableName() . '.menu_footer' => self::STATUS_PUBLISHED])
             ->published()
             ->sort();
         return $query->all();

@@ -10,7 +10,11 @@
 
 /* @var $menu_footer array */
 
-use frontend\models\Language;
+/* @var $menu frontend\models\NewsCategory */
+
+/* @var $sub_menu frontend\models\NewsCategory */
+
+use yii\helpers\Url;
 
 $default_language = $this->params['default_language'];
 ?>
@@ -47,14 +51,14 @@ $default_language = $this->params['default_language'];
                         ?>
                         <div class="col-lg-3">
                             <div class="ft-column ft-nav">
-                                <div class="ft-col-title"><?= $menu['name'] ?></div>
-                                <?php if (count($menu['children']) > 0) { ?>
+                                <div class="ft-col-title"><?= $menu->newsCategoryLanguage[$default_language]->name ?></div>
+                                <?php if (count($menu->categoryHasMany) > 0) { ?>
                                     <div class="ft-col-content">
                                         <ul>
-                                            <?php foreach ($menu['children'] as $sub_menu) { ?>
+                                            <?php foreach ($menu->categoryHasMany as $sub_menu) { ?>
                                                 <li>
-                                                    <a href="<?= $sub_menu['url'] ?>"
-                                                       title="<?= $sub_menu['name'] ?>"><?= $sub_menu['name'] ?></a>
+                                                    <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]) ?>"
+                                                       title="<?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $sub_menu->newsCategoryLanguage[$default_language]->name ?></a>
                                                 </li>
                                             <?php } ?>
                                         </ul>

@@ -99,6 +99,11 @@ class NewsTable extends \yii\db\ActiveRecord
         return $this->hasMany(NewsLanguageTable::class, ['news_id' => 'id'])->indexBy('language_id');
     }
 
+    public function getNewsImagesHasMany()
+    {
+        return $this->hasMany(NewsImagesTable::class, ['news_id' => 'id']);
+    }
+
     public function getImage()
     {
         if (file_exists($this->pathImage . '/' . $this->image)) {

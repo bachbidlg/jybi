@@ -6,6 +6,7 @@ use common\helpers\MyHelper;
 use common\models\User;
 use milkyway\language\models\Language;
 use milkyway\language\models\table\LanguageTable;
+use milkyway\news\models\table\NewsImagesTable;
 use milkyway\news\NewsModule;
 use milkyway\news\models\table\NewsTable;
 use yii\behaviors\BlameableBehavior;
@@ -43,6 +44,7 @@ class News extends NewsTable
     public $news_language;
     public $iptImage;
     private $oldImage;
+    public $news_images;
 
     public function behaviors()
     {
@@ -95,6 +97,7 @@ class News extends NewsTable
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
             [['news_language'], 'validateNewsLanguage'],
+            [['news_images'], 'validateNewsImage'],
             [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}'],
         ];
     }
@@ -167,6 +170,13 @@ class News extends NewsTable
         }
     }
 
+    public function saveNewsImages()
+    {
+        if (!$this->hasErrors()) {
+
+        }
+    }
+
     public function validateNewsLanguage()
     {
         if (!$this->hasErrors()) {
@@ -181,6 +191,26 @@ class News extends NewsTable
                 if (!$news_language_model->validate()) {
                     foreach ($news_language_model->getErrors() as $k => $error) {
                         $this->addError("news_language[$i][$k]", $error);
+                    }
+                }
+            }
+        }
+    }
+
+    public function validateNewsImage()
+    {
+        if (!$this->hasErrors()) {
+            foreach ($this->news_images as $i => $news_images) {
+                $news_images_model = null;
+                if (isset($news_images['id'])) {
+                    $news_images_model = NewsImagesTable::getById($news_images['id']);
+                }
+                if ($news_images_model == null) $news_images_model = new NewsImages();
+                if ($this->scenario === self::SCENARIO_UPDATE) $news_images_model->scenario = NewsImages::SCENARIO_UPDATE;
+                $news_images_model->setAttributes($news_images);
+                if (!$news_images_model->validate()) {
+                    foreach ($news_images_model->getErrors() as $k => $error) {
+                        $this->addError("news_images[$i][$k]", $error);
                     }
                 }
             }
