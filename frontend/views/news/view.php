@@ -6,19 +6,24 @@
  * Time: 10:56
  */
 
-$this->title = Yii::t('frontend', 'Chi tiết');
+/* @var $news frontend\models\News */
+
+$default_language = $this->params['default_language'];
+$this->title = Yii::t('frontend', $news->newsLanguage[$default_language]->name);
+\Yii::$app->view->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="page-news-detail">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="content">
+                <div class="widget content">
                     <p>Lorem Ipsum là gì?</p>
                     <p>Lorem Ipsum chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục
                         vụ cho in ấn. Lorem Ipsum đã được sử dụng như một văn bản chuẩn cho ngành công nghiệp in ấn từ
                         những năm 1500, khi một họa sĩ vô danh ghép nhiều đoạn văn bản với nhau để tạo thành một bản mẫu
                         văn bản. Đoạn văn bản này không những đã tồn tại năm thế kỉ, mà khi được áp dụng vào tin học văn
-                        phòng, nội dung của nó vẫn không hề bị thay đổi. Nó đã được phổ biến trong những năm 1960 nhờ việc bán
+                        phòng, nội dung của nó vẫn không hề bị thay đổi. Nó đã được phổ biến trong những năm 1960 nhờ
+                        việc bán
                         những bản giấy Letraset in những đoạn Lorem Ipsum, và gần đây hơn, được sử dụng trong các ứng
                         dụng dàn trang, như Aldus PageMaker.</p>
                     <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/blog-img3.jpg')[1] ?>" alt="">
@@ -50,28 +55,29 @@ $this->title = Yii::t('frontend', 'Chi tiết');
 
                     <div class="tags">
                         <span><i class="fas fa-tags"></i> Từ khóa:</span>
-                        <a class="badge badge-dark" href="<?= \yii\helpers\Url::toRoute(['/du-an/chi-tiet']) ?>">xây
+                        <a class="badge badge-dark" href="#">xây
                             nhà</a>
-                        <a class="badge badge-dark" href="<?= \yii\helpers\Url::toRoute(['/du-an/chi-tiet']) ?>">thiết
+                        <a class="badge badge-dark" href="#">thiết
                             kế nhà</a>
-                        <a class="badge badge-dark" href="<?= \yii\helpers\Url::toRoute(['/du-an/chi-tiet']) ?>">biệt
+                        <a class="badge badge-dark" href="#">biệt
                             thự</a>
                     </div>
                 </div>
 
                 <?php
-                echo \frontend\widgets\NewsRelateWidget::widget();
+                echo \frontend\widgets\NewsRelateWidget::widget(['news_id' => $news->id, 'limit' => 5]);
                 ?>
 
-                <div class="widget comments px-0">
+                <div class="content widget comments">
                     <div class="sidebar-title">
                         <h4><?= Yii::t('frontend', 'Bình luận') ?></h4>
                         <div class="separator">
-                            <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5" data-width=""></div>
+                            <div class="fb-comments"
+                                 data-href="https://developers.facebook.com/docs/plugins/comments#configurator"
+                                 data-numposts="5" data-width=""></div>
                         </div>
                     </div>
                     <div class="sidebar-content">
-
                     </div>
                 </div>
             </div>
@@ -80,7 +86,7 @@ $this->title = Yii::t('frontend', 'Chi tiết');
                     <?php
                     echo \frontend\widgets\ContactWidget::widget(['type' => 'contact_wg']);
                     echo \frontend\widgets\NewsFeatured::widget();
-                    echo \frontend\widgets\NewsRecommendWidget::widget();
+                    echo \frontend\widgets\NewsRecommendWidget::widget(['news_id' => $news->id, 'limit' => 5]);
                     ?>
                 </div>
             </div>

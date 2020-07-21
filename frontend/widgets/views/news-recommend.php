@@ -5,6 +5,14 @@
  * Date: 7/8/2020
  * Time: 14:09
  */
+
+/* @var $recommend_news array */
+
+/* @var $news frontend\models\News */
+
+use yii\helpers\Url;
+
+$default_language = Yii::$app->view->params['default_language'];
 ?>
 <div class="widget news-relative">
     <div class="sidebar-title">
@@ -12,15 +20,15 @@
         <div class="separator"></div>
     </div>
     <div class="sidebar-content">
-        <?php for ($i = 1; $i <= 3; $i++) { ?>
+        <?php foreach ($recommend_news as $news) { ?>
             <div class="media">
                 <div class="media-left">
-                    <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/sub-properties-' . $i . '.jpg')[1] ?>"
-                         alt="img" class="media-object">
+                    <img src="<?= $news->getImage() ?>" alt="<?= $news->newsLanguage[$default_language]->name ?>"
+                         class="media-object">
                 </div>
                 <div class="media-body">
                     <h3 class="media-heading">
-                        <a href="<?= \yii\helpers\Url::toRoute(['/du-an/chi-tiet']) ?>">Những nguy cơ tiềm ẩn sau "Đơn vị thi công xây dựng nghiệp dư"</a>
+                        <a href="<?= Url::toRoute(['/news/view', 'slug' => $news->slug]) ?>"><?= $news->newsLanguage[$default_language]->name ?></a>
                     </h3>
                 </div>
             </div>

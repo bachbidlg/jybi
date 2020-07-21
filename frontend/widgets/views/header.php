@@ -7,11 +7,13 @@
  */
 
 /* @var $menu array */
+/* @var $data_menu frontend\models\NewsCategory */
+/* @var $sub_menu frontend\models\NewsCategory */
 
 use yii\helpers\Url;
 use milkyway\language\models\table\LanguageTable;
 
-$default_language = LanguageTable::getDefaultLanguage()->id;
+$default_language = $this->params['default_language'];
 ?>
 <header id="header">
     <div class="container">
@@ -34,17 +36,17 @@ $default_language = LanguageTable::getDefaultLanguage()->id;
                     <?php
                     if (count($menu) > 0) {
                         foreach ($menu as $data_menu) {
-                            $has_children = isset($data_menu['children']) && count($data_menu['children']) > 0;
+                            $has_children = count($data_menu->categoryHasMany) > 0;
                             ?>
                             <li<?= $has_children ? ' class="menu-item-has-children"' : '' ?>>
-                                <a href="<?= $data_menu['url'] ?>"
-                                   title="<?= $data_menu['name'] ?>"><?= $data_menu['name'] ?><?= $has_children ? ' <i class="fas fa-caret-down"></i>' : '' ?></a>
+                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $data_menu->slug]) ?>"
+                                   title="<?= $data_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $data_menu->newsCategoryLanguage[$default_language]->name ?><?= $has_children ? ' <i class="fas fa-caret-down"></i>' : '' ?></a>
                                 <?php if ($has_children) { ?>
                                     <ul class="sub-menu">
-                                        <?php foreach ($data_menu['children'] as $sub_menu) { ?>
+                                        <?php foreach ($data_menu->categoryHasMany as $sub_menu) { ?>
                                             <li>
-                                                <a href="<?= $sub_menu['url'] ?>"
-                                                   title="<?= $sub_menu['name'] ?>"><?= $sub_menu['name'] ?></a>
+                                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug])?>"
+                                                   title="<?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $sub_menu->newsCategoryLanguage[$default_language]->name ?></a>
                                             </li>
                                         <?php } ?>
                                     </ul>
@@ -94,12 +96,12 @@ $default_language = LanguageTable::getDefaultLanguage()->id;
         <?php
         if (count($menu) > 0) {
             foreach ($menu as $data_menu) {
-                $has_children = isset($data_menu['children']) && count($data_menu['children']) > 0;
+                $has_children = count($data_menu->categoryHasMany) > 0;
                 if (!$has_children) {
                     ?>
-                    <a class="menu-item" href="<?= $data_menu['url'] ?>">
+                    <a class="menu-item" href="<?= Url::toRoute(['/news/index', 'slug' => $data_menu->slug]) ?>">
                         <i class="fas fa-info-circle"></i>
-                        <span><?= $data_menu['name'] ?>></span>
+                        <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?>></span>
                         <i class="fa fa-circle"></i>
                     </a>
                     <?php
@@ -107,14 +109,14 @@ $default_language = LanguageTable::getDefaultLanguage()->id;
                     ?>
                     <div class="submenu-item">
                         <input type="checkbox" data-submenu-items="4" class="toggle-submenu"
-                               id="toggle-<?= $data_menu['id'] ?>">
-                        <label class="menu-item" for="toggle-<?= $data_menu['id'] ?>"><i
-                                    class="<?= $data_menu['icon'] ?: 'fas fa-archive' ?>"></i><span><?= $data_menu['name'] ?></span></label>
+                               id="toggle-<?= $data_menu->id ?>">
+                        <label class="menu-item" for="toggle-<?= $data_menu->id ?>"><i
+                                    class="<?= $data_menu->icon ?: 'fas fa-archive' ?>"></i><span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span></label>
                         <div class="submenu-wrapper">
-                            <?php foreach ($data_menu['children'] as $sub_menu) { ?>
-                                <a href="<?= $sub_menu['url'] ?>" class="menu-item">
+                            <?php foreach ($data_menu->categoryHasMany as $sub_menu) { ?>
+                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug])?>" class="menu-item">
                                     <i class="fa fa-angle-right"></i>
-                                    <?= $sub_menu['name'] ?>
+                                    <?= $sub_menu->newsCategoryLanguage[$default_language]->name?>
                                     <i class="fa fa-circle"></i>
                                 </a>
                             <?php } ?>

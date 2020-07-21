@@ -20,7 +20,7 @@ class NewsController extends MyController
     {
         $category = NewsCategory::getBySlug($slug);
         if ($category == null) return $this->redirect(['/site/index']);
-        $default_language = LanguageTable::getDefaultLanguage()->id;
+        $default_language = $this->default_language;
 
         /* Breadcrumbs */
         $alias = explode('/', $category->alias);
@@ -52,6 +52,18 @@ class NewsController extends MyController
     {
         $news = News::getBySlug($slug);
         if ($news == null) return $this->redirect(['/site/index']);
+        $default_language = $this->default_language;
+
+        /* Breadcrumbs */
+        $alias = explode('/', $news->categoryHasOne->alias);
+        unset($alias[0]);
+        $list_breadcrumbs = NewsCategory::getByIds($alias, true);
+        foreach ($list_breadcrumbs as $breadcrumb) {
+            \Yii::$app->view->params['breadcrumbs'][] = [
+                'label' => $breadcrumb->newsCategoryLanguage[$default_language]->name,
+                'url' => ['/news/index', 'slug' => $breadcrumb->slug]
+            ];
+        }
 
         $category = NewsCategory::getById($news->category);
         $newsRelate = News::getByAlias($category->alias, 5);

@@ -19,8 +19,8 @@ class MyController extends Controller
     public $default_language;
     public function __construct(string $id, Module $module, array $config = [])
     {
-        $this->default_language = LanguageTable::getDefaultLanguage(false);
-        Yii::$app->view->params['default_language'] = $this->default_language->id;
+        $this->default_language = LanguageTable::getDefaultLanguage(false)->id;
+        Yii::$app->view->params['default_language'] = $this->default_language;
         parent::__construct($id, $module, $config);
     }
 

@@ -40,6 +40,8 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
             'redis-news-get-news-check-hot-' . $this->categoryHasOne->type,
+            'redis-news-get-relate-news-' . $this->id,
+            'redis-news-get-recommend-news-' . $this->id,
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -57,6 +59,8 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
             'redis-news-get-news-check-hot-' . $this->categoryHasOne->type,
+            'redis-news-get-relate-news-' . $this->id,
+            'redis-news-get-recommend-news-' . $this->id,
             'redis-news-get-all',
         ];
         foreach ($keys as $key) {
@@ -192,6 +196,39 @@ class NewsTable extends \yii\db\ActiveRecord
             $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}/%'");
             if ($limit != null) $query->limit($limit)->offset(0);
             $query->sort();
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getRelateNews($id = null, $limit = null)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-relate-news-' . $id;
+        $data = $cache->get($key);
+        if ($data == false) {
+            $news = self::getById($id);
+            if ($news == null) return [];
+            $query = self::find()->where([self::tableName() . '.category' => $news->category])->andWhere(['<>', self::tableName() . '.id', $id])->published()->sort();
+            if ($limit != null) $query->limit($limit)->offset(0);
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getRecommendNews($id = null, $limit = null, $data_cache = YII2_CACHE)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-recommend-news-' . $id;
+        $data = $cache->get($key);
+        if ($data == false || $data_cache === false) {
+            $news = self::getById($id);
+            if ($news == null) return [];
+            $alias = '/' . explode('/', $news->alias)[1];
+            $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}%'")->andWhere(['<>', self::tableName() . '.id', $id])->published()->sort();
+            if ($limit != null) $query->limit($limit)->offset(0);
             $data = $query->all();
             $cache->set($key, $data);
         }

@@ -8,9 +8,11 @@
 
 /* @var $footerInfo frontend\models\Freetype */
 
+/* @var $menu_footer array */
+
 use frontend\models\Language;
 
-$default_language = Language::getDefaultLanguage()->id;
+$default_language = $this->params['default_language'];
 ?>
 <footer id="footer">
     <div class="footer-top">
@@ -39,20 +41,29 @@ $default_language = Language::getDefaultLanguage()->id;
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="ft-column ft-nav">
-                        <div class="ft-col-title">Hỗ trợ khách hàng</div>
-                        <div class="ft-col-content">
-                            <ul>
-                                <li><a href="#" title="">Quy định chung</a></li>
-                                <li><a href="#" title="">Giới thiệu chung</a></li>
-                                <li><a href="#" title="">Chính sách bảo mật</a></li>
-                                <li><a href="#" title="">Chính sách bảo hành</a></li>
-                                <li><a href="#" title="">Chính sách thanh toán</a></li>
-                            </ul>
+                <?php
+                if (count($menu_footer) > 0) {
+                    foreach ($menu_footer as $menu) {
+                        ?>
+                        <div class="col-lg-3">
+                            <div class="ft-column ft-nav">
+                                <div class="ft-col-title"><?= $menu['name'] ?></div>
+                                <?php if (count($menu['children']) > 0) { ?>
+                                    <div class="ft-col-content">
+                                        <ul>
+                                            <?php foreach ($menu['children'] as $sub_menu) { ?>
+                                                <li>
+                                                    <a href="<?= $sub_menu['url'] ?>"
+                                                       title="<?= $sub_menu['name'] ?>"><?= $sub_menu['name'] ?></a>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    <?php }
+                } ?>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ use yii\helpers\Url;
 
 class NewsCategory extends NewsCategoryTable
 {
-    public static function getMenu($type = null, $current = null, $category = null, $get_published = true, $data = null, $prefix = '|--')
+    public static function getMenu($type = null, $current = null, $category = null, $get_published = true, $data = null, $prefix = '')
     {
         if ($data == null) $data = [];
         $default_language = LanguageTable::getDefaultLanguage();
@@ -36,5 +36,16 @@ class NewsCategory extends NewsCategoryTable
             }
         }
         return $data;
+    }
+
+    public static function getMenuMain()
+    {
+        $query = self::find()
+            ->joinWith(['newsCategoryLanguage'])
+            ->where(self::tableName() . '.category IS NULL')
+            ->andWhere([self::tableName() . '.menu_main' => self::STATUS_PUBLISHED])
+            ->published()
+            ->sort();
+        return $query->all();
     }
 }

@@ -152,10 +152,14 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
     public static function getByType($type)
     {
         $cache = Yii::$app->cache;
-        $key = 'redis-news-category-get-by-type-' . $type;
+        $key = 'redis-news-category-get-by-type-';
+        if (is_array($type)) $key .= implode('-', $type);
+        else $key .= $type;
         $data = $cache->get($key);
         if ($data == false) {
-            $query = self::find()->where([self::tableName() . '.type' => $type]);
+            $query = self::find();
+            if (is_array($type)) $query->where(['IN', self::tableName() . '.type', $type]);
+            else $query->where([self::tableName() . '.type' => $type]);
             $data = $query->all();
             $cache->set($key, $data);
         }
@@ -193,7 +197,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         if ($data == null) $data = [];
         $default_language = LanguageTable::getDefaultLanguage();
         $query = self::find()->joinWith(['newsCategoryLanguage'])->where([self::tableName() . '.category' => $category])->sort()->groupBy([self::tableName() . '.id']);
-        if($type !== null) $query->andWhere([self::tableName().'.type' => $type]);
+        if ($type !== null) $query->andWhere([self::tableName() . '.type' => $type]);
         if ($get_published === true) $query->published();
         $rows = $query->all();
         if (count($rows) > 0) {
