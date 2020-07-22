@@ -104,7 +104,7 @@ $list_language = LanguageTable::getAll();
                                             'attribute' => 'name',
                                             'format' => 'raw',
                                             'value' => function ($model) use ($params, $list_language) {
-                                                $language = $params['defaultLanguage'] ?: $list_language[array_keys($list_language)[0]]->id;
+                                                $language = $params['default_language'] ?: $list_language[array_keys($list_language)[0]]->id;
                                                 return Html::a($model->newsLanguage[$language]->name, ['view', 'id' => $model->id], [
                                                     'target' => '_blank',
                                                     'data-pjax' => 0
@@ -116,7 +116,7 @@ $list_language = LanguageTable::getAll();
                                             'format' => 'raw',
                                             'value' => function ($model) use ($params) {
                                                 if ($model->categoryHasOne == null) return null;
-                                                $language = $params['defaultLanguage'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
+                                                $language = $params['default_language'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
                                                 return Html::a($model->categoryHasOne->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->category], [
                                                     'target' => '_blank',
                                                     'data-pjax' => 0
