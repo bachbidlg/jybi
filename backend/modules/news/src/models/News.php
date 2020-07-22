@@ -170,13 +170,6 @@ class News extends NewsTable
         }
     }
 
-    public function saveNewsImages()
-    {
-        if (!$this->hasErrors()) {
-
-        }
-    }
-
     public function validateNewsLanguage()
     {
         if (!$this->hasErrors()) {

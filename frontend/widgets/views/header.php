@@ -10,19 +10,24 @@
 /* @var $data_menu frontend\models\NewsCategory */
 /* @var $sub_menu frontend\models\NewsCategory */
 
+/* @var $shop frontend\models\Shop */
+
 use yii\helpers\Url;
 use milkyway\language\models\table\LanguageTable;
 
 $default_language = $this->params['default_language'];
+$shop = $this->params['shop'];
 ?>
 <header id="header">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <div id="logo">
-                <a href="/" title="iWay"><img
-                            src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/logo.png')[1]; ?>"
-                            alt="logo"></a>
-            </div>
+            <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
+                <div id="logo">
+                    <a href="<?= Url::home() ?>" title="<?= $shop->getMetadata('name') ?>">
+                        <img src="<?= $shop->getImage('logo', 'logo') ?>" alt="<?= $shop->getMetadata('name') ?>">
+                    </a>
+                </div>
+            <?php } ?>
             <nav id="menu" class="main-menu">
                 <ul class="nav">
                     <li<?php if (Yii::$app->controller->id == 'site') echo ' class="active"'; ?>>
@@ -45,7 +50,7 @@ $default_language = $this->params['default_language'];
                                     <ul class="sub-menu">
                                         <?php foreach ($data_menu->categoryHasMany as $sub_menu) { ?>
                                             <li>
-                                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug])?>"
+                                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]) ?>"
                                                    title="<?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $sub_menu->newsCategoryLanguage[$default_language]->name ?></a>
                                             </li>
                                         <?php } ?>
@@ -114,9 +119,10 @@ $default_language = $this->params['default_language'];
                                     class="<?= $data_menu->icon ?: 'fas fa-archive' ?>"></i><span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span></label>
                         <div class="submenu-wrapper">
                             <?php foreach ($data_menu->categoryHasMany as $sub_menu) { ?>
-                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug])?>" class="menu-item">
+                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]) ?>"
+                                   class="menu-item">
                                     <i class="fa fa-angle-right"></i>
-                                    <?= $sub_menu->newsCategoryLanguage[$default_language]->name?>
+                                    <?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>
                                     <i class="fa fa-circle"></i>
                                 </a>
                             <?php } ?>

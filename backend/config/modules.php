@@ -48,4 +48,7 @@ return [
     'freetype' => [
         'class' => 'milkyway\freetype\FreetypeModule',
     ],
+    'shop' => [
+        'class' => 'milkyway\shop\ShopModule',
+    ],
 ];

@@ -8,6 +8,7 @@
 
 namespace frontend\components;
 
+use frontend\models\Shop;
 use milkyway\language\models\table\LanguageTable;
 use yii\base\Module;
 use yii\web\Controller;
@@ -17,10 +18,13 @@ use Yii;
 class MyController extends Controller
 {
     public $default_language;
+
     public function __construct(string $id, Module $module, array $config = [])
     {
         $this->default_language = LanguageTable::getDefaultLanguage(false)->id;
+        $shop = Shop::getOne();
         Yii::$app->view->params['default_language'] = $this->default_language;
+        Yii::$app->view->params['shop'] = $shop;
         parent::__construct($id, $module, $config);
     }
 

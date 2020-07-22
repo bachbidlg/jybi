@@ -76,12 +76,14 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
-                <li class="nav-item<?php if (Yii::$app->controller->module->id == 'settings') echo ' active'; ?>">
-                    <a class="nav-link" href="<?= Url::toRoute(['/settings']); ?>">
-                        <i class="ion ion-ios-cog"></i>
-                        <span class="nav-link-text"><?= Yii::t('backend', 'Settings'); ?></span>
-                    </a>
-                </li>
+                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('shop')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'shop') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/shop']); ?>">
+                            <i class="ion ion-ios-cog"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Shop Info'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
             <?php if (Yii::$app->user->can(User::DEV)) { ?>
                 <hr class="nav-separator">

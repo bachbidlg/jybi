@@ -15,14 +15,18 @@ use Yii;
 
 class MyController extends Controller
 {
+    public $default_language;
+
     public function init()
     {
         parent::init();
         $user = new User();
         $userRoleName = $user->getRoleName(Yii::$app->user->id);
         $defaultLanguage = LanguageTable::getDefaultLanguage();
+        $default_language = $defaultLanguage == null ? null : $defaultLanguage->id;
         $this->view->params['userRoleName'] = $userRoleName;
-        $this->view->params['defaultLanguage'] = $defaultLanguage == null ? null : $defaultLanguage->id;
+        $this->view->params['default_language'] = $default_language;
+        $this->default_language = $default_language;
 //        if (Yii::$app->user->id != null) {
 //            $system_maintenance = Setting::getKey('system_maintenance');
 //            if ($system_maintenance != null && $system_maintenance->value == '1') {
