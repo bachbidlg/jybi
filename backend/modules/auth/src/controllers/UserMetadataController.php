@@ -35,6 +35,10 @@ class UserMetadataController extends MyController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($model == null) {
+            if (Yii::$app->user->can('authUser')) return $this->redirect(['/auth/user']);
+            return $this->redirect(['/site/index']);
+        }
         $user = new User();
         if ($model == null) {
             Yii::$app->session->setFlash('toastr-' . $user->toastr_key . '-index', [

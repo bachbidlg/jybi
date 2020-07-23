@@ -28,7 +28,20 @@ use modava\auth\models\User;
                 <span>UI</span>
             </div>
             <ul class="navbar-nav flex-column">
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('news')) { ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('news') ||
+                    Yii::$app->user->can('newsNews-category') ||
+                    Yii::$app->user->can('newsNews-categoryIndex') ||
+                    Yii::$app->user->can('newsNews') ||
+                    Yii::$app->user->can('newsNewsIndex') ||
+                    Yii::$app->user->can('newsProject-category') ||
+                    Yii::$app->user->can('newsProject-categoryIndex') ||
+                    Yii::$app->user->can('newsProject') ||
+                    Yii::$app->user->can('newsProjectIndex') ||
+                    Yii::$app->user->can('newsSupport-category') ||
+                    Yii::$app->user->can('newsSupport-categoryIndex') ||
+                    Yii::$app->user->can('newsSupport') ||
+                    Yii::$app->user->can('newsSupportIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/news/news-category']); ?>">
                             <i class="ion ion-md-list"></i>
@@ -36,7 +49,10 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('language')) { ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('language') ||
+                    Yii::$app->user->can('languageLanguage') ||
+                    Yii::$app->user->can('languageLanguageIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'language') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/language']); ?>">
                             <i class="ion ion-md-flag"></i>
@@ -44,15 +60,21 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('contact')) { ?>
-                <li class="nav-item<?php if (Yii::$app->controller->module->id == 'contact') echo ' active'; ?>">
-                    <a class="nav-link" href="<?= Url::toRoute(['/contact']); ?>">
-                        <i class="ion ion-ios-chatbubbles"></i>
-                        <span class="nav-link-text"><?= Yii::t('backend', 'Contacts'); ?></span>
-                    </a>
-                </li>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('contact') ||
+                    Yii::$app->user->can('contactContact') ||
+                    Yii::$app->user->can('contactContactIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'contact') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/contact']); ?>">
+                            <i class="ion ion-ios-chatbubbles"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Contacts'); ?></span>
+                        </a>
+                    </li>
                 <?php } ?>
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('slider')) { ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('slider') ||
+                    Yii::$app->user->can('sliderSlider') ||
+                    Yii::$app->user->can('sliderSliderIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'slider') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/slider']); ?>">
                             <i class="ion ion-ios-images"></i>
@@ -60,7 +82,10 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('freetype')) { ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('freetype') ||
+                    Yii::$app->user->can('freetypeFreetype') ||
+                    Yii::$app->user->can('freetypeFreetypeIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'freetype') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/freetype']); ?>">
                             <i class="ion ion-ios-document"></i>
@@ -68,7 +93,10 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('label')) { ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('label') ||
+                    Yii::$app->user->can('labelLabel') ||
+                    Yii::$app->user->can('labelLabelIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'label') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/label']); ?>">
                             <i class="ion ion-ios-at"></i>
@@ -76,11 +104,24 @@ use modava\auth\models\User;
                         </a>
                     </li>
                 <?php } ?>
-                <?php if (Yii::$app->user->can(User::DEV) || Yii::$app->user->can('shop')) { ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('shop') ||
+                    Yii::$app->user->can('shopShop') ||
+                    Yii::$app->user->can('shopShopIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'shop') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/shop']); ?>">
                             <i class="ion ion-ios-cog"></i>
                             <span class="nav-link-text"><?= Yii::t('backend', 'Shop Info'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('authUser') ||
+                    Yii::$app->user->can('authUserIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'auth') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/auth/user']); ?>">
+                            <i class="ion ion-ios-person"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Users'); ?></span>
                         </a>
                     </li>
                 <?php } ?>
