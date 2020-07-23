@@ -21,13 +21,13 @@ $shop = $this->params['shop'];
 <header id="header">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
-                <div id="logo">
+            <div id="logo">
+                <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
                     <a href="<?= Url::home() ?>" title="<?= $shop->dataMetadata('name') ?>">
                         <img src="<?= $shop->getImage('logo', 'logo') ?>" alt="<?= $shop->dataMetadata('name') ?>">
                     </a>
-                </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
             <nav id="menu" class="main-menu">
                 <ul class="nav">
                     <li<?php if (Yii::$app->controller->id == 'site') echo ' class="active"'; ?>>
