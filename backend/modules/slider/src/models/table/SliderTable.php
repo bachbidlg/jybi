@@ -110,12 +110,12 @@ class SliderTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getByType($type = null)
+    public static function getByType($type = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-by-type-' . $type;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache == false) {
             $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
             $data = $query->all();
             $cache->set($key, $data);
