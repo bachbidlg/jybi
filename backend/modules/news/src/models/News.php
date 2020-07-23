@@ -74,7 +74,6 @@ class News extends NewsTable
                 ],
                 'timestamp' => [
                     'class' => 'yii\behaviors\TimestampBehavior',
-                    'preserveNonEmptyValues' => true,
                     'attributes' => [
                         ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
@@ -167,13 +166,6 @@ class News extends NewsTable
             }
             $transaction->commit();
             return true;
-        }
-    }
-
-    public function saveNewsImages()
-    {
-        if (!$this->hasErrors()) {
-
         }
     }
 

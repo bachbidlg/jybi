@@ -16,7 +16,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'News'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $params = $this->params;
-$default_language = LanguageTable::getDefaultLanguage();
+$default_language = $params['default_language'];
 \yii\web\YiiAsset::register($this);
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-view']) ?>
@@ -56,7 +56,7 @@ $default_language = LanguageTable::getDefaultLanguage();
                             'attribute' => 'id',
                             'label' => NewsModule::t('news', 'Name'),
                             'value' => function ($model) use ($default_language) {
-                                $language = $default_language->id;
+                                $language = $default_language;
                                 if (count($model->newsLanguage) <= 0) return null;
                                 if (!array_key_exists($language, $model->newsLanguage)) $language = array_keys($model->newsLanguage)[0];
                                 return $model->newsLanguage[$language]->name;
@@ -65,9 +65,9 @@ $default_language = LanguageTable::getDefaultLanguage();
                         [
                             'attribute' => 'category',
                             'format' => 'raw',
-                            'value' => function ($model) use ($params) {
+                            'value' => function ($model) use ($params, $default_language) {
                                 if ($model->categoryHasOne == null) return null;
-                                $language = $params['defaultLanguage'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
+                                $language = $default_language ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
                                 return Html::a($model->categoryHasOne->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->category], [
                                     'target' => '_blank',
                                     'data-pjax' => 0

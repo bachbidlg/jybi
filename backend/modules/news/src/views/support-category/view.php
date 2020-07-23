@@ -15,7 +15,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => NewsModule::t('news', 'Supports Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $params = $this->params;
-$default_language = LanguageTable::getDefaultLanguage();
+$default_language = $params['default_language'];
 \yii\web\YiiAsset::register($this);
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-view']) ?>
@@ -65,9 +65,9 @@ $default_language = LanguageTable::getDefaultLanguage();
                         [
                             'attribute' => 'category',
                             'format' => 'raw',
-                            'value' => function ($model) use ($params) {
+                            'value' => function ($model) use ($params, $default_language) {
                                 if ($model->categoryHasOne == null) return null;
-                                $language = $params['defaultLanguage'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
+                                $language = $default_language ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
                                 return Html::a($model->categoryHasOne->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->category], [
                                     'target' => '_blank',
                                     'data-pjax' => 0

@@ -17,7 +17,7 @@ use milkyway\language\models\table\LanguageTable;
 /* @var $form yii\widgets\ActiveForm */
 
 $list_language = LanguageTable::getAll();
-$default_language = LanguageTable::getDefaultLanguage();
+$default_language = $this->params['default_language'];
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
     <div class="news-form">
@@ -53,7 +53,7 @@ $default_language = LanguageTable::getDefaultLanguage();
         <ul class="nav nav-tabs" id="tab-language" role="tablist">
             <?php foreach ($list_language as $i => $language) { ?>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link<?= ($default_language !== null && $language->primaryKey === $default_language->primaryKey) || ($default_language === null && $i == 0) ? ' active' : '' ?>"
+                    <a class="nav-link<?= ($default_language !== null && $language->primaryKey === $default_language) || ($default_language === null && $i == 0) ? ' active' : '' ?>"
                        id="language-<?= $language->primaryKey ?>-tab" data-toggle="tab"
                        href="#language-<?= $language->primaryKey ?>"
                        role="tab"
@@ -68,7 +68,7 @@ $default_language = LanguageTable::getDefaultLanguage();
             foreach ($list_language as $i => $language) {
                 if ($model->primaryKey === null) $model->news_language[$language->primaryKey]['language_id'] = $language->primaryKey;
                 ?>
-                <div class="tab-pane fade<?= ($default_language !== null && $language->primaryKey === $default_language->primaryKey) || ($default_language === null && $i == 0) ? ' default show active' : '' ?>"
+                <div class="tab-pane fade<?= ($default_language !== null && $language->primaryKey === $default_language) || ($default_language === null && $i == 0) ? ' default show active' : '' ?>"
                      id="language-<?= $language->primaryKey ?>" role="tabpanel"
                      aria-labelledby="language-<?= $language->primaryKey ?>-tab">
                     <?= $form->field($model, 'news_language[' . $language->primaryKey . '][news_id]')->hiddenInput()->label(false) ?>

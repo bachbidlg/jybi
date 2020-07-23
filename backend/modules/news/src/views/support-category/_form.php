@@ -16,7 +16,7 @@ use milkyway\news\models\table\NewsCategoryTable;
 /* @var $form yii\widgets\ActiveForm */
 
 $list_language = LanguageTable::getAll();
-$default_language = LanguageTable::getDefaultLanguage();
+$default_language = $this->params['default_language'];
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
     <div class="news-category-form">
