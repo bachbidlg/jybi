@@ -50,24 +50,24 @@ $shop = $this->params['shop'];
                                         <strong>Đ/c:</strong> <?= $shop->shopLanguage[$default_language]->getMetadata('address') ?>
                                     </p>
                                 <?php } ?>
-                                <?php if ($shop->getMetadata('hotline') != null) { ?>
+                                <?php if ($shop->dataMetadata('hotline') != null) { ?>
                                     <p>
-                                        <strong>Hotline:</strong> <?= $shop->getMetadata('hotline') ?>
+                                        <strong>Hotline:</strong> <?= $shop->dataMetadata('hotline') ?>
                                     </p>
                                 <?php } ?>
-                                <?php if ($shop->getMetadata('mst') != null) { ?>
+                                <?php if ($shop->dataMetadata('mst') != null) { ?>
                                     <p>
-                                        <strong>MST:</strong> <?= $shop->getMetadata('mst') ?>
+                                        <strong>MST:</strong> <?= $shop->dataMetadata('mst') ?>
                                     </p>
                                 <?php } ?>
-                                <?php if ($shop->getMetadata('created') != null) { ?>
+                                <?php if ($shop->dataMetadata('created') != null) { ?>
                                     <p>
-                                        <strong>Ngày cấp giấy phép:</strong> <?= $shop->getMetadata('created') ?>
+                                        <strong>Ngày cấp giấy phép:</strong> <?= $shop->dataMetadata('created') ?>
                                     </p>
                                 <?php } ?>
-                                <?php if ($shop->getMetadata('started') != null) { ?>
+                                <?php if ($shop->dataMetadata('started') != null) { ?>
                                     <p>
-                                        <strong>Ngày hoạt động:</strong> <?= $shop->getMetadata('started') ?>
+                                        <strong>Ngày hoạt động:</strong> <?= $shop->dataMetadata('started') ?>
                                     </p>
                                 <?php } ?>
                             </div>

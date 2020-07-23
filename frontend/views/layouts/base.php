@@ -75,15 +75,15 @@ $shop = $this->params['shop'];
     <?= $content ?>
     <?php if ($shop != null) { ?>
         <div class="quick-contact">
-            <?php if ($shop->getMetadata('phone') != null) { ?>
-                <a href="tel:<?= $shop->getMetadata('phone') ?>" class="btn-call">
+            <?php if ($shop->dataMetadata('phone') != null) { ?>
+                <a href="tel:<?= $shop->dataMetadata('phone') ?>" class="btn-call">
                     <span class="animated infinite zoomIn kenit-alo-circle"></span>
                     <span class="animated infinite pulse kenit-alo-circle-fill"></span>
                     <i class="fas fa-phone-alt"></i>
                 </a>
             <?php } ?>
-            <?php if ($shop->getMetadata('email') != null) { ?>
-                <a href="mailto:<?= $shop->getMetadata('email') ?>" class="btn-email">
+            <?php if ($shop->dataMetadata('email') != null) { ?>
+                <a href="mailto:<?= $shop->dataMetadata('email') ?>" class="btn-email">
                     <span class="animated infinite zoomIn kenit-alo-circle"></span>
                     <span class="animated infinite pulse kenit-alo-circle-fill"></span>
                     <i class="fas fa-envelope"></i>
@@ -95,13 +95,13 @@ $shop = $this->params['shop'];
     <?php if ($shop != null) { ?>
         <div class="quick-contact-mb d-block d-md-none">
             <div class="d-flex align-items-center justify-content-between">
-                <?php if ($shop->getMetadata('phone') != null) { ?>
+                <?php if ($shop->dataMetadata('phone') != null) { ?>
                     <a href="tel:" class="mb-phone">
                         <i class="fas fa-phone-alt"></i>
                         Gọi điện
                     </a>
                 <?php } ?>
-                <?php if ($shop->getMetadata('email') != null) { ?>
+                <?php if ($shop->dataMetadata('email') != null) { ?>
                     <a href="sms:" class="mb-sms">
                         <i class="fas fa-sms"></i>
                         SMS

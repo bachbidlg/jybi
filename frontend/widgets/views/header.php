@@ -23,8 +23,8 @@ $shop = $this->params['shop'];
         <div class="d-flex justify-content-between align-items-center">
             <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
                 <div id="logo">
-                    <a href="<?= Url::home() ?>" title="<?= $shop->getMetadata('name') ?>">
-                        <img src="<?= $shop->getImage('logo', 'logo') ?>" alt="<?= $shop->getMetadata('name') ?>">
+                    <a href="<?= Url::home() ?>" title="<?= $shop->dataMetadata('name') ?>">
+                        <img src="<?= $shop->getImage('logo', 'logo') ?>" alt="<?= $shop->dataMetadata('name') ?>">
                     </a>
                 </div>
             <?php } ?>

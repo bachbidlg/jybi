@@ -6,6 +6,7 @@ use cheatsheet\Time;
 use milkyway\language\models\table\LanguageTable;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 class ShopLanguageTable extends \yii\db\ActiveRecord
 {
@@ -37,8 +38,7 @@ class ShopLanguageTable extends \yii\db\ActiveRecord
 
     public function getMetadata($data)
     {
-        if (array_key_exists($data, $this->metadata)) return $this->metadata[$data];
-        return null;
+        return ArrayHelper::getValue($this->metadata, $data);
     }
 
     public function getShopHasOne()

@@ -39,56 +39,51 @@ class Shop extends ShopTable
 
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
+        return [
             [
-                [
-                    'class' => BlameableBehavior::class,
-                    'createdByAttribute' => 'created_by',
-                    'updatedByAttribute' => 'updated_by',
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
-                'timestamp' => [
-                    'class' => 'yii\behaviors\TimestampBehavior',
-                    'preserveNonEmptyValues' => true,
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                        ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                    ],
+            ],
+            [
+                'class' => AttributeBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['created'],
                 ],
-                [
-                    'class' => AttributeBehavior::class,
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_VALIDATE => ['created'],
-                    ],
-                    'value' => function () {
-                        if (is_numeric($this->created)) return $this->created;
-                        if (is_string($this->created)) return strtotime($this->created);
-                        return null;
-                    }
+                'value' => function () {
+                    if (is_numeric($this->created)) return $this->created;
+                    if (is_string($this->created)) return strtotime($this->created);
+                    return null;
+                }
+            ],
+            [
+                'class' => AttributeBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['started'],
                 ],
-                [
-                    'class' => AttributeBehavior::class,
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_VALIDATE => ['started'],
-                    ],
-                    'value' => function () {
-                        if (is_numeric($this->created)) return $this->created;
-                        if (is_string($this->created)) return strtotime($this->created);
-                        return null;
-                    }
+                'value' => function () {
+                    if (is_numeric($this->created)) return $this->created;
+                    if (is_string($this->created)) return strtotime($this->created);
+                    return null;
+                }
+            ],
+            [
+                'class' => AttributeBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_VALIDATE => ['metadata'],
                 ],
-                [
-                    'class' => AttributeBehavior::class,
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['metadata'],
-                        ActiveRecord::EVENT_BEFORE_UPDATE => ['metadata'],
-                    ],
-                    'value' => function () {
-                        return $this->getAttributes(['email', 'hotline', 'phone', 'mst', 'created', 'started']);
-                    }
-                ]
+                'value' => function () {
+                    return $this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map']);
+                }
             ]
-        );
+        ];
     }
 
     /**
@@ -106,6 +101,7 @@ class Shop extends ShopTable
             [['created', 'started'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
+            [['map'], 'string']
         ];
     }
 
@@ -124,6 +120,7 @@ class Shop extends ShopTable
             'mst' => ShopModule::t('shop', 'Mã số thuế'),
             'created' => ShopModule::t('shop', 'Ngày cấp giấy phép'),
             'started' => ShopModule::t('shop', 'Ngày hoạt động'),
+            'map' => ShopModule::t('shop', 'Bản đồ'),
             'created_at' => ShopModule::t('shop', 'Created At'),
             'created_by' => ShopModule::t('shop', 'Created By'),
             'updated_at' => ShopModule::t('shop', 'Updated At'),
@@ -144,7 +141,7 @@ class Shop extends ShopTable
                     'metadata' => $metadata
                 ]);
                 $old_logo = isset($old_metadata['logo']) ? $old_metadata['logo'] : null;
-                if (file_exists($this->pathImage.'/logo/'.$old_logo)) {
+                if (file_exists($this->pathImage . '/logo/' . $old_logo)) {
                     @unlink($this->pathImage . '/logo/' . $old_logo);
                 }
             }

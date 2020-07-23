@@ -1,5 +1,6 @@
 <?php
 
+use modava\tiny\TinyMce;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -112,6 +113,15 @@ if ($model->started != null && is_numeric($model->started)) $model->started = da
                         'format' => 'dd-mm-yyyy',
                         'todayHighlight' => true,
                         'endDate' => '+0d'
+                    ]
+                ]) ?>
+            </div>
+            <div class="col-12">
+                <?= TinyMce::widget([
+                    'model' => $model,
+                    'attribute' => 'map',
+                    'type' => 'content',
+                    'options' => [
                     ]
                 ]) ?>
             </div>
