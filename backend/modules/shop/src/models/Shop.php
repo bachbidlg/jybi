@@ -80,7 +80,7 @@ class Shop extends ShopTable
                     ActiveRecord::EVENT_BEFORE_VALIDATE => ['metadata'],
                 ],
                 'value' => function () {
-                    return $this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map']);
+                    return array_merge($this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map']), ['logo' => $this->dataMetadata('logo')]);
                 }
             ]
         ];
