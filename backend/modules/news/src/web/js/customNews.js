@@ -1,4 +1,4 @@
-function readImage(input, preview, maxWidth = 50) {
+function readImage(input, preview, maxWidth = null) {
     var img_preview,
         image_default = $(input).attr('data-default') || null;
     if (image_default === null) preview.hide();
@@ -10,7 +10,7 @@ function readImage(input, preview, maxWidth = 50) {
     }
     img_preview.attr({
         'src': image_default,
-        'style': 'max-width: ' + maxWidth + 'px'
+        'style': (maxWidth === null ? '' : 'max-width: ' + maxWidth + 'px')
     });
     if (input.files && input.files[0]) {
         var reader = new FileReader();
