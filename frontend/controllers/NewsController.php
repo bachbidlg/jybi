@@ -41,7 +41,9 @@ class NewsController extends MyController
             ]
         ]);
 
-        return $this->render('index', [
+        $view = $category->type == 1 ? 'p-index' : 'index';
+
+        return $this->render($view, [
             'category' => $category,
             'news' => $news,
             'default_language' => $default_language
@@ -65,10 +67,12 @@ class NewsController extends MyController
             ];
         }
 
-        $category = NewsCategory::getById($news->category);
+        $category = $news->categoryHasOne;
         $newsRelate = News::getByAlias($category->alias, 5);
 
-        return $this->render('view', [
+        $view = $category->type == 1 ? 'p-view' : 'view';
+
+        return $this->render($view, [
             'news' => $news,
             'newsRelate' => $newsRelate
         ]);

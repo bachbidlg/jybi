@@ -55,7 +55,7 @@ $default_language = $params['default_language'];
                             'attribute' => 'id',
                             'label' => NewsModule::t('news', 'Name'),
                             'value' => function ($model) use ($default_language) {
-                                $language = $default_language->id;
+                                $language = $default_language;
                                 if (count($model->newsCategoryLanguage) <= 0) return null;
                                 if (!array_key_exists($language, $model->newsCategoryLanguage)) $language = array_keys($model->newsCategoryLanguage)[0];
                                 return $model->newsCategoryLanguage[$language]->name;

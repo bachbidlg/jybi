@@ -305,22 +305,17 @@ $default_language = $this->params['default_language'];
     <section id="partners">
         <div class="container">
             <div class="section-title center">
-                Đối tác An Phú
+                Đối tác ACI
             </div>
             <div class="section-content">
                 <div class="partner-slider owl-carousel owl-theme">
-                    <section id="banner-full">
-                        <div class="banner-slider owl-carousel owl-theme">
-                            <?php foreach ($partners as $item) { ?>
-                                <div class="item">
-                                    <a href="<?= $item->url ?: 'javscript:;' ?>"<?= $item->url != null ? ' target="_blank"' : '' ?>>
-                                        <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
-                                    </a>
-                                </div>
-                            <?php } ?>
+                    <?php foreach ($partners as $item) { ?>
+                        <div class="item">
+                            <a href="<?= $item->url ?: 'javscript:;' ?>"<?= $item->url != null ? ' target="_blank"' : '' ?>>
+                                <img class="img-fluid" src="<?= $item->getImage() ?>" alt="<?= $item->name ?>">
+                            </a>
                         </div>
-                    </section>
-
+                    <?php } ?>
                 </div>
             </div>
         </div>
