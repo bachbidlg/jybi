@@ -10,7 +10,7 @@ use milkyway\language\models\table\LanguageTable;
 /* @var $this yii\web\View */
 /* @var $model milkyway\language\models\Language */
 /* @var $form yii\widgets\ActiveForm */
-$default_language = LanguageTable::getDefaultLanguage();
+$default_language = $this->params['default_language'];
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
 <div class="language-form">
@@ -48,7 +48,7 @@ $default_language = LanguageTable::getDefaultLanguage();
         <div class="col-md-6 col-12">
             <?php if (Yii::$app->controller->action->id == 'create') $model->status = 1; ?>
             <?= $form->field($model, 'status')->checkbox() ?>
-            <?php if ($default_language == null || $default_language->primaryKey === $model->primaryKey) { ?>
+            <?php if ($default_language == null || $default_language === $model->primaryKey) { ?>
                 <?= $form->field($model, 'is_default')->checkbox() ?>
             <?php } ?>
         </div>
