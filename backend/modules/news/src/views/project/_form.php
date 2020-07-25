@@ -128,6 +128,7 @@ $default_language = $this->params['default_language'];
                         <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
                         <img src="<?= $default_image ?>" class="img-fluid img-thumbnail" alt="img">
                     </label>
+                    <?= $form->field($model, 'news_images[0][news_id]')->hiddenInput()->label(false) ?>
                     <?= $form->field($model, 'news_images[0][iptImage]')->fileInput([
                         'id' => 'ipt-image-0',
                         'class' => 'd-none ipt-image',
@@ -192,7 +193,8 @@ $('body').on('change', '#tab-language-content .tab-pane .ipt-name', function(){
         var data_image = (parseInt($(this).closest('.image-content').attr('data-image')) || 0) + 1,
             content_text = $('.image-content-temp').clone().html();
         content_text = content_text.replace(/ipt-image-0/g, 'ipt-image-' + data_image);
-        content_text = content_text.replace(/News\[news_images\]\[0\]/g, 'abc');
+        content_text = content_text.replace(/News\[news_images\]\[0\]/g, 'News[news_images][' + data_image + ']');
+        content_text = content_text.replace(/news_images\-0/g, 'news_images-' + data_image);
         var content = $(content_text).attr('data-image', data_image);
         $('.images-content').append(content);
     }
