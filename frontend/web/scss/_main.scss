@@ -42,7 +42,7 @@
 		p.text-secondary {
 			font-weight: 400;
 			font-size: .875rem;
-			color: #fafafa!important;
+			color: #fafafa !important;
 		}
 	}
 
@@ -706,6 +706,111 @@
 		&:last-child {
 			margin-bottom: 0;
 			padding-bottom: 0;
+		}
+	}
+}
+
+.page-projects {
+	.filters {
+		margin-bottom: 50px;
+		text-align: center;
+
+		.filter-item {
+			color: $white;
+			font-size: 16px;
+			padding: 6px 10px;
+			text-transform: capitalize;
+			border-color: $theme-color transparent;
+			border-style: solid;
+			border-width: 1px;
+			display: inline-block;
+			cursor: pointer;
+			margin: 0 10px;
+			@include prefix((transition: all .3s ease), webkit moz o);
+
+			&.filter-item-active, &:hover {
+				border-color: $theme-color;
+				background-color: $theme-color;
+				color: #2a2a2a;
+			}
+		}
+	}
+
+	.grid {
+		a.caption {
+			display: block;
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+
+			&:hover {
+				.image-wrap {
+					@include prefix((transform: scale(1.25)), webkit moz ms o);
+				}
+
+				.caption-wrap {
+					opacity: 1;
+
+					.title {
+
+					}
+				}
+			}
+		}
+
+		.image-wrap {
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+			@include prefix((transition: all .3s ease), webkit moz o);
+
+			img {
+				width: 100%
+			}
+		}
+
+		.caption-wrap {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			padding: 10px;
+			opacity: 0;
+			z-index: 2;
+			@include prefix((transition: opacity .3s ease), webkit moz o);
+
+			.d-table {
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255,255,255,.7);
+
+				.d-table-cell {
+					vertical-align: middle;
+					text-align: center;
+					padding: 15px 0;
+
+					.title {
+						color: #2a2a2a;
+						font-weight: 600;
+						font-size: 18px;
+					}
+
+					.line {
+						width: 0%;
+					}
+				}
+			}
+
+			&:hover {
+				.line {
+					width: 30%!important;
+					height: 1px;
+					margin: 15px auto;
+					background-color: #2a2a2a;
+					@include prefix((transition: all .3s ease), webkit moz o);
+				}
+			}
 		}
 	}
 }
