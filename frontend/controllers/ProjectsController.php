@@ -14,7 +14,7 @@ use frontend\models\NewsCategory;
 use yii\data\ActiveDataProvider;
 use milkyway\language\models\table\LanguageTable;
 
-class NewsController extends MyController
+class ProjectsController extends MyController
 {
     public function actionIndex($slug = null)
     {
@@ -29,48 +29,43 @@ class NewsController extends MyController
         unset($list_breadcrumbs[$category->id]);
         foreach ($list_breadcrumbs as $breadcrumb) {
             \Yii::$app->view->params['breadcrumbs'][] = [
-                'label' => $breadcrumb->newsCategoryLanguage[$default_language]->name,
-                'url' => ['/news/index', 'slug' => $breadcrumb->slug]
+                'label' => $breadcrumb->projectsCategoryLanguage[$default_language]->name,
+                'url' => ['/project/index', 'slug' => $breadcrumb->slug]
             ];
         }
 
-        $news = new ActiveDataProvider([
-            'query' => News::getQueryByAlias($category->alias),
-            'pagination' => [
-                'defaultPageSize' => 3
-            ]
-        ]);
+        $projects = News::getByAlias($category->alias);
 
         return $this->render('index', [
             'category' => $category,
-            'news' => $news,
+            'projects' => $projects,
             'default_language' => $default_language
         ]);
     }
 
     public function actionView($slug)
     {
-        $news = News::getBySlug($slug);
-        if ($news == null) return $this->redirect(['/site/index']);
+        $project = News::getBySlug($slug);
+        if ($project == null) return $this->redirect(['/site/index']);
         $default_language = $this->default_language;
 
         /* Breadcrumbs */
-        $alias = explode('/', $news->categoryHasOne->alias);
+        $alias = explode('/', $project->categoryHasOne->alias);
         unset($alias[0]);
         $list_breadcrumbs = NewsCategory::getByIds($alias, true);
         foreach ($list_breadcrumbs as $breadcrumb) {
             \Yii::$app->view->params['breadcrumbs'][] = [
                 'label' => $breadcrumb->newsCategoryLanguage[$default_language]->name,
-                'url' => ['/news/index', 'slug' => $breadcrumb->slug]
+                'url' => ['/projects/index', 'slug' => $breadcrumb->slug]
             ];
         }
 
-        $category = $news->categoryHasOne;
-        $newsRelate = News::getByAlias($category->alias, 5);
+        $category = $project->categoryHasOne;
+        $projectsRelate = News::getByAlias($category->alias, 5);
 
         return $this->render('view', [
-            'news' => $news,
-            'newsRelate' => $newsRelate
+            'project' => $project,
+            'projectsRelate' => $projectsRelate
         ]);
     }
 }
