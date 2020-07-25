@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use modava\auth\models\User;
 
 ?>
 <nav class="navbar navbar-expand-xl navbar-dark fixed-top hk-navbar">
@@ -147,7 +148,8 @@ use yii\helpers\Url;
                         <span class="badge badge-success badge-indicator"></span>
                     </div>
                     <div class="media-body">
-                        <span><?= Yii::$app->user->identity->userProfile->fullname ?><i class="zmdi zmdi-chevron-down"></i></span>
+                        <span><?= Yii::$app->user->identity->userProfile->fullname ?><i
+                                    class="zmdi zmdi-chevron-down"></i></span>
                     </div>
                 </div>
             </a>
@@ -177,38 +179,41 @@ use yii\helpers\Url;
             </div>
         </li>
     </ul>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-0">
-            <li class="nav-item">
-                <a href="#" class="nav-link">Marketing</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">Sales</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Help Desk</a>
-            </li>
-            <li class="nav-item<?php if (Yii::$app->controller->module->id == 'calendar') echo ' active'; ?>">
-                <a href="<?= Url::toRoute(['/calendar']); ?>" class="nav-link"><?= Yii::t('backend', 'Calendar'); ?></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Email</a>
-            </li>
-            <li class="nav-item<?php if (Yii::$app->controller->module->id == 'filemanager') echo ' active'; ?>">
-                <a href="<?= Url::toRoute(['/filemanager']); ?>"
-                   class="nav-link"><?= Yii::t('backend', 'File Manager'); ?></a>
-            </li>
-        </ul>
-    </div>
-
+    <?php if (Yii::$app->user->can(User::DEV)) { ?>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-0">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Marketing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">Sales</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Help Desk</a>
+                </li>
+                <li class="nav-item<?php if (Yii::$app->controller->module->id == 'calendar') echo ' active'; ?>">
+                    <a href="<?= Url::toRoute(['/calendar']); ?>"
+                       class="nav-link"><?= Yii::t('backend', 'Calendar'); ?></a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Email</a>
+                </li>
+                <li class="nav-item<?php if (Yii::$app->controller->module->id == 'filemanager') echo ' active'; ?>">
+                    <a href="<?= Url::toRoute(['/filemanager']); ?>"
+                       class="nav-link"><?= Yii::t('backend', 'File Manager'); ?></a>
+                </li>
+            </ul>
+        </div>
+    <?php } ?>
 </nav>
 <form role="search" class="navbar-search">
     <div class="position-relative">
