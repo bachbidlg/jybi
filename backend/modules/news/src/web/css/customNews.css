@@ -24,3 +24,19 @@ li.nav-item.mb-5 {
 .form-group .help-block {
     color: red;
 }
+
+.label-preview {
+    position: relative;
+    cursor: pointer;
+}
+
+.label-preview .btn-delete {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    opacity: .7;
+}
+
+.images-content .image-content:last-child span.btn-delete {
+    display: none;
+}

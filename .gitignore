@@ -60,7 +60,8 @@ index.html
 
 /frontend/runtime
 /frontend/web/assets
-/frontend/web/uploads/
+!/frontend/web/uploads/
+/frontend/web/uploads/*
 /frontend/web/scss/
 /frontend/.htaccess
 

@@ -95,7 +95,7 @@ $default_language = $this->params['default_language'];
         <div class="preview">
             <?php
             $image = null;
-            if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->urlImage . '/' . $model->image;
+            if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->getImage();
             if ($image != null) echo Html::img($image, [
                 'style' => 'max-width: 120px'
             ]) ?>
@@ -104,6 +104,39 @@ $default_language = $this->params['default_language'];
             'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $image
         ]) ?>
+
+        <?php $default_image = Yii::$app->assetManager->publish('@backend/web/dist/img/img-thumb.jpg')[1]; ?>
+        <div class="row images-content">
+            <div class="image-content col-sm-6 col-md-3 col-lg-2 mt-15" data-image="1">
+                <label class="label-preview" for="ipt-image-1">
+                    <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
+                    <img src="<?= $default_image ?>" class="img-fluid img-thumbnail" alt="img">
+                </label>
+                <?= $form->field($model, 'news_images[1][news_id]')->hiddenInput()->label(false) ?>
+                <?= $form->field($model, 'news_images[1][iptImage]')->fileInput([
+                    'id' => 'ipt-image-1',
+                    'class' => 'd-none ipt-image',
+                    'onchange' => 'readImage(this, $(this).closest(".image-content").children(".label-preview"), null)',
+                    'data-default' => $default_image
+                ])->label(false) ?>
+            </div>
+        </div>
+        <div class="d-none">
+            <div class="image-content-temp">
+                <div class="image-content col-sm-6 col-md-3 col-lg-2 mt-15" data-image="0">
+                    <label class="label-preview" for="ipt-image-0">
+                        <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
+                        <img src="<?= $default_image ?>" class="img-fluid img-thumbnail" alt="img">
+                    </label>
+                    <?= $form->field($model, 'news_images[0][iptImage]')->fileInput([
+                        'id' => 'ipt-image-0',
+                        'class' => 'd-none ipt-image',
+                        'onchange' => 'readImage(this, $(this).closest(".image-content").children(".label-preview"), null)',
+                        'data-default' => $default_image
+                    ])->label(false) ?>
+                </div>
+            </div>
+        </div>
 
         <?php if (Yii::$app->controller->action->id == 'create') $model->status = 1; ?>
         <?= $form->field($model, 'status')->checkbox() ?>
@@ -153,6 +186,16 @@ $('body').on('change', '#tab-language-content .tab-pane .ipt-name', function(){
     });
 }).on('click', '#btn-submit-form', function(){
     submit_form = true;
+}).on('change', '.images-content .image-content:last-child .ipt-image', function(){
+    var input = $(this)[0];
+    if (input.files && input.files[0]) {
+        var data_image = (parseInt($(this).closest('.image-content').attr('data-image')) || 0) + 1,
+            content_text = $('.image-content-temp').clone().html();
+        content_text = content_text.replace(/ipt-image-0/g, 'ipt-image-' + data_image);
+        content_text = content_text.replace(/News\[news_images\]\[0\]/g, 'abc');
+        var content = $(content_text).attr('data-image', data_image);
+        $('.images-content').append(content);
+    }
 });
 JS;
 $this->registerJs($script, \yii\web\View::POS_END);

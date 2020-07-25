@@ -97,6 +97,7 @@ class News extends NewsTable
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
             [['news_language'], 'validateNewsLanguage'],
             [['news_images'], 'validateNewsImage'],
+            [['news_images'], 'each', 'rule' => ['file', 'maxSize' => 2 * 1024 * 1024, 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Chỉ chấp nhận định dạng: {extension}']],
             [['iptImage'], 'file', 'extensions' => ['jpg', 'jpeg', 'png'], 'maxSize' => 2 * 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng file: {extensions}'],
         ];
     }
@@ -148,30 +149,33 @@ class News extends NewsTable
     public function saveNewsLanguage()
     {
         if (!$this->hasErrors()) {
-            $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
-            foreach ($this->news_language as $news_language) {
-                $news_language_model = null;
-                if (isset($news_language['news_id']) && isset($news_language['language_id'])) {
-                    $news_language_model = NewsLanguage::find()->where(['news_id' => $news_language['news_id'], 'language_id' => $news_language['language_id']])->one();
+            if (is_array($this->news_language)) {
+                $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
+                foreach ($this->news_language as $news_language) {
+                    $news_language_model = null;
+                    if (isset($news_language['news_id']) && isset($news_language['language_id'])) {
+                        $news_language_model = NewsLanguage::find()->where(['news_id' => $news_language['news_id'], 'language_id' => $news_language['language_id']])->one();
+                    }
+                    if ($news_language_model == null) $news_language_model = new NewsLanguage();
+                    $news_language_model->scenario = NewsLanguage::SCENARIO_UPDATE;
+                    $news_language_model->setAttributes(array_merge($news_language, [
+                        'news_id' => $this->primaryKey
+                    ]));
+                    if (!$news_language_model->save()) {
+                        $transaction->rollBack();
+                        return false;
+                    }
                 }
-                if ($news_language_model == null) $news_language_model = new NewsLanguage();
-                $news_language_model->scenario = NewsLanguage::SCENARIO_UPDATE;
-                $news_language_model->setAttributes(array_merge($news_language, [
-                    'news_id' => $this->primaryKey
-                ]));
-                if (!$news_language_model->save()) {
-                    $transaction->rollBack();
-                    return false;
-                }
+                $transaction->commit();
             }
-            $transaction->commit();
             return true;
         }
+        return false;
     }
 
     public function validateNewsLanguage()
     {
-        if (!$this->hasErrors()) {
+        if (!$this->hasErrors() && is_array($this->news_language)) {
             foreach ($this->news_language as $i => $news_language) {
                 $news_language_model = null;
                 if (isset($news_language['news_id']) && isset($news_language['language_id'])) {
@@ -189,9 +193,36 @@ class News extends NewsTable
         }
     }
 
-    public function validateNewsImage()
+    public function saveNewsImages()
     {
         if (!$this->hasErrors()) {
+            if (is_array($this->news_images)) {
+                $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
+                foreach ($this->news_images as $i => $news_image) {
+                    $model = new NewsImages();
+                    if (isset($news_image['id'])) $model = NewsImages::getById($news_image['id']);
+                    $model->scenario = NewsImages::SCENARIO_UPDATE;
+                    $model->setAttributes(array_merge($news_image, [
+                        'iptImage' => UploadedFile::getInstance($this, "news_images[{$i}][iptImage]"),
+                        'news_id' => $this->primaryKey
+                    ]));
+                    if (!$model->save()) {
+                        var_dump($model->getErrors());
+                        die;
+                        $transaction->rollBack();
+                        return false;
+                    }
+                }
+                $transaction->commit();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function validateNewsImage()
+    {
+        if (!$this->hasErrors() && is_array($this->news_images)) {
             foreach ($this->news_images as $i => $news_images) {
                 $news_images_model = null;
                 if (isset($news_images['id'])) {

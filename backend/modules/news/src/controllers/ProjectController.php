@@ -120,7 +120,7 @@ class ProjectController extends MyController
         $model->setNewsLanguage();
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate() && $model->save() && $model->saveNewsLanguage()) {
+            if ($model->validate() && $model->save() && $model->saveNewsLanguage() && $model->saveNewsImages()) {
                 Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                     'title' => 'Thông báo',
                     'text' => 'Cập nhật thành công',

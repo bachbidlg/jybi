@@ -365,7 +365,6 @@ use modava\auth\models\User;
                         </ul>
                     </li>
                 </ul>
-            <?php } ?>
             <hr class="nav-separator">
             <div class="nav-header">
                 <span>Getting Started</span>
@@ -379,6 +378,7 @@ use modava\auth\models\User;
                     </a>
                 </li>
             </ul>
+            <?php } ?>
         </div>
     </div>
 </nav>

@@ -28,6 +28,9 @@ class m200721_035428_create_table_news_images extends Migration
             ], $tableOptions);
             $this->addForeignKey('news_images-news_id-news-id', 'news_images', 'news_id', 'news', 'id', 'CASCADE', 'CASCADE');
         }
+        if (!is_dir(Yii::getAlias('@frontend/web/uploads'))) {
+            @mkdir(Yii::getAlias('@frontend/web/uploads'));
+        }
     }
 
     /**
