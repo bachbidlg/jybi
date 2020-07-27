@@ -107,7 +107,7 @@ $list_language = LanguageTable::getAll();
                                                 'value' => function ($model) use ($params, $list_language) {
                                                     $language = $params['default_language'] ?: $list_language[array_keys($list_language)[0]]->id;
                                                     return Html::a($model->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->id], [
-                                                        'target' => '_blank',
+//                                                        'target' => '_blank',
                                                         'data-pjax' => 0
                                                     ]);
                                                 }
@@ -124,7 +124,7 @@ $list_language = LanguageTable::getAll();
                                                     ]);
                                                 }
                                             ],
-                                            [
+                                            /*[
                                                 'attribute' => 'image',
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
@@ -133,7 +133,7 @@ $list_language = LanguageTable::getAll();
                                                         'style' => 'max-width: 70px'
                                                     ]);
                                                 }
-                                            ],
+                                            ],*/
                                             [
                                                 'attribute' => 'status',
                                                 'format' => 'raw',

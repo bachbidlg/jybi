@@ -98,7 +98,8 @@ class SliderTable extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
-    public static function getById($id){
+    public static function getById($id)
+    {
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-by-id-' . $id;
         $data = $cache->get($key);
@@ -110,13 +111,14 @@ class SliderTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getByType($type = null, $data_cache = YII2_CACHE)
+    public static function getByType($type = null, $published = false, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-by-type-' . $type;
         $data = $cache->get($key);
         if ($data == false || $data_cache == false) {
             $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
+            if ($published === true) $query->published();
             $data = $query->all();
             $cache->set($key, $data);
         }

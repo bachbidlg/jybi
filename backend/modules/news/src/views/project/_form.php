@@ -92,7 +92,7 @@ $default_language = $this->params['default_language'];
         </div>
     <?php } ?>
 
-        <div class="preview">
+        <div class="preview mt-3">
             <?php
             $image = null;
             if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->getImage();

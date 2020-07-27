@@ -106,7 +106,7 @@ $list_language = LanguageTable::getAll();
                                             'value' => function ($model) use ($params, $list_language) {
                                                 $language = $params['default_language'] ?: $list_language[array_keys($list_language)[0]]->id;
                                                 return Html::a($model->newsLanguage[$language]->name, ['view', 'id' => $model->id], [
-                                                    'target' => '_blank',
+//                                                    'target' => '_blank',
                                                     'data-pjax' => 0
                                                 ]);
                                             }
