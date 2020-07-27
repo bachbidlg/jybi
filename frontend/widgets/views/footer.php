@@ -76,27 +76,25 @@ $shop = $this->params['shop'];
                 <?php } ?>
                 <?php
                 if (count($menu_footer) > 0) {
-                    foreach ($menu_footer as $menu) {
-                        ?>
-                        <div class="col-lg-3">
-                            <div class="ft-column ft-nav">
-                                <div class="ft-col-title"><?= $menu->newsCategoryLanguage[$default_language]->name ?></div>
-                                <?php if (count($menu->categoryHasMany) > 0) { ?>
-                                    <div class="ft-col-content">
-                                        <ul>
-                                            <?php foreach ($menu->categoryHasMany as $sub_menu) { ?>
-                                                <li>
-                                                    <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]) ?>"
-                                                       title="<?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $sub_menu->newsCategoryLanguage[$default_language]->name ?></a>
-                                                </li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                <?php } ?>
+                    ?>
+                    <div class="col-lg-3">
+                        <div class="ft-column ft-nav">
+                            <div class="ft-col-title"><?= Yii::t('frontend', 'Hỗ trợ khách hàng') ?></div>
+                            <div class="ft-col-content">
+                                <ul>
+                                    <?php foreach ($menu_footer as $menu) { ?>
+                                        <li>
+                                            <a href="<?= Url::toRoute(['/news/index', 'slug' => $menu->slug]) ?>"
+                                               title="<?= $menu->newsCategoryLanguage[$default_language]->name ?>"><?= $menu->newsCategoryLanguage[$default_language]->name ?></a>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
                             </div>
                         </div>
-                    <?php }
-                } ?>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -104,7 +102,8 @@ $shop = $this->params['shop'];
         <div class="container">
             <div class="row">
                 <div class="copyright">
-                    &copy; 2020 <?= $shop != null ? $shop->shopLanguage[$default_language]->getMetadata('slogan') : '' ?>
+                    &copy;
+                    2020 <?= $shop != null ? $shop->shopLanguage[$default_language]->getMetadata('slogan') : '' ?>
                 </div>
                 <div class="social">
                     <a href="#" title="" target="_blank"><i class="fab fa-facebook-f"></i></a>
