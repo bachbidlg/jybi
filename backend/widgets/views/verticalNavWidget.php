@@ -74,7 +74,9 @@ use modava\auth\models\User;
                 <?php if (Yii::$app->user->can(User::DEV) ||
                     Yii::$app->user->can('slider') ||
                     Yii::$app->user->can('sliderSlider') ||
-                    Yii::$app->user->can('sliderSliderIndex')) { ?>
+                    Yii::$app->user->can('sliderSliderIndex') ||
+                    Yii::$app->user->can('sliderPartner') ||
+                    Yii::$app->user->can('sliderPartnerIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'slider') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/slider']); ?>">
                             <i class="ion ion-ios-images"></i>

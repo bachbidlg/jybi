@@ -41,7 +41,7 @@ class SliderSearch extends Slider
      */
     public function search($params)
     {
-        $query = Slider::find();
+        $query = Slider::find()->where(['type' => $this->type]);
 
         // add conditions that should always apply here
 
@@ -61,7 +61,6 @@ class SliderSearch extends Slider
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'type' => $this->type,
             'sort' => $this->sort,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,

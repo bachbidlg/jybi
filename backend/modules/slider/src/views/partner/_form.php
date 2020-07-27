@@ -31,7 +31,7 @@ use milkyway\slider\models\table\SliderTable;
             'style' => 'max-width: 120px'
         ]) ?>
     </div>
-    <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (1300x600)</div>
+    <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (170x100)</div>
     <?= $form->field($model, 'iptImage')->fileInput([
         'onchange' => "readImage(this, $('.preview'), 120)"
     ]) ?>

@@ -115,6 +115,7 @@ class Shop extends ShopTable
             'metadata' => ShopModule::t('shop', 'Metadata'),
             'iptLogo' => ShopModule::t('shop', 'Logo'),
             'logo' => ShopModule::t('shop', 'Logo'),
+            'iptLogo' => ShopModule::t('shop', 'Logo'),
             'email' => ShopModule::t('shop', 'Email'),
             'hotline' => ShopModule::t('shop', 'Hotline'),
             'mst' => ShopModule::t('shop', 'Mã số thuế'),

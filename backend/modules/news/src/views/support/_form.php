@@ -100,6 +100,7 @@ $default_language = $this->params['default_language'];
                 'style' => 'max-width: 120px'
             ]) ?>
         </div>
+        <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (770x450)</div>
         <?= $form->field($model, 'iptImage')->fileInput([
             'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $image

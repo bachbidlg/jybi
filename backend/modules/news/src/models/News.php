@@ -250,6 +250,7 @@ class News extends NewsTable
             'slug' => NewsModule::t('news', 'Slug'),
             'category' => NewsModule::t('news', 'Category'),
             'image' => NewsModule::t('news', 'Image'),
+            'iptImage' => NewsModule::t('news', 'Image'),
             'status' => NewsModule::t('news', 'Status'),
             'hot' => NewsModule::t('news', 'Nổi bật'),
             'sort' => NewsModule::t('news', 'Sort'),

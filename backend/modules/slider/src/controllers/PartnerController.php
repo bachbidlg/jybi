@@ -17,7 +17,7 @@ use yii\web\Response;
 /**
  * SliderController implements the CRUD actions for Slider model.
  */
-class SliderController extends MyController
+class PartnerController extends MyController
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class SliderController extends MyController
     public function actionIndex()
     {
         $searchModel = new SliderSearch([
-            'type' => SliderTable::TYPE_SLIDER
+            'type' => SliderTable::TYPE_PARTNER
         ]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -73,7 +73,7 @@ class SliderController extends MyController
     public function actionCreate()
     {
         $model = new Slider([
-            'type' => SliderTable::TYPE_SLIDER
+            'type' => SliderTable::TYPE_PARTNER
         ]);
 
         if ($model->load(Yii::$app->request->post())) {

@@ -81,6 +81,7 @@ class Slider extends SliderTable
             'id' => SliderModule::t('slider', 'ID'),
             'name' => SliderModule::t('slider', 'Name'),
             'image' => SliderModule::t('slider', 'Image'),
+            'iptImage' => SliderModule::t('slider', 'Image'),
             'url' => SliderModule::t('slider', 'Url'),
             'type' => SliderModule::t('slider', 'Type'),
             'status' => SliderModule::t('slider', 'Status'),

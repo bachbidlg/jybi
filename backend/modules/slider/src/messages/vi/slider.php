@@ -8,6 +8,7 @@ return [
     'Last' => 'Cuối',
     'Previous' => 'Trước',
     'Next' => 'Tiếp',
+    'Image' => 'Hình ảnh',
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
     'Actions' => 'Hành động'
