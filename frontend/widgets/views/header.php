@@ -13,7 +13,7 @@
 /* @var $shop frontend\models\Shop */
 
 use yii\helpers\Url;
-use milkyway\language\models\table\LanguageTable;
+use frontend\models\NewsCategory;
 
 $default_language = $this->params['default_language'];
 $shop = $this->params['shop'];
@@ -41,16 +41,22 @@ $shop = $this->params['shop'];
                     <?php
                     if (count($menu) > 0) {
                         foreach ($menu as $data_menu) {
-                            $has_children = count($data_menu->categoryHasMany) > 0;
+                            $has_children = $data_menu->type != NewsCategory::TYPE_PROJECT && count($data_menu->categoryHasMany) > 0;
+                            if ($data_menu->type == NewsCategory::TYPE_PROJECT) $url = Url::toRoute(['/projects/index', 'slug' => $data_menu->slug]);
+                            else $url = Url::toRoute(['/news/index', 'slug' => $data_menu->slug]);
                             ?>
                             <li<?= $has_children ? ' class="menu-item-has-children"' : '' ?>>
-                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $data_menu->slug]) ?>"
+                                <a href="<?= $url ?>"
                                    title="<?= $data_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $data_menu->newsCategoryLanguage[$default_language]->name ?><?= $has_children ? ' <i class="fas fa-caret-down"></i>' : '' ?></a>
                                 <?php if ($has_children) { ?>
                                     <ul class="sub-menu">
-                                        <?php foreach ($data_menu->categoryHasMany as $sub_menu) { ?>
+                                        <?php
+                                        foreach ($data_menu->categoryHasMany as $sub_menu) {
+                                            if ($sub_menu->type == NewsCategory::TYPE_PROJECT) $sub_url = Url::toRoute(['/projects/index', 'slug' => $sub_menu->slug]);
+                                            else $sub_url = Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]);
+                                            ?>
                                             <li>
-                                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]) ?>"
+                                                <a href="<?= $sub_url ?>"
                                                    title="<?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $sub_menu->newsCategoryLanguage[$default_language]->name ?></a>
                                             </li>
                                         <?php } ?>
@@ -101,10 +107,12 @@ $shop = $this->params['shop'];
         <?php
         if (count($menu) > 0) {
             foreach ($menu as $data_menu) {
-                $has_children = count($data_menu->categoryHasMany) > 0;
+                $has_children = $data_menu->type != NewsCategory::TYPE_PROJECT && count($data_menu->categoryHasMany) > 0;
                 if (!$has_children) {
+                    if ($data_menu->type == NewsCategory::TYPE_PROJECT) $url = Url::toRoute(['/projects/index', 'slug' => $data_menu->slug]);
+                    else $url = Url::toRoute(['/news/index', 'slug' => $data_menu->slug]);
                     ?>
-                    <a class="menu-item" href="<?= Url::toRoute(['/news/index', 'slug' => $data_menu->slug]) ?>">
+                    <a class="menu-item" href="<?= $url ?>">
                         <i class="fas fa-info-circle"></i>
                         <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?>></span>
                         <i class="fa fa-circle"></i>
@@ -118,8 +126,12 @@ $shop = $this->params['shop'];
                         <label class="menu-item" for="toggle-<?= $data_menu->id ?>"><i
                                     class="<?= $data_menu->icon ?: 'fas fa-archive' ?>"></i><span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span></label>
                         <div class="submenu-wrapper">
-                            <?php foreach ($data_menu->categoryHasMany as $sub_menu) { ?>
-                                <a href="<?= Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]) ?>"
+                            <?php
+                            foreach ($data_menu->categoryHasMany as $sub_menu) {
+                                if ($sub_menu->type == NewsCategory::TYPE_PROJECT) $sub_url = Url::toRoute(['/projects/index', 'slug' => $sub_menu->slug]);
+                                else $sub_url = Url::toRoute(['/news/index', 'slug' => $sub_menu->slug]);
+                                ?>
+                                <a href="<?= $sub_url ?>"
                                    class="menu-item">
                                     <i class="fa fa-angle-right"></i>
                                     <?= $sub_menu->newsCategoryLanguage[$default_language]->name ?>

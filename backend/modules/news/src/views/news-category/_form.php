@@ -87,7 +87,7 @@ $default_language = $this->params['default_language'];
         </div>
     <?php } ?>
 
-        <div class="preview">
+        <?php /*<div class="preview">
             <?php
             $image = null;
             if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->urlImage . '/' . $model->image;
@@ -98,7 +98,7 @@ $default_language = $this->params['default_language'];
         <?= $form->field($model, 'iptImage')->fileInput([
             'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $image
-        ]) ?>
+        ]) ?>*/ ?>
 
         <?php if (Yii::$app->controller->action->id == 'create') $model->status = 1; ?>
         <?= $form->field($model, 'status')->checkbox() ?>

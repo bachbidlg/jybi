@@ -21,8 +21,10 @@ return [
         ['pattern' => 'lien-he', 'route' => 'contact/index', 'suffix' => '.html'],
 
         /* demo */
-        ['pattern' => '<slug>', 'route' => 'news/view', 'suffix' => '.html'],
-        ['pattern' => '<slug>', 'route' => 'news/index', 'suffix' => ''],
+        ['pattern' => 'bai-viet/<slug>', 'route' => 'news/view', 'suffix' => '.html'],
+        ['pattern' => 'bai-viet/<slug>', 'route' => 'news/index', 'suffix' => ''],
+        ['pattern' => 'du-an/<slug>', 'route' => 'projects/view', 'suffix' => '.html'],
+        ['pattern' => 'du-an/<slug>', 'route' => 'projects/index', 'suffix' => ''],
         /* demo */
 
         /*['pattern' => 'bat-dong-san-ky-gui/trang-<page:\d+>', 'route' => 'ky-gui/index', 'suffix' => '.html'],

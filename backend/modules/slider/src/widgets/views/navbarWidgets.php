@@ -17,4 +17,15 @@ use modava\auth\models\User;
             </a>
         </li>
     <?php } ?>
+    <?php if (Yii::$app->user->can(User::DEV) ||
+        Yii::$app->user->can('slider') ||
+        Yii::$app->user->can('sliderPartner') ||
+        Yii::$app->user->can('sliderPartnerIndex')) { ?>
+        <li class="nav-item mb-5">
+            <a class="nav-link link-icon-left<?php if (Yii::$app->controller->id == 'partner') echo ' active' ?>"
+               href="<?= Url::toRoute(['/slider/partner']); ?>">
+                <i class="ion ion-ios-locate"></i><?= SliderModule::t('slider', 'Partner'); ?>
+            </a>
+        </li>
+    <?php } ?>
 </ul>

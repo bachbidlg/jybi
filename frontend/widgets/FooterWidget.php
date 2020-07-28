@@ -21,7 +21,7 @@ class FooterWidget extends Widget
 
     public function run()
     {
-        $footer_info = Freetype::getOneByType(Freetype::TYPE_FOOTER_INFO);
+        $footer_info = Freetype::getOneByType(Freetype::TYPE_FOOTER_INFO, true);
         $menu_footer = NewsCategory::getMenuFooter();
         return $this->render('footer', [
             'footer_info' => $footer_info,

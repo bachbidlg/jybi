@@ -1,22 +1,19 @@
 <?php
 
-use milkyway\news\NewsModule;
-use milkyway\news\widgets\NavbarWidgets;
+use yii\helpers\Url;
+use milkyway\slider\SliderModule;
+use milkyway\slider\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
-use milkyway\language\models\table\LanguageTable;
-use yii\helpers\Url;
-use milkyway\news\models\table\NewsTable;
+use milkyway\slider\models\table\SliderTable;
 /* @var $this yii\web\View */
-/* @var $searchModel milkyway\news\models\search\NewsSearch */
+/* @var $searchModel milkyway\slider\models\search\SliderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = NewsModule::t('news', 'News');
+$this->title = SliderModule::t('slider', 'Sliders');
 $this->params['breadcrumbs'][] = $this->title;
-$params = $this->params;
-$list_language = LanguageTable::getAll();
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
@@ -28,8 +25,8 @@ $list_language = LanguageTable::getAll();
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= NewsModule::t('news', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= NewsModule::t('news', 'Create'); ?></a>
+           title="<?= SliderModule::t('slider', 'Create'); ?>">
+            <i class="fa fa-plus"></i> <?= SliderModule::t('slider', 'Create'); ?></a>
     </div>
 
     <!-- Row -->
@@ -65,10 +62,10 @@ $list_language = LanguageTable::getAll();
                                         </div>
                                     ',
                                     'pager' => [
-                                        'firstPageLabel' => NewsModule::t('news', 'First'),
-                                        'lastPageLabel' => NewsModule::t('news', 'Last'),
-                                        'prevPageLabel' => NewsModule::t('news', 'Previous'),
-                                        'nextPageLabel' => NewsModule::t('news', 'Next'),
+                                        'firstPageLabel' => SliderModule::t('slider', 'First'),
+                                        'lastPageLabel' => SliderModule::t('slider', 'Last'),
+                                        'prevPageLabel' => SliderModule::t('slider', 'Previous'),
+                                        'nextPageLabel' => SliderModule::t('slider', 'Next'),
                                         'maxButtonCount' => 5,
 
                                         'options' => [
@@ -100,59 +97,40 @@ $list_language = LanguageTable::getAll();
                                                 'class' => 'd-none',
                                             ],
                                         ],
-                                        [
-                                            'attribute' => 'name',
-                                            'format' => 'raw',
-                                            'value' => function ($model) use ($params, $list_language) {
-                                                $language = $params['default_language'] ?: $list_language[array_keys($list_language)[0]]->id;
-                                                return Html::a($model->newsLanguage[$language]->name, ['view', 'id' => $model->id], [
-//                                                    'target' => '_blank',
-                                                    'data-pjax' => 0
-                                                ]);
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'category',
-                                            'format' => 'raw',
-                                            'value' => function ($model) use ($params) {
-                                                if ($model->categoryHasOne == null) return null;
-                                                $language = $params['default_language'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
-                                                return Html::a($model->categoryHasOne->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->category], [
-                                                    'target' => '_blank',
-                                                    'data-pjax' => 0
-                                                ]);
-                                            }
-                                        ],
+                                    
+										'name',
                                         [
                                             'attribute' => 'image',
                                             'format' => 'raw',
                                             'value' => function ($model) {
                                                 if ($model->image == null || !file_exists($model->pathImage . '/' . $model->image)) return null;
                                                 return Html::img($model->urlImage . '/' . $model->image, [
-                                                    'style' => 'max-width: 70px'
+                                                    'style' => 'max-width: 150px'
                                                 ]);
                                             }
                                         ],
+                                        'url',
                                         [
-                                            'attribute' => 'status',
-                                            'format' => 'raw',
+                                            'attribute' => 'type',
                                             'value' => function ($model) {
-                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
+                                                if (!array_key_exists($model->type, SliderTable::TYPE)) return null;
+                                                return SliderTable::TYPE[$model->type];
                                             }
                                         ],
-                                        [
-                                            'attribute' => 'hot',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->hot ? 'checked' : '') . ' data-field="hot" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
-                                            }
-                                        ],
+										'sort',
                                         [
                                             'attribute' => 'created_by',
                                             'value' => 'userCreated.userProfile.fullname',
                                             'headerOptions' => [
                                                 'width' => 150,
                                             ],
+                                        ],
+                                        [
+                                            'attribute' => 'status',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . SliderTable::STATUS_PUBLISHED . '" data-unchecked="' . SliderTable::STATUS_DISABLED . '">';
+                                            }
                                         ],
                                         [
                                             'attribute' => 'created_at',
@@ -163,22 +141,22 @@ $list_language = LanguageTable::getAll();
                                         ],
                                         [
                                             'class' => 'yii\grid\ActionColumn',
-                                            'header' => NewsModule::t('news', 'Actions'),
+                                            'header' => SliderModule::t('slider', 'Actions'),
                                             'template' => '{update} {delete}',
                                             'buttons' => [
                                                 'update' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                                        'title' => NewsModule::t('news', 'Update'),
-                                                        'alia-label' => NewsModule::t('news', 'Update'),
+                                                        'title' => SliderModule::t('slider', 'Update'),
+                                                        'alia-label' => SliderModule::t('slider', 'Update'),
                                                         'data-pjax' => 0,
                                                         'class' => 'btn btn-info btn-xs'
                                                     ]);
                                                 },
                                                 'delete' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
-                                                        'title' => NewsModule::t('news', 'Delete'),
+                                                        'title' => SliderModule::t('slider', 'Delete'),
                                                         'class' => 'btn btn-danger btn-xs btn-del',
-                                                        'data-title' => NewsModule::t('news', 'Delete?'),
+                                                        'data-title' => SliderModule::t('slider', 'Delete?'),
                                                         'data-pjax' => 0,
                                                         'data-url' => $url,
                                                         'btn-success-class' => 'success-delete',

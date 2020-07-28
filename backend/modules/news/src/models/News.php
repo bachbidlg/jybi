@@ -199,16 +199,16 @@ class News extends NewsTable
             if (is_array($this->news_images)) {
                 $transaction = Yii::$app->db->beginTransaction(Transaction::SERIALIZABLE);
                 foreach ($this->news_images as $i => $news_image) {
+                    $data_image = UploadedFile::getInstance($this, "news_images[{$i}][iptImage]");
+                    if ($data_image == null) continue;
                     $model = new NewsImages();
                     if (isset($news_image['id'])) $model = NewsImages::getById($news_image['id']);
                     $model->scenario = NewsImages::SCENARIO_UPDATE;
                     $model->setAttributes(array_merge($news_image, [
-                        'iptImage' => UploadedFile::getInstance($this, "news_images[{$i}][iptImage]"),
+                        'iptImage' => $data_image,
                         'news_id' => $this->primaryKey
                     ]));
                     if (!$model->save()) {
-                        var_dump($model->getErrors());
-                        die;
                         $transaction->rollBack();
                         return false;
                     }
@@ -250,6 +250,7 @@ class News extends NewsTable
             'slug' => NewsModule::t('news', 'Slug'),
             'category' => NewsModule::t('news', 'Category'),
             'image' => NewsModule::t('news', 'Image'),
+            'iptImage' => NewsModule::t('news', 'Image'),
             'status' => NewsModule::t('news', 'Status'),
             'hot' => NewsModule::t('news', 'Nổi bật'),
             'sort' => NewsModule::t('news', 'Sort'),

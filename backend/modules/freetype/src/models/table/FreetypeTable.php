@@ -112,13 +112,14 @@ class FreetypeTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getOneByType($type = self::TYPE_FREETYPE, $data_cache = YII2_CACHE)
+    public static function getOneByType($type = self::TYPE_FREETYPE, $published = false, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-freetype-get-one-by-type-' . $type;
         $data = $cache->get($key);
         if ($data == false || $data_cache === false) {
-            $query = self::find()->where([self::tableName() . '.type' => $type])->published()->sort();
+            $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
+            if ($published === true) $query->published();
             $data = $query->one();
             $cache->set($key, $data);
         }

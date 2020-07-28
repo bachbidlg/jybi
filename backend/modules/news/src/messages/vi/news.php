@@ -12,6 +12,7 @@ return [
     'Created At' => 'Ngày tạo',
     'Actions' => 'Hành động',
     'News' => 'Tin tức',
+    'Image' => 'Ảnh đại diện',
     'News Category' => 'Danh mục tin tức',
     'News Categories' => 'Danh mục tin tức',
     'Projects' => 'Dự án',

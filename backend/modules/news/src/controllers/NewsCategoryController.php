@@ -232,11 +232,12 @@ class NewsCategoryController extends MyController
             ];
             try {
                 $model->setAttribute($field, $val);
-                if ($model->validate() && $model->save()) return [
-                    'code' => 200,
-                    'msg' => NewsModule::t('news', 'Cập nhật thành công')
-                ];
-                else {
+                if ($model->validate() && $model->save()) {
+                    return [
+                        'code' => 200,
+                        'msg' => NewsModule::t('news', 'Cập nhật thành công')
+                    ];
+                } else {
                     $error = '';
                     foreach ($model->getErrors() as $err) {
                         $error .= $err[0] . '<br/>';

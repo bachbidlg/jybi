@@ -74,7 +74,7 @@ $default_language = $params['default_language'];
                                 ]);
                             }
                         ],
-                        [
+                        /*[
                             'attribute' => 'image',
                             'format' => 'raw',
                             'value' => function ($model) {
@@ -83,7 +83,7 @@ $default_language = $params['default_language'];
                                     'style' => 'max-width: 70px'
                                 ]);
                             }
-                        ],
+                        ],*/
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {

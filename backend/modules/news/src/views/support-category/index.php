@@ -107,7 +107,7 @@ $list_language = LanguageTable::getAll();
                                                 'value' => function ($model) use ($params, $list_language) {
                                                     $language = $params['default_language'] ?: $list_language[array_keys($list_language)[0]]->id;
                                                     return Html::a($model->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->id], [
-                                                        'target' => '_blank',
+//                                                        'target' => '_blank',
                                                         'data-pjax' => 0
                                                     ]);
                                                 }
@@ -124,7 +124,7 @@ $list_language = LanguageTable::getAll();
                                                     ]);
                                                 }
                                             ],
-                                            [
+                                            /*[
                                                 'attribute' => 'image',
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
@@ -133,7 +133,7 @@ $list_language = LanguageTable::getAll();
                                                         'style' => 'max-width: 70px'
                                                     ]);
                                                 }
-                                            ],
+                                            ],*/
                                             [
                                                 'attribute' => 'status',
                                                 'format' => 'raw',
@@ -148,13 +148,13 @@ $list_language = LanguageTable::getAll();
                                                     return '<input type="checkbox" class="ipt-checkbox" ' . ($model->menu_main ? 'checked' : '') . ' data-field="menu_main" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsCategoryTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsCategoryTable::STATUS_DISABLED . '">';
                                                 }
                                             ],
-                                            [
+                                            /*[
                                                 'attribute' => 'menu_footer',
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
                                                     return '<input type="checkbox" class="ipt-checkbox" ' . ($model->menu_footer ? 'checked' : '') . ' data-field="menu_footer" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsCategoryTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsCategoryTable::STATUS_DISABLED . '">';
                                                 }
-                                            ],
+                                            ],*/
                                             [
                                                 'attribute' => 'created_by',
                                                 'value' => 'userCreated.userProfile.fullname',
