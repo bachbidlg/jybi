@@ -149,14 +149,14 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getByType($type, $published = false)
+    public static function getByType($type, $published = false, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-category-get-by-type-';
         if (is_array($type)) $key .= implode('-', $type);
         else $key .= $type;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find();
             if (is_array($type)) $query->where(['IN', self::tableName() . '.type', $type]);
             else $query->where([self::tableName() . '.type' => $type]);
