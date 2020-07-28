@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel milkyway\freetype\models\search\FreetypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = FreetypeModule::t('freetype', 'Freetypes');
+$this->title = FreetypeModule::t('freetype', 'Freetype');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>

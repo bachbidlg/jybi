@@ -12,7 +12,7 @@ use milkyway\slider\models\table\SliderTable;
 /* @var $searchModel milkyway\slider\models\search\SliderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = SliderModule::t('slider', 'Sliders');
+$this->title = SliderModule::t('slider', 'Slider');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
