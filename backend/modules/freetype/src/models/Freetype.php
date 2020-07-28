@@ -82,6 +82,7 @@ class Freetype extends FreetypeTable
             'image' => FreetypeModule::t('freetype', 'Image'),
             'status' => FreetypeModule::t('freetype', 'Status'),
             'sort' => FreetypeModule::t('freetype', 'Sort'),
+            'type' => FreetypeModule::t('freetype', 'Type'),
             'created_at' => FreetypeModule::t('freetype', 'Created At'),
             'created_by' => FreetypeModule::t('freetype', 'Created By'),
             'updated_at' => FreetypeModule::t('freetype', 'Updated At'),

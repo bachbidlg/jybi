@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h4 class="hk-pg-title"><span class="pg-title-icon"><span
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
-        <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+        <a class="btn btn-sm btn-primary" href="<?= \yii\helpers\Url::to(['create']); ?>"
            title="<?= FreetypeModule::t('freetype', 'Create'); ?>">
             <i class="fa fa-plus"></i> <?= FreetypeModule::t('freetype', 'Create'); ?></a>
     </div>

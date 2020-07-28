@@ -11,5 +11,13 @@ return [
     'Image' => 'Hình ảnh',
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
-    'Actions' => 'Hành động'
+    'Created By' => 'Người tạo',
+    'Updated At' => 'Thời gian cập nhật',
+    'Updated By' => 'Người cập nhật',
+    'Actions' => 'Hành động',
+    'Partner' => 'Đối tác',
+    'Name' => 'Tiêu đề',
+    'Url' => 'Link liên kết',
+    'Sort' => 'Thứ tự',
+    'Type' => 'Loại',
 ];

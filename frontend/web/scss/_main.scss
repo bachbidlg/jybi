@@ -825,7 +825,7 @@
 
 	.contact-info {
 		.info-title {
-			color: #676767;
+			color: $white;
 			font-weight: 700;
 			margin: 0;
 			text-transform: uppercase;
@@ -835,6 +835,7 @@
 			margin-top: 20px;
 
 			li {
+				color: $white;
 				margin-bottom: 15px;
 
 				i {

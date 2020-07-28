@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = SliderModule::t('slider', 'Update');
         <h4 class="hk-pg-title"><span class="pg-title-icon"><span
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
-        <a class="btn btn-outline-light" href="<?= Url::to(['create']); ?>"
+        <a class="btn btn-sm btn-primary" href="<?= Url::to(['create']); ?>"
            title="<?= SliderModule::t('slider', 'Create'); ?>">
             <i class="fa fa-plus"></i> <?= SliderModule::t('slider', 'Create'); ?></a>
     </div>

@@ -29,12 +29,12 @@ $default_language = $params['default_language'];
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <p>
-            <a class="btn btn-outline-light" href="<?= Url::to(['create']); ?>"
+            <a class="btn btn-sm btn-outline-light" href="<?= Url::to(['create']); ?>"
                title="<?= NewsModule::t('news', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= NewsModule::t('news', 'Create'); ?></a>
-            <?= Html::a(NewsModule::t('news', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(NewsModule::t('news', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
             <?= Html::a(NewsModule::t('news', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-sm btn-danger',
                 'data' => [
                     'confirm' => NewsModule::t('news', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
