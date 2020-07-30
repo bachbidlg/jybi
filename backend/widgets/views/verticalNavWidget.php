@@ -118,6 +118,15 @@ use modava\auth\models\User;
                     </li>
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('icons')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'icons') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/icons']); ?>">
+                            <i class="icon-layers"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Icons'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
                     Yii::$app->user->can('authUser') ||
                     Yii::$app->user->can('authUserIndex')) { ?>
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'auth') echo ' active'; ?>">
