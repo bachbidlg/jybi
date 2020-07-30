@@ -37,7 +37,7 @@ $shop = $this->params['shop'];
                             <?php } ?>
                             <?php if ($shop->dataMetadata('email') != null) { ?>
                                 <li>
-                                    <i class="fas fa-envelope-open"></i> $shop->dataMetadata('email')
+                                    <i class="fas fa-envelope-open"></i> <?= $shop->dataMetadata('email') ?>
                                 </li>
                             <?php } ?>
                             <li>

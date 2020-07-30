@@ -13,4 +13,6 @@ return [
     'Actions' => 'Hành động',
     'Contact' => 'Liên hệ',
     'Contacts' => 'Liên hệ',
+    'Subject' => 'Tiêu đề',
+    'Message' => 'Nội dung liên hệ',
 ];

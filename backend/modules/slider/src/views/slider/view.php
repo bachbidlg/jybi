@@ -12,7 +12,7 @@ use milkyway\slider\models\table\SliderTable;
 /* @var $model milkyway\slider\models\Slider */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => SliderModule::t('slider', 'Sliders'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => SliderModule::t('slider', 'Slider'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

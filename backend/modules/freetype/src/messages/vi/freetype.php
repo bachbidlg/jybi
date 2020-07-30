@@ -10,5 +10,13 @@ return [
     'Next' => 'Tiếp',
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
-    'Actions' => 'Hành động'
+    'Created By' => 'Người tạo',
+    'Updated At' => 'Thời gian cập nhật',
+    'Updated By' => 'Người cập nhật',
+    'Actions' => 'Hành động',
+    'Freetype' => 'Tự soạn thảo',
+    'Image' => 'Hình ảnh',
+    'Sort' => 'Thứ tự',
+    'Type' => 'Loại',
+    'Name' => 'Tiêu đề',
 ];

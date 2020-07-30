@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel milkyway\contact\models\search\ContactSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = ContactModule::t('contact', 'Contacts');
+$this->title = ContactModule::t('contact', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>

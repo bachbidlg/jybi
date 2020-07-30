@@ -67,7 +67,7 @@ use modava\auth\models\User;
                     <li class="nav-item<?php if (Yii::$app->controller->module->id == 'contact') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/contact']); ?>">
                             <i class="ion ion-ios-chatbubbles"></i>
-                            <span class="nav-link-text"><?= Yii::t('backend', 'Contacts'); ?></span>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Contact'); ?></span>
                         </a>
                     </li>
                 <?php } ?>

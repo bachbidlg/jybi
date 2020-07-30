@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <p>
 
             <?= Html::a(ContactModule::t('contact', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-sm btn-danger',
                 'data' => [
                     'confirm' => ContactModule::t('contact', 'Are you sure you want to delete this item?'),
                     'method' => 'post',

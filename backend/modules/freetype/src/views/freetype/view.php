@@ -12,7 +12,7 @@ use milkyway\freetype\models\table\FreetypeTable;
 /* @var $model milkyway\freetype\models\Freetype */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => FreetypeModule::t('freetype', 'Freetypes'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => FreetypeModule::t('freetype', 'Freetype'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

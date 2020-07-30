@@ -263,5 +263,5 @@ return [
     'Calendar' => 'Lịch biểu',
     'News' => 'Bài viết',
     'Freetype' => 'Tự soạn thảo',
-
+    'Website' => 'Thông tin website'
 ];

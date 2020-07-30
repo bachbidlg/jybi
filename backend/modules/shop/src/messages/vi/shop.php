@@ -10,5 +10,13 @@ return [
     'Next' => 'Tiếp',
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
-    'Actions' => 'Hành động'
+    'Created By' => 'Người tạo',
+    'Updated At' => 'Thời gian cập nhật',
+    'Updated By' => 'Người cập nhật',
+    'Actions' => 'Hành động',
+    'Name' => 'Tên công ty',
+    'Shop' => 'Thông tin website',
+    'Description' => 'Mô tả',
+    'Address' => 'Địa chỉ',
+    'Phone' => 'Số điện thoại',
 ];

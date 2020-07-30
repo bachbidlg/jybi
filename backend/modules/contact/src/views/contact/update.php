@@ -9,7 +9,7 @@ use milkyway\contact\ContactModule;
 /* @var $model milkyway\contact\models\Contact */
 
 $this->title = ContactModule::t('contact', 'Update : {name}', [
-    'name' => $model->id,
+    'name' => $model->full_name,
 ]);
 $this->params['breadcrumbs'][] = ['label' => ContactModule::t('contact', 'Contacts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];

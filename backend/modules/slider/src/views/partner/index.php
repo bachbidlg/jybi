@@ -12,7 +12,7 @@ use milkyway\slider\models\table\SliderTable;
 /* @var $searchModel milkyway\slider\models\search\SliderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = SliderModule::t('slider', 'Sliders');
+$this->title = SliderModule::t('slider', 'Partner');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h4 class="hk-pg-title"><span class="pg-title-icon"><span
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
-        <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+        <a class="btn btn-sm btn-primary" href="<?= \yii\helpers\Url::to(['create']); ?>"
            title="<?= SliderModule::t('slider', 'Create'); ?>">
             <i class="fa fa-plus"></i> <?= SliderModule::t('slider', 'Create'); ?></a>
     </div>

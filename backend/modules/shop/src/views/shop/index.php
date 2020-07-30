@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel milkyway\shop\models\search\ShopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = ShopModule::t('shop', 'Shops');
+$this->title = ShopModule::t('shop', 'Shop');
 $this->params['breadcrumbs'][] = $this->title;
 $default_language = $this->params['default_language'];
 ?>
@@ -24,7 +24,7 @@ $default_language = $this->params['default_language'];
             <h4 class="hk-pg-title"><span class="pg-title-icon"><span
                             class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
             </h4>
-            <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+            <a class="btn btn-sm btn-primary" href="<?= \yii\helpers\Url::to(['create']); ?>"
                title="<?= ShopModule::t('shop', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= ShopModule::t('shop', 'Create'); ?></a>
         </div>
