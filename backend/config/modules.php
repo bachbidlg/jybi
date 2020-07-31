@@ -51,4 +51,7 @@ return [
     'shop' => [
         'class' => 'milkyway\shop\ShopModule',
     ],
+    'socials' => [
+        'class' => 'milkyway\socials\SocialsModule',
+    ],
 ];

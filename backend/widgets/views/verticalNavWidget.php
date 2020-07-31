@@ -107,6 +107,17 @@ use modava\auth\models\User;
                     </li>
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('socials') ||
+                    Yii::$app->user->can('socialsSocials') ||
+                    Yii::$app->user->can('socialsSocialsIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'socials') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/socials']); ?>">
+                            <i class="ion ion-ios-globe"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Socials'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
                     Yii::$app->user->can('shop') ||
                     Yii::$app->user->can('shopShop') ||
                     Yii::$app->user->can('shopShopIndex')) { ?>

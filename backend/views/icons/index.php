@@ -49,10 +49,15 @@ copyToClipboard = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
-$('.icon-content').on('click', 'ul.font-icons-wrap > li > a', function(e){
+$('.icon-content ul.font-icons-wrap > li > a').on("click", function() {
     var icon = $(this).find('i').attr('class');
     copyToClipboard(icon);
-    $(this).tooltip({title: 'Copied'});
+});
+$('.icon-content ul.font-icons-wrap > li > a').tooltip({
+    trigger : "click",
+    title: "Copied"
+}).on('mouseout', function(){
+    $(this).tooltip("hide");
 });
 JS;
 $this->registerJs($script, \yii\web\View::POS_END);
