@@ -10,4 +10,11 @@ class IconsController extends MyController
     {
         return $this->render('index', []);
     }
+
+    public function actionLoadIcon()
+    {
+        if(\Yii::$app->request->isAjax) {
+            return $this->renderAjax('load-icon', []);
+        }
+    }
 }

@@ -9,55 +9,6 @@
     </div>
     <!-- Row -->
     <div class="row">
-        <div class="col-xl-12 icon-content">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="fontawesome-tab" data-toggle="tab" href="#fontawesome" role="tab"
-                       aria-controls="fontawesome" aria-selected="true">Fontawesome</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="simple-line-tab" data-toggle="tab" href="#simple-line" role="tab"
-                       aria-controls="simple-line" aria-selected="false">Simple Line Icons</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="themify-tab" data-toggle="tab" href="#themify" role="tab"
-                       aria-controls="themify" aria-selected="false">Themify Icons</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="fontawesome" role="tabpanel"
-                     aria-labelledby="fontawesome-tab">
-                    <?= $this->render('_fontawesome', []) ?>
-                </div>
-                <div class="tab-pane fade" id="simple-line" role="tabpanel" aria-labelledby="simple-line-tab">
-                    <?= $this->render('_simple-line', []) ?>
-                </div>
-                <div class="tab-pane fade" id="themify" role="tabpanel" aria-labelledby="themify-tab">
-                    <?= $this->render('_themify', []) ?>
-                </div>
-            </div>
-        </div>
+        <?= $this->render('icons', []) ?>
     </div>
 </div>
-<?php
-$script = <<< JS
-copyToClipboard = str => {
-    const el = document.createElement('textarea');
-    el.value = str;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-};
-$('.icon-content ul.font-icons-wrap > li > a').on("click", function() {
-    var icon = $(this).find('i').attr('class');
-    copyToClipboard(icon);
-});
-$('.icon-content ul.font-icons-wrap > li > a').tooltip({
-    trigger : "click",
-    title: "Copied"
-}).on('mouseout', function(){
-    $(this).tooltip("hide");
-});
-JS;
-$this->registerJs($script, \yii\web\View::POS_END);
