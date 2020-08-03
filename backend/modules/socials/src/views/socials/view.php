@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 use backend\widgets\ToastrWidget;
 use milkyway\socials\widgets\NavbarWidgets;
 use milkyway\socials\SocialsModule;
+use milkyway\socials\models\Socials;
 
 /* @var $this yii\web\View */
 /* @var $model milkyway\socials\models\Socials */
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </h4>
         <p>
             <a class="btn btn-outline-light" href="<?= Url::to(['create']); ?>"
-                title="<?= SocialsModule::t('socials', 'Create'); ?>">
+               title="<?= SocialsModule::t('socials', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= SocialsModule::t('socials', 'Create'); ?></a>
             <?= Html::a(SocialsModule::t('socials', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(SocialsModule::t('socials', 'Delete'), ['delete', 'id' => $model->id], [
@@ -47,19 +48,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
-						'id',
-						'name',
-						'type',
-						'image',
-						'url:url',
+                        'id',
+                        'name',
+                        [
+                            'attribute' => 'type',
+                            'value' => function ($model) {
+                                if (array_key_exists($model->type, Socials::TYPE)) return Socials::TYPE[$model->type];
+                                return null;
+                            }
+                        ],
+                        [
+                            'attribute' => 'image',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                if ($model->image == null) return null;
+                                if ($model->type == Socials::TYPE_ICON) return Html::tag('i', '', [
+                                    'class' => $model->image
+                                ]);
+                                else if ($model->type == Socials::TYPE_IMAGE) {
+                                    $image = $model->getImage();
+                                    if ($image != null) return Html::img($image, [
+                                        'style' => 'max-width: 70px'
+                                    ]);
+                                    return null;
+                                }
+                            }
+                        ],
+                        'url:url',
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {
                                 return Yii::$app->getModule('socials')->params['status'][$model->status];
                             }
                         ],
-						'created_at',
-						'updated_at',
+                        'created_at:datetime',
+                        'updated_at:datetime',
                         [
                             'attribute' => 'userCreated.userProfile.fullname',
                             'label' => SocialsModule::t('socials', 'Created By')

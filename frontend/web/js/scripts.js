@@ -30,7 +30,7 @@ $(function () {
         autoplaySpeed: 2000,
         dots: false,
         nav: true,
-        navText: ['<i class="fas fa-chevron-left"></i>','<i class="fas fa-chevron-right"></i>'],
+        navText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>'],
         margin: 30,
         responsive: {
             0: {items: 1},

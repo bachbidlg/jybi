@@ -10,6 +10,7 @@ use milkyway\socials\models\Socials;
 /* @var $this yii\web\View */
 /* @var $model milkyway\socials\models\Socials */
 /* @var $form yii\widgets\ActiveForm */
+if ($model->type == Socials::TYPE_ICON) $model->iptIcon = $model->image;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
     <div class="socials-form">
@@ -42,7 +43,18 @@ use milkyway\socials\models\Socials;
             <div class="col-12"></div>
             <div class="col-md-6 col-12 type-image"
                  style="display: <?= $model->type == Socials::TYPE_ICON ? 'none' : 'block' ?>">
-                <?= $form->field($model, 'iptImage')->fileInput([]) ?>
+                <div class="preview">
+                <?php
+                $image = $model->getImage();
+                if ($model->type == Socials::TYPE_IMAGE && $image != null) echo Html::img($image, [
+                    'style' => 'max-width: 120px'
+                ])
+                ?>
+                </div>
+                <?= $form->field($model, 'iptImage')->fileInput([
+                    'onchange' => 'readImage(this, $(".preview"), 120)',
+                    'data-default' => $image
+                ]) ?>
             </div>
         </div>
         <?php if (Yii::$app->controller->action->id == 'create') $model->status = 1; ?>

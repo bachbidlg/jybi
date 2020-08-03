@@ -106,10 +106,10 @@ $shop = $this->params['shop'];
                     2020 <?= $shop != null ? $shop->shopLanguage[$default_language]->getMetadata('slogan') : '' ?>
                 </div>
                 <div class="social">
-                    <a href="#" title="" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" title="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" title="" target="_blank"><i class="fab fa-youtube"></i></a>
-                    <a href="#" title="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                    <a href="#" title="" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <a href="#" title="" target="_blank"><i class="fa fa-youtube"></i></a>
+                    <a href="#" title="" target="_blank"><i class="fa fa-linkedin"></i></a>
                 </div>
             </div>
         </div>

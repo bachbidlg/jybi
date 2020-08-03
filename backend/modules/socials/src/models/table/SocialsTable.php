@@ -4,6 +4,7 @@ namespace milkyway\socials\models\table;
 
 use cheatsheet\Time;
 use milkyway\socials\models\query\SocialsQuery;
+use modava\auth\models\User;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -48,6 +49,13 @@ class SocialsTable extends \yii\db\ActiveRecord
 
     public function afterDelete()
     {
+        $type = $this->type;
+        if ($type == self::TYPE_IMAGE) {
+            $image = $this->image;
+            if ($image != null && !is_dir($this->pathImage . '/' . $image) && file_exists($this->pathImage . '/' . $image)) {
+                @unlink($this->pathImage . '/' . $image);
+            }
+        }
         $cache = Yii::$app->cache;
         $keys = [];
         foreach ($keys as $key) {

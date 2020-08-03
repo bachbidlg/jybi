@@ -22,7 +22,7 @@ $default_language = Yii::$app->view->params['default_language'];
         <ul>
             <?php foreach ($news_relate as $news) { ?>
                 <li>
-                    <i class="fas fa-angle-double-right"></i>
+                    <i class="fa fa-angle-double-right"></i>
                     <a href="<?= Url::toRoute(['/news/view', 'slug' => $news->slug]) ?>"><?= $news->newsLanguage[$default_language]->name ?></a>
                 </li>
             <?php } ?>

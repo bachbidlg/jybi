@@ -40,10 +40,10 @@ $default_language = \milkyway\language\models\Language::getDefaultLanguage()->id
         <a href="<?= Url::toRoute(['/news/view', 'slug' => $model->slug]) ?>"><?= $model->newsLanguage[$default_language]->name ?></a>
     </h3>
     <ul class="blog-post-meta">
-        <li><i class="fas fa-user-alt"></i> <?= $model->userCreated->userProfile->fullname ?></li>
-        <li><i class="fas fa-calendar-alt"></i> <?= date('d/m/Y', $model->created_at) ?></li>
+        <li><i class="fa fa-user-alt"></i> <?= $model->userCreated->userProfile->fullname ?></li>
+        <li><i class="fa fa-calendar-alt"></i> <?= date('d/m/Y', $model->created_at) ?></li>
         <li>
-            <i class="fas fa-folder-open"></i>
+            <i class="fa fa-folder-open"></i>
             <a href="<?= Url::toRoute(['/news/index', 'slug' => $model->categoryHasOne->slug]) ?>">
                 <?= $model->categoryHasOne->newsCategoryLanguage[$default_language]->name ?>
             </a>
@@ -53,6 +53,6 @@ $default_language = \milkyway\language\models\Language::getDefaultLanguage()->id
         <?= $model->newsLanguage[$default_language]->description ?>
     </div>
     <a href="<?= Url::toRoute(['/news/index', 'slug' => $model->slug]) ?>" class="button button-icon small alt">
-        <i class="fas fa-angle-right"></i> Xem thêm
+        <i class="fa fa-angle-right"></i> Xem thêm
     </a>
 </div>

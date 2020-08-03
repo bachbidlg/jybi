@@ -79,36 +79,36 @@ $shop = $this->params['shop'];
                 <a href="tel:<?= $shop->dataMetadata('phone') ?>" class="btn-call">
                     <span class="animated infinite zoomIn kenit-alo-circle"></span>
                     <span class="animated infinite pulse kenit-alo-circle-fill"></span>
-                    <i class="fas fa-phone-alt"></i>
+                    <i class="fa fa-phone"></i>
                 </a>
             <?php } ?>
             <?php if ($shop->dataMetadata('email') != null) { ?>
                 <a href="mailto:<?= $shop->dataMetadata('email') ?>" class="btn-email">
                     <span class="animated infinite zoomIn kenit-alo-circle"></span>
                     <span class="animated infinite pulse kenit-alo-circle-fill"></span>
-                    <i class="fas fa-envelope"></i>
+                    <i class="fa fa-envelope"></i>
                 </a>
             <?php } ?>
         </div>
     <?php } ?>
-    <div id="gotop"><i class="fas fa fa-angle-double-up"></i></div>
+    <div id="gotop"><i class="fa fa fa-angle-double-up"></i></div>
     <?php if ($shop != null) { ?>
         <div class="quick-contact-mb d-block d-md-none">
             <div class="d-flex align-items-center justify-content-between">
                 <?php if ($shop->dataMetadata('phone') != null) { ?>
                     <a href="tel:" class="mb-phone">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fa fa-phone"></i>
                         Gọi điện
                     </a>
                 <?php } ?>
                 <?php if ($shop->dataMetadata('email') != null) { ?>
                     <a href="sms:" class="mb-sms">
-                        <i class="fas fa-sms"></i>
+                        <i class="fa fa-sms"></i>
                         SMS
                     </a>
                 <?php } ?>
                 <a href="<?php echo \yii\helpers\Url::toRoute(['/contact/index']) ?>" class="mb-contact">
-                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fa fa-map-marker-alt"></i>
                     Liên hệ
                 </a>
             </div>

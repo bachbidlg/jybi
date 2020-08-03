@@ -47,7 +47,7 @@ $shop = $this->params['shop'];
                             ?>
                             <li<?= $has_children ? ' class="menu-item-has-children"' : '' ?>>
                                 <a href="<?= $url ?>"
-                                   title="<?= $data_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $data_menu->newsCategoryLanguage[$default_language]->name ?><?= $has_children ? ' <i class="fas fa-caret-down"></i>' : '' ?></a>
+                                   title="<?= $data_menu->newsCategoryLanguage[$default_language]->name ?>"><?= $data_menu->newsCategoryLanguage[$default_language]->name ?><?= $has_children ? ' <i class="fa fa-caret-down"></i>' : '' ?></a>
                                 <?php if ($has_children) { ?>
                                     <ul class="sub-menu">
                                         <?php
@@ -84,23 +84,23 @@ $shop = $this->params['shop'];
 <div id="menu-sidebar" class="menu menu-sidebar">
     <div class="menu-scroll">
         <div class="sidebar-socials">
-            <a href="#" title="" target="_blank"><i class="fas fa-phone-alt"></i></a>
-            <a href="#" title="" target="_blank"><i class="fas fa-envelope"></i></a>
-            <a href="#" title="" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" title="" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="#" title="" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" title="" target="_blank"><i class="fa fa-phone"></i></a>
+            <a href="#" title="" target="_blank"><i class="fa fa-envelope"></i></a>
+            <a href="#" title="" target="_blank"><i class="fa fa-facebook-f"></i></a>
+            <a href="#" title="" target="_blank"><i class="fa fa-instagram"></i></a>
+            <a href="#" title="" target="_blank"><i class="fa fa-youtube"></i></a>
+            <a href="#" title="" target="_blank"><i class="fa fa-linkedin"></i></a>
         </div>
         <div class="clearfix"></div>
         <a href="<?= Url::home() ?>" class="sidebar-logo"></a>
         <em class="sidebar-logo-text"></em>
         <a class="menu-item" href="<?= Url::home() ?>">
-            <i class="fas fa-home"></i>
+            <i class="fa fa-home"></i>
             <span>Trang chủ</span>
             <i class="fa fa-circle"></i>
         </a>
         <a class="menu-item" href="<?= Url::toRoute(['/gioi-thieu']); ?>">
-            <i class="fas fa-info-circle"></i>
+            <i class="fa fa-info-circle"></i>
             <span>Giới thiệu</span>
             <i class="fa fa-circle"></i>
         </a>
@@ -113,7 +113,7 @@ $shop = $this->params['shop'];
                     else $url = Url::toRoute(['/news/index', 'slug' => $data_menu->slug]);
                     ?>
                     <a class="menu-item" href="<?= $url ?>">
-                        <i class="fas fa-info-circle"></i>
+                        <i class="fa fa-info-circle"></i>
                         <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?>></span>
                         <i class="fa fa-circle"></i>
                     </a>
@@ -124,7 +124,7 @@ $shop = $this->params['shop'];
                         <input type="checkbox" data-submenu-items="4" class="toggle-submenu"
                                id="toggle-<?= $data_menu->id ?>">
                         <label class="menu-item" for="toggle-<?= $data_menu->id ?>"><i
-                                    class="<?= $data_menu->icon ?: 'fas fa-archive' ?>"></i><span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span></label>
+                                    class="<?= $data_menu->icon ?: 'fa fa-archive' ?>"></i><span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span></label>
                         <div class="submenu-wrapper">
                             <?php
                             foreach ($data_menu->categoryHasMany as $sub_menu) {
@@ -146,7 +146,7 @@ $shop = $this->params['shop'];
         }
         ?>
         <a class="menu-item" href="<?= Url::toRoute(['/lien-he']); ?>">
-            <i class="fas fa-envelope"></i>
+            <i class="fa fa-envelope"></i>
             <span>Liên hệ</span>
             <i class="fa fa-circle"></i>
         </a>

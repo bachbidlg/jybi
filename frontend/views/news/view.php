@@ -54,7 +54,7 @@ $this->title = Yii::t('frontend', $news->newsLanguage[$default_language]->name);
 
 
                     <div class="tags">
-                        <span><i class="fas fa-tags"></i> Từ khóa:</span>
+                        <span><i class="fa fa-tags"></i> Từ khóa:</span>
                         <a class="badge badge-dark" href="#">xây
                             nhà</a>
                         <a class="badge badge-dark" href="#">thiết

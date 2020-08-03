@@ -485,5 +485,10 @@
                 <i class="fa fa-check-circle"></i>
             </a>
         </li>
+        <li>
+            <a href="javascript: void(0);">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
     </ul>
 </div>

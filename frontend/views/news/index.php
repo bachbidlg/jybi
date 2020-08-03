@@ -31,8 +31,8 @@ $this->title = $category->newsCategoryLanguage[$default_language]->name;
                     'pager' => [
                         'firstPageLabel' => 'First',
                         'lastPageLabel' => 'Last',
-                        'prevPageLabel' => '<i class="fas fa-angle-left"></i>',
-                        'nextPageLabel' => '<i class="fas fa-angle-right"></i>',
+                        'prevPageLabel' => '<i class="fa fa-angle-left"></i>',
+                        'nextPageLabel' => '<i class="fa fa-angle-right"></i>',
                         'maxButtonCount' => 5,
 
                         'options' => [
