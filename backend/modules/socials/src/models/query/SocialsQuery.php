@@ -20,4 +20,9 @@ class SocialsQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere([Socials::tableName() . '.status' => Socials::STATUS_DISABLED]);
     }
+
+    public function sort($sort = SORT_ASC)
+    {
+        return $this->orderBy([Socials::tableName() . '.sort' => $sort]);
+    }
 }

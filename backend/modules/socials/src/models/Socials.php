@@ -82,7 +82,7 @@ class Socials extends SocialsTable
     {
         return [
             [['name'], 'required'],
-            [['type'], 'integer'],
+            [['type', 'sort'], 'integer'],
             [['name', 'url', 'image'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
@@ -110,6 +110,7 @@ class Socials extends SocialsTable
             'type' => SocialsModule::t('socials', 'Type'),
             'image' => SocialsModule::t('socials', 'Image'),
             'url' => SocialsModule::t('socials', 'Url'),
+            'sort' => SocialsModule::t('socials', 'Sort'),
             'status' => SocialsModule::t('socials', 'Status'),
             'created_at' => SocialsModule::t('socials', 'Created At'),
             'created_by' => SocialsModule::t('socials', 'Created By'),
