@@ -276,6 +276,7 @@
             </a>
         </li>
     </ul>
+    <?= $this->render('fontawesome/_brand', []) ?>
     <?= $this->render('fontawesome/_web_application', []) ?>
     <?= $this->render('fontawesome/_transportation', []) ?>
     <?= $this->render('fontawesome/_accessibility', []) ?>
