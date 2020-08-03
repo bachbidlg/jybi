@@ -27,6 +27,7 @@ class m200731_102052_create_table_socials extends Migration
                 'image' => $this->string(255)->null(),
                 'url' => $this->string(255)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1),
+                'sort' => $this->tinyInteger(11)->null()->defaultValue(0),
                 'created_at' => $this->integer(11)->null(),
                 'created_by' => $this->integer(11)->null()->defaultValue(1),
                 'updated_at' => $this->integer(11)->null(),
