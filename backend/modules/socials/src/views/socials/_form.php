@@ -23,6 +23,9 @@ if ($model->type == Socials::TYPE_ICON) $model->iptIcon = $model->image;
                 <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6 col-12">
+                <?= $form->field($model, 'sort')->input('number', []) ?>
+            </div>
+            <div class="col-md-6 col-12">
                 <?= $form->field($model, 'type')->dropDownList(Socials::TYPE, [
                     'id' => 'selectType'
                 ]) ?>

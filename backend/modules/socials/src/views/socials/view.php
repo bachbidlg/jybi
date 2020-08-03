@@ -75,6 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                         ],
                         'url:url',
+                        'sort',
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {
