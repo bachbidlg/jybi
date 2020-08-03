@@ -2,493 +2,282 @@
     <ul class="font-icons-wrap">
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-500px"></i>
+                <i class="fa fa-address-book"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-adjust"></i>
+                <i class="fa fa-address-book-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-adn"></i>
+                <i class="fa fa-address-card"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-align-center"></i>
+                <i class="fa fa-address-card-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-align-justify"></i>
+                <i class="fa fa-bandcamp"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-align-left"></i>
+                <i class="fa fa-bath"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-align-right"></i>
+                <i class="fa fa-bathtub"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-amazon"></i>
+                <i class="fa fa-drivers-license"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-ambulance"></i>
+                <i class="fa fa-drivers-license-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-american-sign-language-interpreting"></i>
+                <i class="fa fa-eercast"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-anchor"></i>
+                <i class="fa fa-envelope-open"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-android"></i>
+                <i class="fa fa-envelope-open-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angellist"></i>
+                <i class="fa fa-etsy"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-double-down"></i>
+                <i class="fa fa-free-code-camp"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-double-left"></i>
+                <i class="fa fa-grav"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-double-right"></i>
+                <i class="fa fa-handshake-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-double-up"></i>
+                <i class="fa fa-id-badge"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-down"></i>
+                <i class="fa fa-id-card"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-left"></i>
+                <i class="fa fa-id-card-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-right"></i>
+                <i class="fa fa-imdb"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-angle-up"></i>
+                <i class="fa fa-linode"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-apple"></i>
+                <i class="fa fa-meetup"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-archive"></i>
+                <i class="fa fa-microchip"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-circle-down"></i>
+                <i class="fa fa-podcast"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-circle-left"></i>
+                <i class="fa fa-quora"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-circle-right"></i>
+                <i class="fa fa-ravelry"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-circle-up"></i>
+                <i class="fa fa-s15"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-down"></i>
+                <i class="fa fa-shower"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-left"></i>
+                <i class="fa fa-snowflake-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-right"></i>
+                <i class="fa fa-superpowers"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrow-up"></i>
+                <i class="fa fa-telegram"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-arrows-alt"></i>
+                <i class="fa fa-thermometer"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-assistive-listening-systems"></i>
+                <i class="fa fa-thermometer-0"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-asterisk"></i>
+                <i class="fa fa-thermometer-1"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-at"></i>
+                <i class="fa fa-thermometer-2"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-audio-description"></i>
+                <i class="fa fa-thermometer-3"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-backward"></i>
+                <i class="fa fa-thermometer-4"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-balance-scale"></i>
+                <i class="fa fa-thermometer-empty"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-ban"></i>
+                <i class="fa fa-thermometer-full"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-barcode"></i>
+                <i class="fa fa-thermometer-half"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-bars"></i>
+                <i class="fa fa-thermometer-quarter"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-battery-empty"></i>
+                <i class="fa fa-thermometer-three-quarters"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-battery-full"></i>
+                <i class="fa fa-times-rectangle"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-battery-half"></i>
+                <i class="fa fa-times-rectangle-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-battery-quarter"></i>
+                <i class="fa fa-user-circle"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-battery-three-quarters"></i>
+                <i class="fa fa-user-circle-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-bed"></i>
+                <i class="fa fa-user-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-beer"></i>
+                <i class="fa fa-vcard"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-behance"></i>
+                <i class="fa fa-vcard-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-behance-square"></i>
+                <i class="fa fa-window-close"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-bell"></i>
+                <i class="fa fa-window-close-o"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-bell-slash"></i>
+                <i class="fa fa-window-maximize"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-bicycle"></i>
+                <i class="fa fa-window-minimize"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-binoculars"></i>
+                <i class="fa fa-window-restore"></i>
             </a>
         </li>
         <li>
             <a href="javascript: void(0);">
-                <i class="fa fa-birthday-cake"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bitbucket"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bitcoin"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-black-tie"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-blind"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bluetooth"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bluetooth-b"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bold"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bolt"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bomb"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-book"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bookmark"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-braille"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-briefcase"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-btc"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bug"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-building"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bullhorn"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bullseye"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-bus"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-buysellads"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-calculator"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-calendar"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-camera"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-camera-retro"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-car"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-caret-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-caret-left"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-caret-right"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-caret-up"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cart-arrow-down"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cart-plus"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-amex"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-diners-club"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-discover"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-jcb"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-mastercard"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-paypal"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-stripe"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-cc-visa"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-certificate"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-check"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-check-circle"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript: void(0);">
-                <i class="fa fa-facebook"></i>
+                <i class="fa fa-wpexplorer"></i>
             </a>
         </li>
     </ul>
+    <?= $this->render('fontawesome/_web_application', []) ?>
+    <?= $this->render('fontawesome/_transportation', []) ?>
+    <?= $this->render('fontawesome/_accessibility', []) ?>
+    <?= $this->render('fontawesome/_hand', []) ?>
 </div>
