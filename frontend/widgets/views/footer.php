@@ -7,16 +7,16 @@
  */
 
 /* @var $footerInfo frontend\models\Freetype */
-
 /* @var $menu_footer array */
-
+/* @var $socials array */
+/* @var $social frontend\models\Socials */
 /* @var $menu frontend\models\NewsCategory */
-
 /* @var $sub_menu frontend\models\NewsCategory */
 
 /* @var $shop frontend\models\Shop */
 
 use yii\helpers\Url;
+use frontend\models\Socials;
 
 $default_language = $this->params['default_language'];
 $shop = $this->params['shop'];
@@ -105,12 +105,25 @@ $shop = $this->params['shop'];
                     &copy;
                     2020 <?= $shop != null ? $shop->shopLanguage[$default_language]->getMetadata('slogan') : '' ?>
                 </div>
-                <div class="social">
-                    <a href="#" title="" target="_blank"><i class="fa fa-facebook-f"></i></a>
-                    <a href="#" title="" target="_blank"><i class="fa fa-instagram"></i></a>
-                    <a href="#" title="" target="_blank"><i class="fa fa-youtube"></i></a>
-                    <a href="#" title="" target="_blank"><i class="fa fa-linkedin"></i></a>
-                </div>
+                <?php if (count($socials) > 0) { ?>
+                    <div class="social">
+                        <?php foreach ($socials as $social) { ?>
+                            <a href="<?= $social->url != null ? $social->url : '#' ?>" title="<?= $social->name ?>"
+                               target="_blank">
+                                <?php if ($social->type == Socials::TYPE_ICON) { ?>
+                                    <i class="<?= $social->image ?>"></i>
+                                    <?php
+                                } else {
+                                    $image = $social->getImage();
+                                    if ($image != null) {
+                                        ?>
+                                        <img src="<?= $image ?>" alt="<?= $social->name ?>">
+                                    <?php }
+                                } ?>
+                            </a>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>

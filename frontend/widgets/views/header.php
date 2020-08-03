@@ -7,6 +7,8 @@
  */
 
 /* @var $menu array */
+/* @var $socials array */
+/* @var $social frontend\models\Socials */
 /* @var $data_menu frontend\models\NewsCategory */
 /* @var $sub_menu frontend\models\NewsCategory */
 
@@ -14,6 +16,7 @@
 
 use yii\helpers\Url;
 use frontend\models\NewsCategory;
+use frontend\models\Socials;
 
 $default_language = $this->params['default_language'];
 $shop = $this->params['shop'];
@@ -84,12 +87,35 @@ $shop = $this->params['shop'];
 <div id="menu-sidebar" class="menu menu-sidebar">
     <div class="menu-scroll">
         <div class="sidebar-socials">
-            <a href="#" title="" target="_blank"><i class="fa fa-phone"></i></a>
-            <a href="#" title="" target="_blank"><i class="fa fa-envelope"></i></a>
-            <a href="#" title="" target="_blank"><i class="fa fa-facebook-f"></i></a>
-            <a href="#" title="" target="_blank"><i class="fa fa-instagram"></i></a>
-            <a href="#" title="" target="_blank"><i class="fa fa-youtube"></i></a>
-            <a href="#" title="" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <?php if ($shop != null && $shop->dataMetadata('phone') != null) { ?>
+                <a href="tel: <?= $shop->dataMetadata('phone') ?>" title="" target="_blank">
+                    <i class="fa fa-phone"></i>
+                </a>
+            <?php } ?>
+            <?php if ($shop != null && $shop->dataMetadata('email') != null) { ?>
+                <a href="mailto: <?= $shop->dataMetadata('email') ?>" title="" target="_blank">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            <?php } ?>
+            <?php
+            if (count($socials) > 0) {
+                foreach ($socials as $social) {
+                    ?>
+                    <a href="<?= $social->url != null ? $social->url : '#' ?>" title="<?= $social->name ?>"
+                       target="_blank">
+                        <?php if ($social->type == Socials::TYPE_ICON) { ?>
+                            <i class="<?= $social->image ?>"></i>
+                            <?php
+                        } else {
+                            $image = $social->getImage();
+                            if ($image != null) {
+                                ?>
+                                <img src="<?= $image ?>" alt="<?= $social->name ?>">
+                            <?php }
+                        } ?>
+                    </a>
+                <?php }
+            } ?>
         </div>
         <div class="clearfix"></div>
         <a href="<?= Url::home() ?>" class="sidebar-logo"></a>

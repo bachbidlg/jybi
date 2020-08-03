@@ -10,6 +10,7 @@ namespace frontend\widgets;
 
 use frontend\models\Freetype;
 use frontend\models\NewsCategory;
+use frontend\models\Socials;
 use yii\base\Widget;
 
 class FooterWidget extends Widget
@@ -23,9 +24,11 @@ class FooterWidget extends Widget
     {
         $footer_info = Freetype::getOneByType(Freetype::TYPE_FOOTER_INFO, true);
         $menu_footer = NewsCategory::getMenuFooter();
+        $socials = Socials::getAll(true, false);
         return $this->render('footer', [
             'footer_info' => $footer_info,
-            'menu_footer' => $menu_footer
+            'menu_footer' => $menu_footer,
+            'socials' => $socials
         ]);
     }
 }

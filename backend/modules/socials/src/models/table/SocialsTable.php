@@ -49,15 +49,11 @@ class SocialsTable extends \yii\db\ActiveRecord
 
     public function afterDelete()
     {
-        $type = $this->type;
-        if ($type == self::TYPE_IMAGE) {
-            $image = $this->image;
-            if ($image != null && !is_dir($this->pathImage . '/' . $image) && file_exists($this->pathImage . '/' . $image)) {
-                @unlink($this->pathImage . '/' . $image);
-            }
-        }
         $cache = Yii::$app->cache;
-        $keys = [];
+        $keys = [
+            'redis-social-get-by-id-' . $this->id,
+            'redis-social-get-all'
+        ];
         foreach ($keys as $key) {
             $cache->delete($key);
         }
@@ -67,7 +63,10 @@ class SocialsTable extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         $cache = Yii::$app->cache;
-        $keys = [];
+        $keys = [
+            'redis-social-get-by-id-' . $this->id,
+            'redis-social-get-all'
+        ];
         foreach ($keys as $key) {
             $cache->delete($key);
         }
@@ -92,5 +91,33 @@ class SocialsTable extends \yii\db\ActiveRecord
     public function getUserUpdated()
     {
         return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
+
+    public static function getById($id, $published = false, $data_cache = YII2_CACHE)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-social-get-by-id-' . $id;
+        $data = $cache->get($key);
+        if ($data == false || $data_cache === false) {
+            $query = self::find()->where([self::tableName() . '.id' => $id]);
+            if ($published === true) $query->published();
+            $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getAll($published = false, $data_cache = YII2_CACHE)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-social-get-all';
+        $data = $cache->get($key);
+        if ($data == false || $data_cache === false) {
+            $query = self::find()->sort();
+            if ($published === true) $query->published();
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
     }
 }

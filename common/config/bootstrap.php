@@ -75,3 +75,4 @@ Yii::setAlias('milkyway/slider', dirname(dirname(__DIR__)) . '/backend/modules/s
 Yii::setAlias('milkyway/label', dirname(dirname(__DIR__)) . '/backend/modules/label/src');
 Yii::setAlias('milkyway/freetype', dirname(dirname(__DIR__)) . '/backend/modules/freetype/src');
 Yii::setAlias('milkyway/shop', dirname(dirname(__DIR__)) . '/backend/modules/shop/src');
+Yii::setAlias('milkyway/socials', dirname(dirname(__DIR__)) . '/backend/modules/socials/src');
