@@ -162,7 +162,7 @@ input[data-submenu-items] {
 	display: none;
 
 	& + label:before {
-		font-family: "Font Awesome 5 Free", sans-serif;
+		font: normal normal normal 9px/1 FontAwesome;
 		content: "\f107";
 		position: absolute;
 		right: 0;
@@ -170,7 +170,6 @@ input[data-submenu-items] {
 		width: 55px;
 		line-height: 60px;
 		text-align: center;
-		font-size: 9px;
 		color: #1f1f1f;
 		transition: all 250ms ease;
 	}

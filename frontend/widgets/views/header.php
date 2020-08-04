@@ -76,8 +76,8 @@ $shop = $this->params['shop'];
                     </li>
                     <li id="top-search">
                         <a href="javascript:void(0)" id="top-search-trigger">
-                            <i class="fas fa-search"></i>
-                            <i class="fas fa-times"></i>
+                            <i class="fa fa-search"></i>
+                            <i class="fa fa-times"></i>
                         </a>
                     </li>
                 </ul>
@@ -149,7 +149,7 @@ $shop = $this->params['shop'];
                     ?>
                     <a class="menu-item" href="<?= $url ?>">
                         <i class="fa fa-info-circle"></i>
-                        <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?>></span>
+                        <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span>
                         <i class="fa fa-circle"></i>
                     </a>
                     <?php
