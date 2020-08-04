@@ -821,6 +821,14 @@
 			background-color: $theme-color;
 			border-color: $theme-color;
 		}
+
+		label {
+			color: $white;
+		}
+
+		.help-block-error {
+			color: $theme-color;
+		}
 	}
 
 	.contact-info {
