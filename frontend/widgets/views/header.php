@@ -17,6 +17,7 @@
 use yii\helpers\Url;
 use frontend\models\NewsCategory;
 use frontend\models\Socials;
+use yii\helpers\Html;
 
 $default_language = $this->params['default_language'];
 $shop = $this->params['shop'];
@@ -109,21 +110,27 @@ $shop = $this->params['shop'];
             <?php
             if (count($socials) > 0) {
                 foreach ($socials as $social) {
+                    $icon = null;
+                    if($social->type == Socials::TYPE_ICON){
+                        $icon = Html::tag('i', '', [
+                            'class' => $social->image
+                        ]);
+                    } else if($social->type == Socials::TYPE_IMAGE){
+                        $image = $social->getImage();
+                        if($image != null) {
+                            $icon = Html::img($image, [
+                                'alt' => $social->name
+                            ]);
+                        }
+                    }
+                    if($icon != null){
                     ?>
                     <a href="<?= $social->url != null ? $social->url : '#' ?>" title="<?= $social->name ?>"
                        target="_blank">
-                        <?php if ($social->type == Socials::TYPE_ICON) { ?>
-                            <i class="<?= $social->image ?>"></i>
-                            <?php
-                        } else {
-                            $image = $social->getImage();
-                            if ($image != null) {
-                                ?>
-                                <img src="<?= $image ?>" alt="<?= $social->name ?>">
-                            <?php }
-                        } ?>
+                        <?= $icon ?>
                     </a>
                 <?php }
+                }
             } ?>
         </div>
         <div class="clearfix"></div>
@@ -148,8 +155,8 @@ $shop = $this->params['shop'];
                     else $url = Url::toRoute(['/news/index', 'slug' => $data_menu->slug]);
                     ?>
                     <a class="menu-item" href="<?= $url ?>">
-                        <i class="fa fa-info-circle"></i>
-                        <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?>></span>
+                        <i class="<?= $data_menu->icon ?: 'fa fa-info-circle' ?>"></i>
+                        <span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span>
                         <i class="fa fa-circle"></i>
                     </a>
                     <?php
