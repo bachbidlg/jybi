@@ -99,7 +99,9 @@ $(function () {
                         stack: 6,
                         showHideTransition: 'fade'
                     });
-                } else alert(msg);
+                } else {
+                    alert(msg);
+                }
             }, 'json').fail(f => {
                 if (typeof $.toast === "function") {
                     $.toast({
@@ -111,7 +113,9 @@ $(function () {
                         stack: 6,
                         showHideTransition: 'fade'
                     });
-                } else alert('Có lỗi xảy ra');
+                } else {
+                    alert('Có lỗi xảy ra');
+                }
                 el.prop('checked', !is_checked);
             });
         }
@@ -121,8 +125,10 @@ $(function () {
         setPopovers();
     }).trigger('load-body');
     $('body').on('afterValidate', '.form-language', function (event, messages, errorAttributes) {
-        if ([undefined, false].includes(window['submit_form'])) return false;
-        window['submit_form'] = false;
+        if ([undefined, false].includes(window.submit_form)) {
+            return false;
+        }
+        window.submit_form = false;
         var check_tab_active_error = $('#tab-language-content .tab-content .tab-pane.active .form-group.has-error').length > 0;
         if (!check_tab_active_error && Object.keys(errorAttributes).length > 0) {
             var tab_title = $('#' + errorAttributes[0].id).closest('.tab-pane').attr('aria-labelledby');
@@ -132,7 +138,16 @@ $(function () {
     $('body').on('change', '.ipt-checkbox', function (e) {
         e.preventDefault();
         var el = $(this);
-        if (el.is(':checkbox')) changeCheckBox(el);
+        if (el.is(':checkbox')) {
+            changeCheckBox(el);
+        }
         return false;
-    })
+    }).on('click', '.load-modal', function(){
+        var url = $(this).attr('data-url') || null;
+        if(url === null) {
+            return false;
+        }
+        $('#modal-load .modal-content').load(url);
+        $('#modal-load').modal('show');
+    });
 });

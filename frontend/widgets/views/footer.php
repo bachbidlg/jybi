@@ -52,7 +52,7 @@ $shop = $this->params['shop'];
                                 <?php } ?>
                                 <?php if ($shop->dataMetadata('hotline') != null) { ?>
                                     <p>
-                                        <strong>Hotline:</strong> <?= $shop->dataMetadata('hotline') ?>
+                                        <strong>Hotline:</strong> <a href="tel: <?= $shop->dataMetadata('hotline') ?>"><?= $shop->dataMetadata('hotline') ?></a>
                                     </p>
                                 <?php } ?>
                                 <?php if ($shop->dataMetadata('mst') != null) { ?>
@@ -60,14 +60,20 @@ $shop = $this->params['shop'];
                                         <strong>MST:</strong> <?= $shop->dataMetadata('mst') ?>
                                     </p>
                                 <?php } ?>
-                                <?php if ($shop->dataMetadata('created') != null) { ?>
+                                <?php
+                                $created = $shop->dataMetadata('created');
+                                if ($created != null) {
+                                    ?>
                                     <p>
-                                        <strong>Ngày cấp giấy phép:</strong> <?= $shop->dataMetadata('created') ?>
+                                        <strong>Ngày cấp giấy phép:</strong> <?= is_numeric($created) ? date('d-m-Y', $created) : $created ?>
                                     </p>
                                 <?php } ?>
-                                <?php if ($shop->dataMetadata('started') != null) { ?>
+                                <?php
+                                $started = $shop->dataMetadata('started');
+                                if ($started != null) {
+                                    ?>
                                     <p>
-                                        <strong>Ngày hoạt động:</strong> <?= $shop->dataMetadata('started') ?>
+                                        <strong>Ngày hoạt động:</strong> <?= is_numeric($started) ? date('d-m-Y', $started) : $started ?>
                                     </p>
                                 <?php } ?>
                             </div>

@@ -68,12 +68,6 @@ if ($model->type == Socials::TYPE_ICON) $model->iptIcon = $model->image;
 
         <?php ActiveForm::end(); ?>
     </div>
-    <div class="modal fade in" id="modal-load" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-            </div>
-        </div>
-    </div>
 <?php
 $type_image = Socials::TYPE_IMAGE;
 $script = <<< JS
@@ -86,12 +80,6 @@ $('#selectType').change(function(){
         $('.type-icon').show();
         $('.type-image').hide();
     }
-});
-$('.load-modal').on('click', function(){
-    var url = $(this).attr('data-url') || null;
-    if(url === null) return false;
-    $('#modal-load .modal-content').load(url);
-    $('#modal-load').modal('show');
 });
 JS;
 $this->registerJs($script, \yii\web\View::POS_END);

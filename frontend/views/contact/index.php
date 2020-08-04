@@ -32,12 +32,12 @@ $shop = $this->params['shop'];
                             <?php } ?>
                             <?php if ($shop->dataMetadata('phone') != null) { ?>
                                 <li>
-                                    <i class="fa fa-phone"></i> <?= $shop->dataMetadata('phone') ?>
+                                    <i class="fa fa-phone"></i> <a href="tel: <?= $shop->dataMetadata('phone') ?>"><?= $shop->dataMetadata('phone') ?></a>
                                 </li>
                             <?php } ?>
                             <?php if ($shop->dataMetadata('email') != null) { ?>
                                 <li>
-                                    <i class="fa fa-envelope-open"></i> <?= $shop->dataMetadata('email') ?>
+                                    <i class="fa fa-envelope-open"></i> <a href="mailto: <?= $shop->dataMetadata('email') ?>"><?= $shop->dataMetadata('email') ?></a>
                                 </li>
                             <?php } ?>
                             <li>
