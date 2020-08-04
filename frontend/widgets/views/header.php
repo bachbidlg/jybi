@@ -74,8 +74,17 @@ $shop = $this->params['shop'];
                         <a href="<?= Url::toRoute(['/lien-he']); ?>"
                            title="<?= Yii::t('frontend', 'Liên hệ'); ?>"><?= Yii::t('frontend', 'Liên hệ'); ?></a>
                     </li>
+                    <li id="top-search">
+                        <a href="javascript:void(0)" id="top-search-trigger">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
+            <form class="top-search-form" action="search.html" method="post">
+                <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
+            </form>
         </div>
     </div>
     <a class="mobile-logo" href="<?= Url::home() ?>"><img
@@ -178,4 +187,3 @@ $shop = $this->params['shop'];
         </a>
     </div>
 </div>
-

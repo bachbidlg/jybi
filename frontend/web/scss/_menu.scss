@@ -1,6 +1,6 @@
 #menu {
 	> ul {
-		> li {
+		> li:not(#top-search) {
 			position: relative;
 			text-align: center;
 			text-transform: uppercase;
