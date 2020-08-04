@@ -44,6 +44,18 @@ $default_language = $this->params['default_language'];
                 <?= $form->field($model, 'sort')->textInput() ?>
             </div>
             <div class="col-md-6 col-12">
+                <?= $form->field($model, 'icon', [
+                    'template' => '{label}
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text load-modal" data-url="' . Url::toRoute(['/icons/load-icon']) . '">@</span>
+                                            </div>
+                                            {input}
+                                        </div>
+                                        {error}'
+                ])->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6 col-12">
                 <?= $form->field($model, 'slug')->hiddenInput([
                     'id' => 'slug'
                 ])->label(false) ?>
