@@ -130,10 +130,19 @@ use modava\auth\models\User;
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
                     Yii::$app->user->can('icons')) { ?>
-                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'icons') echo ' active'; ?>">
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'backend' && Yii::$app->controller->id == 'icons') echo ' active'; ?>">
                         <a class="nav-link" href="<?= Url::toRoute(['/icons']); ?>">
                             <i class="icon-layers"></i>
                             <span class="nav-link-text"><?= Yii::t('backend', 'Icons'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('website')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'website') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/website']); ?>">
+                            <i class="fa fa-cogs"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Key - Value'); ?></span>
                         </a>
                     </li>
                 <?php } ?>
@@ -387,19 +396,19 @@ use modava\auth\models\User;
                         </ul>
                     </li>
                 </ul>
-            <hr class="nav-separator">
-            <div class="nav-header">
-                <span>Getting Started</span>
-                <span>GS</span>
-            </div>
-            <ul class="navbar-nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="documentation.html">
-                        <i class="ion ion-md-bookmarks"></i>
-                        <span class="nav-link-text">Documentation</span>
-                    </a>
-                </li>
-            </ul>
+                <hr class="nav-separator">
+                <div class="nav-header">
+                    <span>Getting Started</span>
+                    <span>GS</span>
+                </div>
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="documentation.html">
+                            <i class="ion ion-md-bookmarks"></i>
+                            <span class="nav-link-text">Documentation</span>
+                        </a>
+                    </li>
+                </ul>
             <?php } ?>
         </div>
     </div>

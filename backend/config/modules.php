@@ -54,4 +54,7 @@ return [
     'socials' => [
         'class' => 'milkyway\socials\SocialsModule',
     ],
+    'website' => [
+        'class' => 'modava\website\WebsiteModule',
+    ],
 ];

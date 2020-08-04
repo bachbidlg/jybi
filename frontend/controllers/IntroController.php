@@ -10,11 +10,18 @@ namespace frontend\controllers;
 
 
 use frontend\components\MyController;
+use frontend\models\KeyValue;
+use frontend\models\News;
 
 class IntroController extends MyController
 {
     public function actionIndex()
     {
-        return $this->render('index', []);
+        $subject = KeyValue::getValueByKey('GIOI_THIEU', false);
+        $intro = News::getBySlug($subject);
+        if ($intro == null) return $this->redirect(['/site/index']);
+        return $this->render('index', [
+            'intro' => $intro
+        ]);
     }
 }
