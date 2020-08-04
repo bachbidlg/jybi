@@ -23,6 +23,7 @@ use yii\web\UploadedFile;
  * @property string $slug
  * @property int $category
  * @property string $image
+ * @property string $icon
  * @property int $status
  * @property int $sort Thứ tự
  * @property int $created_at

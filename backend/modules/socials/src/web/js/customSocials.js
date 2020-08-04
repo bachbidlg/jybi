@@ -73,4 +73,13 @@ $(function () {
     $('body').on('load-body', function () {
         setPopovers();
     }).trigger('load-body');
+
+    $('body').on('click', '.load-modal', function(){
+        var url = $(this).attr('data-url') || null;
+        if(url === null) {
+            return false;
+        }
+        $('#modal-load .modal-content').load(url);
+        $('#modal-load').modal('show');
+    });
 });

@@ -8359,29 +8359,30 @@ table.dataTable {
 /*Icons*/
 .font-icons-wrap {
 	li {
-		text-align: center;
-		display: inline-block;
+		/*text-align: center;
+		display: inline-block;*/
 		padding: 10px;
 		min-width: 50px;
 		min-height: 60px;
 		a {
 			position: relative;
 			color: $dark;
+			display: flex;
 			> i {
 				font-size: 27px;
 			}
 			span {
-				display: inline-block;
-				position: absolute;
+				display: block;
+				/*position: absolute;
 				background-color: $blue;
-				color: #fff;
+				color: #fff;*/
 				padding: 4px 7px;
 				font-size: 12px;
 				white-space: nowrap;
-				top: -30px;
+				/*top: -30px;
 				left: 50%;
 				@include transform(translateX(-50%));
-				display: none;
+				display: none;*/
 			}
 			&:hover {
 				span {
