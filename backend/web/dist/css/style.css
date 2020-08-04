@@ -17521,32 +17521,33 @@ table.dataTable {
 
 /*Icons*/
 .font-icons-wrap li {
-  text-align: center;
-  display: inline-block;
+  /*text-align: center;
+  display: inline-block;*/
   padding: 10px;
   min-width: 50px;
   min-height: 60px; }
   .font-icons-wrap li a {
     position: relative;
-    color: #324148; }
+    color: #324148;
+      display: flex;}
     .font-icons-wrap li a > i {
       font-size: 27px; }
     .font-icons-wrap li a span {
-      display: inline-block;
+      /*display: inline-block;
       position: absolute;
       background-color: #0092ee;
-      color: #fff;
+      color: #fff;*/
       padding: 4px 7px;
       font-size: 12px;
       white-space: nowrap;
-      top: -30px;
+      /*top: -30px;
       left: 50%;
       -webkit-transform: translateX(-50%);
       -moz-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
       -o-transform: translateX(-50%);
       transform: translateX(-50%);
-      display: none; }
+      display: none;*/ }
     .font-icons-wrap li a:hover span {
       display: block; }
 
