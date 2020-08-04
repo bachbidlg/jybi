@@ -62,6 +62,7 @@ $default_language = $params['default_language'];
                                 return $model->newsLanguage[$language]->name;
                             }
                         ],
+                        'slug',
                         [
                             'attribute' => 'category',
                             'format' => 'raw',
