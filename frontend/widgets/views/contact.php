@@ -68,7 +68,7 @@ $form = \yii\bootstrap\ActiveForm::begin([
 ])->textarea(['rows' => 5])->label($model->getAttributeLabel('message') . '<span> : </span>') ?>
 
 <?= \yii\helpers\Html::submitButton(
-    '<i class="fas fa-paper-plane"></i> Gửi',
+    '<i class="fa fa-paper-plane"></i> Gửi',
     ['class' => 'btn btn-secondary float-right']
 ) ?>
 <?php \yii\bootstrap\ActiveForm::end() ?>

@@ -109,8 +109,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
 
     public function getImage()
     {
-        if (file_exists($this->pathImage . '/' . $this->image)) {
+        if (!is_dir($this->pathImage . '/' . $this->image) && file_exists($this->pathImage . '/' . $this->image)) {
             return Yii::$app->assetManager->publish($this->pathImage . '/' . $this->image)[1];
+        }
+        $noImage = Yii::getAlias('@frontend/web/default/no-image-770x450.png');
+        if (file_exists($noImage)) {
+            return Yii::$app->assetManager->publish($noImage)[1];
         }
         return null;
     }

@@ -27,21 +27,21 @@ $shop = $this->params['shop'];
                         <ul>
                             <?php if ($shop->shopLanguage[$default_language]->getMetadata('address') != null) { ?>
                                 <li>
-                                    <i class="fas fa-map-signs"></i> <?= $shop->shopLanguage[$default_language]->getMetadata('address') ?>
+                                    <i class="fa fa-map-signs"></i> <?= $shop->shopLanguage[$default_language]->getMetadata('address') ?>
                                 </li>
                             <?php } ?>
                             <?php if ($shop->dataMetadata('phone') != null) { ?>
                                 <li>
-                                    <i class="fas fa-phone-volume"></i> <?= $shop->dataMetadata('phone') ?>
+                                    <i class="fa fa-phone"></i> <?= $shop->dataMetadata('phone') ?>
                                 </li>
                             <?php } ?>
                             <?php if ($shop->dataMetadata('email') != null) { ?>
                                 <li>
-                                    <i class="fas fa-envelope-open"></i> <?= $shop->dataMetadata('email') ?>
+                                    <i class="fa fa-envelope-open"></i> <?= $shop->dataMetadata('email') ?>
                                 </li>
                             <?php } ?>
                             <li>
-                                <i class="fas fa-globe"></i> <?= str_replace(['http://', 'https://'], '', Yii::getAlias('@frontendUrl')) ?>
+                                <i class="fa fa-globe"></i> <?= str_replace(['http://', 'https://'], '', Yii::getAlias('@frontendUrl')) ?>
                             </li>
                         </ul>
                     </div>

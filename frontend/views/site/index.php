@@ -197,7 +197,7 @@ $default_language = $this->params['default_language'];
                         <div class="video-area">
                             <img class="img-fluid w-100" src="https://i3.ytimg.com/vi/8t5Z-pVjYAE/maxresdefault.jpg">
                             <span class="icon-play" data-fancybox="" href="https://www.youtube.com/watch?v=8t5Z-pVjYAE">
-                                    <i class="fas fa-play"></i>
+                                    <i class="fa fa-play"></i>
                                 </span>
                         </div>
                     </div>
@@ -205,7 +205,7 @@ $default_language = $this->params['default_language'];
                         <div class="testimonial-area owl-carousel owl-theme">
                             <div class="testimonial-item">
                                 <div class="reviews">
-                                    <i class="fas fa-quote-left"></i>
+                                    <i class="fa fa-quote-left"></i>
                                     <p>Sau khi nhận nhà dự án căn hộ Ehome S Quận 9 - TPHCM tôi đã tiến hành tìm kiếm 1
                                         đơn
                                         vị thi công nội thất và biết đến <strong>ACI Design</strong>. Liên
@@ -227,7 +227,7 @@ $default_language = $this->params['default_language'];
                             </div>
                             <div class="testimonial-item">
                                 <div class="reviews">
-                                    <i class="fas fa-quote-left"></i>
+                                    <i class="fa fa-quote-left"></i>
                                     <p>Khi thấy một số mẫu thiết kế căn hộ trên website công ty mình gọi điện thì được
                                         tư vấn rất nhiệt tình, cuối cùng mình đã quyết định chọn An Phú Decor. Công ty
                                         làm việc trách nhiệm, bảo hành bảo trì sau thi công cũng rất tốt. Cám ơn An Phú
@@ -246,7 +246,7 @@ $default_language = $this->params['default_language'];
                             </div>
                             <div class="testimonial-item">
                                 <div class="reviews">
-                                    <i class="fas fa-quote-left"></i>
+                                    <i class="fa fa-quote-left"></i>
                                     <p>Văn phòng của tôi được <strong>thiết kế rất hiện đại và đẹp mắt</strong>, tất cả
                                         yêu cầu của tôi đều được giải quyết một cách xuất sắc, đội ngũ kiến trúc
                                         sư và thợ thi công làm việc nhiệt tình và trách nhiệm. Cám ơn công ty rất
