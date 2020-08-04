@@ -52,7 +52,7 @@ $default_language = \milkyway\language\models\Language::getDefaultLanguage()->id
     <div class="blog-post-desc">
         <?= $model->newsLanguage[$default_language]->description ?>
     </div>
-    <a href="<?= Url::toRoute(['/news/index', 'slug' => $model->slug]) ?>" class="button button-icon small alt">
+    <a href="<?= Url::toRoute(['/news/view', 'slug' => $model->slug]) ?>" class="button button-icon small alt">
         <i class="fa fa-angle-right"></i> Xem thêm
     </a>
 </div>
