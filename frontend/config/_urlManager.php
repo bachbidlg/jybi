@@ -19,6 +19,7 @@ return [
 
         ['pattern' => 'gioi-thieu', 'route' => 'intro/index', 'suffix' => '.html'],
         ['pattern' => 'lien-he', 'route' => 'contact/index', 'suffix' => '.html'],
+        ['pattern' => 'search-news', 'route' => 'site/search-news-html', 'suffix' => '.html'],
 
         /* demo */
         ['pattern' => 'bai-viet/<slug>', 'route' => 'news/view', 'suffix' => '.html'],

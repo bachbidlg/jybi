@@ -2,12 +2,10 @@
 
 namespace frontend\controllers;
 
+use frontend\components\MyController;
 use frontend\models\News;
 use frontend\models\NewsCategory;
 use frontend\models\Slider;
-use Yii;
-use frontend\components\MyController;
-use yii\helpers\Url;
 
 class SiteController extends MyController
 {
@@ -30,5 +28,8 @@ class SiteController extends MyController
         ]);
     }
 
-
+    public function actionSearchNewsHtml()
+    {
+        return $this->render('search-news', []);
+    }
 }
