@@ -80,11 +80,12 @@ $default_language = $this->params['default_language'];
         $image = null;
         if ($model->image != null && file_exists($model->pathImage . '/' . $model->image)) $image = $model->urlImage . '/' . $model->image;
         if ($image != null) echo Html::img($image, [
-            'style' => 'max-width: 120px'
+            'style' => 'max-width: 64px'
         ]) ?>
     </div>
+    <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (64x64)</div>
     <?= $form->field($model, 'iptImage')->fileInput([
-        'onchange' => 'readImage(this, $(".preview"), 120)',
+        'onchange' => 'readImage(this, $(".preview"), 64)',
         'data-default' => $image
     ]) ?>
 

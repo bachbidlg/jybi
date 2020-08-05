@@ -49,7 +49,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'model' => $model,
                     'attributes' => [
                         'id',
-                        'image',
+                        [
+                            'attribute' => 'image',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                if ($model->image == null || !file_exists($model->pathImage . '/' . $model->image)) return null;
+                                return Html::img($model->urlImage . '/' . $model->image, [
+                                    'style' => 'max-width: 70px'
+                                ]);
+                            }
+                        ],
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {

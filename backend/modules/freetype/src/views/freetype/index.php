@@ -6,40 +6,43 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
+use milkyway\freetype\models\Freetype;
+
 /* @var $this yii\web\View */
 /* @var $searchModel milkyway\freetype\models\search\FreetypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = FreetypeModule::t('freetype', 'Freetype');
 $this->params['breadcrumbs'][] = $this->title;
+$default_language = $this->params['default_language'];
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
-<div class="container-fluid px-xxl-25 px-xl-10">
-    <?= NavbarWidgets::widget(); ?>
+    <div class="container-fluid px-xxl-25 px-xl-10">
+        <?= NavbarWidgets::widget(); ?>
 
-    <!-- Title -->
-    <div class="hk-pg-header">
-        <h4 class="hk-pg-title"><span class="pg-title-icon"><span
-                        class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
-        </h4>
-        <a class="btn btn-sm btn-primary" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= FreetypeModule::t('freetype', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= FreetypeModule::t('freetype', 'Create'); ?></a>
-    </div>
+        <!-- Title -->
+        <div class="hk-pg-header">
+            <h4 class="hk-pg-title"><span class="pg-title-icon"><span
+                            class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
+            </h4>
+            <a class="btn btn-sm btn-primary" href="<?= \yii\helpers\Url::to(['create']); ?>"
+               title="<?= FreetypeModule::t('freetype', 'Create'); ?>">
+                <i class="fa fa-plus"></i> <?= FreetypeModule::t('freetype', 'Create'); ?></a>
+        </div>
 
-    <!-- Row -->
-    <div class="row">
-        <div class="col-xl-12">
-            <section class="hk-sec-wrapper">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12">
+                <section class="hk-sec-wrapper">
 
-                <?php Pjax::begin(); ?>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="table-wrap">
-                            <div class="dataTables_wrapper dt-bootstrap4">
-                                <?= GridView::widget([
-                                    'dataProvider' => $dataProvider,
-                                    'layout' => '
+                    <?php Pjax::begin(); ?>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="table-wrap">
+                                <div class="dataTables_wrapper dt-bootstrap4">
+                                    <?= GridView::widget([
+                                        'dataProvider' => $dataProvider,
+                                        'layout' => '
                                         {errors}
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -59,101 +62,127 @@ $this->params['breadcrumbs'][] = $this->title;
                                             </div>
                                         </div>
                                     ',
-                                    'pager' => [
-                                        'firstPageLabel' => FreetypeModule::t('freetype', 'First'),
-                                        'lastPageLabel' => FreetypeModule::t('freetype', 'Last'),
-                                        'prevPageLabel' => FreetypeModule::t('freetype', 'Previous'),
-                                        'nextPageLabel' => FreetypeModule::t('freetype', 'Next'),
-                                        'maxButtonCount' => 5,
+                                        'pager' => [
+                                            'firstPageLabel' => FreetypeModule::t('freetype', 'First'),
+                                            'lastPageLabel' => FreetypeModule::t('freetype', 'Last'),
+                                            'prevPageLabel' => FreetypeModule::t('freetype', 'Previous'),
+                                            'nextPageLabel' => FreetypeModule::t('freetype', 'Next'),
+                                            'maxButtonCount' => 5,
 
-                                        'options' => [
-                                            'tag' => 'ul',
-                                            'class' => 'pagination',
-                                        ],
+                                            'options' => [
+                                                'tag' => 'ul',
+                                                'class' => 'pagination',
+                                            ],
 
-                                        // Customzing CSS class for pager link
-                                        'linkOptions' => ['class' => 'page-link'],
-                                        'activePageCssClass' => 'active',
-                                        'disabledPageCssClass' => 'disabled page-disabled',
-                                        'pageCssClass' => 'page-item',
+                                            // Customzing CSS class for pager link
+                                            'linkOptions' => ['class' => 'page-link'],
+                                            'activePageCssClass' => 'active',
+                                            'disabledPageCssClass' => 'disabled page-disabled',
+                                            'pageCssClass' => 'page-item',
 
-                                        // Customzing CSS class for navigating link
-                                        'prevPageCssClass' => 'paginate_button page-item',
-                                        'nextPageCssClass' => 'paginate_button page-item',
-                                        'firstPageCssClass' => 'paginate_button page-item',
-                                        'lastPageCssClass' => 'paginate_button page-item',
-                                    ],
-                                    'columns' => [
-                                        [
-                                            'class' => 'yii\grid\SerialColumn',
-                                            'header' => 'STT',
-                                            'headerOptions' => [
-                                                'width' => 60,
-                                                'rowspan' => 2
-                                            ],
-                                            'filterOptions' => [
-                                                'class' => 'd-none',
-                                            ],
+                                            // Customzing CSS class for navigating link
+                                            'prevPageCssClass' => 'paginate_button page-item',
+                                            'nextPageCssClass' => 'paginate_button page-item',
+                                            'firstPageCssClass' => 'paginate_button page-item',
+                                            'lastPageCssClass' => 'paginate_button page-item',
                                         ],
-                                    
-										'image',
-										'sort',
-										'type',
-                                        [
-                                            'attribute' => 'created_by',
-                                            'value' => 'userCreated.userProfile.fullname',
-                                            'headerOptions' => [
-                                                'width' => 150,
+                                        'columns' => [
+                                            [
+                                                'class' => 'yii\grid\SerialColumn',
+                                                'header' => 'STT',
+                                                'headerOptions' => [
+                                                    'width' => 60,
+                                                    'rowspan' => 2
+                                                ],
+                                                'filterOptions' => [
+                                                    'class' => 'd-none',
+                                                ],
                                             ],
-                                        ],
-                                        [
-                                            'attribute' => 'created_at',
-                                            'format' => 'date',
-                                            'headerOptions' => [
-                                                'width' => 150,
+                                            [
+                                                'attribute' => 'id',
+                                                'label' => FreetypeModule::t('freetype', 'Name'),
+                                                'format' => 'raw',
+                                                'value' => function ($model) use ($default_language) {
+                                                    /* @var $model milkyway\freetype\models\Freetype */
+                                                    return $model->freetypeLanguage[$default_language]->name;
+                                                }
                                             ],
-                                        ],
-                                        [
-                                            'class' => 'yii\grid\ActionColumn',
-                                            'header' => FreetypeModule::t('freetype', 'Actions'),
-                                            'template' => '{update} {delete}',
-                                            'buttons' => [
-                                                'update' => function ($url, $model) {
-                                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                                        'title' => FreetypeModule::t('freetype', 'Update'),
-                                                        'alia-label' => FreetypeModule::t('freetype', 'Update'),
-                                                        'data-pjax' => 0,
-                                                        'class' => 'btn btn-info btn-xs'
-                                                    ]);
-                                                },
-                                                'delete' => function ($url, $model) {
-                                                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
-                                                        'title' => FreetypeModule::t('freetype', 'Delete'),
-                                                        'class' => 'btn btn-danger btn-xs btn-del',
-                                                        'data-title' => FreetypeModule::t('freetype', 'Delete?'),
-                                                        'data-pjax' => 0,
-                                                        'data-url' => $url,
-                                                        'btn-success-class' => 'success-delete',
-                                                        'btn-cancel-class' => 'cancel-delete',
-                                                        'data-placement' => 'top'
+                                            [
+                                                'attribute' => 'image',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    /* @var $model milkyway\freetype\models\Freetype */
+                                                    $image = $model->getImage();
+                                                    if ($image == null) return null;
+                                                    return Html::img($image, [
+                                                        'style' => 'max-width: 64px'
                                                     ]);
                                                 }
                                             ],
-                                            'headerOptions' => [
-                                                'width' => 150,
+                                            'sort',
+                                            [
+                                                'attribute' => 'type',
+                                                'value' => function ($model) {
+                                                    /* @var $model milkyway\freetype\models\Freetype */
+                                                    if (!array_key_exists($model->type, Freetype::TYPE)) return null;
+                                                    return Freetype::TYPE[$model->type];
+                                                }
+                                            ],
+                                            [
+                                                'attribute' => 'created_by',
+                                                'value' => 'userCreated.userProfile.fullname',
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
+                                            ],
+                                            [
+                                                'attribute' => 'created_at',
+                                                'format' => 'date',
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
+                                            ],
+                                            [
+                                                'class' => 'yii\grid\ActionColumn',
+                                                'header' => FreetypeModule::t('freetype', 'Actions'),
+                                                'template' => '{update} {delete}',
+                                                'buttons' => [
+                                                    'update' => function ($url, $model) {
+                                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                                            'title' => FreetypeModule::t('freetype', 'Update'),
+                                                            'alia-label' => FreetypeModule::t('freetype', 'Update'),
+                                                            'data-pjax' => 0,
+                                                            'class' => 'btn btn-info btn-xs'
+                                                        ]);
+                                                    },
+                                                    'delete' => function ($url, $model) {
+                                                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
+                                                            'title' => FreetypeModule::t('freetype', 'Delete'),
+                                                            'class' => 'btn btn-danger btn-xs btn-del',
+                                                            'data-title' => FreetypeModule::t('freetype', 'Delete?'),
+                                                            'data-pjax' => 0,
+                                                            'data-url' => $url,
+                                                            'btn-success-class' => 'success-delete',
+                                                            'btn-cancel-class' => 'cancel-delete',
+                                                            'data-placement' => 'top'
+                                                        ]);
+                                                    }
+                                                ],
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
                                             ],
                                         ],
-                                    ],
-                                ]); ?>
-                                                            </div>
+                                    ]); ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php Pjax::end(); ?>
-            </section>
+                    <?php Pjax::end(); ?>
+                </section>
+            </div>
         </div>
     </div>
-</div>
 <?php
 $script = <<< JS
 $('body').on('click', '.success-delete', function(e){

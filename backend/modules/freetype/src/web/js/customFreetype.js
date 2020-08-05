@@ -1,3 +1,27 @@
+function readImage(input, preview, maxWidth = null) {
+    var img_preview,
+        image_default = $(input).attr('data-default') || null;
+    if (image_default === null) preview.hide();
+    if (preview.is('img')) {
+        img_preview = preview;
+    } else {
+        if (preview.children('img').length <= 0) preview.append('<img/>');
+        img_preview = preview.children('img');
+    }
+    img_preview.attr({
+        'src': image_default,
+        'style': (maxWidth === null ? '' : 'max-width: ' + maxWidth + 'px')
+    });
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            img_preview.attr('src', e.target.result);
+            preview.show();
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+}
+
 $(function () {
     "use strict";
 
