@@ -82,6 +82,7 @@ $default_language = $this->params['default_language'];
                     ])->label(NewsModule::t('news', 'Name')) ?>
                     <?= $form->field($model, 'news_language[' . $language->primaryKey . '][description]')->textarea(['maxlength' => true])->label(NewsModule::t('news', 'Description')) ?>
                     <?= TinyMce::widget([
+                        'type' => 'content',
                         'model' => $model,
                         'attribute' => 'news_language[' . $language->primaryKey . '][content]',
                         'options' => []
