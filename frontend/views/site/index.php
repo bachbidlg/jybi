@@ -7,6 +7,8 @@ use yii\helpers\Url;
 /* @var $projectCat array */
 /* @var $projectHot array */
 /* @var $newsHot array */
+/* @var $freeTypes array */
+/* @var $freeType frontend\models\Freetype */
 
 $this->title = WEB_NAME;
 $default_language = $this->params['default_language'];
@@ -40,60 +42,31 @@ $default_language = $this->params['default_language'];
                     Việt
                     Nam.</p>
             </div>
-            <div class="section-content">
-                <div class="row row-cols-1 row-cols-md-3">
-                    <div class="col">
-                        <div class="box-about">
-                            <div class="box-icon">
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/icon-1.png')[1] ?>"
-                                     alt="img">
+            <?php
+            if (count($freeTypes) > 0) {
+                ?>
+                <div class="section-content">
+                    <div class="row row-cols-1 row-cols-md-3">
+                        <?php foreach ($freeTypes as $freeType) { ?>
+                            <div class="col">
+                                <div class="box-about">
+                                    <div class="box-icon">
+                                        <img class="img-fluid"
+                                             src="<?= $freeType->getImage() ?>"
+                                             alt="<?= $freeType->freetypeLanguage[$default_language]->name ?>">
+                                    </div>
+                                    <div class="box-title">
+                                        <?= $freeType->freetypeLanguage[$default_language]->name ?>
+                                    </div>
+                                    <div class="box-desc">
+                                        <?= $freeType->freetypeLanguage[$default_language]->content ?>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="box-title">
-                                Tư Vấn - Thiết Kế
-                            </div>
-                            <div class="box-desc">
-                                Tư vấn và thiết kế chuyên nghiệp về kiến trúc - xây dựng - nội thất - cảnh quan thuộc
-                                các
-                                thể loại Nhà phố, Biệt thự, căn hộ, văn phòng, coffe - shop, nhà hàng - khách sạn,...
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="box-about">
-                            <div class="box-icon">
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/icon-2.png')[1] ?>"
-                                     alt="img">
-                            </div>
-                            <div class="box-title">
-                                Thiết Kế Thi Công Trọn Gói
-                            </div>
-                            <div class="box-desc">
-                                Design & Build chuyên nghiệp - chìa khóa trao tay nhà phố, biệt thự, căn hộ, văn phòng,
-                                coffe - shop, nhà hàng - khách sạn,...
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="box-about">
-                            <div class="box-icon">
-                                <img class="img-fluid"
-                                     src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/icon-3.png')[1] ?>"
-                                     alt="img">
-                            </div>
-                            <div class="box-title">
-                                Thi Công Hoàn Thiện
-                            </div>
-                            <div class="box-desc">
-                                Thi công hoàn thiện chuẩn mực - sắc nét những dự án căn hộ, nhà phố, biệt thự, văn
-                                phòng,
-                                coffe - shop, nhà hàng - khách sạn,...
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
     </section>
     <!--End #about-us-->

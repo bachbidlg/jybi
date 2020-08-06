@@ -44,7 +44,7 @@ class FreetypeTable extends \yii\db\ActiveRecord
         $keys = [
             'redis-freetype-get-by-id-' . $this->id,
             'redis-freetype-get-one-by-type-' . $this->type,
-            'redis-freetype-get-all-by-type-' . $this->type,
+            'redis-freetype-get-by-type-' . $this->type,
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -58,7 +58,7 @@ class FreetypeTable extends \yii\db\ActiveRecord
         $keys = [
             'redis-freetype-get-by-id-' . $this->id,
             'redis-freetype-get-one-by-type-' . $this->type,
-            'redis-freetype-get-all-by-type-' . $this->type,
+            'redis-freetype-get-by-type-' . $this->type,
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -126,13 +126,14 @@ class FreetypeTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getAllByType($type = self::TYPE_FREETYPE, $data_cache = YII2_CACHE)
+    public static function getByType($type = self::TYPE_FREETYPE, $published = false, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
-        $key = 'redis-freetype-get-all-by-type-' . $type;
+        $key = 'redis-freetype-get-by-type-' . $type;
         $data = $cache->get($key);
         if ($data == false || $data_cache === false) {
-            $query = self::find()->where([self::tableName() . '.type' => $type])->published()->sort();
+            $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
+            if ($published) $query->published();
             $data = $query->all();
             $cache->set($key, $data);
         }

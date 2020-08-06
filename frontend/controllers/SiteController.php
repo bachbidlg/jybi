@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\components\MyController;
+use frontend\models\Freetype;
 use frontend\models\News;
 use frontend\models\NewsCategory;
 use frontend\models\Slider;
@@ -18,6 +19,7 @@ class SiteController extends MyController
         $projectCat = NewsCategory::getByType(NewsCategory::TYPE_PROJECT, true, false);
         $projectHot = News::getNewsCheckHot(NewsCategory::TYPE_PROJECT, false);
         $newsHot = News::getNewsCheckHot(NewsCategory::TYPE_NEWS, false);
+        $freeTypes = Freetype::getByType(Freetype::TYPE_FREETYPE, true, false);
 
         return $this->render('index', [
             'sliders' => $sliders,
@@ -25,6 +27,7 @@ class SiteController extends MyController
             'projectCat' => $projectCat,
             'projectHot' => $projectHot,
             'newsHot' => $newsHot,
+            'freeTypes' => $freeTypes
         ]);
     }
 
