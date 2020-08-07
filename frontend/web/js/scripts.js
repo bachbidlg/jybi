@@ -30,7 +30,7 @@ $(function () {
         autoplaySpeed: 2000,
         dots: false,
         nav: true,
-        navText: ['<i class="fa fa-chevron-left"></i>','<i class="fa fa-chevron-right"></i>'],
+        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
         margin: 30,
         responsive: {
             0: {items: 1},
@@ -50,16 +50,21 @@ $(function () {
         dots: false,
         margin: 30,
         responsive: {
-            0:{items: 2},
-            480:{items: 2},
-            640:{items: 4},
-            991:{items: 5},
+            0: {items: 2},
+            480: {items: 2},
+            640: {items: 4},
+            991: {items: 5},
             1199: {items: 6}
         }
     });
 
-    $('#gotop').click(function() {
-        $('html, body').animate({scrollTop:0},500);
+    $('#gotop').click(function () {
+        $('html, body').animate({scrollTop: 0}, 500);
+    });
+
+    $("#top-search-trigger").on("click", function () {
+        $("body").toggleClass("top-search-open");
+        $("body").hasClass("top-search-open") && $("#top-search").find("input").focus();
     });
 });
 
