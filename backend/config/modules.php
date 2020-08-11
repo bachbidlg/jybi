@@ -54,6 +54,9 @@ return [
     'socials' => [
         'class' => 'milkyway\socials\SocialsModule',
     ],
+    'comments' => [
+        'class' => 'milkyway\comments\CommentsModule',
+    ],
     'website' => [
         'class' => 'modava\website\WebsiteModule',
     ],

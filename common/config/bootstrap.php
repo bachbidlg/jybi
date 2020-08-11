@@ -76,4 +76,5 @@ Yii::setAlias('milkyway/label', dirname(dirname(__DIR__)) . '/backend/modules/la
 Yii::setAlias('milkyway/freetype', dirname(dirname(__DIR__)) . '/backend/modules/freetype/src');
 Yii::setAlias('milkyway/shop', dirname(dirname(__DIR__)) . '/backend/modules/shop/src');
 Yii::setAlias('milkyway/socials', dirname(dirname(__DIR__)) . '/backend/modules/socials/src');
+Yii::setAlias('milkyway/comments', dirname(dirname(__DIR__)) . '/backend/modules/comments/src');
 Yii::setAlias('modava/website', dirname(dirname(__DIR__)) . '/backend/modules/website/src');
