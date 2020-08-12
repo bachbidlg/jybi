@@ -24,7 +24,7 @@ $shop = $this->params['shop'];
 ?>
 <header id="header">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center position-relative">
             <div id="logo">
                 <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
                     <a href="<?= Url::home() ?>" title="<?= $shop->dataMetadata('name') ?>">
