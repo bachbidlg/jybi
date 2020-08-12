@@ -46,5 +46,4 @@ return [
     'find-data-not-success' => 'Không tìm thấy dữ liệu trong hệ thống',
     'product-size' => '150x150px',
     'article-size' => '150x150px',
-    ''
 ];
