@@ -11,6 +11,8 @@ use milkyway\comments\CommentsModule;
 use backend\components\MyController;
 use milkyway\comments\models\Comments;
 use milkyway\comments\models\search\CommentsSearch;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * CommentsController implements the CRUD actions for Comments model.
@@ -18,8 +20,8 @@ use milkyway\comments\models\search\CommentsSearch;
 class CommentsController extends MyController
 {
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function behaviors()
     {
         return [
@@ -33,9 +35,9 @@ class CommentsController extends MyController
     }
 
     /**
-    * Lists all Comments models.
-    * @return mixed
-    */
+     * Lists all Comments models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new CommentsSearch();
@@ -45,16 +47,15 @@ class CommentsController extends MyController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-            }
-
+    }
 
 
     /**
-    * Displays a single Comments model.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Displays a single Comments model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -63,10 +64,10 @@ class CommentsController extends MyController
     }
 
     /**
-    * Creates a new Comments model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    * @return mixed
-    */
+     * Creates a new Comments model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new Comments();
@@ -98,18 +99,18 @@ class CommentsController extends MyController
     }
 
     /**
-    * Updates an existing Comments model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Updates an existing Comments model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate()) {
+            if ($model->validate()) {
                 if ($model->save()) {
                     Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                         'title' => 'Thông báo',
@@ -136,13 +137,25 @@ class CommentsController extends MyController
         ]);
     }
 
+    public function actionValidateComment($id = null)
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $model = new Comments();
+            if ($id != null) $model = $this->findModel($id);
+            if ($model->load(Yii::$app->request->post())) {
+                return ActiveForm::validate($model);
+            }
+        }
+    }
+
     /**
-    * Deletes an existing Comments model.
-    * If deletion is successful, the browser will be redirected to the 'index' page.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Deletes an existing Comments model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -175,12 +188,12 @@ class CommentsController extends MyController
     }
 
     /**
-    * Finds the Comments model based on its primary key value.
-    * If the model is not found, a 404 HTTP exception will be thrown.
-    * @param integer $id
-    * @return Comments the loaded model
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Finds the Comments model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Comments the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
 
 
     protected function findModel($id)

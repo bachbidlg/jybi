@@ -57,9 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Yii::$app->getModule('comments')->params['status'][$model->status];
                             }
                         ],
-						'created_at',
-						'updated_at',
-						'metadata',
+						'created_at:datetime',
+						'updated_at:datetime',
                         [
                             'attribute' => 'userCreated.userProfile.fullname',
                             'label' => CommentsModule::t('comments', 'Created By')

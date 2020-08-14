@@ -4,6 +4,7 @@ namespace milkyway\comments\models\table;
 
 use cheatsheet\Time;
 use milkyway\comments\models\query\CommentsQuery;
+use modava\auth\models\User;
 use Yii;
 use yii\db\ActiveRecord;
 

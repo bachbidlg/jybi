@@ -23,8 +23,8 @@ class m200811_031845_create_table_comments extends Migration
             $this->createTable('comments', [
                 'id' => $this->primaryKey(),
                 'comment' => $this->text()->notNull(),
-                'comment_table' => $this->string(255)->notNull(),
-                'comment_id' => $this->integer(11)->notNull(),
+                'comment_table' => $this->string(255)->null(),
+                'comment_id' => $this->integer(11)->null(),
                 'status' => $this->tinyInteger(1)->null()->defaultValue(1)->comment('0: Disabled, 1: Published'),
                 'created_at' => $this->integer(11)->null(),
                 'created_by' => $this->integer(11)->null(),

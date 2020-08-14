@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel milkyway\comments\models\search\CommentsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -14,32 +15,32 @@ $this->title = CommentsModule::t('comments', 'Comments');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
-<div class="container-fluid px-xxl-25 px-xl-10">
-    <?= NavbarWidgets::widget(); ?>
+    <div class="container-fluid px-xxl-25 px-xl-10">
+        <?= NavbarWidgets::widget(); ?>
 
-    <!-- Title -->
-    <div class="hk-pg-header">
-        <h4 class="hk-pg-title"><span class="pg-title-icon"><span
-                        class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
-        </h4>
-        <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= CommentsModule::t('comments', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= CommentsModule::t('comments', 'Create'); ?></a>
-    </div>
+        <!-- Title -->
+        <div class="hk-pg-header">
+            <h4 class="hk-pg-title"><span class="pg-title-icon"><span
+                            class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
+            </h4>
+            <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+               title="<?= CommentsModule::t('comments', 'Create'); ?>">
+                <i class="fa fa-plus"></i> <?= CommentsModule::t('comments', 'Create'); ?></a>
+        </div>
 
-    <!-- Row -->
-    <div class="row">
-        <div class="col-xl-12">
-            <section class="hk-sec-wrapper">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-xl-12">
+                <section class="hk-sec-wrapper">
 
-                <?php Pjax::begin(); ?>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="table-wrap">
-                            <div class="dataTables_wrapper dt-bootstrap4">
-                                <?= GridView::widget([
-                                    'dataProvider' => $dataProvider,
-                                    'layout' => '
+                    <?php Pjax::begin(); ?>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="table-wrap">
+                                <div class="dataTables_wrapper dt-bootstrap4">
+                                    <?= GridView::widget([
+                                        'dataProvider' => $dataProvider,
+                                        'layout' => '
                                         {errors}
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -59,102 +60,114 @@ $this->params['breadcrumbs'][] = $this->title;
                                             </div>
                                         </div>
                                     ',
-                                    'pager' => [
-                                        'firstPageLabel' => CommentsModule::t('comments', 'First'),
-                                        'lastPageLabel' => CommentsModule::t('comments', 'Last'),
-                                        'prevPageLabel' => CommentsModule::t('comments', 'Previous'),
-                                        'nextPageLabel' => CommentsModule::t('comments', 'Next'),
-                                        'maxButtonCount' => 5,
+                                        'pager' => [
+                                            'firstPageLabel' => CommentsModule::t('comments', 'First'),
+                                            'lastPageLabel' => CommentsModule::t('comments', 'Last'),
+                                            'prevPageLabel' => CommentsModule::t('comments', 'Previous'),
+                                            'nextPageLabel' => CommentsModule::t('comments', 'Next'),
+                                            'maxButtonCount' => 5,
 
-                                        'options' => [
-                                            'tag' => 'ul',
-                                            'class' => 'pagination',
-                                        ],
+                                            'options' => [
+                                                'tag' => 'ul',
+                                                'class' => 'pagination',
+                                            ],
 
-                                        // Customzing CSS class for pager link
-                                        'linkOptions' => ['class' => 'page-link'],
-                                        'activePageCssClass' => 'active',
-                                        'disabledPageCssClass' => 'disabled page-disabled',
-                                        'pageCssClass' => 'page-item',
+                                            // Customzing CSS class for pager link
+                                            'linkOptions' => ['class' => 'page-link'],
+                                            'activePageCssClass' => 'active',
+                                            'disabledPageCssClass' => 'disabled page-disabled',
+                                            'pageCssClass' => 'page-item',
 
-                                        // Customzing CSS class for navigating link
-                                        'prevPageCssClass' => 'paginate_button page-item',
-                                        'nextPageCssClass' => 'paginate_button page-item',
-                                        'firstPageCssClass' => 'paginate_button page-item',
-                                        'lastPageCssClass' => 'paginate_button page-item',
-                                    ],
-                                    'columns' => [
-                                        [
-                                            'class' => 'yii\grid\SerialColumn',
-                                            'header' => 'STT',
-                                            'headerOptions' => [
-                                                'width' => 60,
-                                                'rowspan' => 2
-                                            ],
-                                            'filterOptions' => [
-                                                'class' => 'd-none',
-                                            ],
+                                            // Customzing CSS class for navigating link
+                                            'prevPageCssClass' => 'paginate_button page-item',
+                                            'nextPageCssClass' => 'paginate_button page-item',
+                                            'firstPageCssClass' => 'paginate_button page-item',
+                                            'lastPageCssClass' => 'paginate_button page-item',
                                         ],
-                                    
-										'comment:ntext',
-										'comment_table',
-										'comment_id',
-										'metadata',
-                                        [
-                                            'attribute' => 'created_by',
-                                            'value' => 'userCreated.userProfile.fullname',
-                                            'headerOptions' => [
-                                                'width' => 150,
+                                        'columns' => [
+                                            [
+                                                'class' => 'yii\grid\SerialColumn',
+                                                'header' => 'STT',
+                                                'headerOptions' => [
+                                                    'width' => 60,
+                                                    'rowspan' => 2
+                                                ],
+                                                'filterOptions' => [
+                                                    'class' => 'd-none',
+                                                ],
                                             ],
-                                        ],
-                                        [
-                                            'attribute' => 'created_at',
-                                            'format' => 'date',
-                                            'headerOptions' => [
-                                                'width' => 150,
-                                            ],
-                                        ],
-                                        [
-                                            'class' => 'yii\grid\ActionColumn',
-                                            'header' => CommentsModule::t('comments', 'Actions'),
-                                            'template' => '{update} {delete}',
-                                            'buttons' => [
-                                                'update' => function ($url, $model) {
-                                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                                        'title' => CommentsModule::t('comments', 'Update'),
-                                                        'alia-label' => CommentsModule::t('comments', 'Update'),
-                                                        'data-pjax' => 0,
-                                                        'class' => 'btn btn-info btn-xs'
-                                                    ]);
+                                            [
+                                                'attribute' => 'id',
+                                                'enableSorting' =>false,
+                                                'value' => function ($model) {
+                                                    return $model->metadata['name'];
                                                 },
-                                                'delete' => function ($url, $model) {
-                                                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
-                                                        'title' => CommentsModule::t('comments', 'Delete'),
-                                                        'class' => 'btn btn-danger btn-xs btn-del',
-                                                        'data-title' => CommentsModule::t('comments', 'Delete?'),
-                                                        'data-pjax' => 0,
-                                                        'data-url' => $url,
-                                                        'btn-success-class' => 'success-delete',
-                                                        'btn-cancel-class' => 'cancel-delete',
-                                                        'data-placement' => 'top'
-                                                    ]);
-                                                }
+                                                'label' => CommentsModule::t('comments', 'Name')
                                             ],
-                                            'headerOptions' => [
-                                                'width' => 150,
+                                            [
+                                                'attribute' => 'id',
+                                                'enableSorting' =>false,
+                                                'value' => function ($model) {
+                                                    return $model->metadata['address'];
+                                                },
+                                                'label' => CommentsModule::t('comments', 'Address')
+                                            ],
+                                            'comment:ntext',
+                                            [
+                                                'attribute' => 'created_by',
+                                                'value' => 'userCreated.userProfile.fullname',
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
+                                            ],
+                                            [
+                                                'attribute' => 'created_at',
+                                                'format' => 'date',
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
+                                            ],
+                                            [
+                                                'class' => 'yii\grid\ActionColumn',
+                                                'header' => CommentsModule::t('comments', 'Actions'),
+                                                'template' => '{update} {delete}',
+                                                'buttons' => [
+                                                    'update' => function ($url, $model) {
+                                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                                            'title' => CommentsModule::t('comments', 'Update'),
+                                                            'alia-label' => CommentsModule::t('comments', 'Update'),
+                                                            'data-pjax' => 0,
+                                                            'class' => 'btn btn-info btn-xs'
+                                                        ]);
+                                                    },
+                                                    'delete' => function ($url, $model) {
+                                                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
+                                                            'title' => CommentsModule::t('comments', 'Delete'),
+                                                            'class' => 'btn btn-danger btn-xs btn-del',
+                                                            'data-title' => CommentsModule::t('comments', 'Delete?'),
+                                                            'data-pjax' => 0,
+                                                            'data-url' => $url,
+                                                            'btn-success-class' => 'success-delete',
+                                                            'btn-cancel-class' => 'cancel-delete',
+                                                            'data-placement' => 'top'
+                                                        ]);
+                                                    }
+                                                ],
+                                                'headerOptions' => [
+                                                    'width' => 150,
+                                                ],
                                             ],
                                         ],
-                                    ],
-                                ]); ?>
-                                                            </div>
+                                    ]); ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php Pjax::end(); ?>
-            </section>
+                    <?php Pjax::end(); ?>
+                </section>
+            </div>
         </div>
     </div>
-</div>
 <?php
 $script = <<< JS
 $('body').on('click', '.success-delete', function(e){

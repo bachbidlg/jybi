@@ -10,5 +10,7 @@ return [
     'Next' => 'Tiếp',
     'Status' => 'Trạng thái',
     'Created At' => 'Ngày tạo',
-    'Actions' => 'Hành động'
+    'Actions' => 'Hành động',
+    'Name' => 'Tên',
+    'Address' => 'Địa chỉ',
 ];
