@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ],
                                             ],
                                             [
-                                                'attribute' => 'id',
+                                                'attribute' => 'metadata',
                                                 'enableSorting' =>false,
                                                 'value' => function ($model) {
                                                     return $model->metadata['name'];
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'label' => CommentsModule::t('comments', 'Name')
                                             ],
                                             [
-                                                'attribute' => 'id',
+                                                'attribute' => 'metadata',
                                                 'enableSorting' =>false,
                                                 'value' => function ($model) {
                                                     return $model->metadata['address'];

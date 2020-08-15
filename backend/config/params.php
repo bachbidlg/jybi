@@ -46,4 +46,19 @@ return [
     'find-data-not-success' => 'Không tìm thấy dữ liệu trong hệ thống',
     'product-size' => '150x150px',
     'article-size' => '150x150px',
+    'module-comments' => [
+        'metadataClass' => \backend\models\CommentsMetadata::class,
+        'metadataMappingImage' => [
+            'image' => [
+                'ipt' => 'iptImage',
+                'path' => Yii::getAlias('@frontend/web/uploads/comments'),
+                'size' => '770x450'
+            ],
+            'background' => [
+                'ipt' => 'iptBackground',
+                'path' => Yii::getAlias('@frontend/web/uploads/comments'),
+                'size' => '1000x400'
+            ]
+        ]
+    ]
 ];

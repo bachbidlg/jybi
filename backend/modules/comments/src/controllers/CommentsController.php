@@ -2,6 +2,7 @@
 
 namespace milkyway\comments\controllers;
 
+use milkyway\comments\models\metadata_interface\MetadataTrait;
 use yii\db\Exception;
 use Yii;
 use yii\helpers\Html;

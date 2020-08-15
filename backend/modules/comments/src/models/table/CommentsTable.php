@@ -44,22 +44,28 @@ class CommentsTable extends \yii\db\ActiveRecord
     }
 
     /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getUserCreated()
     {
-    return $this->hasOne(User::class, ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**
-    * Gets query for [[User]].
-    *
-    * @return \yii\db\ActiveQuery
-    */
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
     public function getUserUpdated()
     {
-    return $this->hasOne(User::class, ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
+
+    public function getMetadataByKey($key)
+    {
+        if (!is_array($this->metadata) || !array_key_exists($key, $this->metadata)) return null;
+        return $this->metadata[$key];
     }
 }
