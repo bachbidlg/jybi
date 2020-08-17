@@ -112,6 +112,7 @@ class ShopController extends MyController
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate() && $model->save() && $model->saveShopLanguage()) {
+                var_dump($model->getAttributes());die;
                 Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-view', [
                     'title' => 'Thông báo',
                     'text' => 'Cập nhật thành công',

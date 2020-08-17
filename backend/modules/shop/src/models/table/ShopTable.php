@@ -18,6 +18,7 @@ class ShopTable extends \yii\db\ActiveRecord
     public $created;
     public $started;
     public $map;
+    public $video;
 
     public function init()
     {

@@ -98,17 +98,34 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ],
                                             [
                                                 'attribute' => 'metadata',
-                                                'enableSorting' =>false,
+                                                'enableSorting' => false,
+                                                'format' => 'raw',
                                                 'value' => function ($model) {
-                                                    return $model->metadata['name'];
+                                                    /* @var $model milkyway\comments\models\Comments */
+                                                    $image = $model->getMetadataByKey('image');
+                                                    $path = Yii::$app->params['module-comments']['metadataMappingImage']['image']['path'];
+                                                    if (is_dir($path . '/' . $image) || !file_exists($path . '/' . $image)) return null;
+                                                    return Html::img(Yii::$app->assetManager->publish($path . '/' . $image)[1], [
+                                                        'style' => 'max-width: 120px'
+                                                    ]);
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Name')
                                             ],
                                             [
                                                 'attribute' => 'metadata',
-                                                'enableSorting' =>false,
+                                                'enableSorting' => false,
                                                 'value' => function ($model) {
-                                                    return $model->metadata['address'];
+                                                    /* @var $model milkyway\comments\models\Comments */
+                                                    return $model->getMetadataByKey('name');
+                                                },
+                                                'label' => CommentsModule::t('comments', 'Name')
+                                            ],
+                                            [
+                                                'attribute' => 'metadata',
+                                                'enableSorting' => false,
+                                                'value' => function ($model) {
+                                                    /* @var $model milkyway\comments\models\Comments */
+                                                    return $model->getMetadataByKey('address');
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Address')
                                             ],

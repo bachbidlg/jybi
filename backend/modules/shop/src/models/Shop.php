@@ -80,7 +80,7 @@ class Shop extends ShopTable
                     ActiveRecord::EVENT_BEFORE_VALIDATE => ['metadata'],
                 ],
                 'value' => function () {
-                    return array_merge($this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map']), ['logo' => $this->dataMetadata('logo')]);
+                    return array_merge($this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map', 'video']), ['logo' => $this->dataMetadata('logo')]);
                 }
             ]
         ];
@@ -115,7 +115,6 @@ class Shop extends ShopTable
             'metadata' => ShopModule::t('shop', 'Metadata'),
             'iptLogo' => ShopModule::t('shop', 'Logo'),
             'logo' => ShopModule::t('shop', 'Logo'),
-            'iptLogo' => ShopModule::t('shop', 'Logo'),
             'email' => ShopModule::t('shop', 'Email'),
             'phone' => ShopModule::t('shop', 'Phone'),
             'hotline' => ShopModule::t('shop', 'Hotline'),
@@ -123,6 +122,7 @@ class Shop extends ShopTable
             'created' => ShopModule::t('shop', 'Ngày cấp giấy phép'),
             'started' => ShopModule::t('shop', 'Ngày hoạt động'),
             'map' => ShopModule::t('shop', 'Bản đồ'),
+            'video' => ShopModule::t('shop', 'Video'),
             'created_at' => ShopModule::t('shop', 'Created At'),
             'created_by' => ShopModule::t('shop', 'Created By'),
             'updated_at' => ShopModule::t('shop', 'Updated At'),
