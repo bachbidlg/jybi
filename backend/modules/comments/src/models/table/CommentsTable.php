@@ -2,12 +2,27 @@
 
 namespace milkyway\comments\models\table;
 
-use cheatsheet\Time;
 use milkyway\comments\models\query\CommentsQuery;
 use modava\auth\models\User;
 use Yii;
-use yii\db\ActiveRecord;
 
+/**
+ * This is the model class for table "comments".
+ *
+ * @property int $id
+ * @property string $comment
+ * @property string $comment_table
+ * @property int $comment_id
+ * @property int $status 0: Disabled, 1: Published
+ * @property int $created_at
+ * @property int $created_by
+ * @property int $updated_at
+ * @property int $updated_by
+ * @property array $metadata Other info, ex: name, phone, address,...
+ *
+ * @property User $createdBy
+ * @property User $updatedBy
+ */
 class CommentsTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
@@ -26,7 +41,9 @@ class CommentsTable extends \yii\db\ActiveRecord
     public function afterDelete()
     {
         $cache = Yii::$app->cache;
-        $keys = [];
+        $keys = [
+            'redis-comments-get-all'
+        ];
         foreach ($keys as $key) {
             $cache->delete($key);
         }
@@ -36,7 +53,9 @@ class CommentsTable extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         $cache = Yii::$app->cache;
-        $keys = [];
+        $keys = [
+            'redis-comments-get-all'
+        ];
         foreach ($keys as $key) {
             $cache->delete($key);
         }
@@ -63,7 +82,21 @@ class CommentsTable extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
-    public function getMetadataByKey($key)
+    public static function getAll($published = false, $data_cache = YII2_CACHE)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-comments-get-all';
+        $data = $cache->get($key);
+        if ($data == false || $data_cache === false) {
+            $query = self::find();
+            if ($published === true) $query->published();
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public function dataMetadataByKey($key)
     {
         if (!is_array($this->metadata) || !array_key_exists($key, $this->metadata)) return null;
         return $this->metadata[$key];

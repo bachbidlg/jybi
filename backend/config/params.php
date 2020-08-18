@@ -52,12 +52,7 @@ return [
             'image' => [
                 'ipt' => 'iptImage',
                 'path' => Yii::getAlias('@frontend/web/uploads/comments'),
-                'size' => '770x450'
-            ],
-            'background' => [
-                'ipt' => 'iptBackground',
-                'path' => Yii::getAlias('@frontend/web/uploads/comments'),
-                'size' => '1000x400'
+                'size' => '75x75',
             ]
         ]
     ]

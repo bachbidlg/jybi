@@ -15,15 +15,13 @@ class CommentsMetadata extends Model implements MetadataInterface
     public $address;
     public $image;
     public $iptImage;
-    public $background;
-    public $iptBackground;
 
     public function rules()
     {
         return [
             [['name', 'address'], 'required'],
-            [['name', 'address', 'image', 'background'], 'string', 'max' => 255],
-            [['iptImage', 'iptBackground'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'maxSize' => 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng: {extensions}']
+            [['name', 'address', 'image'], 'string', 'max' => 255],
+            [['iptImage'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'maxSize' => 1024 * 1024, 'wrongExtension' => 'Chỉ chấp nhận định dạng: {extensions}']
         ];
     }
 
@@ -40,16 +38,9 @@ class CommentsMetadata extends Model implements MetadataInterface
                         if ($iptImage->saveAs($path['image'] . $fileName)) $this->image = $fileName;
                     }
                 }
-                if (array_key_exists('image', $path) && is_dir($path['image'])) {
-                    $iptBackground = $this->iptBackground;
-                    if ($iptBackground != null) {
-                        $fileName = $iptBackground->baseName . '-' . time() . '.' . $iptBackground->extension;
-                        if ($iptBackground->saveAs($path['image'] . $fileName)) $this->background = $fileName;
-                    }
-                }
             }
             return $this->getAttributes([
-                'name', 'address', 'image', 'background'
+                'name', 'address', 'image'
             ]);
         }
     }

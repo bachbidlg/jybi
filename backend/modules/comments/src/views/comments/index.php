@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
                                                     /* @var $model milkyway\comments\models\Comments */
-                                                    $image = $model->getMetadataByKey('image');
+                                                    $image = $model->dataMetadataByKey('image');
                                                     $path = Yii::$app->params['module-comments']['metadataMappingImage']['image']['path'];
                                                     if (is_dir($path . '/' . $image) || !file_exists($path . '/' . $image)) return null;
                                                     return Html::img(Yii::$app->assetManager->publish($path . '/' . $image)[1], [
@@ -116,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'enableSorting' => false,
                                                 'value' => function ($model) {
                                                     /* @var $model milkyway\comments\models\Comments */
-                                                    return $model->getMetadataByKey('name');
+                                                    return $model->dataMetadataByKey('name');
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Name')
                                             ],
@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'enableSorting' => false,
                                                 'value' => function ($model) {
                                                     /* @var $model milkyway\comments\models\Comments */
-                                                    return $model->getMetadataByKey('address');
+                                                    return $model->dataMetadataByKey('address');
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Address')
                                             ],

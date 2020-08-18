@@ -9,9 +9,12 @@ use yii\helpers\Url;
 /* @var $newsHot array */
 /* @var $freeTypes array */
 /* @var $freeType frontend\models\Freetype */
+/* @var $comments array */
+/* @var $comment frontend\models\Comments */
 
 $this->title = WEB_NAME;
 $default_language = $this->params['default_language'];
+$shop = $this->params['shop'];
 ?>
 <?php if (count($sliders) > 0) { ?>
     <!--Start #banner-->
@@ -166,78 +169,61 @@ $default_language = $this->params['default_language'];
             </div>
             <div class="section-content">
                 <div class="row m-lg-0">
-                    <div class="col-lg-5 p-lg-0">
-                        <div class="video-area">
-                            <img class="img-fluid w-100" src="https://i3.ytimg.com/vi/8t5Z-pVjYAE/maxresdefault.jpg">
-                            <span class="icon-play" data-fancybox="" href="https://www.youtube.com/watch?v=8t5Z-pVjYAE">
+                    <?php
+                    if ($shop->dataMetadata('video') != null && strpos($shop->dataMetadata('video'), '?v=') !== false) {
+                        $video = $shop->dataMetadata('video');
+                        $arr = explode('?v=', $video);
+                        $arr = explode('&', $arr[1]);
+                        $videoCode = $arr[0];
+                        ?>
+                        <div class="col-lg-5 p-lg-0">
+                            <div class="video-area">
+                                <img class="img-fluid w-100"
+                                     src="https://i3.ytimg.com/vi/<?= $videoCode ?>/maxresdefault.jpg">
+                                <span class="icon-play" data-fancybox=""
+                                      href="https://www.youtube.com/watch?v=<?= $videoCode ?>">
                                     <i class="fa fa-play"></i>
                                 </span>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 p-lg-0">
-                        <div class="testimonial-area owl-carousel owl-theme">
-                            <div class="testimonial-item">
-                                <div class="reviews">
-                                    <i class="fa fa-quote-left"></i>
-                                    <p>Sau khi nhận nhà dự án căn hộ Ehome S Quận 9 - TPHCM tôi đã tiến hành tìm kiếm 1
-                                        đơn
-                                        vị thi công nội thất và biết đến <strong>ACI Design</strong>. Liên
-                                        hệ KTS tôi nhận được sự tư vấn rất nhiệt tình, tôi đã quyết định chọn ngay
-                                        <strong>ACI
-                                            Design</strong>, kết quả là tôi đã có được 1 căn hộ vô cùng ưng
-                                        ý và đẹp mắt.</p>
-                                </div>
-                                <div class="users">
-                                    <div class="user-img">
-                                        <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
-                                             alt=""
-                                             class="img-fluid">
-                                    </div>
-                                    <div class="user-name">
-                                        Chị Hường<br><span>Quận 9</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="reviews">
-                                    <i class="fa fa-quote-left"></i>
-                                    <p>Khi thấy một số mẫu thiết kế căn hộ trên website công ty mình gọi điện thì được
-                                        tư vấn rất nhiệt tình, cuối cùng mình đã quyết định chọn An Phú Decor. Công ty
-                                        làm việc trách nhiệm, bảo hành bảo trì sau thi công cũng rất tốt. Cám ơn An Phú
-                                        Decor đã thiết kế cho mình 1 căn hộ đẹp mắt.</p>
-                                </div>
-                                <div class="users">
-                                    <div class="user-img">
-                                        <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
-                                             alt=""
-                                             class="img-fluid">
-                                    </div>
-                                    <div class="user-name">
-                                        Chị Lanh<br><span>Quận 3</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="reviews">
-                                    <i class="fa fa-quote-left"></i>
-                                    <p>Văn phòng của tôi được <strong>thiết kế rất hiện đại và đẹp mắt</strong>, tất cả
-                                        yêu cầu của tôi đều được giải quyết một cách xuất sắc, đội ngũ kiến trúc
-                                        sư và thợ thi công làm việc nhiệt tình và trách nhiệm. Cám ơn công ty rất
-                                        nhiều.</p>
-                                </div>
-                                <div class="users">
-                                    <div class="user-img">
-                                        <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
-                                             alt=""
-                                             class="img-fluid">
-                                    </div>
-                                    <div class="user-name">
-                                        Anh Cương<br><span>Quận Tân Phú</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
+                    <?php if (count($comments) > 0) { ?>
+                        <div class="col-lg-7 p-lg-0">
+                            <div class="testimonial-area owl-carousel owl-theme">
+                                <?php
+                                foreach ($comments as $comment) {
+                                    $image = $comment->dataMetadataByKey('image');
+                                    if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
+                                        try {
+                                            $image = Yii::$app->assetManager->publish(Yii::getAlias('@frontend/web/uploads/comments/') . $image)[1];
+                                        } catch (Exception $ex) {
+                                            $image = null;
+                                        }
+                                    }
+                                    ?>
+                                    <div class="testimonial-item">
+                                        <div class="reviews">
+                                            <i class="fa fa-quote-left"></i>
+                                            <?= $comment->comment ?>
+                                        </div>
+                                        <div class="users">
+                                            <?php if ($image != null) { ?>
+                                                <div class="user-img">
+                                                    <img src="<?= $image ?>"
+                                                         alt="<?= $comment->dataMetadataByKey('name') ?>"
+                                                         class="img-fluid">
+                                                </div>
+                                            <?php } ?>
+                                            <div class="user-name">
+                                                <?= $comment->dataMetadataByKey('name') ?>
+                                                <br><span><?= $comment->dataMetadataByKey('address') ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

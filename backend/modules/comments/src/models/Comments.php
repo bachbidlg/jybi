@@ -2,8 +2,6 @@
 
 namespace milkyway\comments\models;
 
-use backend\models\CommentsMetadata;
-use common\helpers\MyHelper;
 use common\models\User;
 use milkyway\comments\CommentsModule;
 use milkyway\comments\models\metadata_interface\MetadataInterface;
@@ -15,23 +13,6 @@ use yii\db\ActiveRecord;
 use Yii;
 use yii\web\UploadedFile;
 
-/**
- * This is the model class for table "comments".
- *
- * @property int $id
- * @property string $comment
- * @property string $comment_table
- * @property int $comment_id
- * @property int $status 0: Disabled, 1: Published
- * @property int $created_at
- * @property int $created_by
- * @property int $updated_at
- * @property int $updated_by
- * @property array $metadata Other info, ex: name, phone, address,...
- *
- * @property User $createdBy
- * @property User $updatedBy
- */
 class Comments extends CommentsTable
 {
     const SCENARIO_COMMENT_FOR_TABLE = 'comment-for-table';

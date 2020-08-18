@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\components\MyController;
+use frontend\models\Comments;
 use frontend\models\Freetype;
 use frontend\models\News;
 use frontend\models\NewsCategory;
@@ -21,13 +22,16 @@ class SiteController extends MyController
         $newsHot = News::getNewsCheckHot(NewsCategory::TYPE_NEWS, false);
         $freeTypes = Freetype::getByType(Freetype::TYPE_FREETYPE, true, false);
 
+        $comments = Comments::getAll(true, false);
+
         return $this->render('index', [
             'sliders' => $sliders,
             'partners' => $partners,
             'projectCat' => $projectCat,
             'projectHot' => $projectHot,
             'newsHot' => $newsHot,
-            'freeTypes' => $freeTypes
+            'freeTypes' => $freeTypes,
+            'comments' => $comments
         ]);
     }
 

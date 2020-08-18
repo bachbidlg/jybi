@@ -47,9 +47,9 @@ if ($model->commentsMetadata != null) $metadataPath = $model->commentsMetadata->
                     <div class="preview-<?= $key ?> mt-3">
                         <?php
                         $image = null;
-                        if ($model->getMetadataByKey($key) != null &&
-                            !is_dir($model->commentsMetadata->getPath($key) . '/' . $model->getMetadataByKey($key)) &&
-                            file_exists($model->commentsMetadata->getPath($key) . '/' . $model->getMetadataByKey($key))) {
+                        if ($model->dataMetadataByKey($key) != null &&
+                            !is_dir($model->commentsMetadata->getPath($key) . '/' . $model->dataMetadataByKey($key)) &&
+                            file_exists($model->commentsMetadata->getPath($key) . '/' . $model->dataMetadataByKey($key))) {
                             $image = $model->commentsMetadata->getImage($key);
                         }
                         if ($image != null) echo Html::img($image, [
