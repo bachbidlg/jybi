@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Html;
+use modava\tiny\TinyMce;
 use yii\widgets\ActiveForm;
 use backend\widgets\ToastrWidget;
 use milkyway\comments\CommentsModule;
@@ -35,7 +36,16 @@ if ($model->commentsMetadata != null) $metadataPath = $model->commentsMetadata->
 
     <?= $form->field($model, 'metadata[address]')->textInput()->label(CommentsModule::t('comments', 'Address')) ?>
 
-    <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+    <div class="row">
+        <div class="col-12">
+            <label class="form-label"><?= $model->getAttributeLabel('comment') ?></label>
+            <?= TinyMce::widget([
+                'model' => $model,
+                'attribute' => 'comment',
+                'type' => 'content'
+            ]) ?>
+        </div>
+    </div>
 
     <div class="row">
         <?php
@@ -56,7 +66,7 @@ if ($model->commentsMetadata != null) $metadataPath = $model->commentsMetadata->
                             'style' => 'max-width: 120px'
                         ]) ?>
                     </div>
-                    <div class="text-danger font-italic"><?= $model->getAttributeLabel($ipt) ?>
+                    <div class="text-danger font-italic"><?= $model->commentsMetadata->getAttributeLabel($ipt) ?>
                         (<?= Yii::$app->params['module-comments']['metadataMappingImage'][$key]['size'] ?>)
                     </div>
                     <?= $form->field($model, 'metadata[' . $ipt . ']')->fileInput([

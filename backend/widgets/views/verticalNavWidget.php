@@ -118,6 +118,17 @@ use modava\auth\models\User;
                     </li>
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('comments') ||
+                    Yii::$app->user->can('commentsComments') ||
+                    Yii::$app->user->can('commentsCommentsIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'comments') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/comments']); ?>">
+                            <i class="fa fa-commenting"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Comments'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
                     Yii::$app->user->can('shop') ||
                     Yii::$app->user->can('shopShop') ||
                     Yii::$app->user->can('shopShopIndex')) { ?>

@@ -187,11 +187,11 @@ $shop = $this->params['shop'];
                             </div>
                         </div>
                     <?php } ?>
-                    <?php if (count($comments) > 0) { ?>
+                    <?php //if (count($comments) > 0) { ?>
                         <div class="col-lg-7 p-lg-0">
                             <div class="testimonial-area owl-carousel owl-theme">
                                 <?php
-                                foreach ($comments as $comment) {
+                                /*foreach ($comments as $comment) {
                                     $image = $comment->dataMetadataByKey('image');
                                     if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
                                         try {
@@ -220,10 +220,52 @@ $shop = $this->params['shop'];
                                             </div>
                                         </div>
                                     </div>
-                                <?php } ?>
+                                <?php }*/ ?>
+                                <div class="testimonial-item">
+                                    <div class="reviews">
+                                        <i class="fa fa-quote-left"></i>
+                                        <p>Khi thấy một số mẫu thiết kế căn hộ trên website công ty mình gọi điện thì
+                                            được
+                                            tư vấn rất nhiệt tình, cuối cùng mình đã quyết định chọn An Phú Decor. Công
+                                            ty
+                                            làm việc trách nhiệm, bảo hành bảo trì sau thi công cũng rất tốt. Cám ơn An
+                                            Phú
+                                            Decor đã thiết kế cho mình 1 căn hộ đẹp mắt.</p>
+                                    </div>
+                                    <div class="users">
+                                        <div class="user-img">
+                                            <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
+                                                 alt=""
+                                                 class="img-fluid">
+                                        </div>
+                                        <div class="user-name">
+                                            Chị Lanh<br><span>Quận 3</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-item">
+                                    <div class="reviews">
+                                        <i class="fa fa-quote-left"></i>
+                                        <p>Văn phòng của tôi được <strong>thiết kế rất hiện đại và đẹp mắt</strong>, tất
+                                            cả
+                                            yêu cầu của tôi đều được giải quyết một cách xuất sắc, đội ngũ kiến trúc
+                                            sư và thợ thi công làm việc nhiệt tình và trách nhiệm. Cám ơn công ty rất
+                                            nhiều.</p>
+                                    </div>
+                                    <div class="users">
+                                        <div class="user-img">
+                                            <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
+                                                 alt=""
+                                                 class="img-fluid">
+                                        </div>
+                                        <div class="user-name">
+                                            Anh Cương<br><span>Quận Tân Phú</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php //} ?>
                 </div>
             </div>
         </div>

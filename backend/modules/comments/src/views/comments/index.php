@@ -131,20 +131,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ],
                                             'comment:ntext',
                                             [
-                                                'attribute' => 'created_by',
-                                                'value' => 'userCreated.userProfile.fullname',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
-                                            ],
-                                            [
-                                                'attribute' => 'created_at',
-                                                'format' => 'date',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
-                                            ],
-                                            [
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => CommentsModule::t('comments', 'Actions'),
                                                 'template' => '{update} {delete}',

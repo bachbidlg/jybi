@@ -25,6 +25,16 @@ class CommentsMetadata extends Model implements MetadataInterface
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Tên',
+            'address' => 'Địa chỉ',
+            'iptImage' => 'Avatar',
+            'image' => 'Avatar'
+        ];
+    }
+
     public function getMetadata()
     {
         /* @var $iptImage UploadedFile */
