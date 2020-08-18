@@ -166,7 +166,7 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getNewsCheckHot($type = null, $data_cache = YII2_CACHE)
+    public static function getNewsCheckHot($type = null, $limit = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-news-check-hot-' . $type;
@@ -179,13 +179,14 @@ class NewsTable extends \yii\db\ActiveRecord
                 NewsCategory::tableName() . '.type' => $type
             ]);
             $query->sort(SORT_DESC)->published();
+            if ($limit != null && is_numeric($limit)) $query->offset(0)->limit($limit);
             $data = $query->all();
             $cache->set($key, $data);
         }
         return $data;
     }
 
-    public static function getNewsCheckCamNangXayDung($type = null, $data_cache = YII2_CACHE)
+    public static function getNewsCheckCamNangXayDung($type = null, $limit = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-news-check-cam-nang-xay-dung-' . $type;
@@ -198,6 +199,7 @@ class NewsTable extends \yii\db\ActiveRecord
                 NewsCategory::tableName() . '.type' => $type
             ]);
             $query->sort(SORT_DESC)->published();
+            if ($limit != null && is_numeric($limit)) $query->offset(0)->limit($limit);
             $data = $query->all();
             $cache->set($key, $data);
         }
