@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         'style' => 'max-width: 120px'
                                                     ]);
                                                 },
-                                                'label' => CommentsModule::t('comments', 'Name')
+                                                'label' => CommentsModule::t('comments', 'Avatar')
                                             ],
                                             [
                                                 'attribute' => 'metadata',
@@ -129,7 +129,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Address')
                                             ],
-                                            'comment:ntext',
+                                            [
+                                                'attribyte' => 'comment',
+                                                'format' => 'raw',
+                                            ],
                                             [
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => CommentsModule::t('comments', 'Actions'),
