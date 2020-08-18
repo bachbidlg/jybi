@@ -161,6 +161,7 @@ $shop = $this->params['shop'];
     </section>
     <!--Start #projects-done-->
 <?php } ?>
+<?php if (count($comments) > 0) { ?>
     <!--Start #testimonial-->
     <section id="testimonial">
         <div class="container">
@@ -187,48 +188,47 @@ $shop = $this->params['shop'];
                             </div>
                         </div>
                     <?php } ?>
-                    <?php if (count($comments) > 0) { ?>
-                        <div class="col-lg-7 p-lg-0">
-                            <div class="testimonial-area owl-carousel owl-theme">
-                                <?php
-                                foreach ($comments as $comment) {
-                                    $image = $comment->dataMetadataByKey('image');
-                                    if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
-                                        try {
-                                            $image = Yii::$app->assetManager->publish(Yii::getAlias('@frontend/web/uploads/comments/') . $image)[1];
-                                        } catch (Exception $ex) {
-                                            $image = null;
-                                        }
+                    <div class="col-lg-7 p-lg-0">
+                        <div class="testimonial-area owl-carousel owl-theme">
+                            <?php
+                            foreach ($comments as $comment) {
+                                $image = $comment->dataMetadataByKey('image');
+                                if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
+                                    try {
+                                        $image = Yii::$app->assetManager->publish(Yii::getAlias('@frontend/web/uploads/comments/') . $image)[1];
+                                    } catch (Exception $ex) {
+                                        $image = null;
                                     }
-                                    ?>
-                                    <div class="testimonial-item">
-                                        <div class="reviews">
-                                            <i class="fa fa-quote-left"></i>
-                                            <?= $comment->comment ?>
-                                        </div>
-                                        <div class="users">
-                                            <?php if ($image != null) { ?>
-                                                <div class="user-img">
-                                                    <img src="<?= $image ?>"
-                                                         alt="<?= $comment->dataMetadataByKey('name') ?>"
-                                                         class="img-fluid">
-                                                </div>
-                                            <?php } ?>
-                                            <div class="user-name">
-                                                <?= $comment->dataMetadataByKey('name') ?>
-                                                <br><span><?= $comment->dataMetadataByKey('address') ?></span>
+                                }
+                                ?>
+                                <div class="testimonial-item">
+                                    <div class="reviews">
+                                        <i class="fa fa-quote-left"></i>
+                                        <?= $comment->comment ?>
+                                    </div>
+                                    <div class="users">
+                                        <?php if ($image != null) { ?>
+                                            <div class="user-img">
+                                                <img src="<?= $image ?>"
+                                                     alt="<?= $comment->dataMetadataByKey('name') ?>"
+                                                     class="img-fluid">
                                             </div>
+                                        <?php } ?>
+                                        <div class="user-name">
+                                            <?= $comment->dataMetadataByKey('name') ?>
+                                            <br><span><?= $comment->dataMetadataByKey('address') ?></span>
                                         </div>
                                     </div>
-                                <?php } ?>
-                            </div>
+                                </div>
+                            <?php } ?>
                         </div>
-                    <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <!--Start #testimonial-->
+<?php } ?>
 
 <?php if (count($newsHot) > 0) { ?>
     <!--Start #news-->

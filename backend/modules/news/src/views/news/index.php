@@ -148,6 +148,13 @@ $list_language = LanguageTable::getAll();
                                             }
                                         ],
                                         [
+                                            'attribute' => 'cam_nang_xay_dung',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->cam_nang_xay_dung ? 'checked' : '') . ' data-field="cam_nang_xay_dung" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
+                                            }
+                                        ],
+                                        [
                                             'attribute' => 'created_by',
                                             'value' => 'userCreated.userProfile.fullname',
                                             'headerOptions' => [

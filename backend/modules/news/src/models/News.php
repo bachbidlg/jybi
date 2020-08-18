@@ -4,7 +4,6 @@ namespace milkyway\news\models;
 
 use common\helpers\MyHelper;
 use common\models\User;
-use milkyway\language\models\Language;
 use milkyway\language\models\table\LanguageTable;
 use milkyway\news\models\table\NewsImagesTable;
 use milkyway\news\NewsModule;
@@ -16,27 +15,6 @@ use Yii;
 use yii\db\Transaction;
 use yii\web\UploadedFile;
 
-/**
- * This is the model class for table "news".
- *
- * @property int $id
- * @property string $slug
- * @property int $category
- * @property string $image
- * @property int $status
- * @property int $sort Thứ tự
- * @property int $created_at
- * @property int $created_by
- * @property int $updated_at
- * @property int $updated_by
- * @property string $alias
- *
- * @property NewsCategory $category0
- * @property User $createdBy
- * @property User $updatedBy
- * @property NewsLanguage[] $newsLanguages
- * @property Language[] $languages
- */
 class News extends NewsTable
 {
     const SCENARIO_UPDATE = 'update';
@@ -253,6 +231,7 @@ class News extends NewsTable
             'iptImage' => NewsModule::t('news', 'Image'),
             'status' => NewsModule::t('news', 'Status'),
             'hot' => NewsModule::t('news', 'Nổi bật'),
+            'cam_nang_xay_dung' => NewsModule::t('news', 'Cẩm nang xây dựng'),
             'sort' => NewsModule::t('news', 'Sort'),
             'created_at' => NewsModule::t('news', 'Created At'),
             'created_by' => NewsModule::t('news', 'Created By'),
