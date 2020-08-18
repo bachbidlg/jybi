@@ -132,7 +132,7 @@ class Comments extends CommentsTable
     {
         if ($this->commentsMetadata != null) {
             foreach ($this->commentsMetadata->getPath() as $key => $value) {
-                if (array_key_exists($key, $this->oldMetadata) && $this->oldMetadata[$key] != $this->metadata[$key]) {
+                if ($this->oldMetadata != null && array_key_exists($key, $this->oldMetadata) && $this->oldMetadata[$key] != $this->metadata[$key]) {
                     @unlink($value . $this->oldMetadata[$key]);
                 }
             }
