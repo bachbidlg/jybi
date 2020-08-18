@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'label' => CommentsModule::t('comments', 'Address')
                                             ],
                                             [
-                                                'attribyte' => 'comment',
+                                                'attribute' => 'comment',
                                                 'format' => 'raw',
                                             ],
                                             [
