@@ -81,6 +81,10 @@ $shop = $this->params['shop'];
                             <i class="fa fa-times"></i>
                         </a>
                     </li>
+                    <li class="top-lang">
+                        <a href="#" title="Tiếng việt"><img src="./images/vietnam.png" alt="icon"></a>
+                        <a href="#" title="English"><img src="./images/united-kingdom.png" alt="icon"></a>
+                    </li>
                 </ul>
             </nav>
             <form class="top-search-form" action="search.html" method="post">
