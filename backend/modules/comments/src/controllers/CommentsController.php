@@ -3,6 +3,7 @@
 namespace milkyway\comments\controllers;
 
 use milkyway\comments\models\metadata_interface\MetadataTrait;
+use milkyway\comments\models\table\CommentsTable;
 use yii\db\Exception;
 use Yii;
 use yii\helpers\Html;
@@ -186,6 +187,47 @@ class CommentsController extends MyController
             ]);
         }
         return $this->redirect(['index']);
+    }
+
+    public function actionChangeValue()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->get('id');
+            $val = Yii::$app->request->get('val');
+            $field = Yii::$app->request->get('field');
+            $model = CommentsTable::getById($id);
+            if ($model === null || !$model->canGetProperty($field)) return [
+                'code' => 404,
+                'msg' => CommentsModule::t('news', 'Không tìm thấy dữ liệu')
+            ];
+            try {
+                $model->setAttribute($field, $val);
+                if ($model->validate() && $model->save()) return [
+                    'code' => 200,
+                    'msg' => CommentsModule::t('news', 'Cập nhật thành công')
+                ];
+                else {
+                    $error = '';
+                    foreach ($model->getErrors() as $err) {
+                        $error .= $err[0] . '<br/>';
+                    }
+                    return [
+                        'code' => 400,
+                        'msg' => CommentsModule::t('news', 'Cập nhật thất bại') . ': <br/>' . $error
+                    ];
+                }
+            } catch (Exception $ex) {
+                return [
+                    'code' => 400,
+                    'msg' => CommentsModule::t('news', 'Có lỗi xảy ra')
+                ];
+            }
+        }
+        return [
+            'code' => 403,
+            'msg' => CommentsModule::t('news', 'Không có quyền truy cập')
+        ];
     }
 
     /**

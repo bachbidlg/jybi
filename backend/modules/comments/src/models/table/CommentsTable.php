@@ -42,7 +42,8 @@ class CommentsTable extends \yii\db\ActiveRecord
     {
         $cache = Yii::$app->cache;
         $keys = [
-            'redis-comments-get-all'
+            'redis-comments-get-all',
+            'redis-comments-get-by-id-' . $this->id
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -54,7 +55,8 @@ class CommentsTable extends \yii\db\ActiveRecord
     {
         $cache = Yii::$app->cache;
         $keys = [
-            'redis-comments-get-all'
+            'redis-comments-get-all',
+            'redis-comments-get-by-id-' . $this->id
         ];
         foreach ($keys as $key) {
             $cache->delete($key);
@@ -80,6 +82,19 @@ class CommentsTable extends \yii\db\ActiveRecord
     public function getUserUpdated()
     {
         return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
+
+    public static function getById($id, $data_cache = YII2_CACHE)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-comments-get-by-id-' . $id;
+        $data = $cache->get($key);
+        if ($data == false || $data_cache === false) {
+            $query = self::find()->where(['id' => $id]);
+            $data = $query->one();
+            $cache->set($key, $data);
+        }
+        return $data;
     }
 
     public static function getAll($published = false, $data_cache = YII2_CACHE)

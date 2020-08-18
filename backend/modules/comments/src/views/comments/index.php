@@ -1,11 +1,13 @@
 <?php
 
+use milkyway\comments\models\table\CommentsTable;
 use milkyway\comments\CommentsModule;
 use milkyway\comments\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel milkyway\comments\models\search\CommentsSearch */
@@ -132,6 +134,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                             [
                                                 'attribute' => 'comment',
                                                 'format' => 'raw',
+                                            ],
+                                            [
+                                                'attribute' => 'status',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . CommentsTable::STATUS_PUBLISHED . '" data-unchecked="' . CommentsTable::STATUS_DISABLED . '">';
+                                                }
                                             ],
                                             [
                                                 'class' => 'yii\grid\ActionColumn',
