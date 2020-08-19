@@ -12,4 +12,11 @@ return [
     'Created At' => 'Ngày tạo',
     'Actions' => 'Hành động',
     'Image' => 'Hình ảnh',
+    'Name' => 'Tiêu đề',
+    'Sort' => 'Thứ tự',
+    'Type' => 'Loại',
+    'Url' => 'Đường dẫn',
+    'Created By' => 'Người tạo',
+    'Updated By' => 'Người cập nhật',
+    'Updated At' => 'Ngày cập nhật',
 ];

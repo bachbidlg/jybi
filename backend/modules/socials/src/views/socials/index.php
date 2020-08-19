@@ -97,8 +97,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'class' => 'd-none',
                                                 ],
                                             ],
-
-                                            'name',
+                                            [
+                                                'attribute' => 'name',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return Html::a($model->name, ['view', 'id' => $model->id], [
+                                                        'data-pjax' => 0
+                                                    ]);
+                                                }
+                                            ],
                                             [
                                                 'attribute' => 'type',
                                                 'value' => function ($model) {

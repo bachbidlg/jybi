@@ -116,9 +116,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                             [
                                                 'attribute' => 'metadata',
                                                 'enableSorting' => false,
+                                                'format' => 'raw',
                                                 'value' => function ($model) {
                                                     /* @var $model milkyway\comments\models\Comments */
-                                                    return $model->dataMetadataByKey('name');
+                                                    return Html::a($model->dataMetadataByKey('name'), ['view', 'id' => $model->id], [
+                                                        'data-pjax' => 0
+                                                    ]);
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Name')
                                             ],

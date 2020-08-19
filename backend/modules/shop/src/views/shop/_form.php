@@ -120,6 +120,7 @@ if ($model->started != null && is_numeric($model->started)) $model->started = da
                 <?= $form->field($model, 'video')->textInput() ?>
             </div>
             <div class="col-12">
+                <label class="control-label"><?= $model->getAttributeLabel('map') ?></label>
                 <?= TinyMce::widget([
                     'model' => $model,
                     'attribute' => 'map',

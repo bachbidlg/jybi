@@ -104,7 +104,9 @@ $default_language = $this->params['default_language'];
                                                 'format' => 'raw',
                                                 'value' => function ($model) use ($default_language) {
                                                     /* @var $model milkyway\freetype\models\Freetype */
-                                                    return $model->freetypeLanguage[$default_language]->name;
+                                                    return Html::a($model->freetypeLanguage[$default_language]->name, ['view', 'id' => $model->id], [
+                                                        'data-pjax' => 0
+                                                    ]);
                                                 }
                                             ],
                                             [

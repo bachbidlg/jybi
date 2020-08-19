@@ -226,6 +226,7 @@ class News extends NewsTable
         return [
             'id' => NewsModule::t('news', 'ID'),
             'slug' => NewsModule::t('news', 'Slug'),
+            'name' => NewsModule::t('news', 'Name'),
             'category' => NewsModule::t('news', 'Category'),
             'image' => NewsModule::t('news', 'Image'),
             'iptImage' => NewsModule::t('news', 'Image'),

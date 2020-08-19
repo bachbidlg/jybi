@@ -13,4 +13,8 @@ return [
     'Actions' => 'Hành động',
     'Name' => 'Tên',
     'Address' => 'Địa chỉ',
+    'Avatar' => 'Ảnh đại diện',
+    'Created By' => 'Người tạo',
+    'Updated By' => 'Người cập nhật',
+    'Updated At' => 'Ngày cập nhật',
 ];
