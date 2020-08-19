@@ -83,7 +83,7 @@ $default_language = $this->params['default_language'];
             'style' => 'max-width: 64px'
         ]) ?>
     </div>
-    <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (64x64)</div>
+    <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (64x64px)</div>
     <?= $form->field($model, 'iptImage')->fileInput([
         'onchange' => 'readImage(this, $(".preview"), 64)',
         'data-default' => $image

@@ -138,7 +138,7 @@ if ($model->started != null && is_numeric($model->started)) $model->started = da
                 'style' => 'max-width: 120px'
             ]) ?>
         </div>
-        <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptLogo') ?> (1024x1024)</div>
+        <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptLogo') ?> (1024x1024px)</div>
         <?= $form->field($model, 'iptLogo')->fileInput([
             'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $logo

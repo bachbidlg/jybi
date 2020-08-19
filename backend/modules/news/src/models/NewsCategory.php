@@ -217,6 +217,7 @@ class NewsCategory extends NewsCategoryTable
             'slug' => NewsModule::t('news', 'Slug'),
             'category' => NewsModule::t('news', 'Category'),
             'image' => NewsModule::t('news', 'Image'),
+            'iptImage' => NewsModule::t('news', 'Image'),
             'status' => NewsModule::t('news', 'Status'),
             'sort' => NewsModule::t('news', 'Sort'),
             'created_at' => NewsModule::t('news', 'Created At'),

@@ -67,7 +67,7 @@ if ($model->commentsMetadata != null) $metadataPath = $model->commentsMetadata->
                         ]) ?>
                     </div>
                     <div class="text-danger font-italic"><?= $model->commentsMetadata->getAttributeLabel($ipt) ?>
-                        (<?= Yii::$app->params['module-comments']['metadataMappingImage'][$key]['size'] ?>)
+                        (<?= Yii::$app->params['module-comments']['metadataMappingImage'][$key]['size'] ?>px)
                     </div>
                     <?= $form->field($model, 'metadata[' . $ipt . ']')->fileInput([
                         'onchange' => 'readImage(this, $(".preview-' . $key . '"), 120)',

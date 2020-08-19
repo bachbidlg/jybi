@@ -53,6 +53,7 @@ if ($model->type == Socials::TYPE_ICON) $model->iptIcon = $model->image;
                     'style' => 'max-width: 120px'
                 ])
                 ?>
+                <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (64x64px)</div>
                 </div>
                 <?= $form->field($model, 'iptImage')->fileInput([
                     'onchange' => 'readImage(this, $(".preview"), 120)',

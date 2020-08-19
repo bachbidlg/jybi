@@ -109,6 +109,8 @@ class Socials extends SocialsTable
             'name' => SocialsModule::t('socials', 'Name'),
             'type' => SocialsModule::t('socials', 'Type'),
             'image' => SocialsModule::t('socials', 'Image'),
+            'iptImage' => SocialsModule::t('socials', 'Image'),
+            'iptIcon' => SocialsModule::t('socials', 'Icon'),
             'url' => SocialsModule::t('socials', 'Url'),
             'sort' => SocialsModule::t('socials', 'Sort'),
             'status' => SocialsModule::t('socials', 'Status'),
