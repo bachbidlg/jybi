@@ -196,6 +196,12 @@ $shop = $this->params['shop'];
             <span>Liên hệ</span>
             <i class="fa fa-circle"></i>
         </a>
+        <a class="menu-item flag-vi" href="#" onClick="doGTranslate('en|vi');return false;" title="English" class="gflag nturl" >
+            <img src="/images/vietnam.png" height="32" width="32" alt="English" />
+        </a>
+        <a class="menu-item flag-en" href="#" onClick="doGTranslate('vi|en');return false;" title="Vietnamese" class="gflag nturl">
+            <img src="/images/united-kingdom.png" height="32" width="32" alt="Vietnamese" />
+        </a>
     </div>
 </div>
 
