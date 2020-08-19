@@ -51,7 +51,7 @@ $shop = $this->params['shop'];
                 <div class="section-content">
                     <div class="row row-cols-1 row-cols-md-3">
                         <?php foreach ($freeTypes as $freeType) { ?>
-                            <div class="col">
+                            <div class="col mb-1 mb-md-0">
                                 <div class="box-about">
                                     <div class="box-icon">
                                         <img class="img-fluid"
