@@ -137,11 +137,11 @@ $shop = $this->params['shop'];
                     <div data-filter="*" class="filter-item filter-item-active">All</div>
                     <?php foreach ($projectDesignCategory as $sub_category) { ?>
                         <div data-filter=".<?= $sub_category->slug ?>"
-                             class="filter-item"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                             class="filter-item mb-2 mb-sm-0 mx-1"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
                     <?php } ?>
                 </div>
                 <div id="grid-masonry" class="grid">
-                    <div class="row row-cols-md-3 row-cols-2" style="margin:0 -.5rem">
+                    <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
                         <?php
                         if (count($projects) > 0) {
                             foreach ($projects as $project) {
