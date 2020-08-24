@@ -133,7 +133,7 @@ $shop = $this->params['shop'];
                 <div class="h3"><?= $projectMenu->newsCategoryLanguage[$default_language]->name ?></div>
             </div>
             <div id="list-projects">
-                <div id="filters-masonry" class="filters filter-button-group">
+                <div id="filters-masonry" class="filters filter-button-group mb-sm-4 mb-2">
                     <div data-filter="*" class="filter-item filter-item-active">All</div>
                     <?php foreach ($projectDesignCategory as $sub_category) { ?>
                         <div data-filter=".<?= $sub_category->slug ?>"
@@ -146,7 +146,7 @@ $shop = $this->params['shop'];
                         if (count($projects) > 0) {
                             foreach ($projects as $project) {
                                 ?>
-                                <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-2">
+                                <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
                                     <a class="caption"
                                        href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
                                         <div class="image-wrap">
