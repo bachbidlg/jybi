@@ -9,6 +9,10 @@
 	box-sizing: border-box;
 }
 
+* {
+	-webkit-overflow-scrolling: touch;
+}
+
 html, body, .site-wrapper {
 	height: 100%;
 }
