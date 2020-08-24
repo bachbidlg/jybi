@@ -483,10 +483,10 @@
 
 	#news {
 		.news-item {
-			background-color: $white;
-			border: 1px solid #ebebeb;
-			border-radius: 8px;
-			margin-bottom: 30px;
+			//background-color: $white;
+			//border: 1px solid #ebebeb;
+			//border-radius: 8px;
+			//margin-bottom: 30px;
 			overflow: hidden;
 			position: relative;
 			@include prefix((transition: all 0.3s ease), webkit moz o);
@@ -506,6 +506,7 @@
 			}
 
 			.title {
+				color: $theme-color;
 				font-size: 18px;
 				font-weight: 600;
 				padding: 20px 20px 0;
@@ -513,8 +514,14 @@
 			}
 
 			.desc {
-				padding: 10px 20px 20px;
+				color: $white;
+				padding: 10px 20px 5px;
 				line-height: 24px;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 
