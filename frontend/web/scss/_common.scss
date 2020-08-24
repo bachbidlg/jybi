@@ -9,12 +9,16 @@
 	box-sizing: border-box;
 }
 
+* {
+	-webkit-overflow-scrolling: touch;
+}
+
 html, body, .site-wrapper {
 	height: 100%;
 }
 
 html {
-	//scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 @media #{$tablet-device}, #{$large-mobile} {
