@@ -45,7 +45,7 @@ body {
 
 	@media #{$tablet-device}, #{$large-mobile} {
 		overflow-x: hidden;
-		animation: 0s ease 0s 1 normal none running none;
+		//animation: 0s ease 0s 1 normal none running none;
 
 		::-webkit-scrollbar {
 			width: 0;
