@@ -33,7 +33,7 @@ $default_language = $this->params['default_language'];
                     if (count($projects) > 0) {
                         foreach ($projects as $project) {
                             ?>
-                            <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-2">
+                            <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
                                 <a class="caption"
                                    href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
                                     <div class="image-wrap">

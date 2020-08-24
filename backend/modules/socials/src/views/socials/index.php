@@ -7,6 +7,8 @@ use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
 use milkyway\socials\models\Socials;
+use yii\helpers\Url;
+use milkyway\socials\models\table\SocialsTable;
 
 /* @var $this yii\web\View */
 /* @var $searchModel milkyway\socials\models\search\SocialsSearch */
@@ -132,18 +134,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ],
                                             'url:url',
                                             [
-                                                'attribute' => 'created_by',
-                                                'value' => 'userCreated.userProfile.fullname',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
-                                            ],
-                                            [
-                                                'attribute' => 'created_at',
-                                                'format' => 'date',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
+                                                'attribute' => 'status',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . SocialsTable::STATUS_PUBLISHED . '" data-unchecked="' . SocialsTable::STATUS_DISABLED . '">';
+                                                }
                                             ],
                                             [
                                                 'class' => 'yii\grid\ActionColumn',
