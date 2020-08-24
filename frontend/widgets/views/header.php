@@ -45,7 +45,7 @@ $shop = $this->params['shop'];
                     <?php
                     if (count($menu) > 0) {
                         foreach ($menu as $data_menu) {
-                            $has_children = $data_menu->type != NewsCategory::TYPE_PROJECT && count($data_menu->categoryHasMany) > 0;
+                            $has_children = count($data_menu->categoryHasMany) > 0;
                             if ($data_menu->type == NewsCategory::TYPE_PROJECT) $url = Url::toRoute(['/projects/index', 'slug' => $data_menu->slug]);
                             else $url = Url::toRoute(['/news/index', 'slug' => $data_menu->slug]);
                             ?>
