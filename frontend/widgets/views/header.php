@@ -39,7 +39,7 @@ $shop = $this->params['shop'];
                            title="<?= Yii::t('frontend', 'Trang chủ'); ?>"><?= Yii::t('frontend', 'Trang chủ'); ?></a>
                     </li>
                     <li<?php if (Yii::$app->controller->id == 'intro') echo ' class="active"'; ?>>
-                        <a href="<?= Url::toRoute(['/gioi-thieu']); ?>"
+                        <a href="<?= Url::toRoute(['/ve-chung-toi']); ?>"
                            title="<?= Yii::t('frontend', 'Về chúng tôi'); ?>"><?= Yii::t('frontend', 'Về chúng tôi'); ?></a>
                     </li>
                     <?php
@@ -165,7 +165,7 @@ if (count($socials) > 0) {
             <span>Trang chủ</span>
             <i class="fa fa-circle"></i>
         </a>
-        <a class="menu-item" href="<?= Url::toRoute(['/gioi-thieu']); ?>">
+        <a class="menu-item" href="<?= Url::toRoute(['/ve-chung-toi']); ?>">
             <i class="fa fa-info-circle"></i>
             <span><?= Yii::t('frontend', 'Về chúng tôi') ?></span>
             <i class="fa fa-circle"></i>
