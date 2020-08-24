@@ -92,8 +92,11 @@ $shop = $this->params['shop'];
             </form>
         </div>
     </div>
-    <a class="mobile-logo" href="<?= Url::home() ?>"><img
-                src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/logo.png')[1]; ?>" alt="image"></a>
+    <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
+        <a class="mobile-logo" href="<?= Url::home() ?>" title="<?= $shop->dataMetadata('name') ?>">
+            <img src="<?= $shop->getImage('logo', 'logo') ?>" alt="<?= $shop->dataMetadata('name') ?>">
+        </a>
+    <?php } ?>
 </header>
 <input type="checkbox" id="toggle-menu">
 <label class="toggle-menu-header" for="toggle-menu"><em class="l1"></em><em class="l2"></em><em
@@ -138,7 +141,10 @@ $shop = $this->params['shop'];
             } ?>
         </div>
         <div class="clearfix"></div>
-        <a href="<?= Url::home() ?>" class="sidebar-logo"></a>
+        <?php if ($shop != null && $shop->imageExist('logo', 'logo')) { ?>
+            <a class="sidebar-logo" href="<?= Url::home() ?>" title="<?= $shop->dataMetadata('name') ?>" style="background-image: url(<?= $shop->getImage('logo', 'logo') ?>)">
+            </a>
+        <?php } ?>
         <em class="sidebar-logo-text"></em>
         <a class="menu-item" href="<?= Url::home() ?>">
             <i class="fa fa-home"></i>
