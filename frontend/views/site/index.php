@@ -78,7 +78,7 @@ $shop = $this->params['shop'];
         </div>
     </section>
     <!--End #about-us-->
-<?php if (count($projectCat) > 0) { ?>
+<?php /*if (count($projectCat) > 0) { ?>
     <!--Start #projects-->
     <section id="projects">
         <div class="container">
@@ -124,7 +124,7 @@ $shop = $this->params['shop'];
         </div>
     </section>
     <!--End #projects-->
-<?php } ?>
+<?php }*/ ?>
 <?php if ($projectMenu != null && count($projects) > 0) { ?>
     <section class="page-projects">
         <div class="container-fluid">
