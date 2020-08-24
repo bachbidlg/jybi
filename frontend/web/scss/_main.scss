@@ -133,6 +133,10 @@
 
 			&:not(:first-child) {
 				margin-left: 1px;
+				
+				@media #{$large-mobile} {
+					margin-left: 0;
+				}
 			}
 
 			&:hover {
