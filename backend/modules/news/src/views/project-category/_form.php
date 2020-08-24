@@ -56,6 +56,11 @@ $default_language = $this->params['default_language'];
                 ])->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6 col-12">
+                <?= $form->field($model, 'type_du_an')->dropDownList(NewsCategoryTable::TYPE_DU_AN, [
+                    'prompt' => $model->getAttributeLabel('type_du_an')
+                ]) ?>
+            </div>
+            <div class="col-md-6 col-12 d-none">
                 <?= $form->field($model, 'slug')->hiddenInput([
                     'id' => 'slug'
                 ])->label(false) ?>

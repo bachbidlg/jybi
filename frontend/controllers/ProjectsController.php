@@ -34,7 +34,7 @@ class ProjectsController extends MyController
             ];
         }
 
-        $projects = News::getByAlias($category->alias);
+        $projects = News::getByAlias($category->alias, null, true);
 
         return $this->render('index', [
             'category' => $category,
@@ -61,7 +61,7 @@ class ProjectsController extends MyController
         }
 
         $category = $project->categoryHasOne;
-        $projectsRelate = News::getByAlias($category->alias, 5);
+        $projectsRelate = News::getByAlias($category->alias, 5, true);
 
         return $this->render('view', [
             'project' => $project,

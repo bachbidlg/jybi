@@ -33,6 +33,7 @@ class NewsTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
     const STATUS_PUBLISHED = 1;
+    const SCENARIO_UPDATE = 'update';
     public $pathImage;
     public $urlImage;
 
@@ -241,7 +242,7 @@ class NewsTable extends \yii\db\ActiveRecord
         return $query;
     }
 
-    public static function getByAlias($alias = null, $limit = null)
+    public static function getByAlias($alias = null, $limit = null, $published = false)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-by-alias-' . $alias;
@@ -250,6 +251,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}/%'");
             if ($limit != null) $query->limit($limit)->offset(0);
             $query->sort();
+            if ($published === true) $query->published();
             $data = $query->all();
             $cache->set($key, $data);
         }

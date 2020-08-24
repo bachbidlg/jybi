@@ -66,7 +66,7 @@ class NewsController extends MyController
         }
 
         $category = $news->categoryHasOne;
-        $newsRelate = News::getByAlias($category->alias, 5);
+        $newsRelate = News::getByAlias($category->alias, 5, true);
 
         return $this->render('view', [
             'news' => $news,

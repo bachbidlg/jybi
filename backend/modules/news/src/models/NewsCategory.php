@@ -101,7 +101,7 @@ class NewsCategory extends NewsCategoryTable
     public function rules()
     {
         return [
-            [['category', 'status', 'sort', 'type'], 'integer'],
+            [['category', 'status', 'sort', 'type', 'hot', 'type_du_an'], 'integer'],
             [['sort'], 'default', 'value' => 1],
             [['name', 'slug', 'image', 'icon'], 'string', 'max' => 255],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => NewsCategory::class, 'targetAttribute' => ['category' => 'id']],
@@ -221,6 +221,7 @@ class NewsCategory extends NewsCategoryTable
             'iptImage' => NewsModule::t('news', 'Image'),
             'status' => NewsModule::t('news', 'Status'),
             'sort' => NewsModule::t('news', 'Sort'),
+            'type_du_an' => NewsModule::t('news', 'Type'),
             'created_at' => NewsModule::t('news', 'Created At'),
             'created_by' => NewsModule::t('news', 'Created By'),
             'updated_at' => NewsModule::t('news', 'Updated At'),

@@ -43,7 +43,7 @@ $default_language = $this->params['default_language'];
             <div class="col-md-6 col-12">
                 <?= $form->field($model, 'sort')->textInput() ?>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12 d-none">
                 <?= $form->field($model, 'slug')->hiddenInput([
                     'id' => 'slug'
                 ])->label(false) ?>

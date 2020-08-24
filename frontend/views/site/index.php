@@ -4,7 +4,12 @@ use yii\helpers\Url;
 
 /* @var $sliders array */
 /* @var $partners array */
+/* @var $projectMenu frontend\models\NewsCategory */
+/* @var $projectDesign frontend\models\NewsCategory */
+/* @var $projectDesignCategory array */
+/* @var $projects array */
 /* @var $projectCat array */
+/* @var $project frontend\models\NewsCategory */
 /* @var $projectHot array */
 /* @var $newsHot array */
 /* @var $freeTypes array */
@@ -78,42 +83,40 @@ $shop = $this->params['shop'];
     <section id="projects">
         <div class="container">
             <div class="section-title center">
-                <span>Dự án</span>
+                <span><?= $projectMenu->newsCategoryLanguage[$default_language]->name ?></span>
                 <div class="h3">Dự án của chúng tôi</div>
             </div>
             <div class="section-content">
                 <div class="row row-cols-1 row-cols-md-2">
                     <?php
                     foreach ($projectCat as $project) {
-                        foreach ($project->categoryHasMany as $category_has_many) {
-                            ?>
-                            <div class="col">
-                                <div class="box-project">
-                                    <a class="d-block"
-                                       href="<?= Url::toRoute(['/news/index', 'slug' => $category_has_many->slug]) ?>"
-                                       title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
-                                        <div class="box-image">
-                                            <div class="overlay"></div>
-                                            <img class="img-fluid"
-                                                 src="<?= $category_has_many->getImage() ?>"
-                                                 alt="img">
-                                        </div>
-                                    </a>
-                                    <div class="box-content">
-                                        <div class="title">
-                                            <a href="<?= Url::toRoute(['/news/index', 'slug' => $category_has_many->slug]) ?>"
-                                               title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
-                                                <?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>
-                                            </a>
-                                        </div>
-                                        <div class="desc">
-                                            <?= $category_has_many->newsCategoryLanguage[$default_language]->description ?>
-                                        </div>
+                        ?>
+                        <div class="col">
+                            <div class="box-project">
+                                <a class="d-block"
+                                   href="<?= Url::toRoute(['/news/index', 'slug' => $project->slug]) ?>"
+                                   title="<?= $project->newsCategoryLanguage[$default_language]->name ?>">
+                                    <div class="box-image">
+                                        <div class="overlay"></div>
+                                        <img class="img-fluid"
+                                             src="<?= $project->getImage() ?>"
+                                             alt="img">
+                                    </div>
+                                </a>
+                                <div class="box-content">
+                                    <div class="title">
+                                        <a href="<?= Url::toRoute(['/news/index', 'slug' => $project->slug]) ?>"
+                                           title="<?= $project->newsCategoryLanguage[$default_language]->name ?>">
+                                            <?= $project->newsCategoryLanguage[$default_language]->name ?>
+                                        </a>
+                                    </div>
+                                    <div class="desc">
+                                        <?= $project->newsCategoryLanguage[$default_language]->description ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        }
+                        </div>
+                        <?php
                     }
                     ?>
                 </div>
@@ -122,7 +125,53 @@ $shop = $this->params['shop'];
     </section>
     <!--End #projects-->
 <?php } ?>
-<?php if (count($projectHot) > 0) { ?>
+<?php if ($projectMenu != null && count($projects) > 0) { ?>
+    <section class="page-projects">
+        <div class="container-fluid">
+            <div class="section-title center">
+                <span>Khách hàng</span>
+                <div class="h3"><?= $projectMenu->newsCategoryLanguage[$default_language]->name ?></div>
+            </div>
+            <div id="list-projects">
+                <div id="filters-masonry" class="filters filter-button-group">
+                    <div data-filter="*" class="filter-item filter-item-active">All</div>
+                    <?php foreach ($projectDesignCategory as $sub_category) { ?>
+                        <div data-filter=".<?= $sub_category->slug ?>"
+                             class="filter-item"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                    <?php } ?>
+                </div>
+                <div id="grid-masonry" class="grid">
+                    <div class="row row-cols-md-3 row-cols-2" style="margin:0 -.5rem">
+                        <?php
+                        if (count($projects) > 0) {
+                            foreach ($projects as $project) {
+                                ?>
+                                <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-2">
+                                    <a class="caption"
+                                       href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
+                                        <div class="image-wrap">
+                                            <img class="img-fluid" src="<?= $project->getImage() ?>"
+                                                 alt="<?= $project->newsLanguage[$default_language]->name ?>">
+                                        </div>
+                                        <div class="caption-wrap">
+                                            <div class="d-table">
+                                                <div class="d-table-cell text-center">
+                                                    <div class="title"><?= $project->newsLanguage[$default_language]->name ?></div>
+                                                    <div class="line"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php }
+                        } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+<?php /*if (count($projectHot) > 0) { ?>
     <!--Start #projects-done-->
     <section id="projects-done">
         <div class="container-fluid">
@@ -160,7 +209,7 @@ $shop = $this->params['shop'];
         </div>
     </section>
     <!--Start #projects-done-->
-<?php } ?>
+<?php }*/ ?>
 <?php if (count($comments) > 0) { ?>
     <!--Start #testimonial-->
     <section id="testimonial">
@@ -288,3 +337,21 @@ $css = <<< CSS
 }
 CSS;
 $this->registerCss($css);
+
+$script = <<< JS
+$(function () {
+    $('.grid').isotope({
+      itemSelector: '.grid-item',
+    });
+    
+    // filter items on button click
+    $('.filter-button-group').on( 'click', '.filter-item', function() {
+        var filterValue = $(this).attr('data-filter');
+        $('.grid').isotope({ filter: filterValue });
+        $('.filter-button-group .filter-item').removeClass('filter-item-active');
+        $(this).addClass('filter-item-active');
+    });
+});
+JS;
+$this->registerJs($script, \yii\web\View::POS_END);
+$this->registerJsFile('/js/isotope.pkgd.js', ['depends' => 'yii\web\JqueryAsset']);

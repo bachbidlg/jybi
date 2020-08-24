@@ -20,6 +20,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         self::TYPE_SUPPORT => 'Hỗ trợ khách hàng',
     ];
 
+    const TYPE_DU_AN_THIET_KE = 0;
+    const TYPE_DU_AN_THI_CONG = 1;
+    const TYPE_DU_AN = [
+        self::TYPE_DU_AN_THIET_KE => 'Dự án thiết kế',
+        self::TYPE_DU_AN_THI_CONG => 'Dự án thi công'
+    ];
     public $pathImage;
     public $urlImage;
 
