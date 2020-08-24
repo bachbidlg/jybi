@@ -54,7 +54,9 @@ $default_language = $this->params['default_language'];
                     </div>
                 </div>
             </div>
-        <?php } else echo Yii::t('frontend', 'Dữ liệu đang cập nhật') ?>
+        <?php } else { ?>
+            <div class="container text-white"><?= Yii::t('frontend', 'Dữ liệu đang cập nhật') ?></div>
+        <?php } ?>
     </div>
 </section>
 <?php
