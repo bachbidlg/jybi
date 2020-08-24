@@ -105,7 +105,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
 
     public function getCategoryHasMany()
     {
-        return $this->hasMany(self::class, ['category' => 'id']);
+        return $this->hasMany(self::class, ['category' => 'id'])->orderBy([self::tableName() . '.sort' => SORT_ASC]);
     }
 
     public function getNewsCategoryLanguage()
