@@ -19,18 +19,18 @@ $default_language = $this->params['default_language'];
 ?>
 <section class="page-projects">
     <div class="container-fluid">
-        <div id="list-projects">
-            <div id="filters-masonry" class="filters filter-button-group">
-                <div data-filter="*" class="filter-item filter-item-active">All</div>
-                <?php foreach ($category->categoryHasMany as $sub_category) { ?>
-                    <div data-filter=".<?= $sub_category->slug ?>"
-                         class="filter-item mb-2 mb-sm-0"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
-                <?php } ?>
-            </div>
-            <div id="grid-masonry" class="grid">
-                <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
-                    <?php
-                    if (count($projects) > 0) {
+        <?php if (count($projects) > 0) { ?>
+            <div id="list-projects">
+                <div id="filters-masonry" class="filters filter-button-group">
+                    <div data-filter="*" class="filter-item filter-item-active">All</div>
+                    <?php foreach ($category->categoryHasMany as $sub_category) { ?>
+                        <div data-filter=".<?= $sub_category->slug ?>"
+                             class="filter-item mb-2 mb-sm-0"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                    <?php } ?>
+                </div>
+                <div id="grid-masonry" class="grid">
+                    <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
+                        <?php
                         foreach ($projects as $project) {
                             ?>
                             <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
@@ -50,11 +50,11 @@ $default_language = $this->params['default_language'];
                                     </div>
                                 </a>
                             </div>
-                        <?php }
-                    } ?>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php } else echo Yii::t('frontend', 'Dữ liệu đang cập nhật') ?>
     </div>
 </section>
 <?php
