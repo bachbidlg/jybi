@@ -25,7 +25,7 @@ $default_language = $this->params['default_language'];
                     <div data-filter="*" class="filter-item filter-item-active">All</div>
                     <?php foreach ($category->categoryHasMany as $sub_category) { ?>
                         <div data-filter=".<?= $sub_category->slug ?>"
-                             class="filter-item mb-2 mb-sm-0"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                             class="filter-item mb-2 mb-sm-0 mx-1"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
                     <?php } ?>
                 </div>
                 <div id="grid-masonry" class="grid">
