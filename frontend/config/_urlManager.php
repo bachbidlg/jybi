@@ -17,7 +17,7 @@ return [
         'quy-tac-hoat-dong' => 'site/quy-tac-hoat-dong',
         'quy-trinh-dang-tin' => 'site/quy-trinh-dang-tin',
 
-        ['pattern' => 'gioi-thieu', 'route' => 'intro/index', 'suffix' => '.html'],
+        ['pattern' => 've-chung-toi', 'route' => 'intro/index', 'suffix' => '.html'],
         ['pattern' => 'lien-he', 'route' => 'contact/index', 'suffix' => '.html'],
         ['pattern' => 'search-news', 'route' => 'site/search-news-html', 'suffix' => '.html'],
 

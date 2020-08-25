@@ -33,19 +33,46 @@ use modava\auth\models\User;
                     Yii::$app->user->can('newsNews-category') ||
                     Yii::$app->user->can('newsNews-categoryIndex') ||
                     Yii::$app->user->can('newsNews') ||
-                    Yii::$app->user->can('newsNewsIndex') ||
+                    Yii::$app->user->can('newsNewsIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news' && in_array(Yii::$app->controller->id, [
+                            'news-category',
+                            'news'
+                        ])) echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/news-category']); ?>">
+                            <i class="ion ion-md-list"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'News'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('news') ||
                     Yii::$app->user->can('newsProject-category') ||
                     Yii::$app->user->can('newsProject-categoryIndex') ||
                     Yii::$app->user->can('newsProject') ||
-                    Yii::$app->user->can('newsProjectIndex') ||
+                    Yii::$app->user->can('newsProjectIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news' && in_array(Yii::$app->controller->id, [
+                            'project-category',
+                            'project'
+                        ])) echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/project-category']); ?>">
+                            <i class="ion ion-md-list"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Projects'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('news') ||
                     Yii::$app->user->can('newsSupport-category') ||
                     Yii::$app->user->can('newsSupport-categoryIndex') ||
                     Yii::$app->user->can('newsSupport') ||
                     Yii::$app->user->can('newsSupportIndex')) { ?>
-                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news') echo ' active'; ?>">
-                        <a class="nav-link" href="<?= Url::toRoute(['/news/news-category']); ?>">
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news' && in_array(Yii::$app->controller->id, [
+                            'support-category',
+                            'support'
+                        ])) echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/support-category']); ?>">
                             <i class="ion ion-md-list"></i>
-                            <span class="nav-link-text"><?= Yii::t('backend', 'News'); ?></span>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Supports'); ?></span>
                         </a>
                     </li>
                 <?php } ?>
