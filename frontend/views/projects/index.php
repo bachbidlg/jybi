@@ -16,6 +16,11 @@ use yii\helpers\Url;
 $this->title = $category->newsCategoryLanguage[$default_language]->name;
 \Yii::$app->view->params['breadcrumbs'][] = $this->title;
 $default_language = $this->params['default_language'];
+$this->registerCss('
+@media only screen and (min-width: 992px){
+#main .site-heading{min-height:820px}
+}
+');
 ?>
 <section class="page-projects">
     <div class="container-fluid">

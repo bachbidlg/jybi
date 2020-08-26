@@ -1,8 +1,4 @@
 #footer {
-	@media #{$small-mobile} {
-		margin-bottom: 44px;
-	}
-	
 	.footer-top {
 		background-color: #181818;
 		color: $white;
@@ -71,10 +67,22 @@
 		}
 
 		.social {
-			a:not(:last-child) {
+			a {
 				margin-right: 5px;
+				background-color: $white;
+				color: $black;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				display: block;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
 				&:hover {
-					color: $theme-color;
+					background-color: $theme-color;
 				}
 			}
 		}
@@ -90,6 +98,10 @@
 	justify-content: center;
 	flex-direction: column;
 	z-index: 999;
+
+	@media #{$large-mobile} {
+		display: none;
+	}
 
 	a {
 		display: block;
@@ -115,6 +127,33 @@
 			color: #fff;
 		}
 	}
+
+	span.phone-number {
+		position: absolute;
+		top: 1px;
+		right: 1px;
+		width: 38px;
+		height: 38px;
+		line-height: 38px;
+		border-radius: 38px;
+		background: #1182fc;
+		overflow: hidden;
+		padding-right: 38px;
+		@include prefix((transition: all .5s ease-in-out), webkit moz o);
+	}
+
+	.btn-call:hover {
+		color: inherit;
+
+		span.phone-number {
+			width: 150px;
+			padding-left: 15px;
+			padding-right: 55px;
+			background-color: $theme-color;
+			color: #2a2a2a;
+			font-weight: bold;
+		}
+	}
 }
 
 .quick-contact-mb {
@@ -132,6 +171,12 @@
 
 		&.mb-phone {
 			animation: fadeIn .7s infinite alternate;
+		}
+
+		@media #{$large-mobile} {
+			&:hover {
+				color: inherit;
+			}
 		}
 	}
 }
