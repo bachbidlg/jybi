@@ -263,5 +263,6 @@ return [
     'Calendar' => 'Lịch biểu',
     'News' => 'Bài viết',
     'Freetype' => 'Tự soạn thảo',
-    'Website' => 'Thông tin website'
+    'Website' => 'Thông tin website',
+    'Team' => 'Đội ngũ',
 ];

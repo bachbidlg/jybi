@@ -140,11 +140,13 @@ use modava\auth\models\User;
                     </li>
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
-                    Yii::$app->user->can('icons')) { ?>
-                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'backend' && Yii::$app->controller->id == 'icons') echo ' active'; ?>">
-                        <a class="nav-link" href="<?= Url::toRoute(['/icons']); ?>">
-                            <i class="icon-layers"></i>
-                            <span class="nav-link-text"><?= Yii::t('backend', 'Icons'); ?></span>
+                    Yii::$app->user->can('team') ||
+                    Yii::$app->user->can('teamTeam') ||
+                    Yii::$app->user->can('teamTeamIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'shop') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/team']); ?>">
+                            <i class="fa fa-users"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Team'); ?></span>
                         </a>
                     </li>
                 <?php } ?>
@@ -154,6 +156,15 @@ use modava\auth\models\User;
                         <a class="nav-link" href="<?= Url::toRoute(['/website']); ?>">
                             <i class="fa fa-cogs"></i>
                             <span class="nav-link-text"><?= Yii::t('backend', 'Key - Value'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('icons')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'backend' && Yii::$app->controller->id == 'icons') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/icons']); ?>">
+                            <i class="icon-layers"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Icons'); ?></span>
                         </a>
                     </li>
                 <?php } ?>

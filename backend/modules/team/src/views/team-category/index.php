@@ -1,22 +1,17 @@
 <?php
 
-use milkyway\news\NewsModule;
-use milkyway\news\widgets\NavbarWidgets;
+use milkyway\team\TeamModule;
+use milkyway\team\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
-use milkyway\language\models\table\LanguageTable;
-use yii\helpers\Url;
-use milkyway\news\models\table\NewsTable;
 /* @var $this yii\web\View */
-/* @var $searchModel milkyway\news\models\search\NewsSearch */
+/* @var $searchModel milkyway\team\models\search\TeamCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = NewsModule::t('news', 'News');
+$this->title = TeamModule::t('team', 'Team Categories');
 $this->params['breadcrumbs'][] = $this->title;
-$params = $this->params;
-$list_language = LanguageTable::getAll();
 ?>
 <?= ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
@@ -27,9 +22,9 @@ $list_language = LanguageTable::getAll();
         <h4 class="hk-pg-title"><span class="pg-title-icon"><span
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
-        <a class="btn btn-sm btn-primary" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= NewsModule::t('news', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= NewsModule::t('news', 'Create'); ?></a>
+        <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+           title="<?= TeamModule::t('team', 'Create'); ?>">
+            <i class="fa fa-plus"></i> <?= TeamModule::t('team', 'Create'); ?></a>
     </div>
 
     <!-- Row -->
@@ -65,10 +60,10 @@ $list_language = LanguageTable::getAll();
                                         </div>
                                     ',
                                     'pager' => [
-                                        'firstPageLabel' => NewsModule::t('news', 'First'),
-                                        'lastPageLabel' => NewsModule::t('news', 'Last'),
-                                        'prevPageLabel' => NewsModule::t('news', 'Previous'),
-                                        'nextPageLabel' => NewsModule::t('news', 'Next'),
+                                        'firstPageLabel' => TeamModule::t('team', 'First'),
+                                        'lastPageLabel' => TeamModule::t('team', 'Last'),
+                                        'prevPageLabel' => TeamModule::t('team', 'Previous'),
+                                        'nextPageLabel' => TeamModule::t('team', 'Next'),
                                         'maxButtonCount' => 5,
 
                                         'options' => [
@@ -100,61 +95,9 @@ $list_language = LanguageTable::getAll();
                                                 'class' => 'd-none',
                                             ],
                                         ],
-                                        [
-                                            'attribute' => 'name',
-                                            'format' => 'raw',
-                                            'value' => function ($model) use ($params, $list_language) {
-                                                $language = $params['default_language'] ?: $list_language[array_keys($list_language)[0]]->id;
-                                                return Html::a($model->newsLanguage[$language]->name, ['view', 'id' => $model->id], [
-//                                                    'target' => '_blank',
-                                                    'data-pjax' => 0
-                                                ]);
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'category',
-                                            'format' => 'raw',
-                                            'value' => function ($model) use ($params) {
-                                                if ($model->categoryHasOne == null) return null;
-                                                $language = $params['default_language'] ?: array_keys($model->categoryHasOne->newsCategoryLanguage)[0];
-                                                return Html::a($model->categoryHasOne->newsCategoryLanguage[$language]->name, ['view', 'id' => $model->category], [
-                                                    'target' => '_blank',
-                                                    'data-pjax' => 0
-                                                ]);
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'image',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                $image = $model->getImage();
-                                                if ($image == null) return null;
-                                                return Html::img($image, [
-                                                    'style' => 'max-width: 70px'
-                                                ]);
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'status',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'hot',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->hot ? 'checked' : '') . ' data-field="hot" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
-                                            }
-                                        ],
-                                        [
-                                            'attribute' => 'cam_nang_xay_dung',
-                                            'format' => 'raw',
-                                            'value' => function ($model) {
-                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->cam_nang_xay_dung ? 'checked' : '') . ' data-field="cam_nang_xay_dung" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
-                                            }
-                                        ],
+                                    
+										'name',
+										'sort',
                                         [
                                             'attribute' => 'created_by',
                                             'value' => 'userCreated.userProfile.fullname',
@@ -171,22 +114,22 @@ $list_language = LanguageTable::getAll();
                                         ],
                                         [
                                             'class' => 'yii\grid\ActionColumn',
-                                            'header' => NewsModule::t('news', 'Actions'),
+                                            'header' => TeamModule::t('team', 'Actions'),
                                             'template' => '{update} {delete}',
                                             'buttons' => [
                                                 'update' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                                        'title' => NewsModule::t('news', 'Update'),
-                                                        'alia-label' => NewsModule::t('news', 'Update'),
+                                                        'title' => TeamModule::t('team', 'Update'),
+                                                        'alia-label' => TeamModule::t('team', 'Update'),
                                                         'data-pjax' => 0,
                                                         'class' => 'btn btn-info btn-xs'
                                                     ]);
                                                 },
                                                 'delete' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
-                                                        'title' => NewsModule::t('news', 'Delete'),
+                                                        'title' => TeamModule::t('team', 'Delete'),
                                                         'class' => 'btn btn-danger btn-xs btn-del',
-                                                        'data-title' => NewsModule::t('news', 'Delete?'),
+                                                        'data-title' => TeamModule::t('team', 'Delete?'),
                                                         'data-pjax' => 0,
                                                         'data-url' => $url,
                                                         'btn-success-class' => 'success-delete',

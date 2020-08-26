@@ -60,4 +60,7 @@ return [
     'website' => [
         'class' => 'modava\website\WebsiteModule',
     ],
+    'team' => [
+        'class' => 'milkyway\team\TeamModule',
+    ],
 ];
