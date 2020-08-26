@@ -29,7 +29,7 @@ class ProjectsController extends MyController
         unset($list_breadcrumbs[$category->id]);
         foreach ($list_breadcrumbs as $breadcrumb) {
             \Yii::$app->view->params['breadcrumbs'][] = [
-                'label' => $breadcrumb->projectsCategoryLanguage[$default_language]->name,
+                'label' => $breadcrumb->newsCategoryLanguage[$default_language]->name,
                 'url' => ['/project/index', 'slug' => $breadcrumb->slug]
             ];
         }

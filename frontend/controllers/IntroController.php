@@ -19,7 +19,6 @@ class IntroController extends MyController
     {
         $subject = KeyValue::getValueByKey('GIOI_THIEU', false);
         $intro = News::getBySlug($subject);
-        if ($intro == null) return $this->redirect(['/site/index']);
         return $this->render('index', [
             'intro' => $intro
         ]);

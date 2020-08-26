@@ -98,13 +98,13 @@ $shop = $this->params['shop'];
         <div class="quick-contact-mb d-block d-md-none">
             <div class="d-flex align-items-center justify-content-between">
                 <?php if ($shop->dataMetadata('phone') != null) { ?>
-                    <a href="tel:" class="mb-phone">
+                    <a href="tel: <?= $shop->dataMetadata('phone') ?>" class="mb-phone">
                         <i class="fa fa-phone"></i>
                         Gọi điện
                     </a>
                 <?php } ?>
-                <?php if ($shop->dataMetadata('email') != null) { ?>
-                    <a href="sms:" class="mb-sms">
+                <?php if ($shop->dataMetadata('phone') != null) { ?>
+                    <a href="sms: <?= $shop->dataMetadata('phone') ?>" class="mb-sms">
                         <i class="fa fa-sms"></i>
                         SMS
                     </a>

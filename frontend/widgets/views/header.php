@@ -39,13 +39,13 @@ $shop = $this->params['shop'];
                            title="<?= Yii::t('frontend', 'Trang chủ'); ?>"><?= Yii::t('frontend', 'Trang chủ'); ?></a>
                     </li>
                     <li<?php if (Yii::$app->controller->id == 'intro') echo ' class="active"'; ?>>
-                        <a href="<?= Url::toRoute(['/gioi-thieu']); ?>"
-                           title="<?= Yii::t('frontend', 'Giới thiệu'); ?>"><?= Yii::t('frontend', 'Giới thiệu'); ?></a>
+                        <a href="<?= Url::toRoute(['/ve-chung-toi']); ?>"
+                           title="<?= Yii::t('frontend', 'Về chúng tôi'); ?>"><?= Yii::t('frontend', 'Về chúng tôi'); ?></a>
                     </li>
                     <?php
                     if (count($menu) > 0) {
                         foreach ($menu as $data_menu) {
-                            $has_children = $data_menu->type != NewsCategory::TYPE_PROJECT && count($data_menu->categoryHasMany) > 0;
+                            $has_children = count($data_menu->categoryHasMany) > 0;
                             if ($data_menu->type == NewsCategory::TYPE_PROJECT) $url = Url::toRoute(['/projects/index', 'slug' => $data_menu->slug]);
                             else $url = Url::toRoute(['/news/index', 'slug' => $data_menu->slug]);
                             ?>
@@ -165,9 +165,9 @@ if (count($socials) > 0) {
             <span>Trang chủ</span>
             <i class="fa fa-circle"></i>
         </a>
-        <a class="menu-item" href="<?= Url::toRoute(['/gioi-thieu']); ?>">
+        <a class="menu-item" href="<?= Url::toRoute(['/ve-chung-toi']); ?>">
             <i class="fa fa-info-circle"></i>
-            <span>Giới thiệu</span>
+            <span><?= Yii::t('frontend', 'Về chúng tôi') ?></span>
             <i class="fa fa-circle"></i>
         </a>
         <?php

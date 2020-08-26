@@ -36,48 +36,6 @@ $shop = $this->params['shop'];
     </section>
     <!--End #banner-->
 <?php } ?>
-    <!--Start #about-us-->
-    <section id="about-us">
-        <div class="container">
-            <div class="section-title center">
-                <span>Về chúng tôi</span>
-                <div class="h3">Thiết kế &amp; xây dựng ACI</div>
-                <p class="text-secondary">Chúng tôi – tập hợp đội ngũ kiến trúc sư, kĩ sư trẻ được đào tạo bài bản, kinh
-                    nghiệm
-                    nhiều năm trong nghề, có nhiệt huyết, tuổi trẻ, sáng tạo kết hợp với đội thợ lành nghề đã, đang và
-                    sẽ
-                    tiếp tục đi xây dựng ước mơ – nhiều ngôi nhà đẹp, công trình tâm huyết cho quý khách hàng trên khắp
-                    Việt
-                    Nam.</p>
-            </div>
-            <?php
-            if (count($freeTypes) > 0) {
-                ?>
-                <div class="section-content">
-                    <div class="row row-cols-1 row-cols-md-3">
-                        <?php foreach ($freeTypes as $freeType) { ?>
-                            <div class="col mb-1 mb-md-0">
-                                <div class="box-about">
-                                    <div class="box-icon">
-                                        <img class="img-fluid"
-                                             src="<?= $freeType->getImage() ?>"
-                                             alt="<?= $freeType->freetypeLanguage[$default_language]->name ?>">
-                                    </div>
-                                    <div class="box-title">
-                                        <?= $freeType->freetypeLanguage[$default_language]->name ?>
-                                    </div>
-                                    <div class="box-desc">
-                                        <?= $freeType->freetypeLanguage[$default_language]->content ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </section>
-    <!--End #about-us-->
 <?php /*if (count($projectCat) > 0) { ?>
     <!--Start #projects-->
     <section id="projects">
@@ -171,6 +129,49 @@ $shop = $this->params['shop'];
         </div>
     </section>
 <?php } ?>
+
+    <!--Start #about-us-->
+    <section id="about-us">
+        <div class="container">
+            <div class="section-title center">
+                <span>Về chúng tôi</span>
+                <div class="h3">Thiết kế &amp; xây dựng ACI</div>
+                <p class="text-secondary">Chúng tôi – tập hợp đội ngũ kiến trúc sư, kĩ sư trẻ được đào tạo bài bản, kinh
+                    nghiệm
+                    nhiều năm trong nghề, có nhiệt huyết, tuổi trẻ, sáng tạo kết hợp với đội thợ lành nghề đã, đang và
+                    sẽ
+                    tiếp tục đi xây dựng ước mơ – nhiều ngôi nhà đẹp, công trình tâm huyết cho quý khách hàng trên khắp
+                    Việt
+                    Nam.</p>
+            </div>
+            <?php
+            if (count($freeTypes) > 0) {
+                ?>
+                <div class="section-content">
+                    <div class="row row-cols-1 row-cols-md-3">
+                        <?php foreach ($freeTypes as $freeType) { ?>
+                            <div class="col mb-1 mb-md-0">
+                                <div class="box-about">
+                                    <div class="box-icon">
+                                        <img class="img-fluid"
+                                             src="<?= $freeType->getImage() ?>"
+                                             alt="<?= $freeType->freetypeLanguage[$default_language]->name ?>">
+                                    </div>
+                                    <div class="box-title">
+                                        <?= $freeType->freetypeLanguage[$default_language]->name ?>
+                                    </div>
+                                    <div class="box-desc">
+                                        <?= $freeType->freetypeLanguage[$default_language]->content ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </section>
+    <!--End #about-us-->
 <?php /*if (count($projectHot) > 0) { ?>
     <!--Start #projects-done-->
     <section id="projects-done">
@@ -210,7 +211,7 @@ $shop = $this->params['shop'];
     </section>
     <!--Start #projects-done-->
 <?php }*/ ?>
-<?php if (count($comments) > 0) { ?>
+<?php /*if (count($comments) > 0) { ?>
     <!--Start #testimonial-->
     <section id="testimonial">
         <div class="container">
@@ -277,7 +278,7 @@ $shop = $this->params['shop'];
         </div>
     </section>
     <!--Start #testimonial-->
-<?php } ?>
+<?php }*/ ?>
 
 <?php if (count($newsHot) > 0) { ?>
     <!--Start #news-->
@@ -285,7 +286,7 @@ $shop = $this->params['shop'];
         <div class="container">
             <div class="section-title center">
                 <span>Tin tức</span>
-                <div class="h3">ACI tư vấn</div>
+                <div class="h3">Bài viết nổi bật</div>
             </div>
             <div class="section-content">
                 <div class="news-slider owl-carousel owl-theme">
@@ -308,7 +309,7 @@ $shop = $this->params['shop'];
     </section>
     <!--End #news-->
 <?php } ?>
-<?php if (count($partners) > 0) { ?>
+<?php /*if (count($partners) > 0) { ?>
     <!--Start #partners-->
     <section id="partners">
         <div class="container">
@@ -329,7 +330,7 @@ $shop = $this->params['shop'];
         </div>
     </section>
     <!--End #partners-->
-<?php } ?>
+<?php }*/ ?>
 <?php
 $css = <<< CSS
 .owl-item .item a {
