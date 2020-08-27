@@ -154,12 +154,12 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getBySlug($slug)
+    public static function getBySlug($slug, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-by-slug-' . $slug;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.slug' => $slug]);
             $data = $query->one();
             $cache->set($key, $data);
