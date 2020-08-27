@@ -56,6 +56,11 @@ $default_language = $this->params['default_language'];
                 ])->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6 col-12">
+                <?= $form->field($model, 'type_du_an')->dropDownList(NewsCategoryTable::TYPE_DU_AN, [
+                    'prompt' => $model->getAttributeLabel('type_du_an')
+                ]) ?>
+            </div>
+            <div class="col-md-6 col-12 d-none">
                 <?= $form->field($model, 'slug')->hiddenInput([
                     'id' => 'slug'
                 ])->label(false) ?>
@@ -107,6 +112,7 @@ $default_language = $this->params['default_language'];
                 'style' => 'max-width: 120px'
             ]) ?>
         </div>
+        <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptImage') ?> (770x450px)</div>
         <?= $form->field($model, 'iptImage')->fileInput([
             'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $image

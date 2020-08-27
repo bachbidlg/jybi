@@ -25,4 +25,9 @@ class NewsCategoryQuery extends \yii\db\ActiveQuery
     {
         return $this->orderBy([NewsCategory::tableName() . '.sort' => $sort]);
     }
+
+    public function findByTypeDuAn($type_du_an)
+    {
+        return $this->andWhere([NewsCategory::tableName() . '.type_du_an' => $type_du_an]);
+    }
 }

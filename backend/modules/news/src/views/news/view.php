@@ -79,8 +79,9 @@ $default_language = $params['default_language'];
                             'attribute' => 'image',
                             'format' => 'raw',
                             'value' => function ($model) {
-                                if ($model->image == null || !file_exists($model->pathImage . '/' . $model->image)) return null;
-                                return Html::img($model->urlImage . '/' . $model->image, [
+                                $image = $model->getImage();
+                                if ($image == null) return null;
+                                return Html::img($image, [
                                     'style' => 'max-width: 70px'
                                 ]);
                             }

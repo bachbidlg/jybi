@@ -12,6 +12,7 @@ namespace frontend\controllers;
 use frontend\components\MyController;
 use frontend\models\KeyValue;
 use frontend\models\News;
+use frontend\models\TeamCategory;
 
 class IntroController extends MyController
 {
@@ -19,9 +20,10 @@ class IntroController extends MyController
     {
         $subject = KeyValue::getValueByKey('GIOI_THIEU', false);
         $intro = News::getBySlug($subject);
-        if ($intro == null) return $this->redirect(['/site/index']);
+        $team_cateogies = TeamCategory::getAll(true, false);
         return $this->render('index', [
-            'intro' => $intro
+            'intro' => $intro,
+            'team_categories' => $team_cateogies
         ]);
     }
 }

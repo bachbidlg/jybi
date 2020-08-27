@@ -80,6 +80,7 @@ class Freetype extends FreetypeTable
         return [
             'id' => FreetypeModule::t('freetype', 'ID'),
             'image' => FreetypeModule::t('freetype', 'Image'),
+            'iptImage' => FreetypeModule::t('freetype', 'Image'),
             'status' => FreetypeModule::t('freetype', 'Status'),
             'sort' => FreetypeModule::t('freetype', 'Sort'),
             'type' => FreetypeModule::t('freetype', 'Type'),

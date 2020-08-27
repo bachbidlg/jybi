@@ -9,6 +9,8 @@
 namespace frontend\widgets;
 
 
+use frontend\models\News;
+use frontend\models\NewsCategory;
 use yii\base\Widget;
 
 class NewsFeatured extends Widget
@@ -20,6 +22,10 @@ class NewsFeatured extends Widget
 
     public function run()
     {
-        return $this->render('news-featured', []);
+        $list_news_featured = News::getNewsCheckCamNangXayDung(NewsCategory::TYPE_NEWS, null, false);
+        if (count($list_news_featured) <= 0) return null;
+        return $this->render('news-featured', [
+            'list_news_featured' => $list_news_featured
+        ]);
     }
 }

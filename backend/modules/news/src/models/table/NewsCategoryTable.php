@@ -20,6 +20,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         self::TYPE_SUPPORT => 'Hỗ trợ khách hàng',
     ];
 
+    const TYPE_DU_AN_THIET_KE = 0;
+    const TYPE_DU_AN_THI_CONG = 1;
+    const TYPE_DU_AN = [
+        self::TYPE_DU_AN_THIET_KE => 'Dự án thiết kế',
+        self::TYPE_DU_AN_THI_CONG => 'Dự án thi công'
+    ];
     public $pathImage;
     public $urlImage;
 
@@ -99,7 +105,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
 
     public function getCategoryHasMany()
     {
-        return $this->hasMany(self::class, ['category' => 'id']);
+        return $this->hasMany(self::class, ['category' => 'id'])->orderBy([self::tableName() . '.sort' => SORT_ASC]);
     }
 
     public function getNewsCategoryLanguage()

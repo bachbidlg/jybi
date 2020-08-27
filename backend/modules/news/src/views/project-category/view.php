@@ -7,6 +7,7 @@ use backend\widgets\ToastrWidget;
 use milkyway\news\widgets\NavbarWidgets;
 use milkyway\news\NewsModule;
 use milkyway\language\models\table\LanguageTable;
+use milkyway\news\models\table\NewsCategoryTable;
 
 /* @var $this yii\web\View */
 /* @var $model milkyway\news\models\NewsCategory */
@@ -72,6 +73,14 @@ $default_language = $params['default_language'];
                                     'target' => '_blank',
                                     'data-pjax' => 0
                                 ]);
+                            }
+                        ],
+                        [
+                            'attribute' => 'type_du_an',
+                            'format' => 'raw',
+                            'value' => function ($model) use ($params, $default_language) {
+                                if (!array_key_exists($model->type_du_an, NewsCategoryTable::TYPE_DU_AN)) return null;
+                                return NewsCategoryTable::TYPE_DU_AN[$model->type_du_an];
                             }
                         ],
                         [

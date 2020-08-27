@@ -68,6 +68,16 @@
 				opacity: 1;
 			}
 		}
+
+		> li.top-lang {
+			margin-left: 8px;
+
+			> a {
+				display: inline-block!important;
+				padding-left: 2px!important;
+				padding-right: 2px!important;
+			}
+		}
 	}
 }
 
@@ -83,7 +93,7 @@
 	}
 
 	img {
-		max-height: 60px;
+		max-height: 70px;
 	}
 }
 
@@ -239,7 +249,7 @@ input[data-submenu-items] {
 
 	.sidebar-socials a {
 		color: #1f1f1f;
-		width: 43px;
+		//width: 43px;
 		height: 60px;
 		line-height: 60px;
 		font-size: 12px;
@@ -253,7 +263,7 @@ input[data-submenu-items] {
 		background-image: url("../images/logo.png");
 		background-repeat: no-repeat;
 		background-position: left top;
-		background-size: 80%;
+		background-size: 100%;
 		display: block;
 		width: 80px;
 		height: 57px;

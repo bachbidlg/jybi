@@ -57,4 +57,36 @@ class NewsCategory extends NewsCategoryTable
             ->sort();
         return $query->all();
     }
+
+    public static function getDuAn()
+    {
+        return self::find()
+            ->where([
+                self::tableName() . '.type' => self::TYPE_PROJECT,
+                self::tableName() . '.menu_main' => self::STATUS_PUBLISHED
+            ])
+            ->published()
+            ->sort(SORT_DESC)
+            ->one();
+    }
+
+    public static function getOneProjectDesign()
+    {
+        return self::find()->where([
+            self::tableName() . '.type' => self::TYPE_PROJECT,
+            self::tableName() . '.type_du_an' => self::TYPE_DU_AN_THIET_KE
+        ])
+            ->published()
+            ->sort()
+            ->one();
+    }
+
+    public static function findCategoryChildByTypeDuAn($alias, $type_du_an)
+    {
+        $query = self::find()
+            ->where(self::tableName() . ".alias LIKE '{$alias}%'")
+            ->andWhere(['<>', self::tableName() . '.alias', $alias])
+            ->andWhere([self::tableName() . '.type_du_an' => $type_du_an]);
+        return $query->all();
+    }
 }

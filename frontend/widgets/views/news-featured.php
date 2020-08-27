@@ -5,6 +5,13 @@
  * Date: 7/8/2020
  * Time: 15:00
  */
+
+use yii\helpers\Url;
+
+/* @var $list_news_featured array */
+/* @var $news_featured frontend\models\News */
+
+$default_language = $this->params['default_language'];
 ?>
 <div class="widget news-featured">
     <div class="sidebar-title">
@@ -13,10 +20,13 @@
     </div>
     <div class="sidebar-content">
         <ul>
-            <?php for ($i = 1; $i <= 5; $i++) { ?>
-            <li>
-                <a href="<?= \yii\helpers\Url::toRoute(['/du-an/chi-tiet']) ?>">8 phong cách nhà phố mới lạ đáng xây nhất năm 2020</a>
-            </li>
+            <?php foreach ($list_news_featured as $news_featured) { ?>
+                <li>
+                    <a href="<?= Url::toRoute(['/news/view', 'slug' => $news_featured->slug]) ?>"
+                       alt="<?= $news_featured->newsLanguage[$default_language]->name ?>">
+                        <?= $news_featured->newsLanguage[$default_language]->name ?>
+                    </a>
+                </li>
             <?php } ?>
         </ul>
     </div>

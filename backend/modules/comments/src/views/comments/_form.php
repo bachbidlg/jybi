@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Html;
+use modava\tiny\TinyMce;
 use yii\widgets\ActiveForm;
 use backend\widgets\ToastrWidget;
 use milkyway\comments\CommentsModule;
@@ -35,7 +36,16 @@ if ($model->commentsMetadata != null) $metadataPath = $model->commentsMetadata->
 
     <?= $form->field($model, 'metadata[address]')->textInput()->label(CommentsModule::t('comments', 'Address')) ?>
 
-    <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
+    <div class="row">
+        <div class="col-12">
+            <label class="form-label"><?= $model->getAttributeLabel('comment') ?></label>
+            <?= TinyMce::widget([
+                'model' => $model,
+                'attribute' => 'comment',
+                'type' => 'content'
+            ]) ?>
+        </div>
+    </div>
 
     <div class="row">
         <?php
@@ -47,17 +57,17 @@ if ($model->commentsMetadata != null) $metadataPath = $model->commentsMetadata->
                     <div class="preview-<?= $key ?> mt-3">
                         <?php
                         $image = null;
-                        if ($model->getMetadataByKey($key) != null &&
-                            !is_dir($model->commentsMetadata->getPath($key) . '/' . $model->getMetadataByKey($key)) &&
-                            file_exists($model->commentsMetadata->getPath($key) . '/' . $model->getMetadataByKey($key))) {
+                        if ($model->dataMetadataByKey($key) != null &&
+                            !is_dir($model->commentsMetadata->getPath($key) . '/' . $model->dataMetadataByKey($key)) &&
+                            file_exists($model->commentsMetadata->getPath($key) . '/' . $model->dataMetadataByKey($key))) {
                             $image = $model->commentsMetadata->getImage($key);
                         }
                         if ($image != null) echo Html::img($image, [
                             'style' => 'max-width: 120px'
                         ]) ?>
                     </div>
-                    <div class="text-danger font-italic"><?= $model->getAttributeLabel($ipt) ?>
-                        (<?= Yii::$app->params['module-comments']['metadataMappingImage'][$key]['size'] ?>)
+                    <div class="text-danger font-italic"><?= $model->commentsMetadata->getAttributeLabel($ipt) ?>
+                        (<?= Yii::$app->params['module-comments']['metadataMappingImage'][$key]['size'] ?>px)
                     </div>
                     <?= $form->field($model, 'metadata[' . $ipt . ']')->fileInput([
                         'onchange' => 'readImage(this, $(".preview-' . $key . '"), 120)',

@@ -4,14 +4,22 @@ use yii\helpers\Url;
 
 /* @var $sliders array */
 /* @var $partners array */
+/* @var $projectMenu frontend\models\NewsCategory */
+/* @var $projectDesign frontend\models\NewsCategory */
+/* @var $projectDesignCategory array */
+/* @var $projects array */
 /* @var $projectCat array */
+/* @var $project frontend\models\NewsCategory */
 /* @var $projectHot array */
 /* @var $newsHot array */
 /* @var $freeTypes array */
 /* @var $freeType frontend\models\Freetype */
+/* @var $comments array */
+/* @var $comment frontend\models\Comments */
 
 $this->title = WEB_NAME;
 $default_language = $this->params['default_language'];
+$shop = $this->params['shop'];
 ?>
 <?php if (count($sliders) > 0) { ?>
     <!--Start #banner-->
@@ -28,6 +36,95 @@ $default_language = $this->params['default_language'];
     </section>
     <!--End #banner-->
 <?php } ?>
+<?php /*if (count($projectCat) > 0) { ?>
+    <!--Start #projects-->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title center">
+                <span><?= $projectMenu->newsCategoryLanguage[$default_language]->name ?></span>
+                <div class="h3">Dự án của chúng tôi</div>
+            </div>
+            <div class="section-content">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <?php
+                    foreach ($projectCat as $project) {
+                        ?>
+                        <div class="col">
+                            <div class="box-project">
+                                <a class="d-block"
+                                   href="<?= Url::toRoute(['/news/index', 'slug' => $project->slug]) ?>"
+                                   title="<?= $project->newsCategoryLanguage[$default_language]->name ?>">
+                                    <div class="box-image">
+                                        <div class="overlay"></div>
+                                        <img class="img-fluid"
+                                             src="<?= $project->getImage() ?>"
+                                             alt="img">
+                                    </div>
+                                </a>
+                                <div class="box-content">
+                                    <div class="title">
+                                        <a href="<?= Url::toRoute(['/news/index', 'slug' => $project->slug]) ?>"
+                                           title="<?= $project->newsCategoryLanguage[$default_language]->name ?>">
+                                            <?= $project->newsCategoryLanguage[$default_language]->name ?>
+                                        </a>
+                                    </div>
+                                    <div class="desc">
+                                        <?= $project->newsCategoryLanguage[$default_language]->description ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End #projects-->
+<?php }*/ ?>
+<?php if ($projectMenu != null && count($projects) > 0) { ?>
+    <section class="page-projects">
+        <div class="container-fluid">
+            <div class="section-title center">
+                <span>Khách hàng</span>
+                <div class="h3"><?= $projectMenu->newsCategoryLanguage[$default_language]->name ?></div>
+            </div>
+            <div id="list-projects">
+                <div id="filters-masonry" class="filters filter-button-group mb-sm-4 mb-2">
+                    <div data-filter="*" class="filter-item filter-item-active">All</div>
+                    <?php foreach ($projectDesignCategory as $sub_category) { ?>
+                        <div data-filter=".<?= $sub_category->slug ?>"
+                             class="filter-item mb-2 mb-sm-0 mx-1"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                    <?php } ?>
+                </div>
+                <div id="grid-masonry" class="grid">
+                    <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
+                        <?php
+                        foreach ($projects as $project) {
+                            ?>
+                            <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
+                                <a class="caption"
+                                   href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
+                                    <div class="image-wrap">
+                                        <img class="img-fluid" src="<?= $project->getImage() ?>"
+                                             alt="<?= $project->newsLanguage[$default_language]->name ?>">
+                                    </div>
+                                    <div class="caption-wrap">
+                                        <div class="category"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                                        <div class="title"><?= $project->newsLanguage[$default_language]->name ?></div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+
     <!--Start #about-us-->
     <section id="about-us">
         <div class="container">
@@ -48,7 +145,7 @@ $default_language = $this->params['default_language'];
                 <div class="section-content">
                     <div class="row row-cols-1 row-cols-md-3">
                         <?php foreach ($freeTypes as $freeType) { ?>
-                            <div class="col">
+                            <div class="col mb-1 mb-md-0">
                                 <div class="box-about">
                                     <div class="box-icon">
                                         <img class="img-fluid"
@@ -70,56 +167,7 @@ $default_language = $this->params['default_language'];
         </div>
     </section>
     <!--End #about-us-->
-<?php if (count($projectCat) > 0) { ?>
-    <!--Start #projects-->
-    <section id="projects">
-        <div class="container">
-            <div class="section-title center">
-                <span>Dự án</span>
-                <div class="h3">Dự án của chúng tôi</div>
-            </div>
-            <div class="section-content">
-                <div class="row row-cols-1 row-cols-md-2">
-                    <?php
-                    foreach ($projectCat as $project) {
-                        foreach ($project->categoryHasMany as $category_has_many) {
-                            ?>
-                            <div class="col">
-                                <div class="box-project">
-                                    <a class="d-block"
-                                       href="<?= Url::toRoute(['/news/index', 'slug' => $category_has_many->slug]) ?>"
-                                       title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
-                                        <div class="box-image">
-                                            <div class="overlay"></div>
-                                            <img class="img-fluid"
-                                                 src="<?= $category_has_many->getImage() ?>"
-                                                 alt="img">
-                                        </div>
-                                    </a>
-                                    <div class="box-content">
-                                        <div class="title">
-                                            <a href="<?= Url::toRoute(['/news/index', 'slug' => $category_has_many->slug]) ?>"
-                                               title="<?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>">
-                                                <?= $category_has_many->newsCategoryLanguage[$default_language]->name ?>
-                                            </a>
-                                        </div>
-                                        <div class="desc">
-                                            <?= $category_has_many->newsCategoryLanguage[$default_language]->description ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End #projects-->
-<?php } ?>
-<?php if (count($projectHot) > 0) { ?>
+<?php /*if (count($projectHot) > 0) { ?>
     <!--Start #projects-done-->
     <section id="projects-done">
         <div class="container-fluid">
@@ -157,7 +205,8 @@ $default_language = $this->params['default_language'];
         </div>
     </section>
     <!--Start #projects-done-->
-<?php } ?>
+<?php }*/ ?>
+<?php /*if (count($comments) > 0) { ?>
     <!--Start #testimonial-->
     <section id="testimonial">
         <div class="container">
@@ -166,76 +215,57 @@ $default_language = $this->params['default_language'];
             </div>
             <div class="section-content">
                 <div class="row m-lg-0">
-                    <div class="col-lg-5 p-lg-0">
-                        <div class="video-area">
-                            <img class="img-fluid w-100" src="https://i3.ytimg.com/vi/8t5Z-pVjYAE/maxresdefault.jpg">
-                            <span class="icon-play" data-fancybox="" href="https://www.youtube.com/watch?v=8t5Z-pVjYAE">
+                    <?php
+                    if ($shop->dataMetadata('video') != null && strpos($shop->dataMetadata('video'), '?v=') !== false) {
+                        $video = $shop->dataMetadata('video');
+                        $arr = explode('?v=', $video);
+                        $arr = explode('&', $arr[1]);
+                        $videoCode = $arr[0];
+                        ?>
+                        <div class="col-lg-5 p-lg-0">
+                            <div class="video-area">
+                                <img class="img-fluid w-100"
+                                     src="https://i3.ytimg.com/vi/<?= $videoCode ?>/maxresdefault.jpg">
+                                <span class="icon-play" data-fancybox=""
+                                      href="https://www.youtube.com/watch?v=<?= $videoCode ?>">
                                     <i class="fa fa-play"></i>
                                 </span>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                     <div class="col-lg-7 p-lg-0">
                         <div class="testimonial-area owl-carousel owl-theme">
-                            <div class="testimonial-item">
-                                <div class="reviews">
-                                    <i class="fa fa-quote-left"></i>
-                                    <p>Sau khi nhận nhà dự án căn hộ Ehome S Quận 9 - TPHCM tôi đã tiến hành tìm kiếm 1
-                                        đơn
-                                        vị thi công nội thất và biết đến <strong>ACI Design</strong>. Liên
-                                        hệ KTS tôi nhận được sự tư vấn rất nhiệt tình, tôi đã quyết định chọn ngay
-                                        <strong>ACI
-                                            Design</strong>, kết quả là tôi đã có được 1 căn hộ vô cùng ưng
-                                        ý và đẹp mắt.</p>
-                                </div>
-                                <div class="users">
-                                    <div class="user-img">
-                                        <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
-                                             alt=""
-                                             class="img-fluid">
+                            <?php
+                            foreach ($comments as $comment) {
+                                $image = $comment->dataMetadataByKey('image');
+                                if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
+                                    try {
+                                        $image = Yii::$app->assetManager->publish(Yii::getAlias('@frontend/web/uploads/comments/') . $image)[1];
+                                    } catch (Exception $ex) {
+                                        $image = null;
+                                    }
+                                }
+                                ?>
+                                <div class="testimonial-item">
+                                    <div class="reviews">
+                                        <i class="fa fa-quote-left"></i>
+                                        <?= $comment->comment ?>
                                     </div>
-                                    <div class="user-name">
-                                        Chị Hường<br><span>Quận 9</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="reviews">
-                                    <i class="fa fa-quote-left"></i>
-                                    <p>Khi thấy một số mẫu thiết kế căn hộ trên website công ty mình gọi điện thì được
-                                        tư vấn rất nhiệt tình, cuối cùng mình đã quyết định chọn An Phú Decor. Công ty
-                                        làm việc trách nhiệm, bảo hành bảo trì sau thi công cũng rất tốt. Cám ơn An Phú
-                                        Decor đã thiết kế cho mình 1 căn hộ đẹp mắt.</p>
-                                </div>
-                                <div class="users">
-                                    <div class="user-img">
-                                        <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
-                                             alt=""
-                                             class="img-fluid">
-                                    </div>
-                                    <div class="user-name">
-                                        Chị Lanh<br><span>Quận 3</span>
+                                    <div class="users">
+                                        <?php if ($image != null) { ?>
+                                            <div class="user-img">
+                                                <img src="<?= $image ?>"
+                                                     alt="<?= $comment->dataMetadataByKey('name') ?>"
+                                                     class="img-fluid">
+                                            </div>
+                                        <?php } ?>
+                                        <div class="user-name">
+                                            <?= $comment->dataMetadataByKey('name') ?>
+                                            <br><span><?= $comment->dataMetadataByKey('address') ?></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="reviews">
-                                    <i class="fa fa-quote-left"></i>
-                                    <p>Văn phòng của tôi được <strong>thiết kế rất hiện đại và đẹp mắt</strong>, tất cả
-                                        yêu cầu của tôi đều được giải quyết một cách xuất sắc, đội ngũ kiến trúc
-                                        sư và thợ thi công làm việc nhiệt tình và trách nhiệm. Cám ơn công ty rất
-                                        nhiều.</p>
-                                </div>
-                                <div class="users">
-                                    <div class="user-img">
-                                        <img src="<?= Yii::$app->assetManager->publish('@frontendWeb/images/client.png')[1] ?>"
-                                             alt=""
-                                             class="img-fluid">
-                                    </div>
-                                    <div class="user-name">
-                                        Anh Cương<br><span>Quận Tân Phú</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -243,6 +273,7 @@ $default_language = $this->params['default_language'];
         </div>
     </section>
     <!--Start #testimonial-->
+<?php }*/ ?>
 
 <?php if (count($newsHot) > 0) { ?>
     <!--Start #news-->
@@ -250,7 +281,7 @@ $default_language = $this->params['default_language'];
         <div class="container">
             <div class="section-title center">
                 <span>Tin tức</span>
-                <div class="h3">ACI tư vấn</div>
+                <div class="h3">Bài viết nổi bật</div>
             </div>
             <div class="section-content">
                 <div class="news-slider owl-carousel owl-theme">
@@ -273,7 +304,7 @@ $default_language = $this->params['default_language'];
     </section>
     <!--End #news-->
 <?php } ?>
-<?php if (count($partners) > 0) { ?>
+<?php /*if (count($partners) > 0) { ?>
     <!--Start #partners-->
     <section id="partners">
         <div class="container">
@@ -294,7 +325,7 @@ $default_language = $this->params['default_language'];
         </div>
     </section>
     <!--End #partners-->
-<?php } ?>
+<?php }*/ ?>
 <?php
 $css = <<< CSS
 .owl-item .item a {
@@ -302,3 +333,21 @@ $css = <<< CSS
 }
 CSS;
 $this->registerCss($css);
+
+$script = <<< JS
+$(function () {
+    $('.grid').isotope({
+      itemSelector: '.grid-item',
+    });
+    
+    // filter items on button click
+    $('.filter-button-group').on( 'click', '.filter-item', function() {
+        var filterValue = $(this).attr('data-filter');
+        $('.grid').isotope({ filter: filterValue });
+        $('.filter-button-group .filter-item').removeClass('filter-item-active');
+        $(this).addClass('filter-item-active');
+    });
+});
+JS;
+$this->registerJs($script, \yii\web\View::POS_END);
+$this->registerJsFile('/js/isotope.pkgd.js', ['depends' => 'yii\web\JqueryAsset']);

@@ -1,11 +1,13 @@
 <?php
 
+use milkyway\comments\models\table\CommentsTable;
 use milkyway\comments\CommentsModule;
 use milkyway\comments\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\widgets\ToastrWidget;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel milkyway\comments\models\search\CommentsSearch */
@@ -102,11 +104,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
                                                     /* @var $model milkyway\comments\models\Comments */
-                                                    $image = $model->getMetadataByKey('image');
+                                                    $image = $model->dataMetadataByKey('image');
                                                     $path = Yii::$app->params['module-comments']['metadataMappingImage']['image']['path'];
                                                     if (is_dir($path . '/' . $image) || !file_exists($path . '/' . $image)) return null;
                                                     return Html::img(Yii::$app->assetManager->publish($path . '/' . $image)[1], [
                                                         'style' => 'max-width: 120px'
+                                                    ]);
+                                                },
+                                                'label' => CommentsModule::t('comments', 'Avatar')
+                                            ],
+                                            [
+                                                'attribute' => 'metadata',
+                                                'enableSorting' => false,
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    /* @var $model milkyway\comments\models\Comments */
+                                                    return Html::a($model->dataMetadataByKey('name'), ['view', 'id' => $model->id], [
+                                                        'data-pjax' => 0
                                                     ]);
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Name')
@@ -116,33 +130,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'enableSorting' => false,
                                                 'value' => function ($model) {
                                                     /* @var $model milkyway\comments\models\Comments */
-                                                    return $model->getMetadataByKey('name');
-                                                },
-                                                'label' => CommentsModule::t('comments', 'Name')
-                                            ],
-                                            [
-                                                'attribute' => 'metadata',
-                                                'enableSorting' => false,
-                                                'value' => function ($model) {
-                                                    /* @var $model milkyway\comments\models\Comments */
-                                                    return $model->getMetadataByKey('address');
+                                                    return $model->dataMetadataByKey('address');
                                                 },
                                                 'label' => CommentsModule::t('comments', 'Address')
                                             ],
-                                            'comment:ntext',
                                             [
-                                                'attribute' => 'created_by',
-                                                'value' => 'userCreated.userProfile.fullname',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
+                                                'attribute' => 'comment',
+                                                'format' => 'raw',
                                             ],
                                             [
-                                                'attribute' => 'created_at',
-                                                'format' => 'date',
-                                                'headerOptions' => [
-                                                    'width' => 150,
-                                                ],
+                                                'attribute' => 'status',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return '<input type="checkbox" class="ipt-checkbox" ' . ($model->status ? 'checked' : '') . ' data-field="status" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . CommentsTable::STATUS_PUBLISHED . '" data-unchecked="' . CommentsTable::STATUS_DISABLED . '">';
+                                                }
                                             ],
                                             [
                                                 'class' => 'yii\grid\ActionColumn',

@@ -33,19 +33,46 @@ use modava\auth\models\User;
                     Yii::$app->user->can('newsNews-category') ||
                     Yii::$app->user->can('newsNews-categoryIndex') ||
                     Yii::$app->user->can('newsNews') ||
-                    Yii::$app->user->can('newsNewsIndex') ||
+                    Yii::$app->user->can('newsNewsIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news' && in_array(Yii::$app->controller->id, [
+                            'news-category',
+                            'news'
+                        ])) echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/news-category']); ?>">
+                            <i class="ion ion-md-list"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'News'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('news') ||
                     Yii::$app->user->can('newsProject-category') ||
                     Yii::$app->user->can('newsProject-categoryIndex') ||
                     Yii::$app->user->can('newsProject') ||
-                    Yii::$app->user->can('newsProjectIndex') ||
+                    Yii::$app->user->can('newsProjectIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news' && in_array(Yii::$app->controller->id, [
+                            'project-category',
+                            'project'
+                        ])) echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/project-category']); ?>">
+                            <i class="ion ion-md-list"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Projects'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('news') ||
                     Yii::$app->user->can('newsSupport-category') ||
                     Yii::$app->user->can('newsSupport-categoryIndex') ||
                     Yii::$app->user->can('newsSupport') ||
                     Yii::$app->user->can('newsSupportIndex')) { ?>
-                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news') echo ' active'; ?>">
-                        <a class="nav-link" href="<?= Url::toRoute(['/news/news-category']); ?>">
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'news' && in_array(Yii::$app->controller->id, [
+                            'support-category',
+                            'support'
+                        ])) echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/news/support-category']); ?>">
                             <i class="ion ion-md-list"></i>
-                            <span class="nav-link-text"><?= Yii::t('backend', 'News'); ?></span>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Supports'); ?></span>
                         </a>
                     </li>
                 <?php } ?>
@@ -118,6 +145,17 @@ use modava\auth\models\User;
                     </li>
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('comments') ||
+                    Yii::$app->user->can('commentsComments') ||
+                    Yii::$app->user->can('commentsCommentsIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'comments') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/comments']); ?>">
+                            <i class="fa fa-commenting"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Comments'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
                     Yii::$app->user->can('shop') ||
                     Yii::$app->user->can('shopShop') ||
                     Yii::$app->user->can('shopShopIndex')) { ?>
@@ -129,11 +167,13 @@ use modava\auth\models\User;
                     </li>
                 <?php } ?>
                 <?php if (Yii::$app->user->can(User::DEV) ||
-                    Yii::$app->user->can('icons')) { ?>
-                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'backend' && Yii::$app->controller->id == 'icons') echo ' active'; ?>">
-                        <a class="nav-link" href="<?= Url::toRoute(['/icons']); ?>">
-                            <i class="icon-layers"></i>
-                            <span class="nav-link-text"><?= Yii::t('backend', 'Icons'); ?></span>
+                    Yii::$app->user->can('team') ||
+                    Yii::$app->user->can('teamTeam') ||
+                    Yii::$app->user->can('teamTeamIndex')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'shop') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/team']); ?>">
+                            <i class="fa fa-users"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Team'); ?></span>
                         </a>
                     </li>
                 <?php } ?>
@@ -143,6 +183,15 @@ use modava\auth\models\User;
                         <a class="nav-link" href="<?= Url::toRoute(['/website']); ?>">
                             <i class="fa fa-cogs"></i>
                             <span class="nav-link-text"><?= Yii::t('backend', 'Key - Value'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <?php if (Yii::$app->user->can(User::DEV) ||
+                    Yii::$app->user->can('icons')) { ?>
+                    <li class="nav-item<?php if (Yii::$app->controller->module->id == 'backend' && Yii::$app->controller->id == 'icons') echo ' active'; ?>">
+                        <a class="nav-link" href="<?= Url::toRoute(['/icons']); ?>">
+                            <i class="icon-layers"></i>
+                            <span class="nav-link-text"><?= Yii::t('backend', 'Icons'); ?></span>
                         </a>
                     </li>
                 <?php } ?>

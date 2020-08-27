@@ -120,6 +120,7 @@ if ($model->started != null && is_numeric($model->started)) $model->started = da
                 <?= $form->field($model, 'video')->textInput() ?>
             </div>
             <div class="col-12">
+                <label class="control-label"><?= $model->getAttributeLabel('map') ?></label>
                 <?= TinyMce::widget([
                     'model' => $model,
                     'attribute' => 'map',
@@ -138,7 +139,7 @@ if ($model->started != null && is_numeric($model->started)) $model->started = da
                 'style' => 'max-width: 120px'
             ]) ?>
         </div>
-        <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptLogo') ?> (1024x1024)</div>
+        <div class="text-danger font-italic"><?= $model->getAttributeLabel('iptLogo') ?> (1024x1024px)</div>
         <?= $form->field($model, 'iptLogo')->fileInput([
             'onchange' => 'readImage(this, $(".preview"), 120)',
             'data-default' => $logo

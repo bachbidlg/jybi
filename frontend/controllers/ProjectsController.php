@@ -29,12 +29,12 @@ class ProjectsController extends MyController
         unset($list_breadcrumbs[$category->id]);
         foreach ($list_breadcrumbs as $breadcrumb) {
             \Yii::$app->view->params['breadcrumbs'][] = [
-                'label' => $breadcrumb->projectsCategoryLanguage[$default_language]->name,
+                'label' => $breadcrumb->newsCategoryLanguage[$default_language]->name,
                 'url' => ['/project/index', 'slug' => $breadcrumb->slug]
             ];
         }
 
-        $projects = News::getByAlias($category->alias);
+        $projects = News::getByAlias($category->alias, null, true);
 
         return $this->render('index', [
             'category' => $category,
@@ -61,7 +61,7 @@ class ProjectsController extends MyController
         }
 
         $category = $project->categoryHasOne;
-        $projectsRelate = News::getByAlias($category->alias, 5);
+        $projectsRelate = News::getByAlias($category->alias, 5, true);
 
         return $this->render('view', [
             'project' => $project,

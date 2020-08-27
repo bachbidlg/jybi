@@ -127,8 +127,9 @@ $list_language = LanguageTable::getAll();
                                             'attribute' => 'image',
                                             'format' => 'raw',
                                             'value' => function ($model) {
-                                                if ($model->image == null || !file_exists($model->pathImage . '/' . $model->image)) return null;
-                                                return Html::img($model->urlImage . '/' . $model->image, [
+                                                $image = $model->getImage();
+                                                if ($image == null) return null;
+                                                return Html::img($image, [
                                                     'style' => 'max-width: 70px'
                                                 ]);
                                             }
@@ -145,6 +146,13 @@ $list_language = LanguageTable::getAll();
                                             'format' => 'raw',
                                             'value' => function ($model) {
                                                 return '<input type="checkbox" class="ipt-checkbox" ' . ($model->hot ? 'checked' : '') . ' data-field="hot" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
+                                            }
+                                        ],
+                                        [
+                                            'attribute' => 'cam_nang_xay_dung',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return '<input type="checkbox" class="ipt-checkbox" ' . ($model->cam_nang_xay_dung ? 'checked' : '') . ' data-field="cam_nang_xay_dung" data-id="' . $model->id . '" data-url="' . Url::toRoute(['change-value']) . '" data-checked="' . NewsTable::STATUS_PUBLISHED . '" data-unchecked="' . NewsTable::STATUS_DISABLED . '">';
                                             }
                                         ],
                                         [

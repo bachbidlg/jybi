@@ -261,7 +261,10 @@ return [
     'Location' => 'Địa danh',
     'Contact' => 'Liên hệ',
     'Calendar' => 'Lịch biểu',
-    'News' => 'Bài viết',
+    'News' => 'Tin tức',
+    'Projects' => 'Dự án',
+    'Supports' => 'Hỗ trợ khách hàng',
     'Freetype' => 'Tự soạn thảo',
-    'Website' => 'Thông tin website'
+    'Website' => 'Thông tin website',
+    'Team' => 'Đội ngũ',
 ];

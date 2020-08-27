@@ -82,6 +82,7 @@ $shop = $this->params['shop'];
                     <span class="animated infinite zoomIn kenit-alo-circle"></span>
                     <span class="animated infinite pulse kenit-alo-circle-fill"></span>
                     <i class="fa fa-phone"></i>
+                    <span class="phone-number">0123456789</span>
                 </a>
             <?php } ?>
             <?php if ($shop->dataMetadata('email') != null) { ?>
@@ -95,24 +96,26 @@ $shop = $this->params['shop'];
     <?php } ?>
     <div id="gotop"><i class="fa fa fa-angle-double-up"></i></div>
     <?php if ($shop != null) { ?>
-        <div class="quick-contact-mb d-block d-md-none">
+        <div class="quick-contact-mb d-block d-md-none show">
             <div class="d-flex align-items-center justify-content-between">
                 <?php if ($shop->dataMetadata('phone') != null) { ?>
-                    <a href="tel:" class="mb-phone">
+                    <a href="tel:<?= $shop->dataMetadata('phone') ?>" class="mb-phone">
                         <i class="fa fa-phone"></i>
                         Gọi điện
                     </a>
                 <?php } ?>
-                <?php if ($shop->dataMetadata('email') != null) { ?>
-                    <a href="sms:" class="mb-sms">
-                        <i class="fa fa-sms"></i>
-                        SMS
+                <?php if ($shop->dataMetadata('phone') != null) { ?>
+                    <a href="https://zalo.me/<?= $shop->dataMetadata('phone') ?>" class="mb-sms">
+                        <i class="fa fa-zalo"></i>
+                        Zalo
                     </a>
                 <?php } ?>
-                <a href="<?php echo \yii\helpers\Url::toRoute(['/contact/index']) ?>" class="mb-contact">
-                    <i class="fa fa-map-marker-alt"></i>
-                    Liên hệ
+                <?php if ($shop->dataMetadata('email') != null) { ?>
+                <a href="mailto:<?= $shop->dataMetadata('email') ?>" class="mb-contact">
+                    <i class="fa fa-envelope"></i>
+                    Email
                 </a>
+                <?php } ?>
             </div>
         </div>
     <?php } ?>

@@ -3,10 +3,15 @@
 /*----------------------------------------*/
 /*-- Google Font --*/
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,300&family=Roboto:wght@400;500;700&family=Oswald:wght@300;400;500;600;700&display=swap');
+@include font-face(SFUFuturaBook, '../fonts/SFUFuturaBook', normal, normal, swap, ttf);
 
 /*-- Common Style --*/
 *, *::after, *::before {
 	box-sizing: border-box;
+}
+
+* {
+	-webkit-overflow-scrolling: touch;
 }
 
 html, body, .site-wrapper {
@@ -14,7 +19,7 @@ html, body, .site-wrapper {
 }
 
 html {
-	//scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 @media #{$tablet-device}, #{$large-mobile} {
@@ -41,7 +46,7 @@ body {
 
 	@media #{$tablet-device}, #{$large-mobile} {
 		overflow-x: hidden;
-		animation: 0s ease 0s 1 normal none running none;
+		//animation: 0s ease 0s 1 normal none running none;
 
 		::-webkit-scrollbar {
 			width: 0;
@@ -53,7 +58,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: $heading-font;
 	color: $heading-color;
-	font-weight: 600;
+	font-weight: 400;
 	margin-top: 0;
 	line-height: 1.4;
 }

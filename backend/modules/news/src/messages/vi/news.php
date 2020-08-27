@@ -17,7 +17,6 @@ return [
     'Name' => 'Tiêu đề',
     'Category' => 'Danh mục cha',
     'News' => 'Tin tức',
-    'Name' => 'Tiêu đề',
     'Image' => 'Ảnh đại diện',
     'Sort' => 'Thứ tự',
     'Type' => 'Loại',

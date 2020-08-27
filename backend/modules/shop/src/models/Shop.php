@@ -80,7 +80,8 @@ class Shop extends ShopTable
                     ActiveRecord::EVENT_BEFORE_VALIDATE => ['metadata'],
                 ],
                 'value' => function () {
-                    return array_merge($this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map', 'video']), ['logo' => $this->dataMetadata('logo')]);
+                    $metadata = array_merge($this->getAttributes(['hotline', 'email', 'phone', 'mst', 'created', 'started', 'map', 'video']), ['logo' => $this->dataMetadata('logo')]);
+                    return $metadata;
                 }
             ]
         ];
@@ -96,7 +97,7 @@ class Shop extends ShopTable
             [['shop_language'], 'validateShopLanguage'],
             [['created_at'], 'integer'],
             [['iptLogo'], 'file', 'maxSize' => 2 * 1024 * 1024, 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Chỉ chấp nhận định dạng: {extensions}'],
-            [['email', 'phone', 'hotline', 'mst'], 'string', 'max' => 255],
+            [['email', 'phone', 'hotline', 'mst', 'video'], 'string', 'max' => 255],
             [['email'], 'email'],
             [['created', 'started'], 'safe'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],

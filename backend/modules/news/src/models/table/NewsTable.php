@@ -4,13 +4,36 @@ namespace milkyway\news\models\table;
 
 use common\models\User;
 use frontend\models\NewsCategory;
+use milkyway\language\models\table\LanguageTable;
 use milkyway\news\models\query\NewsQuery;
 use Yii;
 
+/**
+ * This is the model class for table "news".
+ *
+ * @property int $id
+ * @property string $slug
+ * @property int $category
+ * @property string $image
+ * @property int $status
+ * @property int $sort Thứ tự
+ * @property int $created_at
+ * @property int $created_by
+ * @property int $updated_at
+ * @property int $updated_by
+ * @property string $alias
+ *
+ * @property NewsCategory $category0
+ * @property User $createdBy
+ * @property User $updatedBy
+ * @property NewsLanguageTable[] $newsLanguages
+ * @property LanguageTable[] $languages
+ */
 class NewsTable extends \yii\db\ActiveRecord
 {
     const STATUS_DISABLED = 0;
     const STATUS_PUBLISHED = 1;
+    const SCENARIO_UPDATE = 'update';
     public $pathImage;
     public $urlImage;
 
@@ -40,6 +63,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
             'redis-news-get-news-check-hot-' . $this->categoryHasOne->type,
+            'redis-news-get-news-check-cam-nang-xay-dung-' . $this->categoryHasOne->type,
             'redis-news-get-relate-news-' . $this->id,
             'redis-news-get-recommend-news-' . $this->id,
             'redis-news-get-all',
@@ -59,6 +83,7 @@ class NewsTable extends \yii\db\ActiveRecord
             'redis-news-get-by-category-' . $this->category,
             'redis-news-get-by-alias-' . $this->alias,
             'redis-news-get-news-check-hot-' . $this->categoryHasOne->type,
+            'redis-news-get-news-check-cam-nang-xay-dung-' . $this->categoryHasOne->type,
             'redis-news-get-relate-news-' . $this->id,
             'redis-news-get-recommend-news-' . $this->id,
             'redis-news-get-all',
@@ -142,7 +167,7 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getNewsCheckHot($type = null, $data_cache = YII2_CACHE)
+    public static function getNewsCheckHot($type = null, $limit = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-news-check-hot-' . $type;
@@ -155,6 +180,27 @@ class NewsTable extends \yii\db\ActiveRecord
                 NewsCategory::tableName() . '.type' => $type
             ]);
             $query->sort(SORT_DESC)->published();
+            if ($limit != null && is_numeric($limit)) $query->offset(0)->limit($limit);
+            $data = $query->all();
+            $cache->set($key, $data);
+        }
+        return $data;
+    }
+
+    public static function getNewsCheckCamNangXayDung($type = null, $limit = null, $data_cache = YII2_CACHE)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-news-get-news-check-cam-nang-xay-dung-' . $type;
+        $data = $cache->get($key);
+        if ($data == false || $data_cache === false) {
+            $query = self::find()->where([
+                self::tableName() . '.cam_nang_xay_dung' => self::STATUS_PUBLISHED,
+            ]);
+            if ($type !== null) $query->joinWith(['categoryHasOne'])->andWhere([
+                NewsCategory::tableName() . '.type' => $type
+            ]);
+            $query->sort(SORT_DESC)->published();
+            if ($limit != null && is_numeric($limit)) $query->offset(0)->limit($limit);
             $data = $query->all();
             $cache->set($key, $data);
         }
@@ -196,7 +242,7 @@ class NewsTable extends \yii\db\ActiveRecord
         return $query;
     }
 
-    public static function getByAlias($alias = null, $limit = null)
+    public static function getByAlias($alias = null, $limit = null, $published = false)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-by-alias-' . $alias;
@@ -205,6 +251,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}/%'");
             if ($limit != null) $query->limit($limit)->offset(0);
             $query->sort();
+            if ($published === true) $query->published();
             $data = $query->all();
             $cache->set($key, $data);
         }
