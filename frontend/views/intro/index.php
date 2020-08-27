@@ -12,15 +12,17 @@
 
 $default_language = $this->params['default_language'];
 $this->title = $intro != null ? $intro->newsLanguage[$default_language]->name : Yii::t('frontend', 'Về chúng tôi');
-?>
+if ($intro != null) {
+    ?>
     <section class="page-about-us">
         <div class="container">
             <div class="page-wrapp">
-                <?= $intro != null ? $intro->newsLanguage[$default_language]->content : '' ?>
+                <?= $intro->newsLanguage[$default_language]->content ?>
             </div>
         </div>
     </section>
-<?php
+    <?php
+}
 if (count($team_categories) > 0) {
     ?>
     <div id="main">
