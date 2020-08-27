@@ -96,7 +96,7 @@ $shop = $this->params['shop'];
     <?php } ?>
     <div id="gotop"><i class="fa fa fa-angle-double-up"></i></div>
     <?php if ($shop != null) { ?>
-        <div class="quick-contact-mb d-block d-md-none">
+        <div class="quick-contact-mb d-block d-md-none show">
             <div class="d-flex align-items-center justify-content-between">
                 <?php if ($shop->dataMetadata('phone') != null) { ?>
                     <a href="tel:<?= $shop->dataMetadata('phone') ?>" class="mb-phone">

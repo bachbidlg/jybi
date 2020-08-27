@@ -112,12 +112,13 @@ $shop = $this->params['shop'];
                                                  alt="<?= $project->newsLanguage[$default_language]->name ?>">
                                         </div>
                                         <div class="caption-wrap">
-                                            <div class="d-table">
-                                                <div class="d-table-cell text-center">
+<!--                                            <div class="d-table">-->
+<!--                                                <div class="d-table-cell text-center">-->
+                                                    <div class="category"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
                                                     <div class="title"><?= $project->newsLanguage[$default_language]->name ?></div>
-                                                    <div class="line"></div>
-                                                </div>
-                                            </div>
+<!--                                                    <div class="line"></div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
                                         </div>
                                     </a>
                                 </div>

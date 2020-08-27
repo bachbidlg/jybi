@@ -75,7 +75,7 @@
 				height: 30px;
 				line-height: 30px;
 				text-align: center;
-				display: block;
+				display: inline-block;
 
 				&:last-child {
 					margin-right: 0;
@@ -158,12 +158,17 @@
 
 .quick-contact-mb {
 	position: fixed;
-	bottom: 0;
+	bottom: -44px;
 	left: 0;
 	right: 0;
 	background: $theme-color;
 	padding: 10px;
 	z-index: 9;
+	@include prefix((transition: all .4s ease-in-out), webkit moz o);
+
+	&.show {
+		bottom: 0;
+	}
 
 	a {
 		font-size: 16px;

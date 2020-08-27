@@ -66,6 +66,15 @@ $(function () {
         $("body").toggleClass("top-search-open");
         $("body").hasClass("top-search-open") && $("#top-search").find("input").focus();
     });
+
+    $(window).bind('mousewheel', function(event) {
+        if (event.originalEvent.wheelDelta >= 0) {
+            $('.quick-contact-mb').addClass('show');
+        }
+        else {
+            $('.quick-contact-mb').removeClass('show');
+        }
+    });
 });
 
 function m() {
