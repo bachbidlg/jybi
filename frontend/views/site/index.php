@@ -101,29 +101,23 @@ $shop = $this->params['shop'];
                 <div id="grid-masonry" class="grid">
                     <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
                         <?php
-                        if (count($projects) > 0) {
-                            foreach ($projects as $project) {
-                                ?>
-                                <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
-                                    <a class="caption"
-                                       href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
-                                        <div class="image-wrap">
-                                            <img class="img-fluid" src="<?= $project->getImage() ?>"
-                                                 alt="<?= $project->newsLanguage[$default_language]->name ?>">
-                                        </div>
-                                        <div class="caption-wrap">
-<!--                                            <div class="d-table">-->
-<!--                                                <div class="d-table-cell text-center">-->
-                                                    <div class="category"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
-                                                    <div class="title"><?= $project->newsLanguage[$default_language]->name ?></div>
-<!--                                                    <div class="line"></div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-                                        </div>
-                                    </a>
-                                </div>
-                            <?php }
-                        } ?>
+                        foreach ($projects as $project) {
+                            ?>
+                            <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
+                                <a class="caption"
+                                   href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
+                                    <div class="image-wrap">
+                                        <img class="img-fluid" src="<?= $project->getImage() ?>"
+                                             alt="<?= $project->newsLanguage[$default_language]->name ?>">
+                                    </div>
+                                    <div class="caption-wrap">
+                                        <div class="category"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
+                                        <div class="title"><?= $project->newsLanguage[$default_language]->name ?></div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php }
+                        ?>
                     </div>
                 </div>
             </div>
