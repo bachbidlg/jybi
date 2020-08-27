@@ -10,3 +10,7 @@ Auth
 .help-block {
     color: red;
 }
+
+body .hk-pg-wrapper.hk-auth-wrapper > header {
+    width: auto;
+}
