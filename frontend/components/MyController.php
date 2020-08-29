@@ -25,6 +25,7 @@ class MyController extends Controller
         $shop = Shop::getOne();
         Yii::$app->view->params['default_language'] = $this->default_language;
         Yii::$app->view->params['shop'] = $shop;
+        Yii::$app->language = $this->default_language;
         parent::__construct($id, $module, $config);
     }
 

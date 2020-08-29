@@ -34,7 +34,7 @@ class ProjectsController extends MyController
             ];
         }
 
-        $projects = News::getByAlias($category->alias, null, true);
+        $projects = News::getByAlias($category->alias, null, true, false);
 
         return $this->render('index', [
             'category' => $category,

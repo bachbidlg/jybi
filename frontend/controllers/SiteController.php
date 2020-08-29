@@ -52,4 +52,12 @@ class SiteController extends MyController
     {
         return $this->render('search-news', []);
     }
+
+    public function actionError()
+    {
+        return $this->render('error', [
+            'name' => 'Error',
+            'message' => ''
+        ]);
+    }
 }

@@ -26,7 +26,9 @@ class TeamCategoryTable extends \yii\db\ActiveRecord
     public function afterDelete()
     {
         $cache = Yii::$app->cache;
-        $keys = [];
+        $keys = [
+            'redis-team-category-get-all'
+        ];
         foreach ($keys as $key) {
             $cache->delete($key);
         }
@@ -36,7 +38,9 @@ class TeamCategoryTable extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         $cache = Yii::$app->cache;
-        $keys = [];
+        $keys = [
+            'redis-team-category-get-all'
+        ];
         foreach ($keys as $key) {
             $cache->delete($key);
         }
@@ -61,6 +65,11 @@ class TeamCategoryTable extends \yii\db\ActiveRecord
     public function getUserUpdated()
     {
         return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
+
+    public function getTeamHasMany()
+    {
+        return $this->hasMany(TeamTable::class, ['category' => 'id']);
     }
 
     public static function getAll($published = false, $data_cache = YII2_CACHE)
