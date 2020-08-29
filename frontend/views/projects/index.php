@@ -42,7 +42,6 @@ $this->registerCss('
                 <div id="grid-masonry" class="grid">
                     <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
                         <?php
-                        var_dump($list_alias);
                         foreach ($projects as $project) {
                             $cat_slug = $project->categoryHasOne->slug;
                             foreach($list_alias as $alias => $slug){
