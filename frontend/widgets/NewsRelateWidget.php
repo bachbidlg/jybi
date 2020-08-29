@@ -24,7 +24,7 @@ class NewsRelateWidget extends Widget
 
     public function run()
     {
-        $news_relate = News::getRelateNews($this->news_id, $this->limit);
+        $news_relate = News::getRelateNews($this->news_id, $this->limit, false);
         if (count($news_relate) <= 0) return null;
         return $this->render('news-relate', [
             'news_relate' => $news_relate

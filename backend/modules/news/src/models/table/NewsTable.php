@@ -141,12 +141,12 @@ class NewsTable extends \yii\db\ActiveRecord
         return null;
     }
 
-    public static function getById($id)
+    public static function getById($id, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-by-id-' . $id;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.id' => $id]);
             $data = $query->one();
             $cache->set($key, $data);
@@ -207,12 +207,12 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getAll()
+    public static function getAll($data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-all';
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->sort();
             $data = $query->all();
             $cache->set($key, $data);
@@ -220,12 +220,12 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getByCategory($category = null, $limit = null)
+    public static function getByCategory($category = null, $limit = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-by-category-' . $category;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.category' => $category]);
             if ($limit != null) $query->limit($limit)->offset(0);
             $query->sort();
@@ -242,12 +242,12 @@ class NewsTable extends \yii\db\ActiveRecord
         return $query;
     }
 
-    public static function getByAlias($alias = null, $limit = null, $published = false)
+    public static function getByAlias($alias = null, $limit = null, $published = false, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-by-alias-' . $alias;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}/%'");
             if ($limit != null) $query->limit($limit)->offset(0);
             $query->sort();
@@ -258,13 +258,13 @@ class NewsTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getRelateNews($id = null, $limit = null)
+    public static function getRelateNews($id = null, $limit = null, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-get-relate-news-' . $id;
         $data = $cache->get($key);
-        if ($data == false) {
-            $news = self::getById($id);
+        if ($data == false || $data_cache === false) {
+            $news = self::getById($id, $data_cache);
             if ($news == null) return [];
             $query = self::find()->where([self::tableName() . '.category' => $news->category])->andWhere(['<>', self::tableName() . '.id', $id])->published()->sort();
             if ($limit != null) $query->limit($limit)->offset(0);
@@ -280,7 +280,7 @@ class NewsTable extends \yii\db\ActiveRecord
         $key = 'redis-news-get-recommend-news-' . $id;
         $data = $cache->get($key);
         if ($data == false || $data_cache === false) {
-            $news = self::getById($id);
+            $news = self::getById($id, $data_cache);
             if ($news == null) return [];
             $alias = '/' . explode('/', $news->alias)[1];
             $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}%'")->andWhere(['<>', self::tableName() . '.id', $id])->published()->sort();
