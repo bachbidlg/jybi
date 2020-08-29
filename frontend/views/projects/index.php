@@ -24,11 +24,17 @@ $this->registerCss('
 ?>
 <section class="page-projects">
     <div class="container-fluid">
-        <?php if (count($projects) > 0) { ?>
+        <?php
+        if (count($projects) > 0) {
+            $list_alias = [];
+            ?>
             <div id="list-projects">
                 <div id="filters-masonry" class="filters filter-button-group">
                     <div data-filter="*" class="filter-item filter-item-active">All</div>
-                    <?php foreach ($category->categoryHasMany as $sub_category) { ?>
+                    <?php
+                    foreach ($category->categoryHasMany as $sub_category) {
+                        $list_alias[$sub_category->alias] = $sub_category->slug;
+                        ?>
                         <div data-filter=".<?= $sub_category->slug ?>"
                              class="filter-item mb-2 mb-sm-0 mx-1"><?= $sub_category->newsCategoryLanguage[$default_language]->name ?></div>
                     <?php } ?>
@@ -36,9 +42,17 @@ $this->registerCss('
                 <div id="grid-masonry" class="grid">
                     <div class="row row-cols-md-3 row-cols-1" style="margin:0 -.5rem">
                         <?php
+                        var_dump($list_alias);
                         foreach ($projects as $project) {
+                            $cat_slug = $project->categoryHasOne->slug;
+                            foreach($list_alias as $alias => $slug){
+                                if(strpos($project->categoryHasOne->alias .'/', $alias) !== false) {
+                                    $cat_slug = $slug;
+                                }
+                                break;
+                            }
                             ?>
-                            <div class="col grid-item <?= $project->categoryHasOne->slug ?> mb-3 px-0 px-sm-2">
+                            <div class="col grid-item <?= $cat_slug ?> mb-3 px-0 px-sm-2">
                                 <a class="caption"
                                    href="<?= Url::toRoute(['/projects/view', 'slug' => $project->slug]) ?>">
                                     <div class="image-wrap">
