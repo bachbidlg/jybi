@@ -53,4 +53,9 @@ class ContactController extends MyController
             }
         }
     }
+
+    public function actionEmailTemp()
+    {
+        return $this->render('email-temp');
+    }
 }
