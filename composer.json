@@ -31,6 +31,7 @@
     "yiisoft/yii2-redis": "~2.0.0",
     "yiisoft/yii2-elasticsearch": "2.1.x-dev",
     "trntv/cheatsheet": "^0.1@dev",
+    "trntv/yii2-command-bus": "^1.0",
     "kartik-v/yii2-export": "dev-master",
     "kartik-v/yii2-social": "dev-master",
     "alexandernst/yii2-device-detect": "0.0.12",

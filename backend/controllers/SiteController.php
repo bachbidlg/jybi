@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use backend\components\MyController;
+use common\commands\SendEmailCommand;
+use milkyway\shop\models\table\ShopTable;
 use Yii;
 
 /**

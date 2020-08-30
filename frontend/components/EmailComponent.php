@@ -19,7 +19,7 @@ class EmailComponent
 
         $content = self::renderTemplate($content);
         $emailSend = \Yii::$app->mailer->compose(['html' => 'layouts/html'], ['content' => $content])
-            ->setFrom(["mongdao.wd@gmail.com"])
+            ->setFrom(["nguyen.tran2092@gmail.com"])
             ->setTo($emailSend)
             ->setSubject($subject);
         return $emailSend->send();
