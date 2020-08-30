@@ -345,6 +345,10 @@ input[data-submenu-items] {
 	}
 }
 
+[data-submenu-items="1"]:checked ~ .submenu-wrapper {
+	height: 61px;
+}
+
 [data-submenu-items="2"]:checked ~ .submenu-wrapper {
 	height: 121px;
 }
