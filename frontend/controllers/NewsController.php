@@ -18,7 +18,7 @@ class NewsController extends MyController
 {
     public function actionIndex($slug = null)
     {
-        $category = NewsCategory::getBySlug($slug);
+        $category = NewsCategory::getBySlug($slug, false);
         if ($category == null) return $this->redirect(['/site/index']);
         $default_language = $this->default_language;
 
@@ -50,7 +50,7 @@ class NewsController extends MyController
 
     public function actionView($slug)
     {
-        $news = News::getBySlug($slug);
+        $news = News::getBySlug($slug, false);
         if ($news == null) return $this->redirect(['/site/index']);
         $default_language = $this->default_language;
 
@@ -66,7 +66,7 @@ class NewsController extends MyController
         }
 
         $category = $news->categoryHasOne;
-        $newsRelate = News::getByAlias($category->alias, 5, true);
+        $newsRelate = News::getByAlias($category->alias, 5, true, false);
 
         return $this->render('view', [
             'news' => $news,

@@ -107,7 +107,7 @@ class FreetypeTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.id' => $id])->published();
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -121,7 +121,7 @@ class FreetypeTable extends \yii\db\ActiveRecord
             $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
             if ($published === true) $query->published();
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -135,7 +135,7 @@ class FreetypeTable extends \yii\db\ActiveRecord
             $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
             if ($published) $query->published();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
