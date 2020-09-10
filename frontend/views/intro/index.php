@@ -12,15 +12,17 @@
 
 $default_language = $this->params['default_language'];
 $this->title = $intro != null ? $intro->newsLanguage[$default_language]->name : Yii::t('frontend', 'Về chúng tôi');
-?>
+if ($intro != null) {
+    ?>
     <section class="page-about-us">
         <div class="container">
             <div class="page-wrapp">
-                <?= $intro != null ? $intro->newsLanguage[$default_language]->content : '' ?>
+                <?= $intro->newsLanguage[$default_language]->content ?>
             </div>
         </div>
     </section>
-<?php
+    <?php
+}
 if (count($team_categories) > 0) {
     ?>
     <div id="main">
@@ -39,7 +41,7 @@ if (count($team_categories) > 0) {
                     <div class="section-content mb-4">
                         <div class="row row-cols-1 row-cols-md-3">
                             <?php foreach ($team_category->teamHasMany as $team) { ?>
-                                <div class="col mb-1 mb-md-0 p-2">
+                                <div class="col mb-1 p-2">
                                     <div class="box-about">
                                         <div class="box-icon mb-2">
                                             <img class="img-fluid" src="<?= $team->getImage() ?>"

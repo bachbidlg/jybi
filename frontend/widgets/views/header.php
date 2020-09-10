@@ -187,7 +187,7 @@ if (count($socials) > 0) {
                 } else {
                     ?>
                     <div class="submenu-item">
-                        <input type="checkbox" data-submenu-items="4" class="toggle-submenu"
+                        <input type="checkbox" data-submenu-items="<?= count($data_menu->categoryHasMany) ?>" class="toggle-submenu"
                                id="toggle-<?= $data_menu->id ?>">
                         <label class="menu-item" for="toggle-<?= $data_menu->id ?>"><i
                                     class="<?= $data_menu->icon ?: 'fa fa-archive' ?>"></i><span><?= $data_menu->newsCategoryLanguage[$default_language]->name ?></span></label>

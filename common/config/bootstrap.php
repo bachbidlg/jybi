@@ -16,6 +16,7 @@ define('WEEK_IN_SECONDS', 7 * DAY_IN_SECONDS);
 define('MONTH_IN_SECONDS', 30 * DAY_IN_SECONDS);
 define('YEAR_IN_SECONDS', 365 * DAY_IN_SECONDS);
 define('NOIMAGE', 'no-image.png');
+define('UPLOAD_PATH', 'frontend');
 
 /**
  * Setting path aliases
@@ -35,7 +36,7 @@ if (CONSOLE_HOST == 1 || CONSOLE_HOST == 2) {
     define('YII2_CACHE', false);
     define('YII2_DEBUG', true);
     define('YII2_ENV_DEV', true);
-    define('YII2_MAIL', false);
+    define('YII2_MAIL', true);
     define('YII2_LOG', true);
 } elseif (CONSOLE_HOST == 3) {
     define('YII2_CACHE', true);
@@ -51,8 +52,8 @@ define('SITE_ADMIN', 'Dashboard');
 
 
 define('WEB_ADMIN', 'Administrator');
-define('ADMIN_EMAIL', 'mongdaovan86.wd@gmail.com');
-define('ROBOT_EMAIL', 'mongdao.wd@gmail.com');
+define('ADMIN_EMAIL', 'nguyen.tran2092@gmail.com');
+define('ROBOT_EMAIL', 'nguyen.tran2092@gmail.com');
 define('FRONTEND_HOST_INFO', $domain);
 define('FRONTEND_BASE_URL', '/');
 define('BACKEND_HOST_INFO', $domain . '/backend');
@@ -64,8 +65,8 @@ define('RECAPTCHA_GOOGLE_SECRETKEY', '6LcvUX8UAAAAAAQv025aD6luMNd2llYX_bQWtjCi')
 define('WEB_COOKIE_VALIDATION_KEY', 'hXxYdJJVHPJjqDfFvY0DW4_FDYIa5RcS');
 define('FRONTEND_COOKIE_VALIDATION_KEY', 'CU9aseEPkKKG4TpJN5gySlVpV7pco-2P');
 define('BACKEND_COOKIE_VALIDATION_KEY', 'hXxYdJJVHPJjqDfFvY0DW4_FDYIa5RcS');
-define('INFORMATION_EMAIL', 'mongdaovan86@yahoo.com || mongdaovan86.wd@gmail.com');
-define('INFORMATION_PHONE', '0906.904.884');
+define('INFORMATION_EMAIL', 'nguyen.tran2092@gmail.com');
+define('INFORMATION_PHONE', '077.8722.149');
 
 Yii::setAlias('milkyway/language', dirname(dirname(__DIR__)) . '/backend/modules/language/src');
 Yii::setAlias('milkyway/news', dirname(dirname(__DIR__)) . '/backend/modules/news/src');

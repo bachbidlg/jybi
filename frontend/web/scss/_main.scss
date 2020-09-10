@@ -698,9 +698,14 @@
 		padding: 20px;
 		background-color: $white;
 
+		* {
+			font-family: "SFUFuturaBook",sans-serif!important;
+		}
+
 		img {
-			max-width: 100%;
 			margin-bottom: 1rem;
+			max-width: 100%;
+			height: auto;
 		}
 
 		.tags {

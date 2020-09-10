@@ -110,7 +110,8 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
 
     public function getNewsCategoryLanguage()
     {
-        return $this->hasMany(NewsCategoryLanguageTable::class, ['news_category_id' => 'id'])->indexBy('language_id');
+        $query = $this->hasMany(NewsCategoryLanguageTable::class, ['news_category_id' => 'id'])->andWhere([NewsCategoryLanguageTable::tableName() . '.language_id' => Yii::$app->language])->indexBy('language_id');
+        return $query;
     }
 
     public function getImage()
@@ -125,12 +126,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return null;
     }
 
-    public static function getById($id)
+    public static function getById($id, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-category-get-by-id-' . $id;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.id' => $id]);
             $data = $query->one();
             $cache->set($key, $data);
@@ -177,12 +178,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getByCategory($category)
+    public static function getByCategory($category, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-category-get-by-category-' . $category;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.category' => $category]);
             $data = $query->all();
             $cache->set($key, $data);
@@ -190,12 +191,12 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         return $data;
     }
 
-    public static function getAll()
+    public static function getAll($data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-news-category-get-all';
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->sort();
             $data = $query->all();
             $cache->set($key, $data);
