@@ -32,7 +32,7 @@ class SiteController extends MyController
         $newsHot = News::getNewsCheckHot(NewsCategory::TYPE_NEWS, null, false);
         $freeTypes = Freetype::getByType(Freetype::TYPE_FREETYPE, true, false);
 
-        $comments = Comments::getAll(true, false);
+//        $comments = Comments::getAll(true, false);
 
         return $this->render('index', [
             'sliders' => $sliders,
@@ -44,7 +44,7 @@ class SiteController extends MyController
             'projectHot' => $projectHot,
             'newsHot' => $newsHot,
             'freeTypes' => $freeTypes,
-            'comments' => $comments
+//            'comments' => $comments
         ]);
     }
 
