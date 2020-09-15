@@ -81,7 +81,7 @@ class TeamCategoryTable extends \yii\db\ActiveRecord
             $query = self::find()->sort();
             if ($published === true) $query->published();
             $data = $query->all();
-            $cache->set($key, $data_cache);
+            if($data_cache === true) $cache->set($key, $data_cache);
         }
         return $data;
     }

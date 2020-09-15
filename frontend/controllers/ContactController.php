@@ -8,8 +8,10 @@
 
 namespace frontend\controllers;
 
+use common\commands\SendEmailCommand;
 use frontend\components\MyController;
 use frontend\models\form\ContactForm;
+use milkyway\shop\models\table\ShopTable;
 use Yii;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
@@ -25,6 +27,19 @@ class ContactController extends MyController
 
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->validate() && $model->save()) {
+                    try {
+                        $shop = Yii::$app->view->params['shop'];
+                        if ($shop != null && $shop->dataMetadata('email') != null) {
+                            \Yii::$app->commandBus->handle(new SendEmailCommand([
+                                'to' => $shop->dataMetadata('email'),
+                                'subject' => $model->subject,
+                                'view' => 'contactMail',
+                                'params' => $model->getAttributes(['subject', 'message', 'full_name', 'email', 'phone'])
+                            ]));
+                        }
+                    } catch (\Exception $ex) {
+                        Yii::warning('Send contact mail failed. Id: ' . $model->primaryKey . ', info: ' . json_encode($model->getAttributes(['subject', 'message', 'full_name', 'email', 'phone'])));
+                    }
                     return [
                         'code' => 200,
                         'msg' => 'Gửi thành công',

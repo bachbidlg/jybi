@@ -219,23 +219,35 @@ if ($projectMenu != null && count($projects) > 0) {
     </section>
     <!--Start #projects-done-->
 <?php }*/ ?>
-<?php /*if (count($comments) > 0) { ?>
+<?php
+$has_comment = false;
+if ((isset($comments) && is_array($comments) && count($comments) > 0)) {
+    $has_comment = true;
+}
+$has_video = false;
+if ($shop->dataMetadata('video') != null) {
+    $has_video = true;
+}
+if ($has_comment || $has_video) {
+    ?>
     <!--Start #testimonial-->
     <section id="testimonial">
         <div class="container">
-            <div class="section-title center">
-                Nhận xét của khách hàng
-            </div>
+            <?php if ($has_comment) { ?>
+                <div class="section-title center">
+                    Nhận xét của khách hàng
+                </div>
+            <?php } ?>
             <div class="section-content">
                 <div class="row m-lg-0">
                     <?php
-                    if ($shop->dataMetadata('video') != null && strpos($shop->dataMetadata('video'), '?v=') !== false) {
+                    if ($has_video && strpos($shop->dataMetadata('video'), '?v=') !== false) {
                         $video = $shop->dataMetadata('video');
                         $arr = explode('?v=', $video);
                         $arr = explode('&', $arr[1]);
                         $videoCode = $arr[0];
                         ?>
-                        <div class="col-lg-5 p-lg-0">
+                        <div class="col-lg-<?= $has_comment ? 5 : '8 offset-lg-2' ?> p-lg-0">
                             <div class="video-area">
                                 <img class="img-fluid w-100"
                                      src="https://i3.ytimg.com/vi/<?= $videoCode ?>/maxresdefault.jpg">
@@ -246,47 +258,49 @@ if ($projectMenu != null && count($projects) > 0) {
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="col-lg-7 p-lg-0">
-                        <div class="testimonial-area owl-carousel owl-theme">
-                            <?php
-                            foreach ($comments as $comment) {
-                                $image = $comment->dataMetadataByKey('image');
-                                if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
-                                    try {
-                                        $image = Yii::$app->assetManager->publish(Yii::getAlias('@frontend/web/uploads/comments/') . $image)[1];
-                                    } catch (Exception $ex) {
-                                        $image = null;
+                    <?php if ($has_comment) { ?>
+                        <div class="col-lg-<?= $has_video ? 7 : 12 ?> p-lg-0">
+                            <div class="testimonial-area owl-carousel owl-theme">
+                                <?php
+                                foreach ($comments as $comment) {
+                                    $image = $comment->dataMetadataByKey('image');
+                                    if ($image != null && !is_dir(Yii::getAlias('@frontend/web/uploads/comments/') . $image && file_exists(Yii::getAlias('@frontend/web/uploads/comments/') . $image))) {
+                                        try {
+                                            $image = Yii::$app->assetManager->publish(Yii::getAlias('@frontend/web/uploads/comments/') . $image)[1];
+                                        } catch (Exception $ex) {
+                                            $image = null;
+                                        }
                                     }
-                                }
-                                ?>
-                                <div class="testimonial-item">
-                                    <div class="reviews">
-                                        <i class="fa fa-quote-left"></i>
-                                        <?= $comment->comment ?>
-                                    </div>
-                                    <div class="users">
-                                        <?php if ($image != null) { ?>
-                                            <div class="user-img">
-                                                <img src="<?= $image ?>"
-                                                     alt="<?= $comment->dataMetadataByKey('name') ?>"
-                                                     class="img-fluid">
+                                    ?>
+                                    <div class="testimonial-item">
+                                        <div class="reviews">
+                                            <i class="fa fa-quote-left"></i>
+                                            <?= $comment->comment ?>
+                                        </div>
+                                        <div class="users">
+                                            <?php if ($image != null) { ?>
+                                                <div class="user-img">
+                                                    <img src="<?= $image ?>"
+                                                         alt="<?= $comment->dataMetadataByKey('name') ?>"
+                                                         class="img-fluid">
+                                                </div>
+                                            <?php } ?>
+                                            <div class="user-name">
+                                                <?= $comment->dataMetadataByKey('name') ?>
+                                                <br><span><?= $comment->dataMetadataByKey('address') ?></span>
                                             </div>
-                                        <?php } ?>
-                                        <div class="user-name">
-                                            <?= $comment->dataMetadataByKey('name') ?>
-                                            <br><span><?= $comment->dataMetadataByKey('address') ?></span>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                <?php } ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </section>
     <!--Start #testimonial-->
-<?php }*/ ?>
+<?php } ?>
 
 <?php if (count($newsHot) > 0) { ?>
     <!--Start #news-->

@@ -98,15 +98,15 @@ class SliderTable extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
-    public static function getById($id)
+    public static function getById($id, $data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-by-id-' . $id;
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache == false) {
             $query = self::find()->where([self::tableName() . '.id' => $id])->sort();
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -116,24 +116,24 @@ class SliderTable extends \yii\db\ActiveRecord
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-by-type-' . $type;
         $data = $cache->get($key);
-        if ($data == false || $data_cache == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.type' => $type])->sort();
             if ($published === true) $query->published();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
 
-    public static function getAll()
+    public static function getAll($data_cache = YII2_CACHE)
     {
         $cache = Yii::$app->cache;
         $key = 'redis-slider-get-all';
         $data = $cache->get($key);
-        if ($data == false) {
+        if ($data == false || $data_cache === false) {
             $query = self::find()->sort();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }

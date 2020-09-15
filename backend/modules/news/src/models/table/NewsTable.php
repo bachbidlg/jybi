@@ -149,7 +149,7 @@ class NewsTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.id' => $id]);
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -162,7 +162,7 @@ class NewsTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.slug' => $slug]);
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -182,7 +182,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query->sort(SORT_DESC)->published();
             if ($limit != null && is_numeric($limit)) $query->offset(0)->limit($limit);
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -202,7 +202,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query->sort(SORT_DESC)->published();
             if ($limit != null && is_numeric($limit)) $query->offset(0)->limit($limit);
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -215,7 +215,7 @@ class NewsTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->sort();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -230,7 +230,7 @@ class NewsTable extends \yii\db\ActiveRecord
             if ($limit != null) $query->limit($limit)->offset(0);
             $query->sort();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -253,7 +253,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query->sort();
             if ($published === true) $query->published();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -269,7 +269,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query = self::find()->where([self::tableName() . '.category' => $news->category])->andWhere(['<>', self::tableName() . '.id', $id])->published()->sort();
             if ($limit != null) $query->limit($limit)->offset(0);
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -286,7 +286,7 @@ class NewsTable extends \yii\db\ActiveRecord
             $query = self::find()->where(self::tableName() . ".alias LIKE '{$alias}%'")->andWhere(['<>', self::tableName() . '.id', $id])->published()->sort();
             if ($limit != null) $query->limit($limit)->offset(0);
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }

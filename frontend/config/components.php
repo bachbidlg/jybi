@@ -52,8 +52,8 @@ return [
         'transport' => [
             'class' => 'Swift_SmtpTransport',
             'host' => 'smtp.gmail.com',
-            'username' => 'mongdao.wd@gmail.com',
-            'password' => 'qtlqfvknyclgfwbv',
+            'username' => 'mail.smtp.phpmailer@gmail.com',
+            'password' => 'wearkzxstudymuwl',
             'port' => '587',
             'encryption' => 'tls',
             'streamOptions' => [

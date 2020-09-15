@@ -155,7 +155,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache == false) {
             $query = self::find()->where([self::tableName() . '.slug' => $slug]);
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -173,7 +173,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
             else $query->where([self::tableName() . '.type' => $type]);
             if ($published === true) $query->published();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -186,7 +186,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->where([self::tableName() . '.category' => $category]);
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -199,7 +199,7 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->sort();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }

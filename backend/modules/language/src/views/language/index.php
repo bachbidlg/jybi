@@ -103,8 +103,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'attribute' => 'image',
                                                 'format' => 'raw',
                                                 'value' => function ($model) {
-                                                    if ($model->image == null) return null;
-                                                    return Html::img(Yii::getAlias('@frontendUrl/uploads/language') . '/' . $model->image, [
+                                                    if ($model->getImage() == null) return null;
+                                                    return Html::img($model->getImage(), [
                                                         'style' => 'max-width: 70px'
                                                     ]);
                                                 }

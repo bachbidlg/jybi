@@ -62,5 +62,15 @@ return [
         'hashCallback' => function ($path) {
             return hash('md4', $path);
         }
-    ]
+    ],
+    'commandBus' => [
+        'class' => trntv\bus\CommandBus::class,
+        'middlewares' => [
+            [
+                'class' => trntv\bus\middlewares\BackgroundCommandMiddleware::class,
+                'backgroundHandlerPath' => '@console/yii',
+                'backgroundHandlerRoute' => 'command-bus/handle',
+            ]
+        ]
+    ],
 ];

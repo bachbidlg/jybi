@@ -53,7 +53,7 @@ class KeyValueTable extends \yii\db\ActiveRecord
             $query = self::find()->where([self::tableName() . '.key' => $data_key])->published();
             $row = $query->one();
             $data = $row != null ? $row->value : null;
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }

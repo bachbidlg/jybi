@@ -92,7 +92,7 @@ class CommentsTable extends \yii\db\ActiveRecord
         if ($data == false || $data_cache === false) {
             $query = self::find()->where(['id' => $id]);
             $data = $query->one();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
@@ -106,7 +106,7 @@ class CommentsTable extends \yii\db\ActiveRecord
             $query = self::find();
             if ($published === true) $query->published();
             $data = $query->all();
-            $cache->set($key, $data);
+            if($data_cache === true) $cache->set($key, $data);
         }
         return $data;
     }
