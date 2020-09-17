@@ -110,7 +110,8 @@ class NewsCategoryTable extends \yii\db\ActiveRecord
 
     public function getNewsCategoryLanguage()
     {
-        $query = $this->hasMany(NewsCategoryLanguageTable::class, ['news_category_id' => 'id'])->andWhere([NewsCategoryLanguageTable::tableName() . '.language_id' => Yii::$app->language])->indexBy('language_id');
+        $default_language = Yii::$app->view->params['default_language'];
+        $query = $this->hasMany(NewsCategoryLanguageTable::class, ['news_category_id' => 'id'])->andWhere([NewsCategoryLanguageTable::tableName() . '.language_id' => $default_language])->indexBy('language_id');
         return $query;
     }
 
