@@ -21,11 +21,12 @@ class MyController extends Controller
 
     public function __construct(string $id, Module $module, array $config = [])
     {
-        $this->default_language = LanguageTable::getDefaultLanguage(false)->id;
+        $default_language = LanguageTable::getDefaultLanguage(false);
+        $this->default_language = $default_language->id;
         $shop = Shop::getOne();
         Yii::$app->view->params['default_language'] = $this->default_language;
         Yii::$app->view->params['shop'] = $shop;
-        Yii::$app->language = $this->default_language;
+        Yii::$app->language = $default_language->code;
         parent::__construct($id, $module, $config);
     }
 
