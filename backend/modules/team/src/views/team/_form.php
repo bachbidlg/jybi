@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(TeamCategoryTable::getAll(true), 'id', 'name'), []) ?>
+    <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(TeamCategoryTable::getAll(true, false), 'id', 'name'), []) ?>
 
     <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
 
