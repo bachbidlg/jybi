@@ -60,9 +60,9 @@ if (YII2_CACHE) {
         'port' => 6379,
         'database' => 0,
     ];
-    $config['components']['session'] = [
+    /*$config['components']['session'] = [
         'class' => 'yii\redis\Session',
-    ];
+    ];*/
     $config['components']['cache'] = [
         'class' => 'yii\redis\Cache',
     ];
