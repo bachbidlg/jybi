@@ -54,18 +54,18 @@ if (YII2_ENV_DEV) {
 }
 
 if (YII2_CACHE) {
-    $config['components']['redis'] = [
+    /*$config['components']['redis'] = [
         'class' => 'yii\redis\Connection',
         'hostname' => 'localhost',
         'port' => 6379,
         'database' => 0,
-    ];
+    ];*/
     /*$config['components']['session'] = [
         'class' => 'yii\redis\Session',
     ];*/
-    $config['components']['cache'] = [
+    /*$config['components']['cache'] = [
         'class' => 'yii\redis\Cache',
-    ];
+    ];*/
 }
 
 
