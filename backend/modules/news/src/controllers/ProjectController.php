@@ -2,6 +2,7 @@
 
 namespace milkyway\news\controllers;
 
+use milkyway\news\models\NewsImages;
 use milkyway\news\models\NewsLanguage;
 use milkyway\news\models\table\NewsCategoryTable;
 use milkyway\news\models\table\NewsTable;
@@ -215,6 +216,26 @@ class ProjectController extends MyController
             ]);
         }
         return $this->redirect(['index']);
+    }
+
+    public function actionDeleteImage()
+    {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $model = NewsImages::find()->where(['id' => Yii::$app->request->post('id')])->one();
+            if ($model == null) return [
+                'code' => 404,
+                'msg' => 'Không tìm thấy hình ảnh'
+            ];
+            if (!$model->delete()) return [
+                'code' => 400,
+                'msg' => 'Xóa hình ảnh thất bại'
+            ];
+            return [
+                'code' => 200,
+                'msg' => 'Xóa hình ảnh thành công'
+            ];
+        }
     }
 
     public function actionChangeValue()

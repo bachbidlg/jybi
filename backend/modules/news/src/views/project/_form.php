@@ -109,9 +109,27 @@ $default_language = $this->params['default_language'];
 
         <?php $default_image = Yii::$app->assetManager->publish('@backend/web/dist/img/img-thumb.jpg')[1]; ?>
         <div class="row images-content">
+            <?php
+            if (is_array($model->newsImagesHasMany) && count($model->newsImagesHasMany) > 0) {
+                foreach ($model->newsImagesHasMany as $news_image) {
+                    /* @var $news_image milkyway\news\models\NewsImages */
+                    $image_thumb = $news_image->getImage();
+                    ?>
+                    <div class="image-content col-sm-6 col-md-3 col-lg-2 mt-15"
+                         data-id="<?= $news_image->primaryKey ?>">
+                        <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
+                        <label class="label-preview" for="ipt-image-<?= $news_image->primaryKey ?>">
+                            <img src="<?= $image_thumb == null ? $default_image : $image_thumb ?>"
+                                 class="img-fluid img-thumbnail" alt="img">
+                        </label>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
             <div class="image-content col-sm-6 col-md-3 col-lg-2 mt-15" data-image="1">
+                <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
                 <label class="label-preview" for="ipt-image-1">
-                    <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
                     <img src="<?= $default_image ?>" class="img-fluid img-thumbnail" alt="img">
                 </label>
                 <?= $form->field($model, 'news_images[1][news_id]')->hiddenInput()->label(false) ?>
@@ -126,8 +144,8 @@ $default_language = $this->params['default_language'];
         <div class="d-none">
             <div class="image-content-temp">
                 <div class="image-content col-sm-6 col-md-3 col-lg-2 mt-15" data-image="0">
+                    <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
                     <label class="label-preview" for="ipt-image-0">
-                        <span class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i></span>
                         <img src="<?= $default_image ?>" class="img-fluid img-thumbnail" alt="img">
                     </label>
                     <?= $form->field($model, 'news_images[0][news_id]')->hiddenInput()->label(false) ?>
@@ -154,6 +172,7 @@ $default_language = $this->params['default_language'];
     </div>
 <?php
 $url_get_slug = Url::toRoute(['get-slug', 'id' => $model->primaryKey]);
+$url_delete_image = Url::toRoute(['delete-image']);
 $script = <<< JS
 var submit_form = false;
 function getNewSlug(name, language = true){
@@ -199,6 +218,66 @@ $('body').on('change', '#tab-language-content .tab-pane .ipt-name', function(){
         content_text = content_text.replace(/news_images\-0/g, 'news_images-' + data_image);
         var content = $(content_text).attr('data-image', data_image);
         $('.images-content').append(content);
+    }
+}).on('click', '.image-content .btn-delete', function(){
+    var content = $(this).closest('.image-content'),
+        id = content.attr('data-id') || null,
+        c = id === null ? true : confirm('Xóa hình ảnh sẽ không thể phục hồi, xác nhận xóa?');
+    if(c){
+        if(id !== null){
+            $.ajax({
+                type: 'POST',
+                url: '$url_delete_image',
+                dataType: 'json',
+                data: {
+                    id: id
+                }
+            }).done(res => {
+                if(res.code === 200){
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: res.msg,
+                        position: 'top-right',
+                        class: 'jq-toast-success',
+                        hideAfter: 3500,
+                        stack: 6,
+                        showHideTransition: 'fade'
+                    });
+                    content.remove();
+                } else {
+                    $.toast({
+                        heading: 'Thông báo',
+                        text: res.msg,
+                        position: 'top-right',
+                        class: 'jq-toast-warning',
+                        hideAfter: 3500,
+                        stack: 6,
+                        showHideTransition: 'fade'
+                    });
+                }
+            }).fail(f => {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: 'Có lỗi xảy ra! Xóa hình ảnh thất bại.',
+                    position: 'top-right',
+                    class: 'jq-toast-danger',
+                    hideAfter: 3500,
+                    stack: 6,
+                    showHideTransition: 'fade'
+                });
+            });
+        } else {
+            $.toast({
+                heading: 'Thông báo',
+                text: 'Xóa thành công!',
+                position: 'top-right',
+                class: 'jq-toast-success',
+                hideAfter: 3500,
+                stack: 6,
+                showHideTransition: 'fade'
+            });
+            content.remove();
+        }
     }
 });
 JS;

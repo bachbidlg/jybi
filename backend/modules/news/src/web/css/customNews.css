@@ -25,15 +25,18 @@ li.nav-item.mb-5 {
     color: red;
 }
 
-.label-preview {
+.images-content {
     position: relative;
+}
+
+.label-preview {
     cursor: pointer;
 }
 
-.label-preview .btn-delete {
+.images-content .btn-delete {
     position: absolute;
     top: -8px;
-    right: -8px;
+    right: 2px;
     opacity: .7;
 }
 

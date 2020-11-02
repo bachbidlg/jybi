@@ -13,6 +13,26 @@ use yii\helpers\Url;
 $default_language = $this->params['default_language'];
 $this->title = Yii::t('frontend', $news->newsLanguage[$default_language]->name);
 \Yii::$app->view->params['breadcrumbs'][] = $this->title;
+$css = <<< CSS
+/* width */
+.page-news-detail .content .table-responsive::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+/* Track */
+.page-news-detail .content .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+/* Handle */
+.page-news-detail .content .table-responsive::-webkit-scrollbar-thumb {
+    background: #888;
+}
+/* Handle on hover */
+.page-news-detail .content .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+CSS;
+$this->registerCss($css);
 ?>
 <section class="page-news-detail">
     <div class="container">
@@ -57,3 +77,17 @@ $this->title = Yii::t('frontend', $news->newsLanguage[$default_language]->name);
         </div>
     </div>
 </section>
+<?php
+$script = <<< JS
+$(function(){
+    $('.page-news-detail .widget.content table').each(function(){
+        var table = $(this);
+        if(!table.hasClass('table')){
+            var div = $('<div class="table-responsive"></div>');
+            div.insertAfter(table);
+            table.addClass('table').appendTo(div);
+        }
+    });
+});
+JS;
+$this->registerJs($script, \yii\web\View::POS_END);
