@@ -1,31 +1,21 @@
 {
-  "name": "milkyway/manual",
+  "name": "milkyway-manual",
+  "type": "library",
   "description": "Milkyway manual",
   "keywords": [
-    "yii2",
+    "milkyway",
+    "milkyway manual",
     "manual",
-    "user manual"
+    "php"
   ],
-  "type": "Yii2-extension",
-  "license": "BSD-3-Clause",
-  "support": {
-    "wiki": "http://www.yiiframework.com/wiki/",
-    "source": "https://github.com/bachbidlg/milkyway"
-  },
+  "homepage": "https://github.com/bachbidlg/milkyway",
+  "license": "MIT",
   "authors": [
     {
       "name": "Nguyen Tran",
-      "email": "embryo.anonymous@gmail.com",
-      "homepage": "https://github.com/bachbidlg/milkyway"
+      "email": "bachbidlg@gmail.com",
+      "homepage": "https://github.com/bachbidlg/milkyway",
+      "role": "Developer"
     }
-  ],
-  "require": {
-    "php": ">=7.0.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "modava\\giaohang\\": "src"
-    }
-  },
-  "minimum-stability": "dev"
+  ]
 }
