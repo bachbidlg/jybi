@@ -1,22 +1,24 @@
 {
-  "name": "milkyway/manual",
-  "description": "Milkyway manual",
+  "name": "jybi/manual",
+  "description": "Jybi manual",
   "keywords": [
     "yii2",
+    "jybi",
     "manual",
+    "jybi manual",
     "user manual"
   ],
   "type": "Yii2-extension",
   "license": "BSD-3-Clause",
   "support": {
     "wiki": "http://www.yiiframework.com/wiki/",
-    "source": "https://github.com/bachbidlg/milkyway"
+    "source": "https://github.com/bachbidlg/jybi"
   },
   "authors": [
     {
       "name": "Nguyen Tran",
-      "email": "embryo.anonymous@gmail.com",
-      "homepage": "https://github.com/bachbidlg/milkyway"
+      "email": "bachbidlg@gmail.com",
+      "homepage": "https://github.com/bachbidlg/jybi"
     }
   ],
   "require": {
@@ -24,7 +26,7 @@
   },
   "autoload": {
     "psr-4": {
-      "modava\\giaohang\\": "src"
+      "jybi\\manual\\": "src"
     }
   },
   "minimum-stability": "dev"
