@@ -1,2 +1,2 @@
-# milkyway
-Milkyway package
+# jybi
+Jybi package
